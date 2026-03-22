@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { openBookingModal } from '@/lib/booking';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ToolsIcon, ShieldPlusIcon, FlashIcon } from '@hugeicons/core-free-icons';
 
@@ -310,12 +311,12 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
       {/* CTA */}
       <div className="px-5 pb-5">
-        <a
-          href="#contact"
+        <button
+          onClick={openBookingModal}
           className="block w-full text-center bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-all duration-200 cursor-pointer text-sm"
         >
           Book {service.title}
-        </a>
+        </button>
       </div>
     </div>
   );

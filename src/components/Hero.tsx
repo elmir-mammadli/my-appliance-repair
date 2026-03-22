@@ -1,28 +1,29 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { openBookingModal } from '@/lib/booking';
 
 const slides = [
   {
-    src: 'https://picsum.photos/seed/ctrepair1/800/900',
+    src: '/images/hero/ref.jpg',
     alt: 'Technician repairing a washing machine',
     label: 'Washer & Dryer Repair',
     stat: 'Same-day service available',
   },
   {
-    src: 'https://picsum.photos/seed/ctrepair2/800/900',
+    src: '/images/hero/dishwasher.jpg',
     alt: 'Refrigerator repair service',
     label: 'Refrigerator Repair',
     stat: 'Emergency service 24/7',
   },
   {
-    src: 'https://picsum.photos/seed/ctrepair3/800/900',
+    src: '/images/hero/dishwasher.jpg',
     alt: 'Dishwasher being serviced',
     label: 'Dishwasher Repair',
     stat: 'OEM parts on every job',
   },
   {
-    src: 'https://picsum.photos/seed/ctrepair4/800/900',
+    src: '/images/hero/oven-repair.jpg',
     alt: 'Oven and range repair',
     label: 'Oven & Range Repair',
     stat: '90-day labor warranty',
@@ -64,15 +65,15 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <a
-                href="#contact"
+              <button
+                onClick={openBookingModal}
                 className="inline-flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold px-8 py-4 rounded-xl text-base transition-colors duration-200 cursor-pointer shadow-md"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 Schedule a Repair
-              </a>
+              </button>
               <a
                 href="tel:+18005550123"
                 className="inline-flex items-center justify-center gap-2 border-2 border-blue-950 hover:bg-blue-950 hover:text-white text-blue-950 font-bold px-8 py-4 rounded-xl text-base transition-colors duration-200 cursor-pointer"
@@ -85,7 +86,7 @@ export default function Hero() {
             </div>
 
             <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-500">
-              {['Free diagnosis', 'No fix, no fee', '90-day warranty', 'Background-checked techs', 'All major brands'].map((item) => (
+              {['All major brands', '90-day warranty', 'Background-checked techs'].map((item) => (
                 <span key={item} className="flex items-center gap-1.5">
                   <svg className="w-4 h-4 text-[#ffb81c] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />

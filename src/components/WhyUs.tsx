@@ -97,7 +97,7 @@ export default function WhyUs() {
   return (
     <section id="why-us" className="py-20 lg:py-28 bg-white" aria-labelledby="why-us-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left Text */}
           <div>
             <span className="inline-block text-blue-600 font-semibold text-sm tracking-widest uppercase mb-3">Why Choose Us</span>

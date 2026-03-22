@@ -7,6 +7,7 @@ import WhyUs from '@/components/WhyUs';
 import Coverage from '@/components/Coverage';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
+import BookingModal from '@/components/BookingModal';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
 
@@ -22,6 +23,7 @@ export default function Home() {
       <Coverage />
       <Testimonials />
       <FAQ />
+      <BookingModal />
       <ContactForm />
       <Footer />
     </main>
