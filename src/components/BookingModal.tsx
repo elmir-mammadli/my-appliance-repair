@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { isCtZip } from '@/lib/zip';
+import DatePicker from '@/components/DatePicker';
 
 const appliances = [
   'Washer', 'Dryer', 'Refrigerator', 'Dishwasher', 'Oven / Range',
@@ -14,12 +16,12 @@ const timeSlots = [
 interface FormState {
   name: string; phone: string; email: string; zip: string;
   appliance: string; brand: string; issue: string;
-  timeSlot: string; urgency: string;
+  date: string; timeSlot: string; urgency: string;
 }
 
 const initialState: FormState = {
   name: '', phone: '', email: '', zip: '',
-  appliance: '', brand: '', issue: '', timeSlot: '', urgency: 'standard',
+  appliance: '', brand: '', issue: '', date: '', timeSlot: '', urgency: 'standard',
 };
 
 export default function BookingModal() {
@@ -64,8 +66,10 @@ export default function BookingModal() {
       newErrors.phone = 'Please enter a valid phone number';
     if (!form.zip.trim()) newErrors.zip = 'ZIP code is required';
     else if (!/^\d{5}$/.test(form.zip)) newErrors.zip = 'Please enter a valid 5-digit ZIP';
+    else if (!isCtZip(form.zip)) newErrors.zip = 'Sorry, we only service Connecticut (ZIP 06001–06928)';
     if (!form.appliance) newErrors.appliance = 'Please select an appliance';
     if (!form.issue.trim()) newErrors.issue = 'Please describe the issue';
+    if (!form.date) newErrors.date = 'Please select a preferred date';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -79,9 +83,19 @@ export default function BookingModal() {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setSubmitting(false);
-    setSubmitted(true);
+    try {
+      const res = await fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('Request failed');
+      setSubmitted(true);
+    } catch {
+      alert('Something went wrong. Please call us directly at (800) 555-0123.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (!open) return null;
@@ -244,9 +258,16 @@ export default function BookingModal() {
                         value={form.zip} onChange={(e) => handleChange('zip', e.target.value)}
                         placeholder="06510" maxLength={5}
                         className={`w-full px-4 py-3 rounded-xl border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 ${errors.zip ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
-                        aria-required="true" aria-describedby={errors.zip ? 'm-zip-error' : undefined}
+                        aria-required="true" aria-describedby={errors.zip ? 'm-zip-error' : 'm-zip-status'}
                       />
-                      {errors.zip && <p id="m-zip-error" className="text-red-500 text-xs mt-1" role="alert">{errors.zip}</p>}
+                      {errors.zip
+                        ? <p id="m-zip-error" className="text-red-500 text-xs mt-1" role="alert">{errors.zip}</p>
+                        : form.zip.length === 5 && (
+                            isCtZip(form.zip)
+                              ? <p id="m-zip-status" className="text-green-600 text-xs mt-1 flex items-center gap-1"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>We service your area</p>
+                              : <p id="m-zip-status" className="text-red-500 text-xs mt-1 flex items-center gap-1" role="alert"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" /></svg>Outside our service area (CT only)</p>
+                          )
+                      }
                     </div>
                   </div>
 
@@ -301,6 +322,20 @@ export default function BookingModal() {
                       aria-required="true" aria-describedby={errors.issue ? 'm-issue-error' : undefined}
                     />
                     {errors.issue && <p id="m-issue-error" className="text-red-500 text-xs mt-1" role="alert">{errors.issue}</p>}
+                  </div>
+
+                  {/* Preferred Date */}
+                  <div>
+                    <label htmlFor="m-datepicker" className="block text-sm font-semibold text-blue-950 mb-1.5">
+                      Preferred Date <span className="text-red-500" aria-hidden="true">*</span>
+                    </label>
+                    <DatePicker
+                      id="m-datepicker"
+                      value={form.date}
+                      onChange={(date) => handleChange('date', date)}
+                      error={errors.date}
+                    />
+                    {errors.date && <p className="text-red-500 text-xs mt-1" role="alert">{errors.date}</p>}
                   </div>
 
                   {/* Urgency + Time */}
