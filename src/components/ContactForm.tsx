@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { isCtZip } from '@/lib/zip';
+import DatePicker from '@/components/DatePicker';
 
 const appliances = [
   'Washer', 'Dryer', 'Refrigerator', 'Dishwasher', 'Oven / Range',
@@ -19,13 +21,14 @@ interface FormState {
   appliance: string;
   brand: string;
   issue: string;
+  date: string;
   timeSlot: string;
   urgency: string;
 }
 
 const initialState: FormState = {
   name: '', phone: '', email: '', zip: '',
-  appliance: '', brand: '', issue: '', timeSlot: '', urgency: 'standard',
+  appliance: '', brand: '', issue: '', date: '', timeSlot: '', urgency: 'standard',
 };
 
 export default function ContactForm() {
@@ -42,8 +45,10 @@ export default function ContactForm() {
       newErrors.phone = 'Please enter a valid phone number';
     if (!form.zip.trim()) newErrors.zip = 'ZIP code is required';
     else if (!/^\d{5}$/.test(form.zip)) newErrors.zip = 'Please enter a valid 5-digit ZIP code';
+    else if (!isCtZip(form.zip)) newErrors.zip = 'Sorry, we only service Connecticut (ZIP 06001–06928)';
     if (!form.appliance) newErrors.appliance = 'Please select an appliance';
     if (!form.issue.trim()) newErrors.issue = 'Please describe the issue';
+    if (!form.date) newErrors.date = 'Please select a preferred date';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -57,10 +62,19 @@ export default function ContactForm() {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 1500));
-    setSubmitting(false);
-    setSubmitted(true);
+    try {
+      const res = await fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('Request failed');
+      setSubmitted(true);
+    } catch {
+      alert('Something went wrong. Please call us directly at (800) 555-0123.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -224,9 +238,16 @@ export default function ContactForm() {
                         errors.zip ? 'border-red-400 focus:ring-red-400' : 'border-blue-200 hover:border-blue-300'
                       }`}
                       aria-required="true"
-                      aria-describedby={errors.zip ? 'zip-error' : undefined}
+                      aria-describedby={errors.zip ? 'zip-error' : 'zip-status'}
                     />
-                    {errors.zip && <p id="zip-error" className="text-red-500 text-xs mt-1" role="alert">{errors.zip}</p>}
+                    {errors.zip
+                      ? <p id="zip-error" className="text-red-500 text-xs mt-1" role="alert">{errors.zip}</p>
+                      : form.zip.length === 5 && (
+                          isCtZip(form.zip)
+                            ? <p id="zip-status" className="text-green-600 text-xs mt-1 flex items-center gap-1"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>We service your area</p>
+                            : <p id="zip-status" className="text-red-500 text-xs mt-1 flex items-center gap-1" role="alert"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" /></svg>Outside our service area (CT only)</p>
+                        )
+                    }
                   </div>
                 </div>
 
@@ -302,6 +323,20 @@ export default function ContactForm() {
                     aria-describedby={errors.issue ? 'issue-error' : undefined}
                   />
                   {errors.issue && <p id="issue-error" className="text-red-500 text-sm mt-1" role="alert">{errors.issue}</p>}
+                </div>
+
+                {/* Preferred Date */}
+                <div>
+                  <label htmlFor="datepicker" className="block text-sm font-semibold text-blue-900 mb-1.5">
+                    Preferred Date <span className="text-red-500" aria-hidden="true">*</span>
+                  </label>
+                  <DatePicker
+                    id="datepicker"
+                    value={form.date}
+                    onChange={(date) => handleChange('date', date)}
+                    error={errors.date}
+                  />
+                  {errors.date && <p className="text-red-500 text-sm mt-1" role="alert">{errors.date}</p>}
                 </div>
 
                 {/* Urgency + Time */}
