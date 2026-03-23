@@ -37,7 +37,7 @@ const perks = [
       </svg>
     ),
     title: 'Locally Owned & Respected',
-    description: 'Join a tight-knit team that's trusted by thousands of CT homeowners. Your name matters here.',
+    description: "Join a tight-knit team that's trusted by thousands of CT homeowners. Your name matters here.",
   },
 ];
 
