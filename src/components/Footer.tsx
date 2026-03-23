@@ -103,8 +103,8 @@ export default function Footer() {
         <div className="border-t border-blue-800 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-blue-400">
           <p>&copy; {currentYear} CT Appliance Repair. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors duration-200 cursor-pointer">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors duration-200 cursor-pointer">Terms of Service</a>
+            <a href="/privacy" className="hover:text-white transition-colors duration-200 cursor-pointer">Privacy Policy</a>
+            <a href="/terms" className="hover:text-white transition-colors duration-200 cursor-pointer">Terms of Service</a>
             <a href="#" className="hover:text-white transition-colors duration-200 cursor-pointer">Sitemap</a>
           </div>
           <div className="flex items-center gap-2">
