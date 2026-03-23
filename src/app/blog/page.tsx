@@ -39,7 +39,7 @@ export default function BlogPage() {
           }}
           aria-hidden="true"
         />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 lg:pt-36 lg:pb-28">
           <div className="max-w-3xl">
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#ffb81c] mb-4">
               Expert Knowledge
