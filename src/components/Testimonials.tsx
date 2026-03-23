@@ -8,7 +8,7 @@ const testimonials = [
     location: 'West Hartford, CT',
     rating: 5,
     appliance: 'Refrigerator',
-    text: 'My fridge stopped cooling on a Friday evening. I called CT Appliance Repair and they had a technician at my home Saturday morning. Fixed in under an hour! Saved all my food. Incredibly professional and fair pricing.',
+    text: 'My fridge stopped cooling on a Friday evening. I called MY APPLIANCE Repair and they had a technician at my home Saturday morning. Fixed in under an hour! Saved all my food. Incredibly professional and fair pricing.',
     initials: 'SM',
   },
   {
@@ -32,7 +32,7 @@ const testimonials = [
     location: 'Stamford, CT',
     rating: 5,
     appliance: 'Dishwasher',
-    text: 'Used CT Appliance Repair twice now — once for my dishwasher and once for my oven. Both times: fast scheduling, punctual technicians, fair prices, and excellent work. They\'ve earned a customer for life.',
+    text: 'Used MY APPLIANCE Repair twice now — once for my dishwasher and once for my oven. Both times: fast scheduling, punctual technicians, fair prices, and excellent work. They\'ve earned a customer for life.',
     initials: 'RT',
   },
   {
@@ -40,7 +40,7 @@ const testimonials = [
     location: 'New Haven, CT',
     rating: 5,
     appliance: 'Oven',
-    text: 'Our oven stopped working right before Thanksgiving. CT Appliance came out on very short notice, diagnosed a bad igniter, and had it replaced within hours. They saved our holiday dinner. Absolutely recommend them!',
+    text: 'Our oven stopped working right before Thanksgiving. MY APPLIANCE came out on very short notice, diagnosed a bad igniter, and had it replaced within hours. They saved our holiday dinner. Absolutely recommend them!',
     initials: 'MG',
   },
   {

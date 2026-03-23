@@ -148,7 +148,7 @@ export default function ContactForm() {
                   </svg>
                 </div>
                 <div>
-                  <div className="font-bold text-blue-900">info@ctappliancerepair.com</div>
+                  <div className="font-bold text-blue-900">info@myappliance.us</div>
                   <div className="text-sm text-slate-500">We respond within 1 hour</div>
                 </div>
               </div>

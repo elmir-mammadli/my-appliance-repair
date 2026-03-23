@@ -55,7 +55,7 @@ export default function JoinUs() {
             Join Our Team
           </h2>
           <p className="text-blue-200 text-lg leading-relaxed">
-            CT Appliance Repair is a locally owned company built on real craftsmanship and real relationships.
+            MY APPLIANCE Repair is a locally owned company built on real craftsmanship and real relationships.
             We&apos;re looking for skilled technicians who take pride in their work and want to grow with us.
           </p>
         </div>

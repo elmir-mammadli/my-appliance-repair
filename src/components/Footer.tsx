@@ -17,7 +17,7 @@ export default function Footer() {
                 </svg>
               </div>
               <div>
-                <span className="font-bold text-white">CT Appliance Repair</span>
+                <span className="font-bold text-white">MY APPLIANCE Repair</span>
               </div>
             </div>
             <p className="text-sm leading-relaxed mb-5">
@@ -80,7 +80,7 @@ export default function Footer() {
                 <svg className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span>info@ctappliancerepair.com</span>
+                <span>info@myappliance.us</span>
               </li>
               <li className="flex items-start gap-3">
                 <svg className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -101,7 +101,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-blue-800 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-blue-400">
-          <p>&copy; {currentYear} CT Appliance Repair. All rights reserved.</p>
+          <p>&copy; 2026 MY APPLIANCE Repair. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-white transition-colors duration-200 cursor-pointer">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors duration-200 cursor-pointer">Terms of Service</a>

@@ -21,7 +21,7 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) return {};
   return {
-    title: `${post.title} | CT Appliance Repair Blog`,
+    title: `${post.title} | MY APPLIANCE Repair Blog`,
     description: post.excerpt,
     keywords: `${post.category.toLowerCase()}, appliance repair Connecticut, ${post.title.toLowerCase()}`,
   };

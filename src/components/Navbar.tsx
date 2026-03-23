@@ -41,7 +41,7 @@ export default function Navbar() {
             </svg>
           </div>
           <div>
-            <span className="font-bold text-lg leading-none text-blue-900">CT Appliance</span>
+            <span className="font-bold text-lg leading-none text-blue-900">MY APPLIANCE</span>
             <span className="block text-xs font-medium tracking-wide text-blue-600">Repair Experts</span>
           </div>
         </Link>

@@ -20,7 +20,7 @@ export const posts: Post[] = [
     category: 'Refrigerators',
     date: '2026-03-18',
     readTime: '6 min read',
-    author: 'CT Appliance Repair Team',
+    author: 'MY APPLIANCE Repair Team',
     featuredColor: 'from-blue-900 via-blue-800 to-blue-700',
     accentColor: 'bg-blue-500 text-white',
     image: 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=800&q=80',
@@ -71,7 +71,7 @@ export const posts: Post[] = [
     category: 'Tips & Advice',
     date: '2026-03-12',
     readTime: '7 min read',
-    author: 'CT Appliance Repair Team',
+    author: 'MY APPLIANCE Repair Team',
     featuredColor: 'from-amber-700 via-amber-600 to-yellow-500',
     accentColor: 'bg-amber-400 text-amber-900',
     image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80',
@@ -129,7 +129,7 @@ export const posts: Post[] = [
 
 <h2>Making the Final Call</h2>
 <p>When in doubt, get a written diagnosis from a licensed technician before making a decision. A good repair company will give you an honest assessment of the repair cost versus the remaining useful life of the appliance — and tell you frankly if replacement is the smarter move, even if that means less business for them that day.</p>
-<p>At CT Appliance Repair, we've been helping Connecticut homeowners make exactly this call since 2008. Our technicians will give you a full diagnosis and a straightforward opinion on whether the repair is worth it for your specific appliance and situation.</p>
+<p>At MY APPLIANCE Repair, we've been helping Connecticut homeowners make exactly this call since 2008. Our technicians will give you a full diagnosis and a straightforward opinion on whether the repair is worth it for your specific appliance and situation.</p>
     `.trim(),
   },
   {
@@ -139,7 +139,7 @@ export const posts: Post[] = [
     category: 'Maintenance',
     date: '2026-03-05',
     readTime: '6 min read',
-    author: 'CT Appliance Repair Team',
+    author: 'MY APPLIANCE Repair Team',
     featuredColor: 'from-teal-800 via-teal-700 to-teal-500',
     accentColor: 'bg-teal-500 text-white',
     image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=800&q=80',
@@ -188,7 +188,7 @@ export const posts: Post[] = [
     category: 'Dishwashers',
     date: '2026-02-28',
     readTime: '6 min read',
-    author: 'CT Appliance Repair Team',
+    author: 'MY APPLIANCE Repair Team',
     featuredColor: 'from-violet-900 via-violet-800 to-violet-600',
     accentColor: 'bg-violet-500 text-white',
     image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80',
@@ -247,7 +247,7 @@ export const posts: Post[] = [
     category: 'Tips & Advice',
     date: '2026-02-20',
     readTime: '6 min read',
-    author: 'CT Appliance Repair Team',
+    author: 'MY APPLIANCE Repair Team',
     featuredColor: 'from-amber-800 via-orange-700 to-amber-600',
     accentColor: 'bg-amber-400 text-amber-900',
     image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
@@ -283,7 +283,7 @@ export const posts: Post[] = [
 
 <h2>Local Expertise Matters — And Saves You Money</h2>
 <p>There's a meaningful difference between calling a national appliance repair chain and calling a local Connecticut technician. A local tech knows your area's water quality, has seen the same failure patterns in the same appliance models in local homes year after year, and will give you an honest assessment of whether a repair is worth it — rather than just completing the call and moving on to the next ticket.</p>
-<p>CT Appliance Repair has been serving Connecticut homeowners since 2008. Our technicians are licensed, insured, and familiar with the specific conditions — hard water, seasonal demands, the appliance brands common in CT homes — that affect appliance longevity in our region. When you call us for a repair, you also get practical, no-upsell maintenance advice tailored to your specific appliances. We'd rather see you maintain an appliance for 15 years than replace it at 8.</p>
+<p>MY APPLIANCE Repair has been serving Connecticut homeowners since 2008. Our technicians are licensed, insured, and familiar with the specific conditions — hard water, seasonal demands, the appliance brands common in CT homes — that affect appliance longevity in our region. When you call us for a repair, you also get practical, no-upsell maintenance advice tailored to your specific appliances. We'd rather see you maintain an appliance for 15 years than replace it at 8.</p>
     `.trim(),
   },
   {
@@ -293,7 +293,7 @@ export const posts: Post[] = [
     category: 'Smart Home',
     date: '2026-03-20',
     readTime: '7 min read',
-    author: 'CT Appliance Repair Team',
+    author: 'MY APPLIANCE Repair Team',
     featuredColor: 'from-indigo-600 to-indigo-900',
     accentColor: 'bg-indigo-400 text-white',
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
@@ -337,7 +337,7 @@ export const posts: Post[] = [
 </ul>
 
 <h2>Making Sure Your Smart Appliance Stays Repairable Locally</h2>
-<p>At CT Appliance Repair, our technicians have completed manufacturer certification programs for major smart appliance brands and have invested in the diagnostic equipment required to service connected appliances properly. When something goes wrong with a smart appliance — whether it's a software glitch, a failed Wi-Fi module, or a control board issue — we can diagnose and repair it without shipping it back to the manufacturer or voiding your warranty.</p>
+<p>At MY APPLIANCE Repair, our technicians have completed manufacturer certification programs for major smart appliance brands and have invested in the diagnostic equipment required to service connected appliances properly. When something goes wrong with a smart appliance — whether it's a software glitch, a failed Wi-Fi module, or a control board issue — we can diagnose and repair it without shipping it back to the manufacturer or voiding your warranty.</p>
 <p>If you're buying a new smart appliance and want to know whether we service it before you commit, give us a call. We'd rather you make an informed purchase than end up with hardware we can't support locally.</p>
     `.trim(),
   },
@@ -348,7 +348,7 @@ export const posts: Post[] = [
     category: 'Technology',
     date: '2026-03-15',
     readTime: '7 min read',
-    author: 'CT Appliance Repair Team',
+    author: 'MY APPLIANCE Repair Team',
     featuredColor: 'from-cyan-600 to-cyan-900',
     accentColor: 'bg-cyan-400 text-cyan-900',
     image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
@@ -404,7 +404,7 @@ export const posts: Post[] = [
     category: 'Tips & Advice',
     date: '2026-03-10',
     readTime: '6 min read',
-    author: 'CT Appliance Repair Team',
+    author: 'MY APPLIANCE Repair Team',
     featuredColor: 'from-amber-500 to-orange-700',
     accentColor: 'bg-amber-300 text-amber-900',
     image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80',
@@ -451,7 +451,7 @@ export const posts: Post[] = [
     category: 'Tips & Advice',
     date: '2026-03-07',
     readTime: '7 min read',
-    author: 'CT Appliance Repair Team',
+    author: 'MY APPLIANCE Repair Team',
     featuredColor: 'from-rose-600 to-rose-900',
     accentColor: 'bg-rose-400 text-white',
     image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80',
@@ -496,7 +496,7 @@ export const posts: Post[] = [
 
 <h2>Why Choosing a Certified Local Technician Matters More Than Ever</h2>
 <p>On a traditional washer, a competent independent technician with a parts manual can likely diagnose and fix most problems effectively. On a Samsung SmartThings-integrated refrigerator with a proprietary inverter compressor and cloud-connected diagnostics, the margin for error is much smaller — and the cost of a misdiagnosis much higher.</p>
-<p>At CT Appliance Repair, our technicians are manufacturer-certified for the major smart appliance brands we service, and we maintain the diagnostic equipment required to interface with connected appliances properly. Before we recommend a repair — or suggest replacement — we give you a complete picture of the cost, parts availability, and realistic remaining lifespan of your appliance. With smart appliances, that informed assessment is worth more than ever.</p>
+<p>At MY APPLIANCE Repair, our technicians are manufacturer-certified for the major smart appliance brands we service, and we maintain the diagnostic equipment required to interface with connected appliances properly. Before we recommend a repair — or suggest replacement — we give you a complete picture of the cost, parts availability, and realistic remaining lifespan of your appliance. With smart appliances, that informed assessment is worth more than ever.</p>
     `.trim(),
   },
   {
@@ -506,7 +506,7 @@ export const posts: Post[] = [
     category: 'Maintenance',
     date: '2026-03-01',
     readTime: '8 min read',
-    author: 'CT Appliance Repair Team',
+    author: 'MY APPLIANCE Repair Team',
     featuredColor: 'from-teal-600 to-teal-900',
     accentColor: 'bg-teal-400 text-teal-900',
     image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80',
@@ -607,7 +607,7 @@ export const posts: Post[] = [
 
 <h2>The Value of This Routine</h2>
 <p>Working through this checklist each season takes 2–4 hours per year total across all appliances. In exchange, you significantly reduce the likelihood of a major appliance breakdown, extend the service life of every appliance in your home, and maintain the efficiency that keeps your energy bills in check.</p>
-<p>If you find something during your inspection that warrants professional attention — a suspicious noise, a seal that won't pass the dollar-bill test, a dryer that's running hotter than it should — CT Appliance Repair is available for same-day service across all 169 Connecticut towns. We'd rather help you catch a $150 problem before it becomes a $500 emergency repair.</p>
+<p>If you find something during your inspection that warrants professional attention — a suspicious noise, a seal that won't pass the dollar-bill test, a dryer that's running hotter than it should — MY APPLIANCE Repair is available for same-day service across all 169 Connecticut towns. We'd rather help you catch a $150 problem before it becomes a $500 emergency repair.</p>
     `.trim(),
   },
 ];
