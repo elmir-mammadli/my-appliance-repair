@@ -6,7 +6,7 @@ import { openBookingModal } from '@/lib/booking';
 const discounts = [
   {
     group: 'Military & Veterans',
-    badge: '15% OFF',
+    badge: '$50 OFF',
     description: 'Active duty, reservists, National Guard, veterans, and surviving spouses of U.S. service members.',
     eligibility: 'Present military ID, VA card, or DD-214 at time of service.',
     icon: (
@@ -18,7 +18,7 @@ const discounts = [
   },
   {
     group: 'First Responders',
-    badge: '10% OFF',
+    badge: '$35 OFF',
     description: 'Full-time police officers, firefighters, EMTs, paramedics, and 911 emergency dispatchers.',
     eligibility: 'Present department-issued badge or photo ID at time of service.',
     icon: (
@@ -31,7 +31,7 @@ const discounts = [
   },
   {
     group: 'Seniors (65+)',
-    badge: '10% OFF',
+    badge: '$30 OFF',
     description: 'Connecticut residents aged 65 and older. Fixed income or not — every senior deserves a break.',
     eligibility: 'Present any government-issued ID confirming date of birth.',
     icon: (
@@ -43,7 +43,7 @@ const discounts = [
   },
   {
     group: 'Teachers & Educators',
-    badge: '5% OFF',
+    badge: '$20 OFF',
     description: 'K–12 teachers, college faculty, school administrators, and licensed childcare workers.',
     eligibility: 'Present a valid school-issued employee ID at time of service.',
     icon: (
