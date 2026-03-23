@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://myappliance.us'),
   title: "MY APPLIANCE Repair | Same-Day Service Across Connecticut",
   description: "Connecticut's most trusted appliance repair company. We fix washers, dryers, refrigerators, dishwashers & ovens across all 169 CT towns. Licensed, insured, 90-day warranty. Call (800) 555-0123.",
   keywords: "appliance repair Connecticut, washer repair CT, dryer repair CT, refrigerator repair Connecticut, same day appliance repair",
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function RootLayout({
