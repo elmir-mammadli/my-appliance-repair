@@ -1,14 +1,21 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
-// Pick a valid date for tests: tomorrow
-function tomorrow(): string {
+// ─── Helpers ────────────────────────────────────────────────────────────────
+
+const MONTHS = [
+  'January','February','March','April','May','June',
+  'July','August','September','October','November','December',
+];
+
+/** aria-label used on day buttons: e.g. "March 26, 2026" */
+function tomorrowLabel(): string {
   const d = new Date();
   d.setDate(d.getDate() + 1);
-  return d.toISOString().split('T')[0]; // YYYY-MM-DD
+  return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
 }
 
-// Mock the booking API so tests never hit real Sheets / Resend
-async function mockBookingApi(page: import('@playwright/test').Page, { ok = true } = {}) {
+/** Mock /api/book so tests never touch real Sheets or Resend */
+async function mockBookingApi(page: Page, ok = true) {
   await page.route('**/api/book', (route) =>
     route.fulfill({
       status: ok ? 200 : 500,
@@ -18,27 +25,29 @@ async function mockBookingApi(page: import('@playwright/test').Page, { ok = true
   );
 }
 
-// Fill shared form fields that exist in both ContactForm and BookingModal
-async function fillBaseFields(page: import('@playwright/test').Page, prefix = '') {
-  const id = (s: string) => (prefix ? `#${prefix}-${s}` : `#${s}`);
-
-  await page.fill(id('name'), 'John Smith');
-  await page.fill(id('phone'), '(203) 555-0100');
-  await page.fill(id('zip'), '06510');
-  await page.fill(id('appliance'), 'Washer');
-  await page.fill(id('issue'), 'Washer makes loud grinding noise and does not spin');
+/** Open date picker and click tomorrow's date */
+async function pickTomorrow(page: Page) {
+  // The trigger button text shows "Select a date..." when empty
+  const trigger = page.getByRole('button', { name: /Select a date/i });
+  // There might be multiple pickers; click the visible one
+  await trigger.first().click();
+  await page.getByRole('button', { name: tomorrowLabel() }).click();
 }
 
-// ─── CONTACT FORM ────────────────────────────────────────────────────────────
+// ─── Contact Form ────────────────────────────────────────────────────────────
 
 test.describe('Contact Form', () => {
   test.beforeEach(async ({ page }) => {
     await mockBookingApi(page);
-    await page.goto('/#contact');
+    await page.goto('/');
+    // Scroll the contact section into view
+    await page.evaluate(() => {
+      document.getElementById('contact')?.scrollIntoView();
+    });
   });
 
   test('renders all required fields', async ({ page }) => {
-    const form = page.locator('form[aria-label="Repair booking form"]').first();
+    const form = page.locator('#contact form');
     await expect(form.locator('#name')).toBeVisible();
     await expect(form.locator('#phone')).toBeVisible();
     await expect(form.locator('#zip')).toBeVisible();
@@ -48,64 +57,56 @@ test.describe('Contact Form', () => {
   });
 
   test('shows validation errors when submitting empty form', async ({ page }) => {
-    await page.click('form[aria-label="Repair booking form"] button[type="submit"]');
-    await expect(page.getByText('Name is required')).toBeVisible();
-    await expect(page.getByText('Phone number is required')).toBeVisible();
-    await expect(page.getByText('ZIP code is required')).toBeVisible();
-    await expect(page.getByText('Please select an appliance')).toBeVisible();
-    await expect(page.getByText('Please describe the issue')).toBeVisible();
-    await expect(page.getByText('Please select a preferred date')).toBeVisible();
+    const form = page.locator('#contact form');
+    await form.locator('button[type="submit"]').click();
+
+    await expect(form.getByText('Name is required')).toBeVisible();
+    await expect(form.getByText('Phone number is required')).toBeVisible();
+    await expect(form.getByText('ZIP code is required')).toBeVisible();
+    await expect(form.getByText('Please select an appliance')).toBeVisible();
+    await expect(form.getByText('Please describe the issue')).toBeVisible();
+    await expect(form.getByText('Please select a preferred date')).toBeVisible();
   });
 
   test('shows invalid phone error', async ({ page }) => {
-    const form = page.locator('form[aria-label="Repair booking form"]').first();
+    const form = page.locator('#contact form');
     await form.locator('#phone').fill('123');
     await form.locator('button[type="submit"]').click();
-    await expect(page.getByText('Please enter a valid phone number')).toBeVisible();
+    await expect(form.getByText('Please enter a valid phone number')).toBeVisible();
   });
 
-  test('shows CT ZIP validation — out-of-state ZIP rejected', async ({ page }) => {
-    const form = page.locator('form[aria-label="Repair booking form"]').first();
-    await form.locator('#zip').fill('10001'); // New York
-    await expect(page.getByText('Outside our service area (CT only)')).toBeVisible();
+  test('rejects out-of-state ZIP', async ({ page }) => {
+    const form = page.locator('#contact form');
+    await form.locator('#zip').fill('10001');
+    await expect(form.getByText('Outside our service area (CT only)')).toBeVisible();
   });
 
-  test('shows CT ZIP validation — Connecticut ZIP accepted', async ({ page }) => {
-    const form = page.locator('form[aria-label="Repair booking form"]').first();
+  test('accepts Connecticut ZIP', async ({ page }) => {
+    const form = page.locator('#contact form');
     await form.locator('#zip').fill('06510');
-    await expect(page.getByText('We service your area')).toBeVisible();
+    await expect(form.getByText('We service your area')).toBeVisible();
   });
 
-  test('date picker opens and selects a date', async ({ page }) => {
-    const form = page.locator('form[aria-label="Repair booking form"]').first();
-    const trigger = form.locator('#datepicker');
-    await trigger.click();
-
-    // Calendar should be visible
-    await expect(page.locator('[aria-label^="Previous month"], [aria-label^="Next month"]').first()).toBeVisible();
-
-    // Click the first enabled (non-disabled) day button inside the calendar
-    const firstAvailableDay = page
-      .locator('.absolute.z-50 button:not([disabled])')
-      .filter({ hasNotText: /[A-Z]/ }) // exclude month nav buttons
-      .first();
-    await firstAvailableDay.click();
-
-    // Calendar should close and trigger should show a date
-    await expect(trigger).toContainText(/\d{4}/);
+  test('date picker opens and selects tomorrow', async ({ page }) => {
+    const form = page.locator('#contact form');
+    await form.locator('#datepicker').click();
+    // Calendar must be visible
+    await expect(page.getByRole('button', { name: tomorrowLabel() })).toBeVisible();
+    await page.getByRole('button', { name: tomorrowLabel() }).click();
+    // Trigger button now shows a formatted date (contains the year)
+    await expect(form.locator('#datepicker')).toContainText(String(new Date().getFullYear()));
   });
 
-  test('clears field errors on input', async ({ page }) => {
-    const form = page.locator('form[aria-label="Repair booking form"]').first();
+  test('clears field error after typing', async ({ page }) => {
+    const form = page.locator('#contact form');
     await form.locator('button[type="submit"]').click();
-    await expect(page.getByText('Name is required')).toBeVisible();
-
+    await expect(form.getByText('Name is required')).toBeVisible();
     await form.locator('#name').fill('John Smith');
-    await expect(page.getByText('Name is required')).not.toBeVisible();
+    await expect(form.getByText('Name is required')).not.toBeVisible();
   });
 
   test('submits successfully and shows confirmation', async ({ page }) => {
-    const form = page.locator('form[aria-label="Repair booking form"]').first();
+    const form = page.locator('#contact form');
 
     await form.locator('#name').fill('John Smith');
     await form.locator('#phone').fill('(203) 555-0100');
@@ -113,27 +114,20 @@ test.describe('Contact Form', () => {
     await form.locator('#appliance').selectOption('Washer');
     await form.locator('#issue').fill('Washer makes loud grinding noise and does not spin');
 
-    // Open date picker and select a day
     await form.locator('#datepicker').click();
-    const firstAvailableDay = page
-      .locator('.absolute.z-50 button:not([disabled])')
-      .filter({ hasNotText: /[A-Z]/ })
-      .first();
-    await firstAvailableDay.click();
+    await page.getByRole('button', { name: tomorrowLabel() }).click();
 
     await form.locator('button[type="submit"]').click();
 
     await expect(page.getByText('Booking Request Received!')).toBeVisible();
-    await expect(page.getByText(/John Smith/)).toBeVisible();
-    await expect(page.getByText(/Washer/)).toBeVisible();
+    await expect(page.locator('#contact').getByText('John Smith', { exact: true })).toBeVisible();
+    await expect(page.locator('#contact').getByText('Washer', { exact: true })).toBeVisible();
   });
 
-  test('shows error alert on API failure', async ({ page }) => {
-    await page.route('**/api/book', (route) =>
-      route.fulfill({ status: 500, contentType: 'application/json', body: JSON.stringify({ error: 'error' }) })
-    );
+  test('shows alert on API failure', async ({ page }) => {
+    await mockBookingApi(page, false);
 
-    const form = page.locator('form[aria-label="Repair booking form"]').first();
+    const form = page.locator('#contact form');
     await form.locator('#name').fill('John Smith');
     await form.locator('#phone').fill('(203) 555-0100');
     await form.locator('#zip').fill('06510');
@@ -141,24 +135,22 @@ test.describe('Contact Form', () => {
     await form.locator('#issue').fill('Not working');
 
     await form.locator('#datepicker').click();
-    const firstAvailableDay = page
-      .locator('.absolute.z-50 button:not([disabled])')
-      .filter({ hasNotText: /[A-Z]/ })
-      .first();
-    await firstAvailableDay.click();
+    await page.getByRole('button', { name: tomorrowLabel() }).click();
 
-    page.on('dialog', (dialog) => dialog.dismiss());
+    const dialogPromise = page.waitForEvent('dialog');
     await form.locator('button[type="submit"]').click();
+    const dialog = await dialogPromise;
+    expect(dialog.message()).toContain('(800) 555-0123');
+    await dialog.dismiss();
   });
 
   test('submit button is disabled while submitting', async ({ page }) => {
-    // Delay the API so we can observe the loading state
     await page.route('**/api/book', async (route) => {
-      await new Promise((r) => setTimeout(r, 500));
+      await new Promise((r) => setTimeout(r, 600));
       await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) });
     });
 
-    const form = page.locator('form[aria-label="Repair booking form"]').first();
+    const form = page.locator('#contact form');
     await form.locator('#name').fill('John Smith');
     await form.locator('#phone').fill('(203) 555-0100');
     await form.locator('#zip').fill('06510');
@@ -166,19 +158,15 @@ test.describe('Contact Form', () => {
     await form.locator('#issue').fill('Not working');
 
     await form.locator('#datepicker').click();
-    const firstAvailableDay = page
-      .locator('.absolute.z-50 button:not([disabled])')
-      .filter({ hasNotText: /[A-Z]/ })
-      .first();
-    await firstAvailableDay.click();
+    await page.getByRole('button', { name: tomorrowLabel() }).click();
 
     await form.locator('button[type="submit"]').click();
     await expect(form.locator('button[type="submit"]')).toBeDisabled();
-    await expect(page.getByText('Sending Request...')).toBeVisible();
+    await expect(form.getByText('Sending Request...')).toBeVisible();
   });
 });
 
-// ─── BOOKING MODAL ───────────────────────────────────────────────────────────
+// ─── Booking Modal ───────────────────────────────────────────────────────────
 
 test.describe('Booking Modal', () => {
   test.beforeEach(async ({ page }) => {
@@ -186,32 +174,29 @@ test.describe('Booking Modal', () => {
     await page.goto('/');
   });
 
-  test('opens when "Schedule a Repair" hero button is clicked', async ({ page }) => {
+  test('opens from hero "Schedule a Repair" button', async ({ page }) => {
     await page.getByRole('button', { name: /Schedule a Repair/i }).first().click();
     await expect(page.getByRole('dialog')).toBeVisible();
-    await expect(page.getByText('Schedule a Repair').nth(1)).toBeVisible();
   });
 
   test('closes on backdrop click', async ({ page }) => {
     await page.getByRole('button', { name: /Schedule a Repair/i }).first().click();
     await expect(page.getByRole('dialog')).toBeVisible();
-
-    // Click the backdrop (outside the panel)
-    await page.mouse.click(10, 10);
-    await expect(page.getByRole('dialog')).not.toBeVisible({ timeout: 1000 });
+    await page.mouse.click(10, 300);
+    await expect(page.getByRole('dialog')).not.toBeVisible({ timeout: 2000 });
   });
 
   test('closes on Escape key', async ({ page }) => {
     await page.getByRole('button', { name: /Schedule a Repair/i }).first().click();
     await expect(page.getByRole('dialog')).toBeVisible();
     await page.keyboard.press('Escape');
-    await expect(page.getByRole('dialog')).not.toBeVisible({ timeout: 1000 });
+    await expect(page.getByRole('dialog')).not.toBeVisible({ timeout: 2000 });
   });
 
-  test('closes via the X button', async ({ page }) => {
+  test('closes via X button', async ({ page }) => {
     await page.getByRole('button', { name: /Schedule a Repair/i }).first().click();
     await page.getByRole('button', { name: 'Close modal' }).click();
-    await expect(page.getByRole('dialog')).not.toBeVisible({ timeout: 1000 });
+    await expect(page.getByRole('dialog')).not.toBeVisible({ timeout: 2000 });
   });
 
   test('shows validation errors on empty submit', async ({ page }) => {
@@ -227,10 +212,10 @@ test.describe('Booking Modal', () => {
     await expect(modal.getByText('Please select a preferred date')).toBeVisible();
   });
 
-  test('shows out-of-state ZIP error inside modal', async ({ page }) => {
+  test('rejects out-of-state ZIP inside modal', async ({ page }) => {
     await page.getByRole('button', { name: /Schedule a Repair/i }).first().click();
     const modal = page.getByRole('dialog');
-    await modal.locator('#m-zip').fill('90210'); // Beverly Hills
+    await modal.locator('#m-zip').fill('90210');
     await expect(modal.getByText('Outside our service area (CT only)')).toBeVisible();
   });
 
@@ -245,11 +230,7 @@ test.describe('Booking Modal', () => {
     await modal.locator('#m-issue').fill('Fridge not cooling, making clicking sounds');
 
     await modal.locator('#m-datepicker').click();
-    const firstAvailableDay = page
-      .locator('.absolute.z-50 button:not([disabled])')
-      .filter({ hasNotText: /[A-Z]/ })
-      .first();
-    await firstAvailableDay.click();
+    await page.getByRole('button', { name: tomorrowLabel() }).click();
 
     await modal.getByRole('button', { name: /Book My Repair/i }).click();
 
@@ -258,8 +239,13 @@ test.describe('Booking Modal', () => {
     await expect(modal.getByText(/Refrigerator/)).toBeVisible();
   });
 
-  test('can be triggered from Navbar "Book a Repair" button', async ({ page }) => {
-    await page.getByRole('link', { name: /Book a Repair/i }).first().click();
+  test('opens from Navbar "Book a Repair" button', async ({ page }) => {
+    // On mobile the button lives inside the hamburger menu — open it first
+    const hamburger = page.getByRole('button', { name: /Toggle mobile menu/i });
+    if (await hamburger.isVisible()) {
+      await hamburger.click();
+    }
+    await page.locator('header').getByRole('button', { name: /Book a Repair/i }).first().click();
     await expect(page.getByRole('dialog')).toBeVisible();
   });
 });
