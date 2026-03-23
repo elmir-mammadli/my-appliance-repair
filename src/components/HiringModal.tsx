@@ -31,6 +31,8 @@ export default function HiringModal() {
   const [form, setForm] = useState<FormState>(initialState);
   const [brands, setBrands] = useState<string[]>([]);
   const [errors, setErrors] = useState<Partial<FormState>>({});
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [cvError, setCvError] = useState<string>('');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -85,6 +87,21 @@ export default function HiringModal() {
     setBrands((prev) =>
       prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
     );
+  };
+
+  const handleCvChange = (file: File | null) => {
+    setCvError('');
+    if (!file) { setCvFile(null); return; }
+    const allowed = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    if (!allowed.includes(file.type)) {
+      setCvError('Only PDF, DOC, or DOCX files are accepted');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setCvError('File must be 5MB or smaller');
+      return;
+    }
+    setCvFile(file);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -159,7 +176,7 @@ export default function HiringModal() {
                 <strong className="text-blue-950">{form.phone}</strong>.
               </p>
               <button
-                onClick={() => { setSubmitted(false); setForm(initialState); setBrands([]); closeModal(); }}
+                onClick={() => { setSubmitted(false); setForm(initialState); setBrands([]); setCvFile(null); setCvError(''); closeModal(); }}
                 className="inline-flex items-center justify-center px-6 py-3 border border-slate-200 hover:bg-slate-50 text-slate-600 font-medium rounded-xl transition-colors duration-200 cursor-pointer"
               >
                 Close
@@ -298,6 +315,48 @@ export default function HiringModal() {
                     aria-required="true" aria-describedby={errors.why ? 'h-why-error' : undefined}
                   />
                   {errors.why && <p id="h-why-error" className="text-red-500 text-xs mt-1" role="alert">{errors.why}</p>}
+                </div>
+
+                {/* CV Upload */}
+                <div>
+                  <label className="block text-sm font-semibold text-blue-950 mb-1.5">
+                    Resume / CV{' '}
+                    <span className="text-slate-400 font-normal text-xs">(optional)</span>
+                  </label>
+                  {cvFile ? (
+                    <div className="flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50">
+                      <svg className="w-4 h-4 text-blue-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <span className="text-sm text-blue-950 truncate flex-1">{cvFile.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => { setCvFile(null); setCvError(''); }}
+                        className="w-5 h-5 flex items-center justify-center rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-600 transition-colors duration-200 flex-shrink-0 cursor-pointer"
+                        aria-label="Remove file"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  ) : (
+                    <label className="flex flex-col items-center justify-center w-full px-4 py-5 rounded-xl border-2 border-dashed border-slate-200 hover:border-blue-300 bg-white hover:bg-blue-50/30 cursor-pointer transition-colors duration-200">
+                      <svg className="w-7 h-7 text-slate-400 mb-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                      </svg>
+                      <span className="text-sm text-slate-500">Click to upload or drag and drop</span>
+                      <span className="text-xs text-slate-400 mt-0.5">PDF, DOC or DOCX, max 5MB</span>
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        className="sr-only"
+                        onChange={(e) => handleCvChange(e.target.files?.[0] ?? null)}
+                        aria-label="Upload resume or CV"
+                      />
+                    </label>
+                  )}
+                  {cvError && <p className="text-red-500 text-xs mt-1" role="alert">{cvError}</p>}
                 </div>
 
                 {/* Submit */}
