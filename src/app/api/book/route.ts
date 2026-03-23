@@ -17,7 +17,7 @@ async function appendToSheet(data: Record<string, string>) {
 
   const sheets = google.sheets({ version: 'v4', auth });
   const sheetId = process.env.GOOGLE_SHEET_ID!;
-  const tab = 'Service Requests';
+  const tab = process.env.GOOGLE_SHEET_TAB ?? 'Service Requests';
 
   const now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
 
