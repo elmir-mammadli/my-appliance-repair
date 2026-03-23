@@ -7,10 +7,38 @@ import BookingModal from '@/components/BookingModal';
 import { posts } from '@/lib/posts';
 
 export const metadata: Metadata = {
-  title: 'Appliance Repair Tips & Insights | MY APPLIANCE Repair Blog',
-  description: 'Expert appliance repair tips, maintenance guides, and advice for Connecticut homeowners. Learn how to extend the life of your appliances and save money.',
+  title: 'Appliance Repair Tips & Guides | CT Homeowners Blog | MY APPLIANCE Repair',
+  description:
+    "Expert appliance repair tips, maintenance guides, and cost-saving advice for Connecticut homeowners. Stay informed with MY APPLIANCE Repair's blog.",
   keywords: 'appliance repair tips Connecticut, washer dryer maintenance, refrigerator problems, dishwasher repair, appliance maintenance',
+  alternates: { canonical: 'https://myappliance.us/blog' },
 };
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://myappliance.us',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Blog',
+      item: 'https://myappliance.us/blog',
+    },
+  ],
+};
+
+function jsonLd(data: object): string {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
+}
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -25,6 +53,10 @@ export default function BlogPage() {
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbSchema) }}
+      />
       <Navbar />
 
       {/* ── Hero ── */}

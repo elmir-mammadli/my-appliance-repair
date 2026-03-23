@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0c1a3d"/>
+
+  <!-- Subtle dot pattern overlay -->
+  <defs>
+    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#ffffff" opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Gold accent bar -->
+  <rect x="0" y="0" width="1200" height="6" fill="#ffb81c"/>
+
+  <!-- Wrench icon (simplified) -->
+  <g transform="translate(540, 140)">
+    <rect x="0" y="0" width="120" height="120" rx="24" fill="#ffb81c" opacity="0.15"/>
+    <path d="M60 20 C37 20 18 39 18 62 C18 75 24 87 33 95 L55 73 L55 85 L73 85 L73 73 L95 95 C104 87 110 75 110 62 C110 39 83 20 60 20 Z M60 72 C49 72 40 63 40 52 C40 41 49 32 60 32 C71 32 80 41 80 52 C80 63 71 72 60 72 Z" fill="#ffb81c" opacity="0.6"/>
+  </g>
+
+  <!-- Company name -->
+  <text
+    x="600"
+    y="320"
+    font-family="Arial Black, Arial, sans-serif"
+    font-size="76"
+    font-weight="900"
+    fill="#ffb81c"
+    text-anchor="middle"
+    letter-spacing="-1"
+  >MY APPLIANCE Repair</text>
+
+  <!-- Tagline -->
+  <text
+    x="600"
+    y="390"
+    font-family="Arial, sans-serif"
+    font-size="32"
+    font-weight="400"
+    fill="#93c5fd"
+    text-anchor="middle"
+    letter-spacing="0.5"
+  >Connecticut's Trusted Appliance Repair Experts</text>
+
+  <!-- Divider -->
+  <rect x="480" y="420" width="240" height="2" rx="1" fill="#ffb81c" opacity="0.4"/>
+
+  <!-- URL -->
+  <text
+    x="600"
+    y="468"
+    font-family="Arial, sans-serif"
+    font-size="26"
+    font-weight="400"
+    fill="#ffffff"
+    text-anchor="middle"
+    opacity="0.6"
+  >myappliance.us</text>
+
+  <!-- Service pills -->
+  <g transform="translate(170, 510)">
+    <rect x="0" y="0" width="140" height="40" rx="20" fill="#1e3a6e"/>
+    <text x="70" y="26" font-family="Arial, sans-serif" font-size="15" fill="#93c5fd" text-anchor="middle">Refrigerators</text>
+  </g>
+  <g transform="translate(330, 510)">
+    <rect x="0" y="0" width="140" height="40" rx="20" fill="#1e3a6e"/>
+    <text x="70" y="26" font-family="Arial, sans-serif" font-size="15" fill="#93c5fd" text-anchor="middle">Washers &amp; Dryers</text>
+  </g>
+  <g transform="translate(490, 510)">
+    <rect x="0" y="0" width="140" height="40" rx="20" fill="#1e3a6e"/>
+    <text x="70" y="26" font-family="Arial, sans-serif" font-size="15" fill="#93c5fd" text-anchor="middle">Dishwashers</text>
+  </g>
+  <g transform="translate(650, 510)">
+    <rect x="0" y="0" width="140" height="40" rx="20" fill="#1e3a6e"/>
+    <text x="70" y="26" font-family="Arial, sans-serif" font-size="15" fill="#93c5fd" text-anchor="middle">Ovens &amp; Ranges</text>
+  </g>
+  <g transform="translate(810, 510)">
+    <rect x="0" y="0" width="140" height="40" rx="20" fill="#1e3a6e"/>
+    <text x="70" y="26" font-family="Arial, sans-serif" font-size="15" fill="#93c5fd" text-anchor="middle">Same-Day Service</text>
+  </g>
+</svg>

@@ -8,6 +8,13 @@ import BookingModal from '@/components/BookingModal';
 import BookingButton from '@/components/BookingButton';
 import { posts, getPostBySlug, getRelatedPosts } from '@/lib/posts';
 
+function jsonLd(data: object): string {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
+}
+
 export async function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }
@@ -20,10 +27,31 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
+
+  const description =
+    post.excerpt.length > 160 ? post.excerpt.slice(0, 157) + '...' : post.excerpt;
+
   return {
     title: `${post.title} | MY APPLIANCE Repair Blog`,
-    description: post.excerpt,
+    description,
     keywords: `${post.category.toLowerCase()}, appliance repair Connecticut, ${post.title.toLowerCase()}`,
+    alternates: { canonical: `https://myappliance.us/blog/${slug}` },
+    openGraph: {
+      type: 'article',
+      url: `https://myappliance.us/blog/${slug}`,
+      title: `${post.title} | MY APPLIANCE Repair Blog`,
+      description,
+      publishedTime: post.date,
+      authors: ['MY APPLIANCE Repair Team'],
+      images: [
+        {
+          url: post.image,
+          width: 800,
+          height: 600,
+          alt: post.title,
+        },
+      ],
+    },
   };
 }
 
@@ -46,8 +74,70 @@ export default async function PostPage({
 
   const related = getRelatedPosts(post.slug, 2);
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description:
+      post.excerpt.length > 160 ? post.excerpt.slice(0, 157) + '...' : post.excerpt,
+    image: post.image,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      '@type': 'Organization',
+      name: 'MY APPLIANCE Repair Team',
+      url: 'https://myappliance.us',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'MY APPLIANCE Repair',
+      url: 'https://myappliance.us',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://myappliance.us/og-image.svg',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://myappliance.us/blog/${post.slug}`,
+    },
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://myappliance.us',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: 'https://myappliance.us/blog',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `https://myappliance.us/blog/${post.slug}`,
+      },
+    ],
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbSchema) }}
+      />
       <Navbar />
 
       {/* ── Post Header ── */}
@@ -138,9 +228,9 @@ export default async function PostPage({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h3 className="font-bold text-lg mb-2 leading-snug">
+                <h2 className="font-bold text-lg mb-2 leading-snug">
                   Need Appliance Repair?
-                </h3>
+                </h2>
                 <p className="text-blue-200 text-sm leading-relaxed mb-5">
                   Same-day service across Connecticut. Licensed technicians, 90-day warranty on all repairs.
                 </p>
@@ -183,9 +273,9 @@ export default async function PostPage({
                       </span>
                     </div>
                     <div className="p-5">
-                      <h4 className="font-bold text-blue-900 text-sm leading-snug mb-2 group-hover:text-blue-700 transition-colors duration-200 line-clamp-2">
+                      <h3 className="font-bold text-blue-900 text-sm leading-snug mb-2 group-hover:text-blue-700 transition-colors duration-200 line-clamp-2">
                         {p.title}
-                      </h4>
+                      </h3>
                       <span className="text-xs text-blue-500 font-medium flex items-center gap-1">
                         {p.readTime}
                         <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

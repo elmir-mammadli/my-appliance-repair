@@ -4,8 +4,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | MY Appliance Repair',
-  description: 'Privacy Policy for MY Appliance Repair — how we collect, use, and protect your personal information.',
+  title: 'Privacy Policy | MY APPLIANCE Repair',
+  description: 'Privacy Policy for MY APPLIANCE Repair — how we collect, use, and protect your personal information.',
+  alternates: { canonical: 'https://myappliance.us/privacy' },
+  robots: { index: true, follow: true },
 };
 
 export default function PrivacyPage() {

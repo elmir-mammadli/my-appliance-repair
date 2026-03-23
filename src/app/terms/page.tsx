@@ -4,8 +4,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | MY Appliance Repair',
-  description: 'Terms of Service for MY Appliance Repair — the rules and conditions governing our appliance repair services in Connecticut.',
+  title: 'Terms of Service | MY APPLIANCE Repair',
+  description: 'Terms of Service for MY APPLIANCE Repair — the rules and conditions governing our appliance repair services in Connecticut.',
+  alternates: { canonical: 'https://myappliance.us/terms' },
+  robots: { index: true, follow: true },
 };
 
 export default function TermsPage() {
