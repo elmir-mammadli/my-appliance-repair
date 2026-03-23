@@ -89,6 +89,7 @@ export default function ContactForm() {
           <h2 className="text-3xl font-bold text-blue-900 mb-4">Booking Request Received!</h2>
           <p className="text-lg text-slate-600 mb-6">
             Thank you, <strong>{form.name}</strong>! We&apos;ve received your repair request for your <strong>{form.appliance}</strong>.
+            {form.date && <> Your preferred date is <strong>{form.date}</strong>.</>}{' '}
             A technician will call you at <strong>{form.phone}</strong> within 30 minutes to confirm your appointment.
           </p>
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">

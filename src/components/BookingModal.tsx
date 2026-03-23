@@ -151,6 +151,7 @@ export default function BookingModal() {
               <h3 className="text-2xl font-bold text-blue-950 mb-3">Booking Request Received!</h3>
               <p className="text-slate-500 mb-6 max-w-md mx-auto">
                 Thank you, <strong className="text-blue-950">{form.name}</strong>! We&apos;ve received your repair request for your <strong className="text-blue-950">{form.appliance}</strong>.
+                {form.date && <> Your preferred date is <strong className="text-blue-950">{form.date}</strong>.</>}{' '}
                 A technician will call <strong className="text-blue-950">{form.phone}</strong> within 30 minutes.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
