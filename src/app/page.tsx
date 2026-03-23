@@ -10,6 +10,8 @@ import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import BookingModal from '@/components/BookingModal';
 import ContactForm from '@/components/ContactForm';
+import JoinUs from '@/components/JoinUs';
+import HiringModal from '@/components/HiringModal';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -27,6 +29,8 @@ export default function Home() {
       <FAQ />
       <BookingModal />
       <ContactForm />
+      <JoinUs />
+      <HiringModal />
       <Footer />
     </main>
   );
