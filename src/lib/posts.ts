@@ -8,6 +8,7 @@ export interface Post {
   author: string;
   featuredColor: string; // Tailwind gradient classes
   accentColor: string;   // Badge bg + text classes
+  image: string;         // Unsplash image URL
   content: string;       // HTML string
 }
 
@@ -22,6 +23,7 @@ export const posts: Post[] = [
     author: 'CT Appliance Repair Team',
     featuredColor: 'from-blue-900 via-blue-800 to-blue-700',
     accentColor: 'bg-blue-500 text-white',
+    image: 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=800&q=80',
     content: `
 <p>Your refrigerator runs 24 hours a day, 365 days a year — and most of the time, it does so quietly and reliably. That's exactly why it's easy to miss early warning signs that something's going wrong. A failing refrigerator doesn't usually die overnight. It gives you signals weeks or even months in advance. Here are five of the most common warning signs to watch for.</p>
 
@@ -72,6 +74,7 @@ export const posts: Post[] = [
     author: 'CT Appliance Repair Team',
     featuredColor: 'from-amber-700 via-amber-600 to-yellow-500',
     accentColor: 'bg-amber-400 text-amber-900',
+    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80',
     content: `
 <p>When your washing machine makes a grinding noise or your refrigerator suddenly can't hold temperature, you face a decision that feels more complicated than it should be: repair it or replace it? In 2025, with appliance costs rising and repair bills sometimes substantial, making the right call can save you hundreds of dollars. Here's a practical framework for thinking it through.</p>
 
@@ -139,6 +142,7 @@ export const posts: Post[] = [
     author: 'CT Appliance Repair Team',
     featuredColor: 'from-teal-800 via-teal-700 to-teal-500',
     accentColor: 'bg-teal-500 text-white',
+    image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=800&q=80',
     content: `
 <p>Washers and dryers take a beating. The average household runs 400 or more loads of laundry per year — that's a lot of wear on motors, drums, seals, and hoses. The good news is that a handful of simple maintenance habits can easily add 3–5 years to the life of your machines and prevent the most common breakdowns. Here's what actually works.</p>
 
@@ -187,6 +191,7 @@ export const posts: Post[] = [
     author: 'CT Appliance Repair Team',
     featuredColor: 'from-violet-900 via-violet-800 to-violet-600',
     accentColor: 'bg-violet-500 text-white',
+    image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80',
     content: `
 <p>Dishwashers are one of those appliances we take for granted — until they stop working. The frustrating thing is that most dishwasher problems are either a simple DIY fix or a clear signal that it's time to call a professional. This guide walks through the six most common issues and tells you exactly which category each one falls into.</p>
 
@@ -245,6 +250,7 @@ export const posts: Post[] = [
     author: 'CT Appliance Repair Team',
     featuredColor: 'from-amber-800 via-orange-700 to-amber-600',
     accentColor: 'bg-amber-400 text-amber-900',
+    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
     content: `
 <p>Most Connecticut homeowners don't think about their appliances until something breaks. That's entirely understandable — life is busy, and a running refrigerator or washing machine isn't exactly top of mind. But the numbers tell a clear story: homeowners who invest a small amount of time in routine maintenance consistently spend significantly less money over the life of their appliances. Here's why — and what the math looks like.</p>
 
@@ -278,6 +284,330 @@ export const posts: Post[] = [
 <h2>Local Expertise Matters — And Saves You Money</h2>
 <p>There's a meaningful difference between calling a national appliance repair chain and calling a local Connecticut technician. A local tech knows your area's water quality, has seen the same failure patterns in the same appliance models in local homes year after year, and will give you an honest assessment of whether a repair is worth it — rather than just completing the call and moving on to the next ticket.</p>
 <p>CT Appliance Repair has been serving Connecticut homeowners since 2008. Our technicians are licensed, insured, and familiar with the specific conditions — hard water, seasonal demands, the appliance brands common in CT homes — that affect appliance longevity in our region. When you call us for a repair, you also get practical, no-upsell maintenance advice tailored to your specific appliances. We'd rather see you maintain an appliance for 15 years than replace it at 8.</p>
+    `.trim(),
+  },
+  {
+    slug: 'smart-appliances-2026-what-to-know',
+    title: 'Smart Appliances in 2026: What Every CT Homeowner Should Know Before Buying',
+    excerpt: 'Wi-Fi enabled appliances are now mainstream — but are they right for you? We cover what "smart" really means, which appliances benefit most, and how to make sure your smart appliance stays repairable in Connecticut.',
+    category: 'Smart Home',
+    date: '2026-03-20',
+    readTime: '7 min read',
+    author: 'CT Appliance Repair Team',
+    featuredColor: 'from-indigo-600 to-indigo-900',
+    accentColor: 'bg-indigo-400 text-white',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    content: `
+<p>Walk into any appliance showroom in Connecticut today and you'll notice something different: nearly every refrigerator, washer, and dishwasher now comes with Wi-Fi connectivity, an app, and a list of "smart" features. In 2026, connected appliances have moved from a premium novelty to a mainstream expectation. But before you upgrade, it's worth understanding what you're actually getting — and what the tradeoffs are.</p>
+
+<h2>What Does "Smart" Actually Mean?</h2>
+<p>The term "smart appliance" covers a wide range of capabilities, not all of them equally useful. At the basic level, a smart appliance connects to your home Wi-Fi and links to a manufacturer's app on your phone. From there, features vary considerably by brand and model:</p>
+<ul>
+  <li><strong>Remote control:</strong> Start, pause, or adjust your washer from your phone while you're upstairs or away from home.</li>
+  <li><strong>App monitoring:</strong> Check cycle status, get notifications when laundry is done, or see how much energy your fridge is consuming in real time.</li>
+  <li><strong>Diagnostics:</strong> Many smart appliances can run self-diagnostic tests and send error codes directly to the app — or even to a technician — before a problem becomes a breakdown.</li>
+  <li><strong>Voice assistant integration:</strong> Amazon Alexa, Google Home, and Apple HomeKit compatibility is now common, letting you check appliance status hands-free.</li>
+  <li><strong>Automatic reordering:</strong> Some Samsung refrigerators track expiration dates via internal cameras and can prompt you to reorder staples.</li>
+</ul>
+<p>The honest answer is that the most practically useful smart features are app monitoring and remote diagnostics. The rest are convenient but rarely life-changing.</p>
+
+<h2>Which Appliances Benefit Most From Smart Features?</h2>
+<p>Not every appliance benefits equally from connectivity. Based on real-world usage patterns and repair technician feedback, here's where smart features add the most value:</p>
+<ul>
+  <li><strong>Refrigerators:</strong> Temperature monitoring alerts can catch a failing compressor before your food spoils. Door-open notifications are genuinely useful. Internal cameras (Samsung Family Hub, LG InstaView) help you check your grocery inventory while shopping.</li>
+  <li><strong>Washers:</strong> Remote start and cycle completion notifications are the most-used features. The ability to download new wash cycles via app updates is a legitimate advantage on premium models.</li>
+  <li><strong>Dishwashers:</strong> Bosch's Home Connect lets you monitor cycle progress and adjust settings remotely. More valuably, built-in diagnostics can identify issues like blocked spray arms or heater element problems early.</li>
+  <li><strong>Ovens:</strong> Remote preheat is genuinely time-saving. Some models allow recipe integration and automatic temperature adjustment mid-cook.</li>
+</ul>
+<p>Smart features add less value on dryers (where you just want clothes dried) and microwaves (where usage is almost always hands-on).</p>
+
+<h2>The Real Downsides: More Electronics, More Repair Complexity</h2>
+<p>Here's what showroom salespeople won't tell you: smart appliances are meaningfully harder and more expensive to repair than their traditional counterparts. Every Wi-Fi module, touchscreen interface, and app-connected sensor is an additional component that can fail — and often one that requires proprietary parts and specialized diagnostic tools.</p>
+<p>Control boards on smart appliances can cost $200–$500 or more to replace, compared to $80–$150 on a traditional model. Wi-Fi modules are frequently non-standard and must be sourced through the manufacturer at a premium. Touchscreen display panels — increasingly common on premium models — can run $300–$600 as replacement parts alone.</p>
+<p>There's also the software dependency issue: some smart features rely on cloud services that manufacturers may discontinue. Several major brands have already sunset app support for appliances just 5–7 years old, effectively disabling smart features on fully functional hardware.</p>
+
+<h2>What to Look for When Buying a Smart Appliance in CT</h2>
+<p>If you've decided smart appliances are right for your home, here's how to buy smart:</p>
+<ul>
+  <li><strong>Choose brands with a local repair presence:</strong> Samsung, LG, Bosch, and Whirlpool all have authorized service networks in Connecticut. Avoid lesser-known brands where local technician certification is rare.</li>
+  <li><strong>Check parts availability before buying:</strong> Ask your appliance dealer — or look up the model on parts suppliers like Repair Clinic — whether common components are available and at what price.</li>
+  <li><strong>Understand the app ecosystem:</strong> How long has the manufacturer supported the app? Is it tied to accounts that could be deprecated? Look for models that offer local network control (not just cloud-dependent) where possible.</li>
+  <li><strong>Extended warranty consideration:</strong> Smart appliances are a stronger candidate for extended warranty coverage given the higher cost of control board and electronics repairs.</li>
+  <li><strong>Look for right-to-repair compliance:</strong> Several states have passed or are passing right-to-repair legislation requiring manufacturers to make diagnostic tools and parts available to independent technicians. Choosing compliant brands keeps your local CT repair options open.</li>
+</ul>
+
+<h2>Making Sure Your Smart Appliance Stays Repairable Locally</h2>
+<p>At CT Appliance Repair, our technicians have completed manufacturer certification programs for major smart appliance brands and have invested in the diagnostic equipment required to service connected appliances properly. When something goes wrong with a smart appliance — whether it's a software glitch, a failed Wi-Fi module, or a control board issue — we can diagnose and repair it without shipping it back to the manufacturer or voiding your warranty.</p>
+<p>If you're buying a new smart appliance and want to know whether we service it before you commit, give us a call. We'd rather you make an informed purchase than end up with hardware we can't support locally.</p>
+    `.trim(),
+  },
+  {
+    slug: 'ai-predictive-maintenance-2026',
+    title: 'Your Appliance Is Trying to Tell You Something: AI & Predictive Maintenance in 2026',
+    excerpt: 'Modern appliances use sensors and AI to detect problems before they become breakdowns. Here\'s what those alerts actually mean, which brands have it, and what to do if yours doesn\'t.',
+    category: 'Technology',
+    date: '2026-03-15',
+    readTime: '7 min read',
+    author: 'CT Appliance Repair Team',
+    featuredColor: 'from-cyan-600 to-cyan-900',
+    accentColor: 'bg-cyan-400 text-cyan-900',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+    content: `
+<p>For most of appliance history, the only warning you got before a breakdown was the breakdown itself. A refrigerator that worked perfectly on Tuesday simply stopped cooling on Wednesday. A washer that completed hundreds of loads without complaint suddenly refused to spin. The failure felt sudden — but it almost never was. By the time an appliance stops working, the underlying problem has usually been developing for weeks or months.</p>
+<p>In 2026, a new generation of sensor-equipped appliances is changing this dynamic. AI-driven predictive maintenance systems can detect the early signatures of failure — abnormal vibration patterns, unexpected temperature shifts, unusual power consumption spikes — and alert you (or your repair technician) before a small problem becomes an expensive breakdown.</p>
+
+<h2>How Predictive Maintenance Actually Works</h2>
+<p>Modern smart appliances contain multiple embedded sensors that continuously monitor operating conditions. A washing machine might track motor vibration, drum rotation speed, and water temperature simultaneously. A refrigerator monitors compressor cycling frequency, evaporator temperature, and door seal integrity. A dishwasher tracks water inlet flow rate and spray arm pressure.</p>
+<p>This sensor data is compared against baseline operating profiles — either set during manufacturing or learned over the first weeks of use in your home. When readings deviate meaningfully from normal, the system flags it. The sophistication varies by brand and model:</p>
+<ul>
+  <li><strong>Basic systems</strong> simply monitor for out-of-range values and trigger error codes.</li>
+  <li><strong>Intermediate systems</strong> track trends over time — noticing, for example, that your dryer is taking 12% longer per cycle than it did six months ago, which may indicate a partially blocked vent.</li>
+  <li><strong>Advanced AI systems</strong> use machine learning trained on thousands of appliance failure histories to recognize patterns that precede specific failure modes, sometimes weeks before any obvious symptom appears.</li>
+</ul>
+
+<h2>Which Brands and Appliances Have This in 2026</h2>
+<p>Predictive maintenance features are increasingly widespread, though the depth of implementation varies significantly:</p>
+<ul>
+  <li><strong>Samsung:</strong> The SmartThings ecosystem integrates with Samsung washers, dryers, refrigerators, and dishwashers. The app provides real-time alerts for detected anomalies and integrates with Samsung's remote diagnostic service, where a technician can review your appliance's data logs before ever making a house call.</li>
+  <li><strong>LG ThinQ:</strong> LG's proactive customer care feature monitors appliances for 20+ potential failure conditions and pushes alerts to the app. LG also offers remote diagnosis directly with their service center via the ThinQ app.</li>
+  <li><strong>Bosch Home Connect:</strong> Bosch's connected appliances focus particularly on dishwasher and oven performance monitoring, with alerts for filter cleaning reminders, door seal integrity, and heating element performance.</li>
+  <li><strong>Whirlpool (Sixth Sense technology):</strong> Available on higher-end Whirlpool and KitchenAid models, monitors load balance, cycle efficiency, and temperature consistency with app-based alerts.</li>
+</ul>
+
+<h2>What the Alerts Actually Mean — and When to Trust Them</h2>
+<p>Receiving a push notification that your appliance has "detected an anomaly" is only useful if you know what to do with it. Here's a practical guide:</p>
+<ul>
+  <li><strong>"Unusual vibration detected" (washer):</strong> Could be an unbalanced load — rearrange and rerun. If it persists across multiple loads, it may indicate a worn drum bearing or failing shock absorber. Worth a technician look if it doesn't resolve in 2–3 cycles.</li>
+  <li><strong>"Compressor cycling more frequently than normal" (refrigerator):</strong> Pay attention to this one. It usually means the fridge is working harder to maintain temperature — often due to dirty condenser coils (clean them first) or a developing seal leak. If cleaning the coils doesn't resolve it within a week, call a tech.</li>
+  <li><strong>"Filter needs cleaning" (dishwasher):</strong> This is a maintenance reminder, not a failure warning. Clean the filter and the alert should clear.</li>
+  <li><strong>"Heating element performance below normal" (dryer):</strong> Take this seriously. It often precedes a full heating element failure. Schedule service before the dryer stops drying effectively.</li>
+  <li><strong>Error codes (any appliance):</strong> Look up the specific code in the manufacturer app or manual before calling. Many error codes have simple DIY resolutions. Others are clear calls for professional service.</li>
+</ul>
+
+<h2>What to Do If Your Appliance Doesn't Have Smart Sensors</h2>
+<p>The majority of Connecticut homes still have traditional appliances without embedded sensors or app connectivity — and that's perfectly fine. You can approximate the benefits of predictive maintenance through attentive observation:</p>
+<ul>
+  <li><strong>Track cycle times:</strong> If your dryer starts taking noticeably longer to complete a cycle, something has changed. Check the vent, clean the lint trap, and call for service if the issue persists.</li>
+  <li><strong>Listen for new noises:</strong> Any new clicking, grinding, or humming that wasn't there six months ago is a signal worth investigating promptly.</li>
+  <li><strong>Watch your energy bill:</strong> A significant unexplained increase in electricity consumption often corresponds to an appliance working harder than it should.</li>
+  <li><strong>Feel for heat:</strong> Appliances that run hotter than usual on the outside — particularly dryers and refrigerators — are often working harder to compensate for a developing problem.</li>
+  <li><strong>Schedule annual checkups:</strong> Just as you service your HVAC system annually, a periodic appliance inspection by a qualified technician can catch developing issues before they cause a breakdown.</li>
+</ul>
+
+<p>Whether your appliances are AI-equipped or decades old, the goal is the same: catch problems early. An alert on your phone or a noise you notice while switching laundry are both useful signals. The key is paying attention — and acting on what you find rather than hoping it resolves on its own.</p>
+    `.trim(),
+  },
+  {
+    slug: 'lower-energy-bill-appliance-tips-2026',
+    title: '10 Appliance Habits That Will Lower Your Energy Bill in 2026',
+    excerpt: 'Simple changes to how you use your appliances can cut your energy bill by hundreds of dollars a year. Here are 10 practical, actionable tips — with CT electricity rates in mind.',
+    category: 'Tips & Advice',
+    date: '2026-03-10',
+    readTime: '6 min read',
+    author: 'CT Appliance Repair Team',
+    featuredColor: 'from-amber-500 to-orange-700',
+    accentColor: 'bg-amber-300 text-amber-900',
+    image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80',
+    content: `
+<p>Connecticut has some of the highest residential electricity rates in the country — consistently among the top five states. In 2026, the average CT household pays around 26–28 cents per kilowatt-hour, roughly double the national average. That makes appliance efficiency not just an environmental choice, but a meaningful financial one. Here are ten habits that can make a real difference on your monthly bill.</p>
+
+<h2>1. Run Your Dishwasher and Washer During Off-Peak Hours</h2>
+<p>Connecticut utilities use time-of-use pricing models where electricity costs more during peak demand hours — typically 7 AM to 9 PM on weekdays. Shifting your dishwasher and washer cycles to evenings after 9 PM, overnight, or weekend mornings can reduce the per-cycle cost by 20–30% under time-of-use rate plans. Both appliances have delay-start features specifically designed for this purpose — use them.</p>
+
+<h2>2. Switch to Cold-Water Wash Cycles</h2>
+<p>Approximately 90% of the energy used by a washing machine goes toward heating the water. Modern detergents are formulated to work effectively in cold water, and cold washing is sufficient for the vast majority of household laundry — everything except heavily soiled items and certain medical or allergy-related needs. Switching from warm to cold wash on a household running 8 loads per week can save $80–$120 per year at CT electricity rates.</p>
+
+<h2>3. Always Run Full Loads</h2>
+<p>A dishwasher uses roughly the same amount of water and energy whether it's half-full or completely full. Same with your washer. Running two half-loads instead of one full load doubles your energy and water consumption for the same amount of cleaning. Wait for a full load — it's one of the simplest, highest-impact energy habits you can build.</p>
+
+<h2>4. Set Your Refrigerator to the Right Temperature</h2>
+<p>The Department of Energy recommends a refrigerator temperature of 37°F and a freezer temperature of 0°F. Many refrigerators are set colder than necessary — every degree below the optimal range increases energy consumption by approximately 2.5%. Check your actual temperature with an appliance thermometer (the dial setting is often inaccurate) and adjust accordingly. This costs nothing and saves year-round.</p>
+
+<h2>5. Clean Your Dryer Vent for Efficiency — Not Just Safety</h2>
+<p>Most homeowners know a clogged dryer vent is a fire hazard. Fewer realize it's also a significant energy waster. A partially blocked vent can increase drying time per load by 25–50%, meaning your 45-minute cycles become 60-minute cycles consuming proportionally more electricity. Annual professional vent cleaning pays for itself in energy savings within the first year for most CT households.</p>
+
+<h2>6. Don't Block Your Refrigerator's Condenser Coils</h2>
+<p>Refrigerators with coils on the back need airspace to dissipate heat. If your fridge is pushed tight against the wall with no clearance, it has to work significantly harder to cool. Leave at least an inch of clearance behind and ensure nothing is stored on top of the unit blocking heat dissipation. Cleaning the coils twice a year reduces energy consumption by an additional 10–15%.</p>
+
+<h2>7. Use Your Appliances' Delay-Start and Eco Features</h2>
+<p>Modern dishwashers, washers, and dryers include eco modes that use less water and lower heat settings to achieve comparable results. The energy saving cycle on a Bosch dishwasher, for example, uses significantly less electricity than the standard cycle for everyday loads. These modes exist for a reason — make them your default rather than an occasional override.</p>
+
+<h2>8. Unplug Phantom Load Appliances</h2>
+<p>Appliances in standby mode still consume electricity — sometimes 5–15 watts continuously. A microwave with a digital clock, a coffee maker with a programmable display, a toaster oven on standby — these phantom loads add up. A smart power strip or simple unplugging habit for appliances you use only occasionally can reduce your phantom load by $30–$60 per year in CT.</p>
+
+<h2>9. Understand ENERGY STAR Ratings Before You Buy</h2>
+<p>When it's time to replace an appliance, ENERGY STAR certification is worth paying attention to. ENERGY STAR refrigerators use at least 15% less energy than the federal minimum standard; ENERGY STAR washers use 25% less energy and 33% less water. Over a 10-year appliance lifespan, these savings are substantial — often $200–$500 per appliance at CT electricity rates. Factor the operating cost, not just the purchase price, into your replacement decision.</p>
+
+<h2>10. Don't Ignore a Poorly Maintained Appliance's Energy Cost</h2>
+<p>A refrigerator with dirty condenser coils, a dryer with a partially blocked vent, or a washer with worn drum seals doesn't just risk a breakdown — it runs inefficiently every single day. A refrigerator working harder than it should due to neglected maintenance can consume $150–$300 more per year in electricity than a well-maintained unit of the same model. The repair or maintenance cost often pays for itself in energy savings alone within 12–18 months, before you account for the avoided breakdown.</p>
+
+<p>At CT electricity rates, your appliances are a significant operating cost — not just a one-time purchase. Treating them with the same attention you'd give any ongoing household expense pays dividends year over year.</p>
+    `.trim(),
+  },
+  {
+    slug: 'smart-appliance-repair-costs-2026',
+    title: 'Are Smart Appliances Harder to Repair? What CT Homeowners Are Paying in 2026',
+    excerpt: 'Smart appliances have more electronics, proprietary parts, and software complexity. Here\'s an honest look at what repairs actually cost — and when repair still beats replace.',
+    category: 'Tips & Advice',
+    date: '2026-03-07',
+    readTime: '7 min read',
+    author: 'CT Appliance Repair Team',
+    featuredColor: 'from-rose-600 to-rose-900',
+    accentColor: 'bg-rose-400 text-white',
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80',
+    content: `
+<p>The short answer is yes: smart appliances are generally more expensive and complex to repair than their traditional counterparts. But the longer, more useful answer involves understanding exactly why — and knowing when a repair still makes financial sense even on a connected appliance.</p>
+
+<h2>Why Smart Appliances Cost More to Repair</h2>
+<p>Traditional appliances fail in predictable ways: motors wear out, heating elements burn through, belts break, seals crack. These components are largely standardized, widely available, and relatively inexpensive. A technician can diagnose the problem with basic tools, order a part from any number of suppliers, and have the repair done in a single visit.</p>
+<p>Smart appliances add layers of complexity on top of this:</p>
+<ul>
+  <li><strong>Proprietary control boards:</strong> The main control board in a smart appliance — which manages connectivity, app integration, and sensor processing alongside basic operational functions — is almost always a proprietary part sourced exclusively through the manufacturer. These boards are more complex, harder to test, and significantly more expensive.</li>
+  <li><strong>Specialized diagnostic tools:</strong> Properly diagnosing a smart appliance often requires manufacturer-specific diagnostic software and interface tools. A technician without these tools may misdiagnose the problem, ordering the wrong part and adding cost and delay to the repair.</li>
+  <li><strong>Software and firmware issues:</strong> A growing percentage of smart appliance service calls involve software problems — firmware that needs updating, connectivity modules that need reconfiguration, or app-hardware communication failures. These are often not covered under standard repair warranties.</li>
+  <li><strong>Fewer independent parts sources:</strong> The aftermarket parts ecosystem for smart appliances is far less developed than for traditional units. Many components can only be purchased through the manufacturer or authorized distributors, at full retail pricing with no competitive pressure on price.</li>
+</ul>
+
+<h2>Real 2026 Cost Ranges for Smart Appliance Repairs in Connecticut</h2>
+<p>Based on service calls across Connecticut in 2026, here's what CT homeowners are actually paying:</p>
+<ul>
+  <li><strong>Smart refrigerator main control board:</strong> $250–$550 for the part alone; $350–$700 installed</li>
+  <li><strong>Wi-Fi/connectivity module replacement:</strong> $120–$300 installed, depending on brand</li>
+  <li><strong>Touchscreen display panel (refrigerator/oven):</strong> $300–$650 installed</li>
+  <li><strong>Smart washer control board:</strong> $200–$450 installed</li>
+  <li><strong>Smart dishwasher control module:</strong> $180–$380 installed</li>
+  <li><strong>Software/firmware diagnostic and reset:</strong> $95–$150 service call</li>
+</ul>
+<p>Compare these to traditional appliance repair costs for similar components: a standard washer motor controller runs $100–$250 installed; a conventional refrigerator control board runs $150–$350 installed. The smart premium on parts is real — typically 40–80% higher.</p>
+
+<h2>The Right-to-Repair Context</h2>
+<p>Several states have enacted right-to-repair legislation requiring appliance manufacturers to make diagnostic tools, repair documentation, and parts available to independent technicians and consumers. Connecticut has been an active participant in these legislative discussions. As of 2026, federal guidelines also push manufacturers toward greater parts availability.</p>
+<p>This matters for CT homeowners because it's gradually improving the independent repair ecosystem for smart appliances. Brands like Samsung, LG, and Whirlpool have increased parts availability through third-party suppliers under this pressure, and diagnostic tool access for independent technicians has improved. The situation is still not as good as traditional appliances, but it's moving in the right direction.</p>
+
+<h2>When Repair Still Beats Replace on a Smart Appliance</h2>
+<p>The same 50% rule that applies to traditional appliances applies here — but the math sometimes works differently because smart appliance replacement costs are higher. A mid-range smart refrigerator that cost $1,800 when purchased may cost $2,000–$2,500 to replace today. That means a $500–$600 control board replacement — which would feel excessive on a $900 traditional unit — is still within reasonable range for a 4-year-old smart refrigerator.</p>
+<p>Specific situations where repair clearly makes sense on a smart appliance:</p>
+<ul>
+  <li>The appliance is under 6 years old and the failure is in a single, identifiable component</li>
+  <li>The failed component is available through an authorized supplier at a known price</li>
+  <li>The rest of the appliance's systems are functioning normally (no history of multiple failures)</li>
+  <li>A software or firmware issue is the root cause — these repairs are typically the least expensive smart appliance service calls</li>
+</ul>
+
+<h2>Why Choosing a Certified Local Technician Matters More Than Ever</h2>
+<p>On a traditional washer, a competent independent technician with a parts manual can likely diagnose and fix most problems effectively. On a Samsung SmartThings-integrated refrigerator with a proprietary inverter compressor and cloud-connected diagnostics, the margin for error is much smaller — and the cost of a misdiagnosis much higher.</p>
+<p>At CT Appliance Repair, our technicians are manufacturer-certified for the major smart appliance brands we service, and we maintain the diagnostic equipment required to interface with connected appliances properly. Before we recommend a repair — or suggest replacement — we give you a complete picture of the cost, parts availability, and realistic remaining lifespan of your appliance. With smart appliances, that informed assessment is worth more than ever.</p>
+    `.trim(),
+  },
+  {
+    slug: '2026-appliance-maintenance-checklist',
+    title: 'The Complete 2026 Home Appliance Maintenance Checklist for Connecticut Homeowners',
+    excerpt: 'A seasonal, appliance-by-appliance maintenance checklist for CT homeowners. Bookmark this one — it covers everything from monthly quick checks to annual service tasks.',
+    category: 'Maintenance',
+    date: '2026-03-01',
+    readTime: '8 min read',
+    author: 'CT Appliance Repair Team',
+    featuredColor: 'from-teal-600 to-teal-900',
+    accentColor: 'bg-teal-400 text-teal-900',
+    image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80',
+    content: `
+<p>Most appliance failures aren't sudden — they're the predictable result of deferred maintenance compounding over time. The good news is that a consistent, simple maintenance routine can prevent the majority of common appliance breakdowns and extend the useful life of your appliances by years. This checklist is designed to be your annual reference guide. Bookmark it, print it, or set calendar reminders. Your future self — and your bank account — will thank you.</p>
+
+<h2>Monthly Quick Checklist (15 Minutes Total)</h2>
+<ul>
+  <li><strong>Washer:</strong> Run a cleaning cycle with a washer tablet or cup of white vinegar. Wipe down the door gasket (front-loaders) and check for mold or buildup.</li>
+  <li><strong>Dishwasher:</strong> Remove and rinse the filter under running water. Run a hot cycle with a cup of white vinegar in the bottom rack to clear mineral buildup.</li>
+  <li><strong>Refrigerator:</strong> Wipe door gaskets with a damp cloth and check that they seal properly (slide a dollar bill into the closed door — it should offer resistance when pulled).</li>
+  <li><strong>Dryer:</strong> Confirm you're cleaning the lint trap after every load. Check that the exterior vent flap opens and closes freely.</li>
+</ul>
+
+<h2>Spring Checklist (March–May)</h2>
+<p>Spring is the ideal time to address the wear from winter's heavy use and prepare for summer's increased cooling demands.</p>
+
+<h3>Air Conditioning / Window Units</h3>
+<ul>
+  <li>Clean or replace air filters before first use of the season.</li>
+  <li>Vacuum condenser coils on central AC units — dirty coils are the leading cause of AC inefficiency and early compressor failure.</li>
+  <li>Check refrigerant charge (call a certified HVAC tech if cooling performance seems reduced).</li>
+  <li>Test the thermostat with a known thermometer to verify accuracy.</li>
+</ul>
+
+<h3>Dishwasher</h3>
+<ul>
+  <li>Remove and inspect the spray arms — use a toothpick to clear any clogged holes.</li>
+  <li>Run a dishwasher cleaner tablet through a hot cycle to clear accumulated grease from the pump and interior.</li>
+  <li>Inspect the door gasket for cracking or hardening from winter temperature swings.</li>
+</ul>
+
+<h3>Washing Machine</h3>
+<ul>
+  <li>Inspect inlet hoses for bulging, cracking, or signs of wear. Replace if over 5 years old — a burst hose is one of the most common sources of major water damage in CT homes.</li>
+  <li>Clean the detergent dispenser drawer thoroughly.</li>
+  <li>Run a hot cleaning cycle with a commercial washer cleaner.</li>
+</ul>
+
+<h2>Summer Checklist (June–August)</h2>
+<p>Higher kitchen temperatures mean refrigerators work harder. Summer is the highest-risk season for compressor problems.</p>
+
+<h3>Refrigerator</h3>
+<ul>
+  <li><strong>Clean condenser coils</strong> — this is the single most important refrigerator maintenance task. Coils under or behind the fridge accumulate dust and pet hair, forcing the compressor to run hotter. Use a coil brush or vacuum attachment.</li>
+  <li>Verify the fridge temperature is between 35°F and 38°F with a standalone thermometer.</li>
+  <li>Verify the freezer is at 0°F. Adjust if it's running warmer.</li>
+  <li>Check door seals with the dollar bill test. Replace if there's no resistance — a failing seal causes the compressor to run continuously.</li>
+  <li>Clean the drain pan underneath the fridge (often overlooked, can develop mold).</li>
+</ul>
+
+<h3>Dryer</h3>
+<ul>
+  <li>Check the exterior vent for bird nests — summer is prime nesting season and a blocked vent is both an efficiency problem and fire hazard.</li>
+</ul>
+
+<h2>Fall Checklist (September–November)</h2>
+<p>Pre-holiday season is the time to service your oven and prepare for winter's heavier appliance loads.</p>
+
+<h3>Oven and Range</h3>
+<ul>
+  <li>Deep clean the oven interior — built-up grease can cause smoke, odors, and in extreme cases, fires during high-temperature cooking.</li>
+  <li>Test all burners (gas range: check for uneven flame patterns or yellow/orange flames, which indicate burner blockage). Clean burner caps and ports with a thin wire.</li>
+  <li>Inspect oven door gasket for cracks — a failing gasket allows heat to escape, increasing cooking times and energy use.</li>
+  <li>Calibrate oven temperature: set to 350°F and check with an oven thermometer. Many ovens run 15–25°F off-calibration, which affects cooking results.</li>
+</ul>
+
+<h3>Water Heater</h3>
+<ul>
+  <li>Flush the tank to clear sediment buildup — sediment acts as insulation on the heating element, reducing efficiency and accelerating tank failure.</li>
+  <li>Test the pressure relief valve (T&P valve) — lift the lever briefly and release. Water should flow and stop cleanly. If it drips afterward, the valve needs replacement.</li>
+  <li>Check the anode rod if the heater is more than 4 years old — this sacrificial rod prevents tank corrosion and typically needs replacement every 4–6 years.</li>
+</ul>
+
+<h3>Dryer</h3>
+<ul>
+  <li><strong>Annual professional dryer vent cleaning</strong> — have a technician clean the full duct run before the winter season of heavy use (blankets, sweaters, heavy denim). A clogged vent going into high-use months is the scenario that leads to house fires.</li>
+</ul>
+
+<h2>Winter Checklist (December–February)</h2>
+<p>Winter in Connecticut creates unique appliance risks — particularly around pipes, freezing, and condensation.</p>
+
+<h3>All Appliances</h3>
+<ul>
+  <li>Ensure appliances near exterior walls or unheated garage spaces are protected from freezing. Water supply lines to refrigerators, washers, and dishwashers can freeze and burst in an unheated space.</li>
+  <li>Check that appliance water supply lines (washer inlet hoses, refrigerator ice maker line) are not routed through uninsulated exterior walls.</li>
+</ul>
+
+<h3>Dryer</h3>
+<ul>
+  <li>Check the exterior dryer exhaust vent in January and February for condensation freezing inside the duct. In very cold weather, moist air from the dryer can freeze before fully exiting, gradually blocking the vent. If clothes are taking significantly longer to dry in midwinter, this is the likely cause.</li>
+</ul>
+
+<h3>Refrigerator</h3>
+<ul>
+  <li>If your garage refrigerator or spare fridge is in an unheated garage, be aware that most refrigerators won't operate correctly below 50°F ambient temperature — the compressor may not run when the garage is cold enough, causing the freezer to warm up. A garage kit (available for select models) resolves this.</li>
+</ul>
+
+<h2>The Value of This Routine</h2>
+<p>Working through this checklist each season takes 2–4 hours per year total across all appliances. In exchange, you significantly reduce the likelihood of a major appliance breakdown, extend the service life of every appliance in your home, and maintain the efficiency that keeps your energy bills in check.</p>
+<p>If you find something during your inspection that warrants professional attention — a suspicious noise, a seal that won't pass the dollar-bill test, a dryer that's running hotter than it should — CT Appliance Repair is available for same-day service across all 169 Connecticut towns. We'd rather help you catch a $150 problem before it becomes a $500 emergency repair.</p>
     `.trim(),
   },
 ];

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BookingModal from '@/components/BookingModal';
@@ -67,11 +68,18 @@ export default function BlogPage() {
 
           <Link href={`/blog/${featured.slug}`} className="group block">
             <div className="rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 grid lg:grid-cols-2">
-              {/* Left: gradient visual */}
+              {/* Left: image with gradient overlay */}
               <div
                 className={`bg-gradient-to-br ${featured.featuredColor} relative min-h-64 lg:min-h-auto flex flex-col justify-end p-8 lg:p-12`}
               >
-                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 70% 30%, #ffffff 1.5px, transparent 1.5px)', backgroundSize: '40px 40px' }} aria-hidden="true" />
+                <Image
+                  src={featured.image}
+                  alt={featured.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" aria-hidden="true" />
                 <div className="relative">
                   <span className={`inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 ${featured.accentColor}`}>
                     {featured.category}
@@ -116,9 +124,16 @@ export default function BlogPage() {
             {rest.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
                 <article className="bg-white rounded-2xl border border-blue-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col">
-                  {/* Card gradient header */}
+                  {/* Card image header */}
                   <div className={`bg-gradient-to-br ${post.featuredColor} h-36 relative flex items-end p-5`}>
-                    <div className="absolute inset-0 opacity-15" style={{ backgroundImage: 'radial-gradient(circle at 80% 20%, #ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} aria-hidden="true" />
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" aria-hidden="true" />
                     <span className={`relative inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${post.accentColor}`}>
                       {post.category}
                     </span>

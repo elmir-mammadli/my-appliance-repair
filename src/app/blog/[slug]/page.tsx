@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -98,6 +99,22 @@ export default async function PostPage({
           </div>
         </div>
       </header>
+
+      {/* ── Post Image ── */}
+      <div className="bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+          <div className="relative w-full h-[400px] rounded-2xl overflow-hidden">
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 896px) 100vw, 896px"
+              priority
+            />
+          </div>
+        </div>
+      </div>
 
       {/* ── Post Body ── */}
       <article className="bg-white py-12 lg:py-16">

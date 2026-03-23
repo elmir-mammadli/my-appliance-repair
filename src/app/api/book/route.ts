@@ -4,8 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 async function appendToSheet(data: Record<string, string>) {
   const auth = new google.auth.GoogleAuth({
     credentials: {
@@ -55,6 +53,7 @@ async function appendToSheet(data: Record<string, string>) {
 }
 
 async function sendNotification(data: Record<string, string>) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
     from: 'CT Appliance Repair <onboarding@resend.dev>',
     to: process.env.NOTIFICATION_EMAIL!,
