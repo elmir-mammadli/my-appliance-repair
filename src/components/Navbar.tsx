@@ -80,25 +80,26 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Phone Link */}
-        <a
-          href="tel:+18005550123"
-          className="md:hidden flex items-center gap-1.5 text-[#ffb81c] font-semibold text-sm"
-          aria-label="Call (800) 555-0123"
-        >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
-          (800) 555-0123
-        </a>
+        {/* Mobile Phone Link + Hamburger */}
+        <div className="md:hidden flex items-center gap-3">
+          <a
+            href="tel:+18005550123"
+            className="flex items-center gap-1.5 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-sm px-3 py-1.5 rounded-lg transition-colors duration-200 cursor-pointer"
+            aria-label="Call (800) 555-0123"
+          >
+            <svg className="w-4 h-4 text-[#ffb81c]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            (800) 555-0123
+          </a>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="md:hidden p-2 rounded-lg text-blue-900 hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
-          aria-expanded={isMobileOpen}
-          aria-label="Toggle mobile menu"
-        >
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            className="p-2 rounded-lg text-blue-900 hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
+            aria-expanded={isMobileOpen}
+            aria-label="Toggle mobile menu"
+          >
           {isMobileOpen ? (
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -109,6 +110,7 @@ export default function Navbar() {
             </svg>
           )}
         </button>
+        </div>
       </div>
 
       {/* Mobile Dropdown */}
