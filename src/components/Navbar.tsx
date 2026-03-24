@@ -20,6 +20,7 @@ export default function Navbar() {
     { href: '#why-us', label: 'Why Us' },
     { href: '#testimonials', label: 'Reviews' },
     { href: '#faq', label: 'FAQ' },
+    { href: '/about', label: 'About' },
     { href: '#join-us', label: 'Join Our Team' },
   ];
 
