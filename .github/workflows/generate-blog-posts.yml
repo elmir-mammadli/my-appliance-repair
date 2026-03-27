@@ -43,8 +43,8 @@ jobs:
       - name: Commit and push new posts
         if: steps.changes.outputs.changed == 'true'
         run: |
-          git config user.name "MY APPLIANCE Blog Bot"
-          git config user.email "bot@myappliance.us"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add content/posts.json
           git commit -m "feat: auto-generate 2 blog posts [$(date +'%Y-%m-%d')]"
           git push
