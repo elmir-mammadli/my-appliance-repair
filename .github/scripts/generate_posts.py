@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
 Automated blog post generator for MY APPLIANCE Repair (myappliance.us)
-Runs via GitHub Actions daily. Generates 2 research-backed blog posts using Claude API with web search.
+Runs via GitHub Actions daily. Generates 2 blog posts using Claude API.
 """
 
 import json
 import math
 import os
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -26,17 +27,17 @@ POSTS_PER_RUN = 2
 
 # Color gradients keyed by category
 CATEGORY_COLORS: dict[str, tuple[str, str]] = {
-    "Refrigerators":   ("from-blue-900 via-blue-800 to-blue-700", "bg-blue-500 text-white"),
-    "Dishwashers":     ("from-violet-900 via-violet-800 to-violet-600", "bg-violet-500 text-white"),
-    "Maintenance":     ("from-teal-800 via-teal-700 to-teal-500", "bg-teal-500 text-white"),
-    "Tips & Advice":   ("from-amber-700 via-amber-600 to-yellow-500", "bg-amber-400 text-amber-900"),
-    "Smart Home":      ("from-indigo-600 to-indigo-900", "bg-indigo-400 text-white"),
-    "Technology":      ("from-cyan-600 to-cyan-900", "bg-cyan-400 text-cyan-900"),
-    "Washers & Dryers":("from-teal-600 to-teal-800", "bg-teal-400 text-teal-900"),
-    "Ovens & Ranges":  ("from-orange-700 via-orange-600 to-amber-500", "bg-orange-400 text-orange-900"),
-    "Energy Savings":  ("from-green-700 via-green-600 to-emerald-500", "bg-green-400 text-green-900"),
-    "Safety":          ("from-red-700 via-red-600 to-rose-500", "bg-red-400 text-white"),
-    "default":         ("from-slate-700 via-slate-600 to-slate-500", "bg-slate-400 text-white"),
+    "Refrigerators":    ("from-blue-900 via-blue-800 to-blue-700", "bg-blue-500 text-white"),
+    "Dishwashers":      ("from-violet-900 via-violet-800 to-violet-600", "bg-violet-500 text-white"),
+    "Maintenance":      ("from-teal-800 via-teal-700 to-teal-500", "bg-teal-500 text-white"),
+    "Tips & Advice":    ("from-amber-700 via-amber-600 to-yellow-500", "bg-amber-400 text-amber-900"),
+    "Smart Home":       ("from-indigo-600 to-indigo-900", "bg-indigo-400 text-white"),
+    "Technology":       ("from-cyan-600 to-cyan-900", "bg-cyan-400 text-cyan-900"),
+    "Washers & Dryers": ("from-teal-600 to-teal-800", "bg-teal-400 text-teal-900"),
+    "Ovens & Ranges":   ("from-orange-700 via-orange-600 to-amber-500", "bg-orange-400 text-orange-900"),
+    "Energy Savings":   ("from-green-700 via-green-600 to-emerald-500", "bg-green-400 text-green-900"),
+    "Safety":           ("from-red-700 via-red-600 to-rose-500", "bg-red-400 text-white"),
+    "default":          ("from-slate-700 via-slate-600 to-slate-500", "bg-slate-400 text-white"),
 }
 
 # Unsplash images keyed by category
@@ -73,18 +74,10 @@ def save_posts(posts: list[dict]) -> None:
 
 
 def estimate_read_time(html_content: str) -> str:
-    # Strip tags roughly for word count
-    import re
     text = re.sub(r"<[^>]+>", " ", html_content)
     words = len(text.split())
     minutes = math.ceil(words / 200)
     return f"{minutes} min read"
-
-
-def format_date_today() -> str:
-    return datetime.utcnow().strftime("%-m/%-d/%Y").replace(
-        datetime.utcnow().strftime("%-m"), datetime.utcnow().strftime("%B"), 1
-    )
 
 
 def today_string() -> str:
@@ -100,36 +93,40 @@ def get_image(category: str) -> str:
     return CATEGORY_IMAGES.get(category, CATEGORY_IMAGES["default"])
 
 
-def extract_text_between(text: str, start_marker: str, end_marker: str) -> str | None:
-    s = text.find(start_marker)
-    if s == -1:
-        return None
-    s += len(start_marker)
-    e = text.find(end_marker, s)
-    if e == -1:
-        return text[s:].strip()
-    return text[s:e].strip()
+def parse_field(text: str, field: str) -> str | None:
+    """Extract a single-line field value like 'FIELD: value'."""
+    match = re.search(rf"^{re.escape(field)}:\s*(.+)$", text, re.MULTILINE | re.IGNORECASE)
+    return match.group(1).strip() if match else None
+
+
+def parse_research_summary(text: str) -> str | None:
+    """Extract the RESEARCH SUMMARY block (everything after the marker)."""
+    match = re.search(r"RESEARCH SUMMARY:\s*\n(.*)", text, re.DOTALL | re.IGNORECASE)
+    if match:
+        summary = match.group(1).strip()
+        return summary if summary else None
+    return None
 
 
 # ---------------------------------------------------------------------------
-# Step 1 — Research phase
+# Step 1 — Topic selection + outline
 # ---------------------------------------------------------------------------
 
-def research_topic(
+def pick_topic_and_outline(
     client: anthropic.Anthropic,
     existing_slugs: list[str],
     existing_titles: list[str],
     attempt: int,
 ) -> dict | None:
     """
-    Use Claude with web_search to find a fresh blog topic and gather research.
+    Ask Claude to pick a fresh blog topic and provide a detailed content outline.
     Returns a dict with: title, slug, category, excerpt, research_summary
     """
-    existing_list = "\n".join(f"- {t}" for t in existing_titles)
+    existing_list = "\n".join(f"- {t}" for t in existing_titles) or "(none yet)"
 
     prompt = f"""You are a content strategist for {COMPANY_NAME}, a Connecticut home appliance repair company at {COMPANY_URL}.
 
-Your task: propose ONE new, original blog post topic for the company blog — then use the web_search tool to research it thoroughly.
+Your task: propose ONE new, original blog post topic and provide a detailed content outline for it.
 
 Existing post titles (do NOT duplicate these topics):
 {existing_list}
@@ -138,56 +135,55 @@ Requirements for the new topic:
 - Must be genuinely useful to Connecticut homeowners
 - Should relate to: appliance repair, maintenance, energy savings, appliance buying advice, troubleshooting, seasonal tips, or smart home appliances
 - Pick a topic not already covered above
-- Preference for topics with current data, seasonal relevance, or trending searches
+- Draw on your knowledge of common homeowner problems, seasonal patterns, energy costs in the Northeast, and appliance repair best practices
 
-Steps:
-1. First, pick a specific topic and tell me the proposed: title, slug (kebab-case, URL-safe), category (one of: Refrigerators, Dishwashers, Maintenance, Tips & Advice, Smart Home, Technology, Washers & Dryers, Ovens & Ranges, Energy Savings, Safety), and a 155-character-max excerpt.
-2. Then use web_search to find: current statistics, recent news, common homeowner questions, cost data, or seasonal trends related to your chosen topic.
-3. After searching, compile a RESEARCH SUMMARY (key facts, data points, relevant statistics you found) that a writer can use to write an authoritative blog post.
-
-Format your final response EXACTLY like this:
-TITLE: [title here]
-SLUG: [slug here]
-CATEGORY: [category here]
-EXCERPT: [excerpt here, max 155 chars]
+Format your response EXACTLY like this (fill in each field):
+TITLE: [compelling blog post title]
+SLUG: [kebab-case-url-slug]
+CATEGORY: [one of: Refrigerators, Dishwashers, Maintenance, Tips & Advice, Smart Home, Technology, Washers & Dryers, Ovens & Ranges, Energy Savings, Safety]
+EXCERPT: [compelling summary, max 155 characters]
 RESEARCH SUMMARY:
-[Your compiled research notes here — bullet points preferred]"""
+[Detailed content outline and key points for the writer — include: main angle, 4-6 section ideas, specific tips or facts to include, Connecticut-relevant details, and any seasonal/regional context. Bullet points preferred.]"""
 
     try:
-        response = client.beta.messages.create(
+        response = client.messages.create(
             model=MODEL,
-            max_tokens=2000,
+            max_tokens=1500,
             messages=[{"role": "user", "content": prompt}],
-            tools=[{"type": "web_search_20250305", "name": "web_search"}],
-            betas=["web_search_20250305"],
         )
     except Exception as e:
-        print(f"  [research] API error (web search): {e}", file=sys.stderr)
+        print(f"  [topic] API error: {e}", file=sys.stderr)
         return None
 
-    # Collect all text blocks from the response
     full_text = ""
     for block in response.content:
         if hasattr(block, "text"):
             full_text += block.text + "\n"
 
     if not full_text.strip():
-        print("  [research] Empty response from Claude", file=sys.stderr)
+        print("  [topic] Empty response from Claude", file=sys.stderr)
         return None
 
-    # Parse structured fields
-    title = extract_text_between(full_text, "TITLE:", "\n")
-    slug = extract_text_between(full_text, "SLUG:", "\n")
-    category = extract_text_between(full_text, "CATEGORY:", "\n")
-    excerpt = extract_text_between(full_text, "EXCERPT:", "\n")
-    research_summary = extract_text_between(full_text, "RESEARCH SUMMARY:", "")
+    # Parse required fields
+    title = parse_field(full_text, "TITLE")
+    slug = parse_field(full_text, "SLUG")
 
-    if not all([title, slug, category, excerpt, research_summary]):
-        print(f"  [research] Could not parse all fields. Raw response:\n{full_text[:500]}", file=sys.stderr)
+    if not title or not slug:
+        print(f"  [topic] Missing TITLE or SLUG. Raw response:\n{full_text[:500]}", file=sys.stderr)
         return None
+
+    # Parse optional fields with fallbacks
+    category = parse_field(full_text, "CATEGORY") or "Tips & Advice"
+    excerpt = parse_field(full_text, "EXCERPT") or title[:155]
+
+    # Validate category
+    if category not in CATEGORY_COLORS:
+        category = "Tips & Advice"
+
+    # RESEARCH SUMMARY is optional — fall back to excerpt
+    research_summary = parse_research_summary(full_text) or excerpt
 
     # Clean slug
-    import re
     slug = re.sub(r"[^a-z0-9-]", "-", slug.lower().strip())
     slug = re.sub(r"-+", "-", slug).strip("-")
 
@@ -196,96 +192,11 @@ RESEARCH SUMMARY:
         slug = f"{slug}-{attempt}"
 
     return {
-        "title": title.strip(),
+        "title": title,
         "slug": slug,
-        "category": category.strip(),
-        "excerpt": excerpt.strip()[:155],
-        "research_summary": research_summary.strip(),
-    }
-
-
-# ---------------------------------------------------------------------------
-# Step 1b — Research fallback (no web search)
-# ---------------------------------------------------------------------------
-
-def research_topic_fallback(
-    client: anthropic.Anthropic,
-    existing_slugs: list[str],
-    existing_titles: list[str],
-    attempt: int,
-) -> dict | None:
-    """
-    Fallback: generate a topic and research summary using Claude's knowledge only.
-    Called when the web_search API call fails.
-    """
-    existing_list = "\n".join(f"- {t}" for t in existing_titles)
-
-    prompt = f"""You are a content strategist for {COMPANY_NAME}, a Connecticut home appliance repair company at {COMPANY_URL}.
-
-Your task: propose ONE new, original blog post topic and provide a detailed research summary using your knowledge.
-
-Existing post titles (do NOT duplicate these topics):
-{existing_list}
-
-Requirements for the new topic:
-- Must be genuinely useful to Connecticut homeowners
-- Should relate to: appliance repair, maintenance, energy savings, appliance buying advice, troubleshooting, seasonal tips, or smart home appliances
-- Pick a topic not already covered above
-
-Provide:
-1. A specific topic with title, slug, category, and excerpt
-2. A detailed research summary with key facts, statistics, common homeowner questions, cost data, or seasonal tips — draw on your knowledge to make it authoritative
-
-Format your response EXACTLY like this:
-TITLE: [title here]
-SLUG: [slug here]
-CATEGORY: [category here]
-EXCERPT: [excerpt here, max 155 chars]
-RESEARCH SUMMARY:
-[Your compiled research notes here — bullet points preferred]"""
-
-    try:
-        response = client.messages.create(
-            model=MODEL,
-            max_tokens=2000,
-            messages=[{"role": "user", "content": prompt}],
-        )
-    except Exception as e:
-        print(f"  [research-fallback] API error: {e}", file=sys.stderr)
-        return None
-
-    full_text = ""
-    for block in response.content:
-        if hasattr(block, "text"):
-            full_text += block.text + "\n"
-
-    if not full_text.strip():
-        print("  [research-fallback] Empty response from Claude", file=sys.stderr)
-        return None
-
-    title = extract_text_between(full_text, "TITLE:", "\n")
-    slug = extract_text_between(full_text, "SLUG:", "\n")
-    category = extract_text_between(full_text, "CATEGORY:", "\n")
-    excerpt = extract_text_between(full_text, "EXCERPT:", "\n")
-    research_summary = extract_text_between(full_text, "RESEARCH SUMMARY:", "")
-
-    if not all([title, slug, category, excerpt, research_summary]):
-        print(f"  [research-fallback] Could not parse all fields. Raw response:\n{full_text[:500]}", file=sys.stderr)
-        return None
-
-    import re
-    slug = re.sub(r"[^a-z0-9-]", "-", slug.lower().strip())
-    slug = re.sub(r"-+", "-", slug).strip("-")
-
-    if slug in existing_slugs:
-        slug = f"{slug}-{attempt}"
-
-    return {
-        "title": title.strip(),
-        "slug": slug,
-        "category": category.strip(),
-        "excerpt": excerpt.strip()[:155],
-        "research_summary": research_summary.strip(),
+        "category": category,
+        "excerpt": excerpt[:155],
+        "research_summary": research_summary,
     }
 
 
@@ -298,25 +209,25 @@ def write_post(
     research: dict,
 ) -> str | None:
     """
-    Use the research summary to write a full blog post in HTML.
+    Use the content outline to write a full blog post in HTML.
     Returns the HTML content string.
     """
     prompt = f"""You are a skilled content writer for {COMPANY_NAME}, a Connecticut appliance repair company at {COMPANY_URL}.
 
-Write a complete, high-quality blog post based on the research below.
+Write a complete, high-quality blog post based on the outline below.
 
 Post details:
 - Title: {research["title"]}
 - Category: {research["category"]}
 - Target length: 700–900 words
 
-Research summary (use this to make the post authoritative and data-driven):
+Content outline (use this to structure an authoritative, helpful post):
 {research["research_summary"]}
 
 Writing guidelines:
-- Write for Connecticut homeowners — knowledgeable but not technical
+- Write for Connecticut homeowners — knowledgeable but not overly technical
 - Use <h2> and <h3> for section headings, <p> for paragraphs, <ul>/<li> for lists
-- Include specific facts/data from the research where natural
+- Include specific, practical tips and actionable advice
 - Naturally mention {COMPANY_NAME} in 1–2 places (not spammy)
 - End with a soft CTA paragraph mentioning {COMPANY_URL}
 - Return ONLY the HTML body content (no <html>, <head>, or <body> tags — just the inner content starting with <p> or <h2>)
@@ -340,7 +251,6 @@ Writing guidelines:
     content = content.strip()
 
     # Strip any accidental markdown code fences
-    import re
     content = re.sub(r"^```html\s*", "", content)
     content = re.sub(r"\s*```$", "", content)
     content = content.strip()
@@ -361,24 +271,21 @@ def generate_post(
     existing_titles = [p["title"] for p in existing_posts]
 
     print(f"\n--- Generating post {attempt + 1} ---")
-    print("  Phase 1: Researching topic (with web search)...")
+    print("  Phase 1: Selecting topic and outline...")
 
-    research = research_topic(client, existing_slugs, existing_titles, attempt)
+    research = pick_topic_and_outline(client, existing_slugs, existing_titles, attempt)
     if not research:
-        print("  Web search research failed. Trying fallback (no web search)...", file=sys.stderr)
-        research = research_topic_fallback(client, existing_slugs, existing_titles, attempt)
-    if not research:
-        print("  Failed to complete research phase (both web search and fallback failed).", file=sys.stderr)
+        print("  Failed to select topic.", file=sys.stderr)
         return None
 
-    print(f"  Topic: {research['title']}")
-    print(f"  Slug:  {research['slug']}")
+    print(f"  Topic:    {research['title']}")
+    print(f"  Slug:     {research['slug']}")
     print(f"  Category: {research['category']}")
     print("  Phase 2: Writing post...")
 
     content_html = write_post(client, research)
     if not content_html:
-        print("  Failed to complete writing phase.", file=sys.stderr)
+        print("  Failed to write post.", file=sys.stderr)
         return None
 
     featured_color, accent_color = get_colors(research["category"])
@@ -424,8 +331,8 @@ def main() -> None:
             print(f"  Skipping post {i + 1} due to errors.", file=sys.stderr)
 
     if not new_posts:
-        print("\nERROR: No new posts were generated. posts.json was NOT modified.", file=sys.stderr)
-        sys.exit(1)
+        print("\nNo new posts were generated. Exiting without modifying posts.json.")
+        sys.exit(0)
 
     # Prepend new posts (newest first)
     updated_posts = new_posts + existing_posts
