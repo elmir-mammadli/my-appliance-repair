@@ -11,13 +11,16 @@ The GitHub Actions workflow then commits and pushes any changes automatically.
 
 ## Setup
 
-### 1. Add the API key secret
+### 1. Add the API key secrets
 
 In your GitHub repository, go to **Settings → Secrets and variables → Actions** and add:
 
-| Secret name         | Value                          |
-|---------------------|--------------------------------|
-| `ANTHROPIC_API_KEY` | Your Anthropic API key         |
+| Secret name         | Value                          | Required |
+|---------------------|--------------------------------|----------|
+| `ANTHROPIC_API_KEY` | Your Anthropic API key         | Yes      |
+| `TAVILY_API_KEY`    | Your Tavily API key            | No — but recommended for live research |
+
+**About `TAVILY_API_KEY`:** Tavily is a search API optimized for AI use cases. It gives the blog generator access to real, current information (recent CT appliance news, seasonal trends, etc.) before writing each post, making content more timely and relevant. Get a free key at [tavily.com](https://tavily.com) — no credit card required. If the key is missing or Tavily is unavailable, the generator falls back to Claude's built-in knowledge automatically without crashing.
 
 ### 2. That's it
 

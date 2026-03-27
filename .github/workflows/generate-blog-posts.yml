@@ -23,11 +23,12 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install anthropic
+        run: pip install anthropic tavily-python
 
       - name: Generate blog posts
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
         run: python .github/scripts/generate_posts.py
 
       - name: Show tail of posts.json

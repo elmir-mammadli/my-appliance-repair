@@ -14,6 +14,12 @@ from pathlib import Path
 
 import anthropic
 
+try:
+    from tavily import TavilyClient as _TavilyClient
+    _TAVILY_AVAILABLE = True
+except ImportError:
+    _TAVILY_AVAILABLE = False
+
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
@@ -106,6 +112,66 @@ def parse_research_summary(text: str) -> str | None:
         summary = match.group(1).strip()
         return summary if summary else None
     return None
+
+
+# ---------------------------------------------------------------------------
+# Tavily research helper
+# ---------------------------------------------------------------------------
+
+def init_tavily() -> object | None:
+    """Return a TavilyClient if available and key is set, otherwise None."""
+    if not _TAVILY_AVAILABLE:
+        return None
+    key = os.environ.get("TAVILY_API_KEY")
+    if not key:
+        return None
+    try:
+        return _TavilyClient(api_key=key)
+    except Exception as e:
+        print(f"  [tavily] Init failed: {e}", file=sys.stderr)
+        return None
+
+
+def tavily_search(tavily, query: str) -> list[dict]:
+    """Run a single Tavily search; return list of {title, content, url} dicts."""
+    try:
+        results = tavily.search(query=query, max_results=3)
+        return results.get("results", [])
+    except Exception as e:
+        print(f"  [tavily] Search failed for '{query}': {e}", file=sys.stderr)
+        return []
+
+
+def gather_research(tavily, topic_hint: str, month_year: str) -> str:
+    """
+    Run 2-3 Tavily searches and format the results as a context block.
+    Returns an empty string if Tavily is unavailable or all searches fail.
+    """
+    if tavily is None:
+        return ""
+
+    queries = [
+        f"Connecticut appliance repair {month_year}",
+        f"appliance problems Connecticut homeowners 2026",
+        f"{topic_hint} Connecticut homeowners",
+    ]
+
+    all_results: list[dict] = []
+    for q in queries:
+        all_results.extend(tavily_search(tavily, q))
+
+    if not all_results:
+        return ""
+
+    lines = ["Recent news and data from the web:"]
+    for r in all_results:
+        title = r.get("title", "").strip()
+        snippet = r.get("content", "").strip()[:300]
+        url = r.get("url", "").strip()
+        if title or snippet:
+            lines.append(f"- {title}: {snippet} ({url})")
+
+    return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
@@ -207,15 +273,18 @@ RESEARCH SUMMARY:
 def write_post(
     client: anthropic.Anthropic,
     research: dict,
+    web_context: str = "",
 ) -> str | None:
     """
     Use the content outline to write a full blog post in HTML.
     Returns the HTML content string.
     """
+    context_block = f"\n{web_context}\n" if web_context else ""
+
     prompt = f"""You are a skilled content writer for {COMPANY_NAME}, a Connecticut appliance repair company at {COMPANY_URL}.
 
 Write a complete, high-quality blog post based on the outline below.
-
+{context_block}
 Post details:
 - Title: {research["title"]}
 - Category: {research["category"]}
@@ -228,8 +297,17 @@ Writing guidelines:
 - Write for Connecticut homeowners — knowledgeable but not overly technical
 - Use <h2> and <h3> for section headings, <p> for paragraphs, <ul>/<li> for lists
 - Include specific, practical tips and actionable advice
-- Naturally mention {COMPANY_NAME} in 1–2 places (not spammy)
-- End with a soft CTA paragraph mentioning {COMPANY_URL}
+
+BRANDING — follow these rules exactly:
+1. Mention "{COMPANY_NAME}" naturally 2–3 times throughout the post — woven into the content, never forced. Examples: "At {COMPANY_NAME}, we see this problem regularly in CT homes..." or "{COMPANY_NAME} technicians recommend..."
+2. Include 2–3 internal anchor links as actual <a> HTML tags placed naturally mid-sentence (NOT in a separate CTA paragraph):
+   - At least one to the booking section: <a href="/#booking" style="color:#1e3a5f;font-weight:600;">book a service call</a>
+   - At least one to the contact form: <a href="/#contact" style="color:#1e3a5f;font-weight:600;">contact our team</a>
+   - Optionally one to services: <a href="/#services" style="color:#1e3a5f;font-weight:600;">our appliance repair services</a>
+   - Example placement: "If you notice any of these signs, <a href="/#booking" style="color:#1e3a5f;font-weight:600;">book a service call</a> before it gets worse."
+3. End the post with a soft branded CTA paragraph (separate from the inline links) in this style:
+   "For Connecticut homeowners dealing with [topic], {COMPANY_NAME} offers same-day service across the state. <a href="/#booking" style="color:#1e3a5f;font-weight:600;">Schedule your repair online</a> or <a href="/#contact" style="color:#1e3a5f;font-weight:600;">get in touch</a> — we'll have your appliance running again fast."
+
 - Return ONLY the HTML body content (no <html>, <head>, or <body> tags — just the inner content starting with <p> or <h2>)
 - Do not include a title heading (the <h1> is handled separately by the site)"""
 
@@ -266,6 +344,7 @@ def generate_post(
     client: anthropic.Anthropic,
     existing_posts: list[dict],
     attempt: int,
+    tavily=None,
 ) -> dict | None:
     existing_slugs = [p["slug"] for p in existing_posts]
     existing_titles = [p["title"] for p in existing_posts]
@@ -281,9 +360,23 @@ def generate_post(
     print(f"  Topic:    {research['title']}")
     print(f"  Slug:     {research['slug']}")
     print(f"  Category: {research['category']}")
-    print("  Phase 2: Writing post...")
 
-    content_html = write_post(client, research)
+    # Tavily research phase
+    month_year = datetime.utcnow().strftime("%B %Y")
+    if tavily is not None:
+        print("  Phase 2: Gathering live web research via Tavily...")
+        web_context = gather_research(tavily, research["title"], month_year)
+        if web_context:
+            print(f"  Found {web_context.count(chr(10))} result snippets.")
+        else:
+            print("  No Tavily results — falling back to Claude knowledge only.")
+    else:
+        print("  Tavily not configured — using Claude knowledge only.")
+        web_context = ""
+
+    print("  Phase 3: Writing post...")
+
+    content_html = write_post(client, research, web_context)
     if not content_html:
         print("  Failed to write post.", file=sys.stderr)
         return None
@@ -316,6 +409,12 @@ def main() -> None:
 
     client = anthropic.Anthropic(api_key=api_key)
 
+    tavily = init_tavily()
+    if tavily:
+        print("Tavily search client initialized — live research enabled.")
+    else:
+        print("Tavily not available — posts will use Claude knowledge only.")
+
     existing_posts = load_existing_posts()
     print(f"Loaded {len(existing_posts)} existing posts from {POSTS_JSON_PATH}")
 
@@ -324,7 +423,7 @@ def main() -> None:
     for i in range(POSTS_PER_RUN):
         # Include newly generated posts so the next iteration avoids duplicates
         all_posts_so_far = existing_posts + new_posts
-        post = generate_post(client, all_posts_so_far, i)
+        post = generate_post(client, all_posts_so_far, i, tavily=tavily)
         if post:
             new_posts.append(post)
         else:
