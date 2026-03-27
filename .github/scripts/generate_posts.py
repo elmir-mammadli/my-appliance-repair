@@ -159,10 +159,10 @@ RESEARCH SUMMARY:
             max_tokens=2000,
             messages=[{"role": "user", "content": prompt}],
             tools=[{"type": "web_search_20250305", "name": "web_search"}],
-            betas=["web_search_2025_03_05"],
+            betas=["web_search_20250305"],
         )
     except Exception as e:
-        print(f"  [research] API error: {e}", file=sys.stderr)
+        print(f"  [research] API error (web search): {e}", file=sys.stderr)
         return None
 
     # Collect all text blocks from the response
@@ -192,6 +192,91 @@ RESEARCH SUMMARY:
     slug = re.sub(r"-+", "-", slug).strip("-")
 
     # Ensure slug is unique
+    if slug in existing_slugs:
+        slug = f"{slug}-{attempt}"
+
+    return {
+        "title": title.strip(),
+        "slug": slug,
+        "category": category.strip(),
+        "excerpt": excerpt.strip()[:155],
+        "research_summary": research_summary.strip(),
+    }
+
+
+# ---------------------------------------------------------------------------
+# Step 1b — Research fallback (no web search)
+# ---------------------------------------------------------------------------
+
+def research_topic_fallback(
+    client: anthropic.Anthropic,
+    existing_slugs: list[str],
+    existing_titles: list[str],
+    attempt: int,
+) -> dict | None:
+    """
+    Fallback: generate a topic and research summary using Claude's knowledge only.
+    Called when the web_search API call fails.
+    """
+    existing_list = "\n".join(f"- {t}" for t in existing_titles)
+
+    prompt = f"""You are a content strategist for {COMPANY_NAME}, a Connecticut home appliance repair company at {COMPANY_URL}.
+
+Your task: propose ONE new, original blog post topic and provide a detailed research summary using your knowledge.
+
+Existing post titles (do NOT duplicate these topics):
+{existing_list}
+
+Requirements for the new topic:
+- Must be genuinely useful to Connecticut homeowners
+- Should relate to: appliance repair, maintenance, energy savings, appliance buying advice, troubleshooting, seasonal tips, or smart home appliances
+- Pick a topic not already covered above
+
+Provide:
+1. A specific topic with title, slug, category, and excerpt
+2. A detailed research summary with key facts, statistics, common homeowner questions, cost data, or seasonal tips — draw on your knowledge to make it authoritative
+
+Format your response EXACTLY like this:
+TITLE: [title here]
+SLUG: [slug here]
+CATEGORY: [category here]
+EXCERPT: [excerpt here, max 155 chars]
+RESEARCH SUMMARY:
+[Your compiled research notes here — bullet points preferred]"""
+
+    try:
+        response = client.messages.create(
+            model=MODEL,
+            max_tokens=2000,
+            messages=[{"role": "user", "content": prompt}],
+        )
+    except Exception as e:
+        print(f"  [research-fallback] API error: {e}", file=sys.stderr)
+        return None
+
+    full_text = ""
+    for block in response.content:
+        if hasattr(block, "text"):
+            full_text += block.text + "\n"
+
+    if not full_text.strip():
+        print("  [research-fallback] Empty response from Claude", file=sys.stderr)
+        return None
+
+    title = extract_text_between(full_text, "TITLE:", "\n")
+    slug = extract_text_between(full_text, "SLUG:", "\n")
+    category = extract_text_between(full_text, "CATEGORY:", "\n")
+    excerpt = extract_text_between(full_text, "EXCERPT:", "\n")
+    research_summary = extract_text_between(full_text, "RESEARCH SUMMARY:", "")
+
+    if not all([title, slug, category, excerpt, research_summary]):
+        print(f"  [research-fallback] Could not parse all fields. Raw response:\n{full_text[:500]}", file=sys.stderr)
+        return None
+
+    import re
+    slug = re.sub(r"[^a-z0-9-]", "-", slug.lower().strip())
+    slug = re.sub(r"-+", "-", slug).strip("-")
+
     if slug in existing_slugs:
         slug = f"{slug}-{attempt}"
 
@@ -276,11 +361,14 @@ def generate_post(
     existing_titles = [p["title"] for p in existing_posts]
 
     print(f"\n--- Generating post {attempt + 1} ---")
-    print("  Phase 1: Researching topic...")
+    print("  Phase 1: Researching topic (with web search)...")
 
     research = research_topic(client, existing_slugs, existing_titles, attempt)
     if not research:
-        print("  Failed to complete research phase.", file=sys.stderr)
+        print("  Web search research failed. Trying fallback (no web search)...", file=sys.stderr)
+        research = research_topic_fallback(client, existing_slugs, existing_titles, attempt)
+    if not research:
+        print("  Failed to complete research phase (both web search and fallback failed).", file=sys.stderr)
         return None
 
     print(f"  Topic: {research['title']}")
@@ -336,8 +424,8 @@ def main() -> None:
             print(f"  Skipping post {i + 1} due to errors.", file=sys.stderr)
 
     if not new_posts:
-        print("\nNo new posts were generated. Exiting without modifying posts.json.")
-        sys.exit(0)
+        print("\nERROR: No new posts were generated. posts.json was NOT modified.", file=sys.stderr)
+        sys.exit(1)
 
     # Prepend new posts (newest first)
     updated_posts = new_posts + existing_posts
