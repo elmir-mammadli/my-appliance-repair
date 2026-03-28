@@ -71,7 +71,7 @@ export default function ContactForm() {
       if (!res.ok) throw new Error('Request failed');
       setSubmitted(true);
     } catch {
-      alert('Something went wrong. Please call us directly at (800) 555-0123.');
+      alert('Something went wrong. Please call us directly at (917) 378-3014.');
     } finally {
       setSubmitting(false);
     }
@@ -94,8 +94,8 @@ export default function ContactForm() {
           </p>
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
             <p className="text-blue-800 font-medium">Need immediate assistance?</p>
-            <a href="tel:+18005550123" className="text-blue-700 font-bold text-xl hover:text-blue-900 transition-colors duration-200 cursor-pointer">
-              Call (800) 555-0123
+            <a href="tel:+19173783014" className="text-blue-700 font-bold text-xl hover:text-blue-900 transition-colors duration-200 cursor-pointer">
+              Call (917) 378-3014
             </a>
           </div>
           <button
@@ -126,9 +126,9 @@ export default function ContactForm() {
             {/* Contact Methods */}
             <div className="space-y-4 mb-8">
               <a
-                href="tel:+18005550123"
+                href="tel:+19173783014"
                 className="flex items-center gap-4 p-5 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl transition-all duration-200 cursor-pointer group"
-                aria-label="Call us at (800) 555-0123"
+                aria-label="Call us at (917) 378-3014"
               >
                 <div className="w-12 h-12 bg-blue-700 rounded-xl flex items-center justify-center text-white flex-shrink-0 group-hover:bg-blue-800 transition-colors duration-200">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -136,7 +136,7 @@ export default function ContactForm() {
                   </svg>
                 </div>
                 <div>
-                  <div className="font-bold text-blue-900">(800) 555-0123</div>
+                  <div className="font-bold text-blue-900">(917) 378-3014</div>
                   <div className="text-sm text-slate-500">Available 24/7 for emergencies</div>
                 </div>
               </a>

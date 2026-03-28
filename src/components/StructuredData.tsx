@@ -11,7 +11,7 @@ const localBusiness = {
   '@id': 'https://myappliance.us/#business',
   name: 'MY APPLIANCE Repair',
   url: 'https://myappliance.us',
-  telephone: '+1-860-000-0000',
+  telephone: '+1-917-378-3014',
   email: 'info@myappliance.us',
   description:
     'Licensed appliance repair service in Connecticut. Same-day service for refrigerators, washers, dryers, dishwashers, ovens, and more. Licensed, insured, 90-day parts and labor warranty.',
