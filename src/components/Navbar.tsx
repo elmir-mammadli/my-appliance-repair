@@ -41,9 +41,9 @@ export default function Navbar() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </div>
-          <div>
-            <span className="font-bold text-lg leading-none text-blue-900">MY APPLIANCE</span>
-            <span className="block text-xs font-medium tracking-wide text-blue-600">Repair Experts</span>
+          <div className='flex flex-col leading-tight'>
+            <span className="font-bold text-xl leading-none text-blue-900">My Appliance</span>
+            <span className="block text-sm font-medium tracking-wide text-blue-600">Repair Company</span>
           </div>
         </Link>
 
@@ -64,7 +64,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           <a
             href="tel:+19173783014"
-            className="flex items-center gap-2 text-blue-900 hover:text-blue-600 font-semibold text-sm transition-colors duration-200 cursor-pointer"
+            className="flex items-center gap-2 text-blue-900 hover:text-blue-600 font-semibold text-sm mr-1 transition-colors duration-200 cursor-pointer"
             aria-label="Call us now"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

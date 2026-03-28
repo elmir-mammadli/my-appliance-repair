@@ -147,7 +147,7 @@ export default async function PostPage({
           style={{ backgroundImage: 'radial-gradient(circle at 30% 70%, #ffffff 1.5px, transparent 1.5px)', backgroundSize: '50px 50px' }}
           aria-hidden="true"
         />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:pt-30 lg:pb-14">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-6">
             <Link
