@@ -1,0 +1,60 @@
+name: Monthly SEO Strategy Generator
+
+# Secrets required:
+#   ANTHROPIC_API_KEY — Claude API key (already set)
+#   TAVILY_API_KEY    — Tavily search API key (already set)
+
+on:
+  schedule:
+    - cron: '0 11 1 * *'  # 11 AM UTC on the 1st of every month
+  workflow_dispatch:        # Allow manual trigger for testing
+
+jobs:
+  monthly-strategy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic tavily-python
+
+      - name: Generate monthly SEO strategy
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+        run: python .github/scripts/monthly_strategy.py
+
+      - name: Check for new strategy file
+        id: changes
+        run: |
+          git diff --quiet HEAD -- content/ && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push strategy document
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/seo-strategy-*.md
+          MONTH_LABEL=$(python3 -c "
+from datetime import datetime
+now = datetime.utcnow()
+m, y = (now.month % 12) + 1, now.year + (1 if now.month == 12 else 0)
+print(datetime(y, m, 1).strftime('%B %Y'))
+")
+          git commit -m "seo: monthly strategy for ${MONTH_LABEL}"
+          git push
+
+      - name: No changes
+        if: steps.changes.outputs.changed == 'false'
+        run: echo "No strategy file was created — nothing to commit."
