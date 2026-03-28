@@ -1,7 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import ServiceAreaMap from './ServiceAreaMap';
+import dynamic from 'next/dynamic';
+
+const ServiceAreaMap = dynamic(() => import('./ServiceAreaMapInner'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[400px] bg-blue-800/30 rounded-2xl flex items-center justify-center text-blue-300 text-sm">
+      Loading map…
+    </div>
+  ),
+});
 
 const regions = [
   {
@@ -47,27 +56,27 @@ export default function Coverage() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10 items-start">
-          {/* CT Interactive Map */}
-          <div className="relative flex flex-col gap-4">
-            <div
-              className="rounded-2xl overflow-hidden border border-blue-600/30"
-              style={{ height: '500px' }}
-            >
-              <ServiceAreaMap />
-            </div>
+          {/* CT Map Illustration */}
+          <div className="relative">
+            <div className="bg-blue-800/50 border border-blue-600/30 rounded-2xl p-8 backdrop-blur-sm">
+              {/* Interactive Leaflet county map */}
+              <div className="w-full rounded-xl overflow-hidden" style={{ height: '400px' }}>
+                <ServiceAreaMap />
+              </div>
 
-            {/* Stats row */}
-            <div className="grid grid-cols-3 gap-4">
-              {[
-                { value: '169', label: 'Towns' },
-                { value: '30 min', label: 'Avg. Response' },
-                { value: '24/7', label: 'Availability' },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center bg-blue-700/40 rounded-xl py-3 px-2 border border-blue-500/30">
-                  <div className="text-xl font-bold text-orange-400">{stat.value}</div>
-                  <div className="text-blue-300 text-xs mt-0.5">{stat.label}</div>
-                </div>
-              ))}
+              {/* Stats row */}
+              <div className="grid grid-cols-3 gap-4 mt-6">
+                {[
+                  { value: '169', label: 'Towns' },
+                  { value: '30 min', label: 'Avg. Response' },
+                  { value: '24/7', label: 'Availability' },
+                ].map((stat) => (
+                  <div key={stat.label} className="text-center bg-blue-700/40 rounded-xl py-3 px-2 border border-blue-500/30">
+                    <div className="text-xl font-bold text-orange-400">{stat.value}</div>
+                    <div className="text-blue-300 text-xs mt-0.5">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
