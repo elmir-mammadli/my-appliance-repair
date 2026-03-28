@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import ServiceAreaMap from './ServiceAreaMap';
 
 const regions = [
   {
@@ -46,60 +47,27 @@ export default function Coverage() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10 items-start">
-          {/* CT Map Illustration */}
-          <div className="relative">
-            <div className="bg-blue-800/50 border border-blue-600/30 rounded-2xl p-8 backdrop-blur-sm">
-              {/* Simple stylized CT map */}
-              <svg viewBox="0 0 400 280" className="w-full max-w-md mx-auto" aria-label="Map of Connecticut showing service coverage">
-                <defs>
-                  <linearGradient id="ctGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.8"/>
-                    <stop offset="100%" stopColor="#1E40AF" stopOpacity="0.9"/>
-                  </linearGradient>
-                </defs>
-                {/* CT outline (simplified) */}
-                <path
-                  d="M20,40 L360,30 L380,80 L370,200 L280,220 L240,260 L180,265 L140,250 L60,230 L20,180 Z"
-                  fill="url(#ctGrad)"
-                  stroke="#60A5FA"
-                  strokeWidth="2"
-                />
-                {/* City dots */}
-                {[
-                  { x: 195, y: 90, name: 'Hartford' },
-                  { x: 155, y: 170, name: 'New Haven' },
-                  { x: 75, y: 130, name: 'Stamford' },
-                  { x: 310, y: 195, name: 'New London' },
-                  { x: 135, y: 140, name: 'Waterbury' },
-                  { x: 280, y: 100, name: 'Willimantic' },
-                ].map((city) => (
-                  <g key={city.name}>
-                    <circle cx={city.x} cy={city.y} r="8" fill="#F97316" opacity="0.9">
-                      <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite"/>
-                      <animate attributeName="opacity" values="0.9;0.6;0.9" dur="2s" repeatCount="indefinite"/>
-                    </circle>
-                    <circle cx={city.x} cy={city.y} r="4" fill="white"/>
-                    <text x={city.x} y={city.y - 14} textAnchor="middle" fill="white" fontSize="10" fontWeight="600">{city.name}</text>
-                  </g>
-                ))}
-                {/* Coverage label */}
-                {/* <text x="200" y="155" textAnchor="middle" fill="white" fontSize="13" fontWeight="700" opacity="0.8">All 169 Towns</text>
-                <text x="200" y="172" textAnchor="middle" fill="#93C5FD" fontSize="11" opacity="0.7">Fully Covered</text> */}
-              </svg>
+          {/* CT Interactive Map */}
+          <div className="relative flex flex-col gap-4">
+            <div
+              className="rounded-2xl overflow-hidden border border-blue-600/30"
+              style={{ height: '500px' }}
+            >
+              <ServiceAreaMap />
+            </div>
 
-              {/* Stats row */}
-              <div className="grid grid-cols-3 gap-4 mt-6">
-                {[
-                  { value: '169', label: 'Towns' },
-                  { value: '30 min', label: 'Avg. Response' },
-                  { value: '24/7', label: 'Availability' },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center bg-blue-700/40 rounded-xl py-3 px-2 border border-blue-500/30">
-                    <div className="text-xl font-bold text-orange-400">{stat.value}</div>
-                    <div className="text-blue-300 text-xs mt-0.5">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
+            {/* Stats row */}
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                { value: '169', label: 'Towns' },
+                { value: '30 min', label: 'Avg. Response' },
+                { value: '24/7', label: 'Availability' },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center bg-blue-700/40 rounded-xl py-3 px-2 border border-blue-500/30">
+                  <div className="text-xl font-bold text-orange-400">{stat.value}</div>
+                  <div className="text-blue-300 text-xs mt-0.5">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
 
