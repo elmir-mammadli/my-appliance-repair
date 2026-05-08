@@ -92,7 +92,7 @@ export default function BookingModal() {
       if (!res.ok) throw new Error('Request failed');
       setSubmitted(true);
     } catch {
-      alert('Something went wrong. Please call us directly at (917) 378-3014.');
+      alert('Something went wrong. Please call us directly at (959) 261-6736.');
     } finally {
       setSubmitting(false);
     }
@@ -156,10 +156,10 @@ export default function BookingModal() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
-                  href="tel:+19173783014"
+                  href="tel:+19592616736"
                   className="inline-flex items-center justify-center gap-2 bg-blue-950 hover:bg-blue-900 text-white font-bold px-6 py-3 rounded-xl transition-colors duration-200 cursor-pointer"
                 >
-                  Call (917) 378-3014
+                  Call (959) 261-6736
                 </a>
                 <button
                   onClick={() => { setSubmitted(false); setForm(initialState); closeModal(); }}
@@ -177,7 +177,7 @@ export default function BookingModal() {
                 <div>
                   <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Contact Us Directly</p>
                   <a
-                    href="tel:+19173783014"
+                    href="tel:+19592616736"
                     className="flex items-center gap-3 p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl transition-colors duration-200 cursor-pointer group"
                   >
                     <div className="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center text-white flex-shrink-0">
@@ -186,7 +186,7 @@ export default function BookingModal() {
                       </svg>
                     </div>
                     <div>
-                      <div className="font-bold text-blue-950 text-sm">(917) 378-3014</div>
+                      <div className="font-bold text-blue-950 text-sm">(959) 261-6736</div>
                       <div className="text-xs text-slate-500">24/7 emergency line</div>
                     </div>
                   </a>

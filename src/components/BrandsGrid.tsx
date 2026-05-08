@@ -120,7 +120,7 @@ export default function BrandsGrid() {
 
         <p className="text-center text-sm text-slate-400">
           Don&apos;t see your brand?{' '}
-          <a href="tel:+19173783014" className="text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-200 cursor-pointer">
+          <a href="tel:+19592616736" className="text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-200 cursor-pointer">
             Call us — we most likely service it.
           </a>
         </p>

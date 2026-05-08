@@ -137,13 +137,13 @@ export default function Coverage() {
               <p className="text-orange-300 font-semibold mb-1">Don&apos;t see your town?</p>
               <p className="text-blue-200 text-sm">We cover <strong className="text-white">all 169 Connecticut municipalities</strong>. Call us to confirm availability in your area.</p>
               <a
-                href="tel:+19173783014"
+                href="tel:+19592616736"
                 className="inline-flex items-center gap-2 mt-3 bg-[#ffb81c] hover:bg-[#ffca4d] text-gray-900 font-bold px-5 py-2.5 rounded-lg transition-all duration-200 cursor-pointer text-sm"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                Call (917) 378-3014
+                Call (959) 261-6736
               </a>
             </div>
           </div>

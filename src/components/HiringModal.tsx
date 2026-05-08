@@ -113,7 +113,7 @@ export default function HiringModal() {
       await new Promise((res) => setTimeout(res, 800));
       setSubmitted(true);
     } catch {
-      alert('Something went wrong. Please call us directly at (917) 378-3014.');
+      alert('Something went wrong. Please call us directly at (959) 261-6736.');
     } finally {
       setSubmitting(false);
     }
