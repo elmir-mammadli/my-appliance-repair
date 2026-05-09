@@ -1,5 +1,6 @@
 'use client';
 
+import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef } from 'react';
 import type { Map, GeoJSON, Layer, LeafletMouseEvent } from 'leaflet';
 
@@ -155,9 +156,13 @@ export default function ServiceAreaMapInner() {
     if (!containerRef.current || mapRef.current) return;
 
     let L: typeof import('leaflet');
+    let destroyed = false;
 
     const init = async () => {
       L = (await import('leaflet')).default;
+
+      if (destroyed) return;
+
 
       // Fix default icon path issue with webpack
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -266,6 +271,7 @@ export default function ServiceAreaMapInner() {
     init();
 
     return () => {
+      destroyed = true;
       mapRef.current?.remove();
       mapRef.current = null;
     };
