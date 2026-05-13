@@ -6,7 +6,7 @@ import { openBookingModal } from '@/lib/booking';
 const discounts = [
   {
     group: 'Military & Veterans',
-    badge: '$50 OFF',
+    badge: '$30 OFF',
     description: 'Active duty, reservists, National Guard, veterans, and surviving spouses of U.S. service members.',
     eligibility: 'Present military ID, VA card, or DD-214 at time of service.',
     icon: (
@@ -18,7 +18,7 @@ const discounts = [
   },
   {
     group: 'First Responders',
-    badge: '$35 OFF',
+    badge: '$30 OFF',
     description: 'Full-time police officers, firefighters, EMTs, paramedics, and 911 emergency dispatchers.',
     eligibility: 'Present department-issued badge or photo ID at time of service.',
     icon: (
@@ -43,7 +43,7 @@ const discounts = [
   },
   {
     group: 'Teachers & Educators',
-    badge: '$20 OFF',
+    badge: '$30 OFF',
     description: 'K–12 teachers, college faculty, school administrators, and licensed childcare workers.',
     eligibility: 'Present a valid school-issued employee ID at time of service.',
     icon: (
@@ -156,7 +156,7 @@ export default function Discounts() {
               <span className="text-white font-bold text-lg">Returning Customer Loyalty Bonus</span>
             </div>
             <p className="text-blue-200 text-sm leading-relaxed max-w-xl">
-              Had us out before? Get <span className="text-white font-semibold">$25 off</span> your next repair — no ID required. Just mention you&apos;re a returning customer when you book.
+              Had us out before? Get <span className="text-white font-semibold">$30 off</span> your next repair — no ID required. Just mention you&apos;re a returning customer when you book.
             </p>
           </div>
           <button
