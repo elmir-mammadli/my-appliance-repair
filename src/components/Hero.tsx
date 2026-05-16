@@ -61,7 +61,7 @@ export default function Hero() {
 
             <p className="text-lg text-slate-500 leading-relaxed mb-10 max-w-lg">
               Fast, affordable repairs for washers, dryers, refrigerators, dishwashers, and ovens.
-              Free diagnosis, OEM parts, and a 90-day labor warranty on every job.
+              OEM parts, and a 90-day labor warranty&nbsp;on&nbsp;every job.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-5">

@@ -162,7 +162,6 @@ export default function ContactForm() {
                   'Free diagnostic with any paid repair',
                   'Written estimate before work begins',
                   '90-day parts & labor warranty',
-                  'No fix, no fee — guaranteed',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm">
                     <svg className="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">

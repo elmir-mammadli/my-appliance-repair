@@ -199,7 +199,6 @@ export default function BookingModal() {
                       'Free diagnostic with any paid repair',
                       'Written estimate before work begins',
                       '90-day parts & labor warranty',
-                      'No fix, no fee — guaranteed',
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2 text-sm text-blue-100">
                         <svg className="w-4 h-4 text-[#ffb81c] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
