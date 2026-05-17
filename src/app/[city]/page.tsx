@@ -29,7 +29,7 @@ export async function generateMetadata({
       url: `https://myappliance.us/${city.slug}`,
       title: `Appliance Repair ${city.name}, CT | Same-Day Service | MY APPLIANCE Repair`,
       description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Licensed techs, 90-day warranty.`,
-      images: [{ url: '/public/images/og-image.png', width: 1200, height: 630, alt: `Appliance Repair ${city.name} CT` }],
+      images: [{ url: '/images/og-image.png', width: 1200, height: 630, alt: `Appliance Repair ${city.name} CT` }],
     },
   };
 }

@@ -43,7 +43,7 @@ export const metadata: Metadata = {
       "Connecticut's trusted appliance repair experts. Same-day service for refrigerators, washers, dryers, dishwashers & more. Licensed, insured, 90-day warranty. Call now!",
     images: [
       {
-        url: '/public/images/og-image.png',
+        url: '/images/og-image.png',
         width: 1200,
         height: 630,
         alt: 'MY APPLIANCE Repair - Connecticut Appliance Repair Services',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     title: 'MY APPLIANCE Repair | CT Appliance Repair Services',
     description:
       "Connecticut's trusted appliance repair experts. Same-day service for refrigerators, washers, dryers, dishwashers & more. Licensed, insured, 90-day warranty. Call now!",
-    images: ['/public/images/og-image.png'],
+    images: ['/images/og-image.png'],
   },
   verification: {},
   icons: {

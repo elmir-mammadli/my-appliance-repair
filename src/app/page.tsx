@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       'Fast, reliable appliance repair across Connecticut. Refrigerators, washers, dryers, dishwashers & more. Licensed techs, 90-day warranty, veteran & senior discounts. Book online!',
     images: [
       {
-        url: '/public/images/og-image.png',
+        url: '/images/og-image.png',
         width: 1200,
         height: 630,
         alt: 'MY APPLIANCE Repair - Connecticut Appliance Repair Services',
