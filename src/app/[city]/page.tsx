@@ -21,13 +21,13 @@ export async function generateMetadata({
   if (!city) return {};
 
   return {
-    title: `Appliance Repair ${city.name}, CT | Same-Day Service | MY APPLIANCE Repair`,
+    title: `Appliance Repair ${city.name}, CT | Same-Day Service | MyAppliance Repair LLC`,
     description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Licensed techs, 90-day warranty. Call (959) 261-6736.`,
     alternates: { canonical: `https://myappliance.us/${city.slug}` },
     openGraph: {
       type: 'website',
       url: `https://myappliance.us/${city.slug}`,
-      title: `Appliance Repair ${city.name}, CT | Same-Day Service | MY APPLIANCE Repair`,
+      title: `Appliance Repair ${city.name}, CT | Same-Day Service | MyAppliance Repair LLC`,
       description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Licensed techs, 90-day warranty.`,
       images: [{ url: '/images/og-image.png', width: 1200, height: 630, alt: `Appliance Repair ${city.name} CT` }],
     },
@@ -120,7 +120,7 @@ export default async function CityPage({
     '@context': 'https://schema.org',
     '@type': 'HomeAndConstructionBusiness',
     '@id': 'https://myappliance.us/#business',
-    name: 'MY APPLIANCE Repair',
+    name: 'MyAppliance Repair LLC',
     url: 'https://myappliance.us',
     telephone: '+19592616736',
     email: 'info@myappliance.us',

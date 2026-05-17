@@ -5,7 +5,7 @@ import BookingModal from '@/components/BookingModal';
 import NotFoundActions from '@/components/NotFoundActions';
 
 export const metadata: Metadata = {
-  title: 'Page Not Found | MY APPLIANCE Repair',
+  title: 'Page Not Found | MyAppliance Repair LLC',
   robots: { index: false },
 };
 
@@ -18,7 +18,7 @@ export default function NotFound() {
           <Link href="/" className="flex items-center group cursor-pointer">
             <Image
               src="/logo.svg"
-              alt="MY APPLIANCE Repair"
+              alt="MyAppliance Repair LLC"
               width={160}
               height={53}
               className="h-11 w-auto transition-transform duration-200 group-hover:scale-105"

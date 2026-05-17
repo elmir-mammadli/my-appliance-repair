@@ -222,7 +222,7 @@ export default function ServiceAreaMapInner() {
                 .setContent(
                   `<div style="font-family:sans-serif;padding:4px 2px">
                     <strong style="font-size:14px">${countyName} County, CT</strong><br/>
-                    <span style="font-size:12px;color:#555">MY APPLIANCE Repair serves ${countyName} County, CT</span>
+                    <span style="font-size:12px;color:#555">MyAppliance Repair LLC serves ${countyName} County, CT</span>
                   </div>`
                 )
                 .openOn(map);

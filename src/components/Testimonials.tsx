@@ -8,7 +8,7 @@ const testimonials = [
     location: 'West Hartford, CT',
     rating: 5,
     appliance: 'Refrigerator',
-    text: 'My fridge stopped cooling on a Friday evening. I called MY APPLIANCE Repair and they had a technician at my home Saturday morning. Fixed in under an hour! Saved all my food. Incredibly professional and fair pricing.',
+    text: 'My fridge stopped cooling on a Friday evening. I called MyAppliance Repair LLC and they had a technician at my home Saturday morning. Fixed in under an hour! Saved all my food. Incredibly professional and fair pricing.',
     initials: 'SM',
   },
   {
@@ -32,7 +32,7 @@ const testimonials = [
     location: 'Stamford, CT',
     rating: 5,
     appliance: 'Dishwasher',
-    text: 'Used MY APPLIANCE Repair twice now — once for my dishwasher and once for my oven. Both times: fast scheduling, punctual technicians, fair prices, and excellent work. They\'ve earned a customer for life.',
+    text: 'Used MyAppliance Repair LLC twice now — once for my dishwasher and once for my oven. Both times: fast scheduling, punctual technicians, fair prices, and excellent work. They\'ve earned a customer for life.',
     initials: 'RT',
   },
   {

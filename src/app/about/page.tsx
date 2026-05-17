@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import AboutContent from '@/components/AboutContent';
 
 export const metadata: Metadata = {
-  title: 'About Us | Licensed CT Appliance Repair Experts | MY APPLIANCE Repair',
+  title: 'About Us | Licensed CT Appliance Repair Experts | MyAppliance Repair LLC',
   description:
-    "Learn about MY APPLIANCE Repair — Connecticut's trusted local appliance repair service. Licensed technicians, 90-day warranty, 2,500+ repairs completed across CT.",
+    "Learn about MyAppliance Repair LLC — Connecticut's trusted local appliance repair service. Licensed technicians, 90-day warranty, 2,500+ repairs completed across CT.",
   alternates: { canonical: 'https://myappliance.us/about' },
 };
 
@@ -18,14 +18,14 @@ function jsonLd(data: object): string {
 const aboutPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  name: 'About MY APPLIANCE Repair',
+  name: 'About MyAppliance Repair LLC',
   description:
     "Connecticut's trusted local appliance repair service. Licensed technicians, 90-day warranty, 2,500+ repairs completed across CT.",
   url: 'https://myappliance.us/about',
   mainEntity: {
     '@type': 'LocalBusiness',
     '@id': 'https://myappliance.us/#business',
-    name: 'MY APPLIANCE Repair',
+    name: 'MyAppliance Repair LLC',
     description:
       "Connecticut's most trusted appliance repair service. Licensed & insured technicians, 90-day warranty, same-day appointments available.",
     url: 'https://myappliance.us',

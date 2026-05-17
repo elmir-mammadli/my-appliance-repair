@@ -7,9 +7,9 @@ import BookingModal from '@/components/BookingModal';
 import { posts } from '@/lib/posts';
 
 export const metadata: Metadata = {
-  title: 'Appliance Repair Tips & Guides | CT Homeowners Blog | MY APPLIANCE Repair',
+  title: 'Appliance Repair Tips & Guides | CT Homeowners Blog | MyAppliance Repair LLC',
   description:
-    "Expert appliance repair tips, maintenance guides, and cost-saving advice for Connecticut homeowners. Stay informed with MY APPLIANCE Repair's blog.",
+    "Expert appliance repair tips, maintenance guides, and cost-saving advice for Connecticut homeowners. Stay informed with MyAppliance Repair LLC's blog.",
   keywords: 'appliance repair tips Connecticut, washer dryer maintenance, refrigerator problems, dishwasher repair, appliance maintenance',
   alternates: { canonical: 'https://myappliance.us/blog' },
 };

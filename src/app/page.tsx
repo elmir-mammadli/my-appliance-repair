@@ -16,14 +16,14 @@ import HiringModal from '@/components/HiringModal';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Appliance Repair Connecticut | Same-Day Service | MY APPLIANCE Repair',
+  title: 'Appliance Repair Connecticut | Same-Day Service | MyAppliance Repair LLC',
   description:
     'Fast, reliable appliance repair across Connecticut. Refrigerators, washers, dryers, dishwashers & more. Licensed techs, 90-day warranty, veteran & senior discounts. Book online!',
   alternates: { canonical: 'https://myappliance.us' },
   openGraph: {
     type: 'website',
     url: 'https://myappliance.us',
-    title: 'Appliance Repair Connecticut | Same-Day Service | MY APPLIANCE Repair',
+    title: 'Appliance Repair Connecticut | Same-Day Service | MyAppliance Repair LLC',
     description:
       'Fast, reliable appliance repair across Connecticut. Refrigerators, washers, dryers, dishwashers & more. Licensed techs, 90-day warranty, veteran & senior discounts. Book online!',
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         url: '/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'MY APPLIANCE Repair - Connecticut Appliance Repair Services',
+        alt: 'MyAppliance Repair LLC - Connecticut Appliance Repair Services',
       },
     ],
   },

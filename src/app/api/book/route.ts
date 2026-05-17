@@ -55,7 +55,7 @@ async function appendToSheet(data: Record<string, string>) {
 async function sendNotification(data: Record<string, string>) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
-    from: 'MY APPLIANCE Repair <onboarding@resend.dev>',
+    from: 'MyAppliance Repair LLC <onboarding@resend.dev>',
     to: process.env.NOTIFICATION_EMAIL!,
     subject: `New Repair Request — ${data.appliance} (${data.urgency})`,
     html: `

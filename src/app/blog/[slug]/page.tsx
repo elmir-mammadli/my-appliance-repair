@@ -32,17 +32,17 @@ export async function generateMetadata({
     post.excerpt.length > 160 ? post.excerpt.slice(0, 157) + '...' : post.excerpt;
 
   return {
-    title: `${post.title} | MY APPLIANCE Repair Blog`,
+    title: `${post.title} | MyAppliance Repair LLC Blog`,
     description,
     keywords: `${post.category.toLowerCase()}, appliance repair Connecticut, ${post.title.toLowerCase()}`,
     alternates: { canonical: `https://myappliance.us/blog/${slug}` },
     openGraph: {
       type: 'article',
       url: `https://myappliance.us/blog/${slug}`,
-      title: `${post.title} | MY APPLIANCE Repair Blog`,
+      title: `${post.title} | MyAppliance Repair LLC Blog`,
       description,
       publishedTime: post.date,
-      authors: ['MY APPLIANCE Repair Team'],
+      authors: ['MyAppliance Repair LLC Team'],
       images: [
         {
           url: post.image,
@@ -85,12 +85,12 @@ export default async function PostPage({
     dateModified: post.date,
     author: {
       '@type': 'Organization',
-      name: 'MY APPLIANCE Repair Team',
+      name: 'MyAppliance Repair LLC Team',
       url: 'https://myappliance.us',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'MY APPLIANCE Repair',
+      name: 'MyAppliance Repair LLC',
       url: 'https://myappliance.us',
       logo: {
         '@type': 'ImageObject',

@@ -224,7 +224,7 @@ export default function AboutContent() {
             Our Story
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
-            About MY APPLIANCE Repair
+            About MyAppliance Repair LLC
           </h1>
           <p className="text-blue-300 text-lg sm:text-xl max-w-2xl leading-relaxed">
             Connecticut&apos;s trusted appliance repair team &mdash; licensed, local, and here when you need us
@@ -250,13 +250,13 @@ export default function AboutContent() {
             </h2>
             <div className="space-y-4 text-slate-600 leading-relaxed">
               <p>
-                MY APPLIANCE Repair was founded by a Connecticut-born technician with over a decade of experience
+                MyAppliance Repair LLC was founded by a Connecticut-born technician with over a decade of experience
                 working for a major national appliance chain. After years of watching customers get hit with
                 surprise fees, week-long wait times, and technicians who&apos;d never return a call &mdash; he
                 knew there had to be a better way.
               </p>
               <p>
-                In 2008, he launched MY APPLIANCE Repair with one simple promise: show up when we say we will,
+                In 2008, he launched MyAppliance Repair LLC with one simple promise: show up when we say we will,
                 fix it right the first time, and charge a fair price. No bait-and-switch diagnostics. No pressure
                 to replace an appliance that can still be saved. Just honest, skilled work backed by a real
                 warranty.
@@ -281,7 +281,7 @@ export default function AboutContent() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-bold text-lg leading-tight">MY APPLIANCE Repair</p>
+                  <p className="font-bold text-lg leading-tight">MyAppliance Repair LLC</p>
                   <p className="text-blue-200 text-sm">Connecticut&apos;s trusted repair experts</p>
                 </div>
               </div>
@@ -424,7 +424,7 @@ export default function AboutContent() {
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
             Whether you&apos;re in Hartford, New Haven, Bridgeport, Stamford, Waterbury, Norwalk, or anywhere in
-            between &mdash; we&apos;re likely already in your area today. MY APPLIANCE Repair covers all 169
+            between &mdash; we&apos;re likely already in your area today. MyAppliance Repair LLC covers all 169
             Connecticut towns and cities, with same-day availability across most of the state.
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-10">

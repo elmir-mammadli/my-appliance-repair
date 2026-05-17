@@ -9,7 +9,7 @@ const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'HomeAndConstructionBusiness',
   '@id': 'https://myappliance.us/#business',
-  name: 'MY APPLIANCE Repair',
+  name: 'MyAppliance Repair LLC',
   url: 'https://myappliance.us',
   telephone: '+19592616736',
   email: 'info@myappliance.us',
@@ -96,7 +96,7 @@ const website = {
   '@type': 'WebSite',
   '@id': 'https://myappliance.us/#website',
   url: 'https://myappliance.us',
-  name: 'MY APPLIANCE Repair',
+  name: 'MyAppliance Repair LLC',
   potentialAction: {
     '@type': 'SearchAction',
     target: {
