@@ -94,7 +94,7 @@ export default async function PostPage({
       url: 'https://myappliance.us',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://myappliance.us/og-image.svg',
+        url: 'https://myappliance.us/og-image.png',
       },
     },
     mainEntityOfPage: {

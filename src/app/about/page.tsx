@@ -29,7 +29,7 @@ const aboutPageSchema = {
     description:
       "Connecticut's most trusted appliance repair service. Licensed & insured technicians, 90-day warranty, same-day appointments available.",
     url: 'https://myappliance.us',
-    telephone: '+1-917-378-3014',
+    telephone: '+19592616736',
     email: 'info@myappliance.us',
     foundingDate: '2008',
     areaServed: {

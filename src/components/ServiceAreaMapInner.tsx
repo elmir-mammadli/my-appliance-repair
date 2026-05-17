@@ -113,21 +113,23 @@ const CT_COUNTIES_GEOJSON = {
 };
 
 const MUNICIPALITIES = [
-  { name: 'Hartford', lat: 41.7637, lng: -72.6851 },
   { name: 'New Haven', lat: 41.3083, lng: -72.9279 },
-  { name: 'Stamford', lat: 41.0534, lng: -73.5387 },
-  { name: 'Bridgeport', lat: 41.1865, lng: -73.1952 },
-  { name: 'Waterbury', lat: 41.5582, lng: -73.0515 },
-  { name: 'Norwalk', lat: 41.1177, lng: -73.4082 },
-  { name: 'Danbury', lat: 41.3948, lng: -73.4540 },
-  { name: 'New Britain', lat: 41.6612, lng: -72.7795 },
-  { name: 'West Hartford', lat: 41.7623, lng: -72.7418 },
-  { name: 'Groton', lat: 41.3501, lng: -72.0782 },
-  { name: 'New London', lat: 41.3557, lng: -72.0995 },
-  { name: 'Torrington', lat: 41.8009, lng: -73.1215 },
+  { name: 'Hamden', lat: 41.3959, lng: -72.8967 },
+  { name: 'West Haven', lat: 41.2709, lng: -72.9471 },
+  { name: 'East Haven', lat: 41.2759, lng: -72.8687 },
+  { name: 'North Haven', lat: 41.3915, lng: -72.8590 },
+  { name: 'Woodbridge', lat: 41.3565, lng: -73.0071 },
+  { name: 'Orange', lat: 41.2784, lng: -73.0285 },
+  { name: 'Bethany', lat: 41.4398, lng: -72.9979 },
+  { name: 'Branford', lat: 41.2793, lng: -72.8154 },
+  { name: 'Milford', lat: 41.2223, lng: -73.0568 },
+  { name: 'Shelton', lat: 41.3165, lng: -73.0929 },
+  { name: 'Derby', lat: 41.3220, lng: -73.0879 },
+  { name: 'Ansonia', lat: 41.3445, lng: -73.0779 },
+  { name: 'Naugatuck', lat: 41.4851, lng: -73.0504 },
+  { name: 'Cheshire', lat: 41.4990, lng: -72.9015 },
   { name: 'Meriden', lat: 41.5382, lng: -72.8070 },
-  { name: 'Willimantic', lat: 41.7104, lng: -72.2118 },
-  { name: 'Mystic', lat: 41.3543, lng: -71.9668 },
+  { name: 'Wallingford', lat: 41.4571, lng: -72.8232 },
 ];
 
 const DEFAULT_STYLE = {
@@ -174,8 +176,8 @@ export default function ServiceAreaMapInner() {
       });
 
       const map = L.map(containerRef.current!, {
-        center: [41.6, -72.65],
-        zoom: 9,
+        center: [41.38, -72.95],
+        zoom: 11,
         zoomControl: true,
         scrollWheelZoom: false,
       });
