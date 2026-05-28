@@ -5,16 +5,10 @@ import { openBookingModal } from '@/lib/booking';
 
 const slides = [
   {
-    src: '/images/hero/ref.jpg',
-    alt: 'Technician repairing a washing machine',
+    src: '/images/hero/washer.jpg',
+    alt: 'Washer and dryer repair service',
     label: 'Washer & Dryer Repair',
     stat: 'Same-day service available',
-  },
-  {
-    src: '/images/hero/washer.jpg',
-    alt: 'Refrigerator repair service',
-    label: 'Refrigerator Repair',
-    stat: 'Emergency service 24/7',
   },
   {
     src: '/images/hero/dishwasher.jpg',
