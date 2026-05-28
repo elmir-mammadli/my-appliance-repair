@@ -55,9 +55,9 @@ async function appendToSheet(data: Record<string, string>) {
 async function sendNotification(data: Record<string, string>) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
-    from: 'MyAppliance Repair LLC <onboarding@resend.dev>',
+    from: 'MyAppliance Repair LLC <notifications@myappliance.us>',
     to: process.env.NOTIFICATION_EMAIL!,
-    subject: `New Repair Request — ${data.appliance} (${data.urgency})`,
+    subject: `🔧 New Repair Request — ${data.appliance} (${data.urgency})`,
     html: `
       <h2>New Booking Request</h2>
       <table style="border-collapse:collapse;width:100%;font-family:sans-serif;font-size:14px">
@@ -78,12 +78,25 @@ async function sendNotification(data: Record<string, string>) {
 }
 
 export async function POST(req: NextRequest) {
+  const data = await req.json();
+
+  let sheetOk = false;
   try {
-    const data = await req.json();
-    await Promise.all([appendToSheet(data), sendNotification(data)]);
-    return NextResponse.json({ ok: true });
+    await appendToSheet(data);
+    sheetOk = true;
   } catch (err) {
-    console.error('[/api/book]', err);
+    console.error('[/api/book] sheet error:', err);
+  }
+
+  try {
+    await sendNotification(data);
+  } catch (err) {
+    console.error('[/api/book] email error:', err);
+  }
+
+  if (!sheetOk) {
     return NextResponse.json({ error: 'Failed to submit booking' }, { status: 500 });
   }
+
+  return NextResponse.json({ ok: true });
 }
