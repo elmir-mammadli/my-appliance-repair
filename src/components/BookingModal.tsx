@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { isCtZip } from '@/lib/zip';
 import DatePicker from '@/components/DatePicker';
+import AddressAutocomplete from '@/components/AddressAutocomplete';
 
 const appliances = [
   'Washer', 'Dryer', 'Refrigerator', 'Dishwasher', 'Oven / Range',
@@ -15,13 +16,13 @@ const timeSlots = [
 
 interface FormState {
   name: string; phone: string; email: string; zip: string;
-  appliance: string; brand: string; issue: string;
+  address: string; appliance: string; brand: string; issue: string;
   date: string; timeSlot: string; urgency: string;
 }
 
 const initialState: FormState = {
   name: '', phone: '', email: '', zip: '',
-  appliance: '', brand: '', issue: '', date: '', timeSlot: '', urgency: 'standard',
+  address: '', appliance: '', brand: '', issue: '', date: '', timeSlot: '', urgency: 'standard',
 };
 
 export default function BookingModal() {
@@ -67,6 +68,7 @@ export default function BookingModal() {
     if (!form.zip.trim()) newErrors.zip = 'ZIP code is required';
     else if (!/^\d{5}$/.test(form.zip)) newErrors.zip = 'Please enter a valid 5-digit ZIP';
     else if (!isCtZip(form.zip)) newErrors.zip = 'Sorry, we only service Connecticut (ZIP 06001–06928)';
+    if (!form.address.trim()) newErrors.address = 'Service address is required';
     if (!form.appliance) newErrors.appliance = 'Please select an appliance';
     if (!form.issue.trim()) newErrors.issue = 'Please describe the issue';
     if (!form.date) newErrors.date = 'Please select a preferred date';
@@ -269,6 +271,20 @@ export default function BookingModal() {
                           )
                       }
                     </div>
+                  </div>
+
+                  {/* Service Address */}
+                  <div>
+                    <label htmlFor="m-address" className="block text-sm font-semibold text-blue-950 mb-1.5">
+                      Service Address <span className="text-red-500" aria-hidden="true">*</span>
+                    </label>
+                    <AddressAutocomplete
+                      id="m-address"
+                      value={form.address}
+                      onChange={(v) => handleChange('address', v)}
+                      error={errors.address}
+                    />
+                    {errors.address && <p className="text-red-500 text-xs mt-1" role="alert">{errors.address}</p>}
                   </div>
 
                   {/* Email */}

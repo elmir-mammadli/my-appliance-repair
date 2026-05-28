@@ -20,22 +20,23 @@ async function appendToSheet(data: Record<string, string>) {
   const now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
 
   const row = [
-    data.name,           // Full Name
-    data.phone,          // Phone
-    data.email || '',    // Email
-    data.zip,            // ZIP Code
-    data.appliance,      // Appliance
-    data.brand || '',    // Brand
-    data.issue,          // Issue Description
-    data.urgency,        // Urgency
-    data.timeSlot || '', // Preferred Time
-    'New',               // Status
-    '',                  // Assigned Technician
-    '',                  // Parts Needed
-    data.date || '',     // Appointment Date
-    now,                 // Created Time
-    now,                 // Last Modified
-    '',                  // Completion Time
+    data.name,            // Full Name
+    data.phone,           // Phone
+    data.email || '',     // Email
+    data.address || '',   // Service Address
+    data.zip,             // ZIP Code
+    data.appliance,       // Appliance
+    data.brand || '',     // Brand
+    data.issue,           // Issue Description
+    data.urgency,         // Urgency
+    data.timeSlot || '',  // Preferred Time
+    'New',                // Status
+    '',                   // Assigned Technician
+    '',                   // Parts Needed
+    data.date || '',      // Appointment Date
+    now,                  // Created Time
+    now,                  // Last Modified
+    '',                   // Completion Time
   ];
 
   const existing = await sheets.spreadsheets.values.get({
@@ -102,8 +103,12 @@ async function sendNotification(data: Record<string, string>) {
             <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.email || '—'}</p></td>
           </tr>
           <tr>
-            <td style="padding:8px 0;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">ZIP Code</p></td>
-            <td style="padding:8px 0;"><p style="margin:0;color:#112654;font-size:14px;">${data.zip}</p></td>
+            <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">ZIP Code</p></td>
+            <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.zip}</p></td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Service Address</p></td>
+            <td style="padding:8px 0;"><p style="margin:0;color:#112654;font-size:14px;font-weight:600;">${data.address || '—'}</p></td>
           </tr>
         </table>
 
