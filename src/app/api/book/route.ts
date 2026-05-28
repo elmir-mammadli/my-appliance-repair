@@ -47,7 +47,7 @@ async function appendToSheet(data: Record<string, string>) {
 
   await sheets.spreadsheets.values.update({
     spreadsheetId: sheetId,
-    range: `${tab}!A${nextRow}:P${nextRow}`,
+    range: `${tab}!A${nextRow}:Q${nextRow}`,
     valueInputOption: 'USER_ENTERED',
     requestBody: { values: [row] },
   });
