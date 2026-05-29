@@ -28,8 +28,10 @@ const initialState: FormState = {
 export default function BookingModal() {
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [step, setStep] = useState<1 | 2>(1);
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Partial<FormState>>({});
+  const [checking, setChecking] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -40,7 +42,10 @@ export default function BookingModal() {
 
   const closeModal = useCallback(() => {
     setVisible(false);
-    setTimeout(() => setOpen(false), 250);
+    setTimeout(() => {
+      setOpen(false);
+      setStep(1);
+    }, 250);
   }, []);
 
   useEffect(() => {
@@ -59,31 +64,47 @@ export default function BookingModal() {
     };
   }, [open, closeModal]);
 
-  const validate = (): boolean => {
-    const newErrors: Partial<FormState> = {};
-    if (!form.name.trim()) newErrors.name = 'Name is required';
-    if (!form.phone.trim()) newErrors.phone = 'Phone number is required';
-    else if (!/^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(form.phone.replace(/\s/g, '')))
-      newErrors.phone = 'Please enter a valid phone number';
-    if (!form.zip.trim()) newErrors.zip = 'ZIP code is required';
-    else if (!/^\d{5}$/.test(form.zip)) newErrors.zip = 'Please enter a valid 5-digit ZIP';
-    else if (!isCtZip(form.zip)) newErrors.zip = 'Sorry, we only service Connecticut (ZIP 06001–06928)';
-    if (!form.address.trim()) newErrors.address = 'Service address is required';
-    if (!form.appliance) newErrors.appliance = 'Please select an appliance';
-    if (!form.issue.trim()) newErrors.issue = 'Please describe the issue';
-    if (!form.date) newErrors.date = 'Please select a preferred date';
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleChange = (field: keyof FormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
+  const validateStep1 = (): boolean => {
+    const errs: Partial<FormState> = {};
+    if (!form.phone.trim()) errs.phone = 'Phone number is required';
+    else if (!/^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(form.phone.replace(/\s/g, '')))
+      errs.phone = 'Please enter a valid phone number';
+    if (!form.zip.trim()) errs.zip = 'ZIP code is required';
+    else if (!/^\d{5}$/.test(form.zip)) errs.zip = 'Please enter a valid 5-digit ZIP';
+    else if (!isCtZip(form.zip)) errs.zip = 'Sorry, we only service Connecticut (ZIP 06001–06928)';
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
+  const validateStep2 = (): boolean => {
+    const errs: Partial<FormState> = {};
+    if (!form.name.trim()) errs.name = 'Name is required';
+    if (!form.address.trim()) errs.address = 'Service address is required';
+    if (!form.appliance) errs.appliance = 'Please select an appliance';
+    if (!form.issue.trim()) errs.issue = 'Please describe the issue';
+    if (!form.date) errs.date = 'Please select a preferred date';
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
+  const handleStep1Next = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateStep1()) return;
+    setChecking(true);
+    setTimeout(() => {
+      setChecking(false);
+      setStep(2);
+    }, 1000);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (!validateStep2()) return;
     setSubmitting(true);
     try {
       const res = await fetch('/api/book', {
@@ -118,31 +139,60 @@ export default function BookingModal() {
         aria-hidden="true"
       />
 
-      {/* Panel */}
+      {/* Panel — narrows on step 1, expands on step 2 */}
       <div
-        className={`relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[92vh] overflow-y-auto transition-all duration-250 ${
-          visible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'
-        }`}
+        className={`relative bg-white rounded-2xl shadow-2xl w-full max-h-[92vh] overflow-y-auto transition-all duration-300 ${
+          step === 1 && !submitted ? 'max-w-md' : 'max-w-4xl'
+        } ${visible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'}`}
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between px-8 py-5 bg-white border-b border-slate-100">
-          <div>
-            <h2 className="text-xl font-bold text-blue-950">Schedule a Repair</h2>
-            <p className="text-sm text-slate-500 mt-0.5">We&apos;ll call you within 30 minutes to confirm</p>
+        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-5 bg-white border-b border-slate-100">
+          <div className="flex items-center gap-3">
+            {step === 2 && !submitted && (
+              <button
+                onClick={() => { setStep(1); setErrors({}); }}
+                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer flex-shrink-0"
+                aria-label="Back to step 1"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            )}
+            <div>
+              <h2 className="text-xl font-bold text-blue-950">Schedule a Repair</h2>
+              <p className="text-sm text-slate-500 mt-0.5">
+                {submitted
+                  ? 'Request received!'
+                  : step === 1
+                  ? "Step 1 of 2 — Let's check your area"
+                  : 'Step 2 of 2 — Repair details'}
+              </p>
+            </div>
           </div>
-          <button
-            onClick={closeModal}
-            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors duration-200 cursor-pointer flex-shrink-0"
-            aria-label="Close modal"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-3">
+            {!submitted && (
+              <div className="flex gap-1.5" aria-hidden="true">
+                <div className="w-2 h-2 rounded-full bg-blue-600" />
+                <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${step === 2 ? 'bg-blue-600' : 'bg-slate-200'}`} />
+              </div>
+            )}
+            <button
+              onClick={closeModal}
+              className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors duration-200 cursor-pointer flex-shrink-0"
+              aria-label="Close modal"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Body */}
-        <div className="p-8">
+        <div className="p-6 sm:p-8">
+
+          {/* ── Success ── */}
           {submitted ? (
             <div className="text-center py-10">
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -151,36 +201,133 @@ export default function BookingModal() {
                 </svg>
               </div>
               <h3 className="text-2xl font-bold text-blue-950 mb-3">Booking Request Received!</h3>
-              <p className="text-slate-500 mb-6 max-w-md mx-auto">
-                Thank you, <strong className="text-blue-950">{form.name}</strong>! We&apos;ve received your repair request for your <strong className="text-blue-950">{form.appliance}</strong>.
-                {form.date && <> Your preferred date is <strong className="text-blue-950">{form.date}</strong>.</>}{' '}
-                A technician will call <strong className="text-blue-950">{form.phone}</strong> within 30 minutes.
+              <p className="text-slate-500 mb-4 max-w-sm mx-auto">
+                Thanks, <strong className="text-blue-950">{form.name}</strong>! We&apos;ve got your {form.appliance} repair request.
               </p>
+              <ol className="text-sm text-slate-600 text-left max-w-xs mx-auto mb-8 space-y-3">
+                <li className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 bg-blue-100 text-blue-700 rounded-full text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                  <span>You&apos;ll get a call at <strong className="text-blue-950">{form.phone}</strong> within 30 minutes to confirm.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 bg-blue-100 text-blue-700 rounded-full text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                  <span>Your technician arrives in your preferred window{form.date ? <> on <strong className="text-blue-950">{form.date}</strong></> : ''}.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 bg-blue-100 text-blue-700 rounded-full text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                  <span>{form.email ? <>Confirmation sent to <strong className="text-blue-950">{form.email}</strong>.</> : 'We\'ll confirm your appointment by phone.'}</span>
+                </li>
+              </ol>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
                   href="tel:+19592616736"
-                  className="inline-flex items-center justify-center gap-2 bg-blue-950 hover:bg-blue-900 text-white font-bold px-6 py-3 rounded-xl transition-colors duration-200 cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 bg-blue-950 hover:bg-blue-900 text-white font-bold px-6 py-3 rounded-xl transition-colors duration-200"
                 >
                   Call (959) 261-6736
                 </a>
                 <button
-                  onClick={() => { setSubmitted(false); setForm(initialState); closeModal(); }}
+                  onClick={() => { setSubmitted(false); setForm(initialState); setStep(1); closeModal(); }}
                   className="inline-flex items-center justify-center px-6 py-3 border border-slate-200 hover:bg-slate-50 text-slate-600 font-medium rounded-xl transition-colors duration-200 cursor-pointer"
                 >
                   Close
                 </button>
               </div>
             </div>
+
+          ) : step === 1 ? (
+
+            /* ── Step 1 — Phone + ZIP ── */
+            <form onSubmit={handleStep1Next} noValidate aria-label="Step 1: Contact check">
+              <div className="space-y-5">
+                <p className="text-sm text-slate-500 text-center pb-1">
+                  Quick check — 2 fields and we&apos;ll confirm we service your area.
+                </p>
+
+                {/* Phone */}
+                <div>
+                  <label htmlFor="m-phone" className="block text-sm font-semibold text-blue-950 mb-1.5">
+                    Phone Number <span className="text-red-500" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    id="m-phone" type="tel" autoComplete="tel" value={form.phone}
+                    onChange={(e) => handleChange('phone', e.target.value)}
+                    placeholder="(203) 555-0100"
+                    autoFocus
+                    className={`w-full px-4 py-3.5 rounded-xl border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors text-base ${errors.phone ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
+                    aria-required="true" aria-describedby={errors.phone ? 'm-phone-error' : undefined}
+                  />
+                  {errors.phone && <p id="m-phone-error" className="text-red-500 text-xs mt-1" role="alert">{errors.phone}</p>}
+                </div>
+
+                {/* ZIP */}
+                <div>
+                  <label htmlFor="m-zip" className="block text-sm font-semibold text-blue-950 mb-1.5">
+                    ZIP Code <span className="text-red-500" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    id="m-zip" type="text" inputMode="numeric" autoComplete="postal-code"
+                    value={form.zip} onChange={(e) => handleChange('zip', e.target.value)}
+                    placeholder="06510" maxLength={5}
+                    className={`w-full px-4 py-3.5 rounded-xl border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors text-base ${errors.zip ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
+                    aria-required="true" aria-describedby={errors.zip ? 'm-zip-error' : 'm-zip-status'}
+                  />
+                  {errors.zip
+                    ? <p id="m-zip-error" className="text-red-500 text-xs mt-1" role="alert">{errors.zip}</p>
+                    : form.zip.length === 5 && (
+                        isCtZip(form.zip)
+                          ? <p id="m-zip-status" className="text-green-600 text-xs mt-1 flex items-center gap-1">
+                              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                              Great — we service your area!
+                            </p>
+                          : <p id="m-zip-status" className="text-red-500 text-xs mt-1 flex items-center gap-1" role="alert">
+                              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                              Outside our service area (CT only)
+                            </p>
+                      )
+                  }
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={checking}
+                  className="w-full flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] disabled:bg-[#ffb81c]/80 text-gray-900 font-bold py-4 rounded-xl transition-colors shadow-md text-base cursor-pointer disabled:cursor-not-allowed"
+                >
+                  {checking ? (
+                    <>
+                      <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      Checking your area...
+                    </>
+                  ) : (
+                    <>
+                      Check Availability
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </>
+                  )}
+                </button>
+
+                <p className="text-center text-xs text-slate-400">
+                  We&apos;ll call you within 30 minutes to confirm your appointment.
+                </p>
+              </div>
+            </form>
+
           ) : (
+
+            /* ── Step 2 — Full details ── */
             <div className="grid lg:grid-cols-[280px_1fr] gap-8">
 
-              {/* Left — trust sidebar */}
+              {/* Trust sidebar */}
               <div className="space-y-6">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Contact Us Directly</p>
                   <a
                     href="tel:+19592616736"
-                    className="flex items-center gap-3 p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl transition-colors duration-200 cursor-pointer group"
+                    className="flex items-center gap-3 p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl transition-colors duration-200 cursor-pointer"
                   >
                     <div className="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center text-white flex-shrink-0">
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -223,9 +370,10 @@ export default function BookingModal() {
                 </div>
               </div>
 
-              {/* Right — form */}
-              <form onSubmit={handleSubmit} noValidate aria-label="Repair booking form">
+              {/* Step 2 form */}
+              <form onSubmit={handleSubmit} noValidate aria-label="Step 2: Repair details">
                 <div className="space-y-4">
+
                   {/* Name */}
                   <div>
                     <label htmlFor="m-name" className="block text-sm font-semibold text-blue-950 mb-1.5">
@@ -233,47 +381,13 @@ export default function BookingModal() {
                     </label>
                     <input id="m-name" type="text" autoComplete="name" value={form.name}
                       onChange={(e) => handleChange('name', e.target.value)} placeholder="John Smith"
-                      className={`w-full px-4 py-3 rounded-xl border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 ${errors.name ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
+                      className={`w-full px-4 py-3 rounded-xl border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${errors.name ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
                       aria-required="true" aria-describedby={errors.name ? 'm-name-error' : undefined}
                     />
                     {errors.name && <p id="m-name-error" className="text-red-500 text-xs mt-1" role="alert">{errors.name}</p>}
                   </div>
 
-                  {/* Phone + ZIP */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="m-phone" className="block text-sm font-semibold text-blue-950 mb-1.5">
-                        Phone <span className="text-red-500" aria-hidden="true">*</span>
-                      </label>
-                      <input id="m-phone" type="tel" autoComplete="tel" value={form.phone}
-                        onChange={(e) => handleChange('phone', e.target.value)} placeholder="(203) 555-0100"
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 ${errors.phone ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
-                        aria-required="true" aria-describedby={errors.phone ? 'm-phone-error' : undefined}
-                      />
-                      {errors.phone && <p id="m-phone-error" className="text-red-500 text-xs mt-1" role="alert">{errors.phone}</p>}
-                    </div>
-                    <div>
-                      <label htmlFor="m-zip" className="block text-sm font-semibold text-blue-950 mb-1.5">
-                        ZIP Code <span className="text-red-500" aria-hidden="true">*</span>
-                      </label>
-                      <input id="m-zip" type="text" inputMode="numeric" autoComplete="postal-code"
-                        value={form.zip} onChange={(e) => handleChange('zip', e.target.value)}
-                        placeholder="06510" maxLength={5}
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 ${errors.zip ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
-                        aria-required="true" aria-describedby={errors.zip ? 'm-zip-error' : 'm-zip-status'}
-                      />
-                      {errors.zip
-                        ? <p id="m-zip-error" className="text-red-500 text-xs mt-1" role="alert">{errors.zip}</p>
-                        : form.zip.length === 5 && (
-                            isCtZip(form.zip)
-                              ? <p id="m-zip-status" className="text-green-600 text-xs mt-1 flex items-center gap-1"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>We service your area</p>
-                              : <p id="m-zip-status" className="text-red-500 text-xs mt-1 flex items-center gap-1" role="alert"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" /></svg>Outside our service area (CT only)</p>
-                          )
-                      }
-                    </div>
-                  </div>
-
-                  {/* Service Address */}
+                  {/* Address */}
                   <div>
                     <label htmlFor="m-address" className="block text-sm font-semibold text-blue-950 mb-1.5">
                       Service Address <span className="text-red-500" aria-hidden="true">*</span>
@@ -290,11 +404,11 @@ export default function BookingModal() {
                   {/* Email */}
                   <div>
                     <label htmlFor="m-email" className="block text-sm font-semibold text-blue-950 mb-1.5">
-                      Email <span className="text-slate-400 font-normal text-xs">(optional)</span>
+                      Email <span className="text-slate-400 font-normal text-xs">(optional — for confirmation)</span>
                     </label>
                     <input id="m-email" type="email" autoComplete="email" value={form.email}
                       onChange={(e) => handleChange('email', e.target.value)} placeholder="john@example.com"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 hover:border-blue-300 bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 hover:border-blue-300 bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
                     />
                   </div>
 
@@ -306,7 +420,7 @@ export default function BookingModal() {
                       </label>
                       <select id="m-appliance" value={form.appliance}
                         onChange={(e) => handleChange('appliance', e.target.value)}
-                        className={`w-full px-4 py-3 rounded-xl border bg-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer ${errors.appliance ? 'border-red-400 text-blue-950' : 'border-slate-200 hover:border-blue-300'} ${!form.appliance ? 'text-slate-400' : 'text-blue-950'}`}
+                        className={`w-full px-4 py-3 rounded-xl border bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer ${errors.appliance ? 'border-red-400 text-blue-950' : 'border-slate-200 hover:border-blue-300'} ${!form.appliance ? 'text-slate-400' : 'text-blue-950'}`}
                         aria-required="true" aria-describedby={errors.appliance ? 'm-appliance-error' : undefined}
                       >
                         <option value="" disabled>Select appliance...</option>
@@ -321,7 +435,7 @@ export default function BookingModal() {
                       <input id="m-brand" type="text" value={form.brand}
                         onChange={(e) => handleChange('brand', e.target.value)}
                         placeholder="e.g. Whirlpool, LG..."
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 hover:border-blue-300 bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 hover:border-blue-300 bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
                       />
                     </div>
                   </div>
@@ -334,7 +448,7 @@ export default function BookingModal() {
                     <textarea id="m-issue" rows={3} value={form.issue}
                       onChange={(e) => handleChange('issue', e.target.value)}
                       placeholder="e.g. Washer won't spin, makes grinding noise..."
-                      className={`w-full px-4 py-3 rounded-xl border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none transition-colors duration-200 ${errors.issue ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
+                      className={`w-full px-4 py-3 rounded-xl border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none transition-colors ${errors.issue ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
                       aria-required="true" aria-describedby={errors.issue ? 'm-issue-error' : undefined}
                     />
                     {errors.issue && <p id="m-issue-error" className="text-red-500 text-xs mt-1" role="alert">{errors.issue}</p>}
@@ -360,7 +474,11 @@ export default function BookingModal() {
                       <fieldset>
                         <legend className="block text-sm font-semibold text-blue-950 mb-2">Urgency</legend>
                         <div className="space-y-2">
-                          {[{ value: 'emergency', label: 'Emergency' }, { value: 'today', label: 'Today' }, { value: 'standard', label: 'Next 2 days' }].map((opt) => (
+                          {[
+                            { value: 'emergency', label: 'Emergency' },
+                            { value: 'today', label: 'Today' },
+                            { value: 'standard', label: 'Next 2 days' },
+                          ].map((opt) => (
                             <label key={opt.value} className="flex items-center gap-2 cursor-pointer">
                               <input type="radio" name="m-urgency" value={opt.value}
                                 checked={form.urgency === opt.value}
@@ -377,7 +495,7 @@ export default function BookingModal() {
                       <label htmlFor="m-timeSlot" className="block text-sm font-semibold text-blue-950 mb-1.5">Preferred Time</label>
                       <select id="m-timeSlot" value={form.timeSlot}
                         onChange={(e) => handleChange('timeSlot', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 hover:border-blue-300 bg-white text-blue-950 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 text-sm cursor-pointer"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 hover:border-blue-300 bg-white text-blue-950 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors text-sm cursor-pointer"
                       >
                         <option value="">Any time</option>
                         {timeSlots.map((slot) => <option key={slot} value={slot}>{slot}</option>)}
@@ -388,7 +506,7 @@ export default function BookingModal() {
                   {/* Submit */}
                   <button
                     type="submit" disabled={submitting}
-                    className="w-full flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] disabled:bg-[#ffb81c]/50 text-gray-900 font-bold py-4 rounded-xl transition-colors duration-200 cursor-pointer shadow-md text-lg disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] disabled:bg-[#ffb81c]/50 text-gray-900 font-bold py-4 rounded-xl transition-colors cursor-pointer shadow-md text-lg disabled:cursor-not-allowed"
                     aria-disabled={submitting}
                   >
                     {submitting ? (

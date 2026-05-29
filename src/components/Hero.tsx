@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { openBookingModal } from '@/lib/booking';
 
 const slides = [
@@ -117,12 +118,13 @@ export default function Hero() {
                 aria-hidden={i !== current}
                 className={`absolute inset-0 transition-opacity duration-700 ${i === current ? 'opacity-100' : 'opacity-0'}`}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={slide.src}
                   alt={slide.alt}
-                  className="w-full h-full object-cover"
-                  loading={i === 0 ? 'eager' : 'lazy'}
+                  fill
+                  className="object-cover"
+                  priority={i === 0}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-950/90 via-blue-950/20 to-transparent" aria-hidden="true" />

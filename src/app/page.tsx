@@ -190,10 +190,10 @@ export default function Home() {
       <Hero />
       <BrandsGrid />
       <Services />
+      <Coverage />
       <RecentRepairs />
       <WhyUs />
       <Discounts />
-      <Coverage />
       <Testimonials />
       <FAQ />
       <BookingModal />

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -20,16 +19,16 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Source Sans 3', Arial, sans-serif;
+  font-family: var(--font-source-sans-3), Arial, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lexend', Arial, sans-serif;
+  font-family: var(--font-lexend), Arial, sans-serif;
 }
 
 /* Blog prose styles */
 .prose h2 {
-  font-family: 'Lexend', Arial, sans-serif;
+  font-family: var(--font-lexend), Arial, sans-serif;
   font-size: 1.375rem;
   font-weight: 700;
   color: #1e3a5f;
@@ -39,7 +38,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .prose h3 {
-  font-family: 'Lexend', Arial, sans-serif;
+  font-family: var(--font-lexend), Arial, sans-serif;
   font-size: 1.125rem;
   font-weight: 600;
   color: #1e3a5f;

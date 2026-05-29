@@ -1,6 +1,20 @@
 import type { Metadata } from "next";
+import { Lexend, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import StructuredData from "@/components/StructuredData";
+import CookieConsent from "@/components/CookieConsent";
+
+const lexend = Lexend({
+  subsets: ["latin"],
+  variable: "--font-lexend",
+  display: "swap",
+});
+
+const sourceSans3 = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--font-source-sans-3",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://myappliance.us'),
@@ -76,10 +90,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased scroll-smooth">
+    <html lang="en" className={`h-full antialiased scroll-smooth ${lexend.variable} ${sourceSans3.variable}`}>
       <body className="min-h-full flex flex-col bg-blue-50">
         <StructuredData />
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
