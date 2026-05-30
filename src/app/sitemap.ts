@@ -1,12 +1,14 @@
 import type { MetadataRoute } from 'next'
 import { getAllSlugs } from '@/lib/posts'
 import { getAllCitySlugs } from '@/lib/cities'
+import { getAllServiceSlugs } from '@/lib/services'
 
 const BASE_URL = 'https://myappliance.us'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogSlugs = getAllSlugs()
   const citySlugs = getAllCitySlugs()
+  const serviceSlugs = getAllServiceSlugs()
 
   const blogEntries: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
     url: `${BASE_URL}/blog/${slug}`,
@@ -18,6 +20,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE_URL}/${slug}`,
     changeFrequency: 'monthly',
     priority: 0.85,
+  }))
+
+  const serviceEntries: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
+    url: `${BASE_URL}/services/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.9,
   }))
 
   return [
@@ -37,6 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${BASE_URL}/services`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
       url: `${BASE_URL}/privacy`,
       changeFrequency: 'yearly',
       priority: 0.3,
@@ -47,6 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
     ...cityEntries,
+    ...serviceEntries,
     ...blogEntries,
   ]
 }
