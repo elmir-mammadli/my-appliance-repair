@@ -1,4 +1,14 @@
 import Image from 'next/image';
+import Link from 'next/link';
+
+const footerServiceLinks: { label: string; href: string }[] = [
+  { label: 'Washer Repair', href: '/services/washer-repair' },
+  { label: 'Dryer Repair', href: '/services/dryer-repair' },
+  { label: 'Refrigerator Repair', href: '/services/refrigerator-repair' },
+  { label: 'Dishwasher Repair', href: '/services/dishwasher-repair' },
+  { label: 'Oven & Range Repair', href: '/services/oven-range-repair' },
+  { label: 'Same-Day Emergency', href: '/services' },
+];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -39,26 +49,26 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-bold mb-4">Services</h3>
             <ul className="space-y-2 text-sm">
-              {['Washer Repair', 'Dryer Repair', 'Refrigerator Repair', 'Dishwasher Repair', 'Oven & Range Repair', 'Same-Day Emergency'].map((s) => (
-                <li key={s}>
-                  <a href="#services" className="hover:text-white transition-colors duration-200 cursor-pointer">{s}</a>
+              {footerServiceLinks.map((s) => (
+                <li key={s.label}>
+                  <Link href={s.href} className="hover:text-white transition-colors duration-200 cursor-pointer">{s.label}</Link>
                 </li>
               ))}
               <li className="pt-1 border-t border-blue-800 mt-2">
-                <a href="/about" className="hover:text-white transition-colors duration-200 cursor-pointer flex items-center gap-1.5">
+                <Link href="/about" className="hover:text-white transition-colors duration-200 cursor-pointer flex items-center gap-1.5">
                   <svg className="w-3.5 h-3.5 text-[#ffb81c]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/blog" className="hover:text-white transition-colors duration-200 cursor-pointer flex items-center gap-1.5">
+                <Link href="/blog" className="hover:text-white transition-colors duration-200 cursor-pointer flex items-center gap-1.5">
                   <svg className="w-3.5 h-3.5 text-[#ffb81c]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                   </svg>
                   Blog &amp; Tips
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -69,7 +79,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {['Greater Hartford', 'Greater New Haven', 'Fairfield County', 'New London County', 'Waterbury Area', 'Northeastern CT'].map((area) => (
                 <li key={area}>
-                  <a href="#coverage" className="hover:text-white transition-colors duration-200 cursor-pointer">{area}</a>
+                  <Link href="/#coverage" className="hover:text-white transition-colors duration-200 cursor-pointer">{area}</Link>
                 </li>
               ))}
             </ul>

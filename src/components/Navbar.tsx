@@ -16,13 +16,13 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: '#services', label: 'Services' },
-    { href: '#coverage', label: 'Coverage' },
-    { href: '#why-us', label: 'Why Us' },
-    { href: '#testimonials', label: 'Reviews' },
-    { href: '#faq', label: 'FAQ' },
+    { href: '/services', label: 'Services' },
+    { href: '/#coverage', label: 'Coverage' },
+    { href: '/#why-us', label: 'Why Us' },
+    { href: '/#testimonials', label: 'Reviews' },
+    { href: '/#faq', label: 'FAQ' },
     { href: '/about', label: 'About' },
-    { href: '#join-us', label: 'Join Our Team' },
+    { href: '/#join-us', label: 'Join Our Team' },
   ];
 
   return (
@@ -72,7 +72,7 @@ export default function Navbar() {
             (959) 261-6736
           </a>
           <button
-            onClick={openBookingModal}
+            onClick={() => openBookingModal()}
             className="flex items-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-semibold px-5 py-2.5 rounded-lg transition-colors duration-200 cursor-pointer shadow-sm"
           >
             Book a Repair
