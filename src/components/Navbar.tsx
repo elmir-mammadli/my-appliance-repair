@@ -16,13 +16,13 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: '#services', label: 'Services' },
-    { href: '#coverage', label: 'Coverage' },
-    { href: '#why-us', label: 'Why Us' },
-    { href: '#testimonials', label: 'Reviews' },
-    { href: '#faq', label: 'FAQ' },
+    { href: '/services', label: 'Services' },
+    { href: '/#coverage', label: 'Coverage' },
+    { href: '/#why-us', label: 'Why Us' },
+    { href: '/#testimonials', label: 'Reviews' },
+    { href: '/#faq', label: 'FAQ' },
     { href: '/about', label: 'About' },
-    { href: '#join-us', label: 'Join Our Team' },
+    { href: '/#join-us', label: 'Join Our Team' },
   ];
 
   return (
