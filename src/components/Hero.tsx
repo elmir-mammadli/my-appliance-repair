@@ -61,7 +61,7 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-4 mb-5">
               <button
-                onClick={openBookingModal}
+                onClick={() => openBookingModal()}
                 className="inline-flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold px-8 py-4 rounded-xl text-base transition-colors duration-200 cursor-pointer shadow-md"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">

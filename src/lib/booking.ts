@@ -1,5 +1,9 @@
-export const openBookingModal = () => {
+export interface OpenBookingDetail {
+  appliance?: string;
+}
+
+export const openBookingModal = (detail?: OpenBookingDetail) => {
   if (typeof window !== 'undefined') {
-    window.dispatchEvent(new CustomEvent('open-booking'));
+    window.dispatchEvent(new CustomEvent<OpenBookingDetail>('open-booking', { detail }));
   }
 };

@@ -160,7 +160,7 @@ export default function Discounts() {
             </p>
           </div>
           <button
-            onClick={openBookingModal}
+            onClick={() => openBookingModal()}
             className="flex-shrink-0 inline-flex items-center justify-center gap-2 font-bold px-7 py-3.5 rounded-xl transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 text-blue-900"
             style={{ backgroundColor: '#ffb81c' }}
             aria-label="Book a repair and claim your discount"

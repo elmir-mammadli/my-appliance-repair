@@ -209,7 +209,7 @@ export default function RecentRepairs() {
           <p className="text-blue-100 mb-6 text-lg">Your appliance could be next. Most repairs done in a single visit.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={openBookingModal}
+              onClick={() => openBookingModal()}
               className="inline-flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#ffca4d] text-gray-900 font-bold px-8 py-3.5 rounded-xl transition-all duration-200 cursor-pointer shadow-lg"
             >
               Book a Repair Today

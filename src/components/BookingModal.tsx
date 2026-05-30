@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { isCtZip } from '@/lib/zip';
+import type { OpenBookingDetail } from '@/lib/booking';
 import DatePicker from '@/components/DatePicker';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
 
@@ -35,7 +36,10 @@ export default function BookingModal() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const openModal = useCallback(() => {
+  const openModal = useCallback((appliance?: string) => {
+    if (appliance && appliances.includes(appliance)) {
+      setForm((prev) => ({ ...prev, appliance }));
+    }
     setOpen(true);
     setTimeout(() => setVisible(true), 10);
   }, []);
@@ -49,8 +53,12 @@ export default function BookingModal() {
   }, []);
 
   useEffect(() => {
-    window.addEventListener('open-booking', openModal);
-    return () => window.removeEventListener('open-booking', openModal);
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<OpenBookingDetail>).detail;
+      openModal(detail?.appliance);
+    };
+    window.addEventListener('open-booking', handler);
+    return () => window.removeEventListener('open-booking', handler);
   }, [openModal]);
 
   useEffect(() => {
