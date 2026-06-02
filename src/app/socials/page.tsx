@@ -133,7 +133,7 @@ const reviewLinks: ReviewLink[] = [
     name: 'Thumbtack',
     title: 'Rate us on Thumbtack',
     description: 'Tell other Thumbtack customers about your service.',
-    url: 'https://TODO_THUMBTACK_URL',
+    url: 'https://www.thumbtack.com/reviews/services/580267695654707208/write-customer-review',
     cta: 'Leave a Review',
     icon: ThumbtackIcon,
     accent: '#009fd9',
