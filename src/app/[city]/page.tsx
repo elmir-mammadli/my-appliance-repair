@@ -123,7 +123,7 @@ export default async function CityPage({
     name: 'MyAppliance Repair LLC',
     url: 'https://myappliance.us',
     telephone: '+19592616736',
-    email: 'info@myappliance.us',
+    email: 'service@myappliance.us',
     description: `Licensed appliance repair service in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers, ovens, and more. 90-day parts and labor warranty.`,
     areaServed: [
       { '@type': 'City', name: city.name, containedInPlace: { '@type': 'State', name: 'Connecticut' } },

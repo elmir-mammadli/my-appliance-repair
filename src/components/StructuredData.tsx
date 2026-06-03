@@ -12,7 +12,7 @@ const localBusiness = {
   name: 'MyAppliance Repair LLC',
   url: 'https://myappliance.us',
   telephone: '+19592616736',
-  email: 'info@myappliance.us',
+  email: 'service@myappliance.us',
   description:
     'Licensed appliance repair service in Connecticut. Same-day service for refrigerators, washers, dryers, dishwashers, ovens, and more. Licensed, insured, 90-day parts and labor warranty.',
   areaServed: [

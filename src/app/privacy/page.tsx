@@ -154,7 +154,7 @@ export default function PrivacyPage() {
           </ul>
           <p className="text-slate-600 leading-relaxed mb-6">
             To exercise any of these rights, please contact us at{' '}
-            <a href="mailto:info@myappliance.us" className="text-blue-700 hover:underline">info@myappliance.us</a>.
+            <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">service@myappliance.us</a>.
             We will respond to your request within a reasonable timeframe.
           </p>
 
@@ -185,7 +185,7 @@ export default function PrivacyPage() {
           </ul>
           <p className="text-slate-600 leading-relaxed mb-6">
             To submit a CTDPA rights request, email us at{' '}
-            <a href="mailto:info@myappliance.us" className="text-blue-700 hover:underline">info@myappliance.us</a>{' '}
+            <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">service@myappliance.us</a>{' '}
             with the subject line &ldquo;CTDPA Rights Request.&rdquo; We will respond within 45 days as required by law, with an option to extend for an additional 45 days when reasonably necessary.
           </p>
 
@@ -210,7 +210,7 @@ export default function PrivacyPage() {
           <h2 className="text-2xl font-bold text-blue-900 mb-4 mt-10">8. Children&apos;s Privacy</h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             Our website and services are not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe that we have inadvertently collected information from a child under 13, please contact us immediately at{' '}
-            <a href="mailto:info@myappliance.us" className="text-blue-700 hover:underline">info@myappliance.us</a>{' '}
+            <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">service@myappliance.us</a>{' '}
             and we will take steps to delete that information as promptly as possible.
           </p>
 
@@ -242,8 +242,8 @@ export default function PrivacyPage() {
             <p className="text-slate-600 text-sm">Serving Connecticut</p>
             <p className="text-slate-600 text-sm mt-2">
               Email:{' '}
-              <a href="mailto:info@myappliance.us" className="text-blue-700 hover:underline">
-                info@myappliance.us
+              <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">
+                service@myappliance.us
               </a>
             </p>
             <p className="text-slate-600 text-sm">

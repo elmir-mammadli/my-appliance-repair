@@ -481,19 +481,19 @@ export default function AboutContent() {
               Book a Service
             </button>
             <a
-              href="mailto:info@myappliance.us"
+              href="mailto:service@myappliance.us"
               className="w-full sm:w-auto flex items-center justify-center gap-2 border border-blue-600 text-blue-200 hover:bg-blue-800 hover:text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer text-base"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              info@myappliance.us
+              service@myappliance.us
             </a>
           </div>
           <p className="text-blue-500 text-sm mt-8">
             Have a question?{' '}
-            <a href="mailto:info@myappliance.us" className="text-blue-300 hover:text-white transition-colors duration-200 underline underline-offset-2">
-              Contact us at info@myappliance.us
+            <a href="mailto:service@myappliance.us" className="text-blue-300 hover:text-white transition-colors duration-200 underline underline-offset-2">
+              Contact us at service@myappliance.us
             </a>
           </p>
         </div>

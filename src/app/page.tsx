@@ -188,13 +188,13 @@ export default function Home() {
       />
       <Navbar />
       <Hero />
+      <Testimonials />
       <BrandsGrid />
       <Services />
       <Coverage />
       <RecentRepairs />
       <WhyUs />
       <Discounts />
-      <Testimonials />
       <FAQ />
       <BookingModal />
       <ContactForm />

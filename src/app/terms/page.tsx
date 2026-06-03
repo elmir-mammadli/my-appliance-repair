@@ -202,7 +202,7 @@ export default function TermsPage() {
           <h2 className="text-2xl font-bold text-blue-900 mb-4 mt-10">12. Dispute Resolution</h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             Before filing any formal legal action, we encourage you to contact us directly at{' '}
-            <a href="mailto:info@myappliance.us" className="text-blue-700 hover:underline">info@myappliance.us</a>{' '}
+            <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">service@myappliance.us</a>{' '}
             to attempt to resolve the dispute informally. Most concerns can be resolved quickly and to your satisfaction. If informal resolution is unsuccessful, disputes shall be resolved in the state or federal courts of Connecticut as provided in Section 11. You agree to waive any right to a jury trial to the fullest extent permitted by Connecticut law.
           </p>
 
@@ -228,8 +228,8 @@ export default function TermsPage() {
             <p className="text-slate-600 text-sm">Serving Connecticut</p>
             <p className="text-slate-600 text-sm mt-2">
               Email:{' '}
-              <a href="mailto:info@myappliance.us" className="text-blue-700 hover:underline">
-                info@myappliance.us
+              <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">
+                service@myappliance.us
               </a>
             </p>
             <p className="text-slate-600 text-sm">

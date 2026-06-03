@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import BookingModal from '@/components/BookingModal';
 import BookingButton from '@/components/BookingButton';
 import { posts, getPostBySlug, getRelatedPosts } from '@/lib/posts';
+import ViewCounter from '@/components/ViewCounter';
 
 function jsonLd(data: object): string {
   return JSON.stringify(data)
@@ -186,6 +187,7 @@ export default async function PostPage({
               </svg>
               {post.author}
             </span>
+            <ViewCounter slug={post.slug} />
           </div>
         </div>
       </header>

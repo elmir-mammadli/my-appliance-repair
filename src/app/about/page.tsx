@@ -30,7 +30,7 @@ const aboutPageSchema = {
       "Connecticut's most trusted appliance repair service. Licensed & insured technicians, 90-day warranty, same-day appointments available.",
     url: 'https://myappliance.us',
     telephone: '+19592616736',
-    email: 'info@myappliance.us',
+    email: 'service@myappliance.us',
     foundingDate: '2008',
     areaServed: {
       '@type': 'State',

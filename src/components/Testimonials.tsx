@@ -7,257 +7,233 @@ const GOOGLE_REVIEWS_URL = 'https://share.google/aktwu5fUEtjV6Eo40';
 const testimonials = [
   {
     name: 'Niyazi Y.',
-    location: 'Connecticut',
-    rating: 5,
-    appliance: 'Dishwasher',
-    text: 'I called MyAppliance Repair at 10 AM and they had Nijat at my door by 1:30 that same afternoon. He walked me through everything, tested every one of my new kitchen appliances, and even installed my disposal press button — all without me asking. 75 minutes. That\'s all it took to turn one of my most stressful days into one where I felt completely taken care of.',
     initials: 'NY',
-    source: 'google' as const,
+    text: 'I called MyAppliance Repair at 10 AM and they had Nijat at my door by 1:30 that same afternoon. He walked me through everything and even installed my disposal press button — all without me asking. 75 minutes. That\'s all it took.',
+    appliance: 'Dishwasher',
   },
   {
     name: 'Ruhiyya A.',
-    location: 'Connecticut',
-    rating: 5,
-    appliance: 'Dishwasher',
-    text: 'Our KitchenAid dishwasher was not draining correctly and had very weak water pressure during the wash cycle. Nijat diagnosed the issue fast and knew exactly what to check. He was professional, honest, and took the time to explain everything. The dishwasher is running properly again and we\'re really satisfied with the service.',
     initials: 'RA',
-    source: 'google' as const,
+    text: 'Our KitchenAid dishwasher was not draining correctly. Nijat diagnosed the issue fast and knew exactly what to check. Professional, honest, and took the time to explain everything. The dishwasher is running perfectly again.',
+    appliance: 'Dishwasher',
   },
   {
     name: 'Christopher N.',
-    location: 'Connecticut',
-    rating: 5,
-    appliance: 'Freezer',
-    text: 'My Appliance Repair contacted me minutes after I submitted a request for service, came out at my earliest available time, and fixed the issue with my freezer. The technician showed me what the problem was, explained how he could fix it, and communicated the cost before doing anything. Did not pressure me at all. I had a great experience and recommend using them.',
     initials: 'CN',
-    source: 'google' as const,
+    text: 'They contacted me minutes after I submitted a request, came out at my earliest time, and fixed my freezer. The technician showed me the problem, explained the fix, and communicated the cost before doing anything. Great experience.',
+    appliance: 'Freezer',
   },
   {
     name: 'Linda',
-    location: 'Connecticut',
-    rating: 5,
-    appliance: 'Appliance Repair',
-    text: 'Such a smooth and pleasant experience. They were kind, professional, and made the whole process feel easy and stress free. So happy I found them and will definitely call again if I ever need help.',
     initials: 'L',
-    source: 'google' as const,
+    text: 'Such a smooth and pleasant experience. They were kind, professional, and made the whole process feel easy and stress free. So happy I found them and will definitely call again.',
+    appliance: 'Appliance Repair',
   },
   {
     name: 'Koksal D.',
-    location: 'Connecticut',
-    rating: 5,
-    appliance: 'Appliance Repair',
-    text: 'Really good people and great service. They came fast, explained everything clearly, and fixed the issue without wasting time. Honest, respectful and easy to deal with. Felt more like getting help from people you know than an appliance repair company. Definitely recommended.',
     initials: 'KD',
-    source: 'google' as const,
+    text: 'Really good people and great service. They came fast, explained everything clearly, and fixed the issue without wasting time. Honest, respectful and easy to deal with. Felt more like getting help from people you know.',
+    appliance: 'Appliance Repair',
   },
   {
     name: 'S. Mizrahi',
-    location: 'Connecticut',
-    rating: 5,
-    appliance: 'Microwave',
-    text: 'Our microwave stopped heating and was making unusual noises. The technician arrived on time, quickly diagnosed the issue, and fixed it the same day. Very professional, honest pricing, and great communication throughout the process. The microwave works perfectly again. Highly recommend MyAppliance Repair LLC for any appliance repairs!',
     initials: 'SM',
-    source: 'google' as const,
+    text: 'Our microwave stopped heating and was making unusual noises. The technician arrived on time, quickly diagnosed the issue, and fixed it the same day. Very professional, honest pricing, and great communication.',
+    appliance: 'Microwave',
   },
 ];
 
-function GoogleLogo({ className = 'w-4 h-4' }: { className?: string }) {
+function GoogleG() {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-label="Google" role="img">
-      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
-      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+    <svg width="22" height="22" viewBox="0 0 48 48" aria-label="Google review" role="img">
+      <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z" />
+      <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z" />
+      <path fill="#FBBC05" d="M11.69 28.18c-.44-1.32-.69-2.73-.69-4.18s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z" />
+      <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z" />
     </svg>
   );
 }
 
-function YelpLogo({ className = 'w-4 h-4' }: { className?: string }) {
+function GoogleWordmark() {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-label="Yelp" role="img" fill="#FF1A1A">
-      <path d="M20.16 12.73l-4.703 1.14c-.44.107-.7-.12-.7-.51V13c0-.25.14-.48.37-.58l4.473-2.01c.45-.2.9.1.9.58v1.28c0 .29-.14.56-.34.46zM19.2 16.97l-4.18 2.35c-.4.23-.83.02-.9-.43l-.07-.34c-.05-.25.07-.5.3-.64l4.05-2.62c.42-.27.88 0 .88.5v.58c0 .23-.04.45-.1.6zM12 21.8c0 .66-.54 1.2-1.2 1.2h-.6c-3.28 0-5.9-1.2-7.55-3.3-.28-.36-.22-.87.14-1.15l3.74-2.83c.38-.29.92-.2 1.2.18.57.77 1.5 1.3 2.47 1.3h.6c.66 0 1.2.54 1.2 1.2v3.4zM10.8 2.2v5.4c0 .66-.54 1.2-1.2 1.2H9c-1.44 0-2.8.52-3.87 1.46-.3.27-.76.25-1.04-.05L1.5 7.6c-.3-.32-.27-.82.07-1.1C3.26 4.96 5.94 4 8.8 4h.8c.66 0 1.2.54 1.2 1.2v-3zM12 2.2V.6C12 .27 12.27 0 12.6 0h.6c3.04 0 5.76 1.08 7.87 2.87.34.29.37.8.06 1.12l-2.6 2.6c-.3.3-.77.3-1.07.02C15.96 5.54 14.67 5 13.2 5h-.6c-.33 0-.6-.27-.6-.6V2.2z"/>
+    <svg viewBox="0 0 272 92" className="h-7 w-auto" aria-label="Google" role="img">
+      <path fill="#4285F4" d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" />
+      <path fill="#EA4335" d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" />
+      <path fill="#FBBC05" d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z" />
+      <path fill="#4285F4" d="M225 3v65h-9.5V3h9.5z" />
+      <path fill="#34A853" d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.70-8.23-4.70-4.95 0-11.84 4.37-11.59 12.93z" />
+      <path fill="#EA4335" d="M35.29 41.41V32h31.36c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 35.36.36 16.83 16.32 1.37 34.95 1.37c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.14.11z" />
     </svg>
-  );
-}
-
-function SourceBadge({ source }: { source: 'google' | 'yelp' }) {
-  if (source === 'google') {
-    return (
-      <a
-        href={GOOGLE_REVIEWS_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="ml-auto hidden sm:flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-700 transition-colors"
-        aria-label="Reviewed on Google"
-      >
-        <GoogleLogo className="w-4 h-4" />
-        <span>Google</span>
-      </a>
-    );
-  }
-  return (
-    <div className="ml-auto hidden sm:flex items-center gap-1.5 text-xs font-semibold text-slate-500">
-      <YelpLogo className="w-4 h-4" />
-      <span>Yelp</span>
-    </div>
-  );
-}
-
-function MiniSourceBadge({ source }: { source: 'google' | 'yelp' }) {
-  if (source === 'google') {
-    return <GoogleLogo className="w-3.5 h-3.5 flex-shrink-0" />;
-  }
-  return <YelpLogo className="w-3.5 h-3.5 flex-shrink-0" />;
-}
-
-function StarRating({ count }: { count: number }) {
-  return (
-    <div className="flex gap-0.5" aria-label={`${count} out of 5 stars`}>
-      {Array.from({ length: count }).map((_, i) => (
-        <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-      ))}
-    </div>
   );
 }
 
 export default function Testimonials() {
-  const [current, setCurrent] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [visible, setVisible] = useState(3);
   const [paused, setPaused] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    if (!paused) {
-      intervalRef.current = setInterval(() => {
-        setCurrent((prev) => (prev + 1) % testimonials.length);
-      }, 5000);
-    }
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
-  }, [paused]);
+    const update = () => {
+      if (window.innerWidth < 640) setVisible(1);
+      else if (window.innerWidth < 1024) setVisible(2);
+      else setVisible(3);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
-  const go = (index: number) => {
-    setCurrent(index);
-    setPaused(true);
-    setTimeout(() => setPaused(false), 8000);
-  };
+  const max = testimonials.length - visible;
+
+  useEffect(() => {
+    if (paused) return;
+    intervalRef.current = setInterval(() => {
+      setIndex((prev) => (prev >= max ? 0 : prev + 1));
+    }, 4000);
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, [paused, max]);
+
+  const prev = () => { setIndex((i) => (i <= 0 ? max : i - 1)); setPaused(true); };
+  const next = () => { setIndex((i) => (i >= max ? 0 : i + 1)); setPaused(true); };
 
   return (
-    <section id="testimonials" className="py-20 lg:py-28 bg-blue-50" aria-labelledby="testimonials-heading">
+    <section id="testimonials" className="py-14 bg-blue-50" aria-labelledby="testimonials-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <span className="inline-block text-blue-600 font-semibold text-sm tracking-widest uppercase mb-3">Customer Reviews</span>
-          <h2 id="testimonials-heading" className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-4">
-            What Our Customers Say
-          </h2>
-          <div className="flex flex-col items-center gap-3">
-            <div className="flex items-center gap-3 text-slate-600">
-              <div className="flex gap-0.5" aria-label="4.9 out of 5 stars average rating">
-                {[1,2,3,4,5].map((i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="font-bold text-blue-900">4.9/5</span>
-              <span>from 2,400+ verified reviews</span>
+
+        {/* Heading */}
+        <h2
+          id="testimonials-heading"
+          className="text-3xl sm:text-4xl font-bold text-center text-blue-900 mb-2 font-[family-name:var(--font-lexend)]"
+        >
+          Our Happy{' '}
+          <span style={{ color: '#F97316' }}>Customers!</span>
+        </h2>
+        <div className="mx-auto mb-10 h-px w-16 bg-slate-300" aria-hidden="true" />
+
+        {/* Body: rating panel + carousel */}
+        <div
+          className="flex items-center gap-4 sm:gap-6"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+
+          {/* Left: aggregate rating */}
+          <div className="hidden sm:flex flex-col items-center gap-1.5 w-36 flex-shrink-0 text-center select-none">
+            <div className="flex gap-0.5" aria-label="4.9 out of 5 stars">
+              {[1,2,3,4,5].map((i) => (
+                <svg key={i} className="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
             </div>
+            <p className="text-xs text-slate-600 font-[family-name:var(--font-source-sans-3)]">
+              Based on <strong className="text-blue-900">22</strong> reviews
+            </p>
             <a
               href={GOOGLE_REVIEWS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors border border-slate-200 hover:border-slate-300 bg-white rounded-full px-4 py-2 shadow-sm"
+              aria-label="View our Google reviews"
+              className="mt-1 hover:opacity-80 transition-opacity"
             >
-              <GoogleLogo className="w-4 h-4" />
-              Read all our Google reviews
-              <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
+              <GoogleWordmark />
             </a>
           </div>
-        </div>
 
-        {/* Featured Testimonial Carousel */}
-        <div
-          className="relative mb-10"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg border border-blue-100 max-w-3xl mx-auto relative overflow-hidden">
-            <div className="absolute top-6 right-8 text-blue-100">
-              <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-            </div>
+          {/* Prev arrow */}
+          <button
+            onClick={prev}
+            aria-label="Previous reviews"
+            className="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 cursor-pointer"
+          >
+            <svg className="w-4 h-4 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
 
-            {testimonials.map((t, index) => (
-              <div
-                key={t.name}
-                className={`transition-all duration-500 ${
-                  current === index ? 'block opacity-100' : 'hidden opacity-0'
-                }`}
-                aria-hidden={current !== index}
-              >
-                <StarRating count={t.rating} />
-                <p className="text-slate-700 text-lg lg:text-xl leading-relaxed mt-4 mb-6">&ldquo;{t.text}&rdquo;</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" aria-hidden="true">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <div className="font-bold text-blue-900">{t.name}</div>
-                    <div className="text-sm text-slate-500">{t.location} • {t.appliance} Repair</div>
-                  </div>
-                  <SourceBadge source={t.source} />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Dots */}
-          <div className="flex justify-center gap-2 mt-6" role="group" aria-label="Testimonial navigation">
-            {testimonials.map((t, index) => (
-              <button
-                key={index}
-                onClick={() => go(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-200 cursor-pointer ${
-                  current === index ? 'bg-blue-700 w-6' : 'bg-blue-300 hover:bg-blue-400'
-                }`}
-                aria-label={`View testimonial from ${t.name}`}
-                aria-pressed={current === index}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Grid of mini cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {testimonials.map((t, index) => (
-            <button
-              key={t.name}
-              onClick={() => go(index)}
-              className={`text-left bg-white rounded-xl p-5 border transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md ${
-                current === index ? 'border-blue-400 shadow-md' : 'border-blue-100 hover:border-blue-300'
-              }`}
-              aria-pressed={current === index}
+          {/* Cards */}
+          <div className="flex-1 overflow-hidden" aria-live="polite" aria-atomic="true">
+            <div
+              className="flex gap-4 transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(calc(-${index} * (100% / ${visible} + ${visible > 1 ? '16px' : '0px'})))` }}
             >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 bg-blue-700 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0" aria-hidden="true">
-                  {t.initials}
+              {testimonials.map((t) => (
+                <div
+                  key={t.name}
+                  className="flex-shrink-0 bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col gap-3"
+                  style={{ width: `calc(${100 / visible}% - ${visible > 1 ? '12px' : '0px'})` }}
+                >
+                  {/* Card header */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0" aria-hidden="true">
+                        {t.initials}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-blue-900 text-sm leading-tight font-[family-name:var(--font-lexend)]">{t.name}</div>
+                        <div className="text-xs text-slate-400">{t.appliance}</div>
+                      </div>
+                    </div>
+                    <GoogleG />
+                  </div>
+
+                  {/* Stars */}
+                  <div className="flex gap-0.5" aria-label="5 stars">
+                    {[1,2,3,4,5].map((i) => (
+                      <svg key={i} className="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+
+                  {/* Review text */}
+                  <p className="text-slate-600 text-sm leading-relaxed flex-1 font-[family-name:var(--font-source-sans-3)]">
+                    {t.text}
+                  </p>
+
+                  <a
+                    href={GOOGLE_REVIEWS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-slate-400 hover:text-blue-600 transition-colors"
+                  >
+                    Read more
+                  </a>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-blue-900 text-sm">{t.name}</div>
-                  <div className="text-xs text-slate-500">{t.location}</div>
-                </div>
-                <MiniSourceBadge source={t.source} />
-              </div>
-              <StarRating count={t.rating} />
-              <p className="text-slate-600 text-sm mt-2 line-clamp-2">{t.text}</p>
-            </button>
-          ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Next arrow */}
+          <button
+            onClick={next}
+            aria-label="Next reviews"
+            className="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 cursor-pointer"
+          >
+            <svg className="w-4 h-4 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
         </div>
+
+        {/* Mobile: rating strip */}
+        <div className="sm:hidden flex items-center justify-center gap-3 mt-6">
+          <div className="flex gap-0.5" aria-label="4.9 out of 5 stars">
+            {[1,2,3,4,5].map((i) => (
+              <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+          <span className="text-sm font-bold text-blue-900">4.9</span>
+          <span className="text-sm text-slate-500">· 22 reviews</span>
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" aria-label="View on Google">
+            <GoogleG />
+          </a>
+        </div>
+
       </div>
     </section>
   );
