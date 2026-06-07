@@ -167,6 +167,101 @@ async function sendNotification(data: Record<string, string>) {
   });
 }
 
+async function sendConfirmation(data: Record<string, string>) {
+  if (!data.email) return;
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Booking Confirmation</title></head>
+<body style="margin:0;padding:0;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f1f5f9;padding:32px 16px;">
+  <tr><td align="center">
+    <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+      <tr><td style="background:#112654;padding:28px 32px;border-radius:4px 4px 0 0;">
+        <p style="margin:0;color:#ffb81c;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">MyAppliance Repair LLC</p>
+        <h1 style="margin:6px 0 0;color:#ffffff;font-size:22px;font-weight:700;">We Got Your Request!</h1>
+      </td></tr>
+
+      <tr><td style="background:#ffb81c;padding:14px 32px;">
+        <p style="margin:0;color:#112654;font-size:14px;font-weight:700;">Hi ${data.name} — your booking request is confirmed. We&apos;ll call you within 30 minutes.</p>
+      </td></tr>
+
+      <tr><td style="background:#ffffff;padding:28px 32px;">
+
+        <p style="margin:0 0 12px;color:#112654;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-bottom:2px solid #f1f5f9;padding-bottom:8px;">Your Request Summary</p>
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+          <tr>
+            <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;width:40%;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Appliance</p></td>
+            <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;font-weight:700;">${data.appliance}${data.brand ? ` (${data.brand})` : ''}</p></td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Service Address</p></td>
+            <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.address || '—'}</p></td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Preferred Date</p></td>
+            <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;font-weight:600;">${data.date || '—'}</p></td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Preferred Time</p></td>
+            <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.timeSlot || 'Any time'}</p></td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Issue</p></td>
+            <td style="padding:8px 0;"><p style="margin:0;color:#112654;font-size:14px;">${data.issue}</p></td>
+          </tr>
+        </table>
+
+        <p style="margin:0 0 12px;color:#112654;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-bottom:2px solid #f1f5f9;padding-bottom:8px;">What Happens Next</p>
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+          <tr><td style="padding:10px 0;border-bottom:1px solid #f1f5f9;">
+            <table cellpadding="0" cellspacing="0"><tr>
+              <td style="width:28px;vertical-align:top;padding-top:1px;"><span style="display:inline-block;width:20px;height:20px;background:#dbeafe;color:#1d4ed8;border-radius:50%;font-size:11px;font-weight:800;text-align:center;line-height:20px;">1</span></td>
+              <td style="padding-left:8px;"><p style="margin:0;color:#334155;font-size:13px;">We&apos;ll call <strong>${data.phone}</strong> within 30 minutes to confirm your appointment.</p></td>
+            </tr></table>
+          </td></tr>
+          <tr><td style="padding:10px 0;border-bottom:1px solid #f1f5f9;">
+            <table cellpadding="0" cellspacing="0"><tr>
+              <td style="width:28px;vertical-align:top;padding-top:1px;"><span style="display:inline-block;width:20px;height:20px;background:#dbeafe;color:#1d4ed8;border-radius:50%;font-size:11px;font-weight:800;text-align:center;line-height:20px;">2</span></td>
+              <td style="padding-left:8px;"><p style="margin:0;color:#334155;font-size:13px;">A technician arrives in your preferred time window${data.date ? ` on <strong>${data.date}</strong>` : ''}.</p></td>
+            </tr></table>
+          </td></tr>
+          <tr><td style="padding:10px 0;">
+            <table cellpadding="0" cellspacing="0"><tr>
+              <td style="width:28px;vertical-align:top;padding-top:1px;"><span style="display:inline-block;width:20px;height:20px;background:#dbeafe;color:#1d4ed8;border-radius:50%;font-size:11px;font-weight:800;text-align:center;line-height:20px;">3</span></td>
+              <td style="padding-left:8px;"><p style="margin:0;color:#334155;font-size:13px;">Free diagnostic included with any paid repair. Written estimate before work begins.</p></td>
+            </tr></table>
+          </td></tr>
+        </table>
+
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:16px 20px;text-align:center;">
+          <p style="margin:0 0 4px;color:#64748b;font-size:13px;">Questions? Reach us anytime:</p>
+          <a href="tel:+19592616736" style="display:inline-block;background:#112654;color:#ffffff;font-size:14px;font-weight:700;padding:10px 24px;border-radius:4px;text-decoration:none;">(959) 261-6736</a>
+        </div>
+
+      </td></tr>
+
+      <tr><td style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 32px;border-radius:0 0 4px 4px;">
+        <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">MyAppliance Repair LLC · myappliance.us · (959) 261-6736</p>
+        <p style="margin:6px 0 0;color:#cbd5e1;font-size:11px;text-align:center;">This confirmation was sent to ${data.email} · Connecticut service area</p>
+      </td></tr>
+
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>`;
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  await resend.emails.send({
+    from: 'MyAppliance Repair LLC <notifications@myappliance.us>',
+    to: data.email,
+    subject: `Booking Confirmed — ${data.appliance} Repair · MyAppliance`,
+    html,
+  });
+}
+
 export async function POST(req: NextRequest) {
   const data = await req.json();
 
@@ -182,6 +277,14 @@ export async function POST(req: NextRequest) {
     await sendNotification(data);
   } catch (err) {
     console.error('[/api/book] email error:', err);
+  }
+
+  if (data.email) {
+    try {
+      await sendConfirmation(data);
+    } catch (err) {
+      console.error('[/api/book] confirmation email error:', err);
+    }
   }
 
   if (!sheetOk) {
