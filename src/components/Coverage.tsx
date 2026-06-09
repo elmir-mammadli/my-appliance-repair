@@ -1,6 +1,9 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { cities } from '@/lib/cities';
 
 const ServiceAreaMap = dynamic(() => import('./ServiceAreaMapInner'), {
   ssr: false,
@@ -11,14 +14,25 @@ const ServiceAreaMap = dynamic(() => import('./ServiceAreaMapInner'), {
   ),
 });
 
-const serviceCities = [
-  'New Haven', 'Hamden', 'West Haven', 'East Haven', 'North Haven',
-  'Woodbridge', 'Orange', 'Bethany', 'Branford', 'Milford',
-  'Shelton', 'Derby', 'Ansonia', 'Naugatuck', 'Cheshire',
-  'Meriden', 'Wallingford',
-];
-
 export default function Coverage() {
+  const [showMap, setShowMap] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (showMap || !mapRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px 0px' }
+    );
+    observer.observe(mapRef.current);
+    return () => observer.disconnect();
+  }, [showMap]);
+
   return (
     <section id="coverage" className="py-20 lg:py-28 bg-gradient-to-br from-blue-900 to-blue-800" aria-labelledby="coverage-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,8 +49,23 @@ export default function Coverage() {
         <div className="grid lg:grid-cols-2 gap-10 items-start">
           {/* Map */}
           <div className="bg-blue-800/50 border border-blue-600/30 rounded-2xl p-8 backdrop-blur-sm">
-            <div className="w-full rounded-xl overflow-hidden" style={{ height: '400px' }}>
-              <ServiceAreaMap />
+            <div ref={mapRef} className="w-full rounded-xl overflow-hidden" style={{ height: '400px' }}>
+              {showMap ? (
+                <ServiceAreaMap />
+              ) : (
+                <div className="flex h-full flex-col items-center justify-center gap-3 bg-blue-800/30 px-6 text-center text-blue-200">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-700/70 text-white">
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <p className="text-lg font-semibold text-white">Interactive service area map</p>
+                  <p className="max-w-sm text-sm leading-relaxed text-blue-200">
+                    The map loads as you reach this section so the homepage stays lighter and faster up top.
+                  </p>
+                </div>
+              )}
             </div>
             <div className="grid grid-cols-3 gap-4 mt-6">
               {[
@@ -62,13 +91,17 @@ export default function Coverage() {
                 Greater New Haven Area
               </h3>
               <div className="grid grid-cols-2 gap-2">
-                {serviceCities.map((city) => (
-                  <div key={city} className="flex items-center gap-2 text-blue-200 text-sm">
+                {cities.map((city) => (
+                  <Link
+                    key={city.slug}
+                    href={`/${city.slug}`}
+                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-blue-200 transition-colors duration-200 hover:bg-blue-700/30 hover:text-white"
+                  >
                     <svg className="w-3.5 h-3.5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    {city}
-                  </div>
+                    {city.name}
+                  </Link>
                 ))}
               </div>
             </div>

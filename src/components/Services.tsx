@@ -14,7 +14,9 @@ export default function Services() {
             Appliance repair across Connecticut
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Pick an appliance to see the symptoms we hear most weeks and the parts we keep on the truck. Same-day service when slots are open.
+            Browse refrigerator repair, washing machine repair, dryer repair, dishwasher repair,
+            oven repair, and more. Pick an appliance to see the symptoms we hear most weeks and
+            the parts we keep on the truck.
           </p>
 
           {/* Review pill */}

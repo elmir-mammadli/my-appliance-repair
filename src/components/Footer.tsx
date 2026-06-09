@@ -75,7 +75,7 @@ export default function Footer() {
               style={{ filter: 'brightness(0) invert(1)' }}
             />
             <p className="text-sm leading-relaxed mb-6">
-              Connecticut&apos;s trusted appliance repair experts since 2008. Licensed, insured technicians with a 90-day warranty on every repair.
+              Connecticut&apos;s trusted appliance repair experts. Licensed, insured technicians with a 90-day warranty on every repair.
             </p>
 
             <ul className="space-y-3 text-sm">

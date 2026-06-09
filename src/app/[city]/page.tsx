@@ -164,7 +164,7 @@ export default async function CityPage({
           </nav>
 
           <p className="text-sm font-semibold text-blue-600 tracking-wide uppercase mb-4">
-            {city.county} · Serving Connecticut Since 2008
+            {city.county} · Same-day appliance repair
           </p>
 
           <h1 className="text-4xl lg:text-5xl font-bold text-blue-950 leading-tight tracking-tight mb-6">

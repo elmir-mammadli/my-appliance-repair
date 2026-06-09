@@ -31,7 +31,6 @@ const aboutPageSchema = {
     url: 'https://myappliance.us',
     telephone: '+19592616736',
     email: 'service@myappliance.us',
-    foundingDate: '2008',
     areaServed: {
       '@type': 'State',
       name: 'Connecticut',

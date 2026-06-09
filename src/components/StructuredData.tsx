@@ -7,14 +7,26 @@ function jsonLd(data: object): string {
 
 const localBusiness = {
   '@context': 'https://schema.org',
-  '@type': 'HomeAndConstructionBusiness',
+  '@type': 'LocalBusiness',
   '@id': 'https://myappliance.us/#business',
   name: 'MyAppliance Repair LLC',
+  alternateName: 'My Appliance Repair',
   url: 'https://myappliance.us',
   telephone: '+19592616736',
   email: 'service@myappliance.us',
+  image: 'https://myappliance.us/images/og-image.png',
+  logo: 'https://myappliance.us/logo.svg',
   description:
-    'Licensed appliance repair service in Connecticut. Same-day service for refrigerators, washers, dryers, dishwashers, ovens, and more. Licensed, insured, 90-day parts and labor warranty.',
+    'Licensed appliance repair service in Connecticut. Same-day service for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Licensed, insured, 90-day parts and labor warranty.',
+  slogan: 'Same-day appliance repair in Connecticut',
+  knowsAbout: [
+    'Appliance repair',
+    'Refrigerator repair',
+    'Washing machine repair',
+    'Clothes dryer repair',
+    'Dishwasher repair',
+    'Oven repair',
+  ],
   areaServed: [
     { '@type': 'City', name: 'New Haven', containedInPlace: { '@type': 'State', name: 'Connecticut' } },
     { '@type': 'City', name: 'Hamden', containedInPlace: { '@type': 'State', name: 'Connecticut' } },
@@ -49,27 +61,27 @@ const localBusiness = {
     itemListElement: [
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Refrigerator Repair' },
+        itemOffered: { '@type': 'Service', name: 'Refrigerator Repair', url: 'https://myappliance.us/services/refrigerator-repair' },
       },
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Washer Repair' },
+        itemOffered: { '@type': 'Service', name: 'Washing Machine Repair', url: 'https://myappliance.us/services/washer-repair' },
       },
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Dryer Repair' },
+        itemOffered: { '@type': 'Service', name: 'Clothes Dryer Repair', url: 'https://myappliance.us/services/dryer-repair' },
       },
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Dishwasher Repair' },
+        itemOffered: { '@type': 'Service', name: 'Dishwasher Repair', url: 'https://myappliance.us/services/dishwasher-repair' },
       },
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Oven & Range Repair' },
+        itemOffered: { '@type': 'Service', name: 'Oven & Range Repair', url: 'https://myappliance.us/services/oven-range-repair' },
       },
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Air Conditioner Repair' },
+        itemOffered: { '@type': 'Service', name: 'Additional Appliance Repair', url: 'https://myappliance.us/services' },
       },
     ],
   },
@@ -88,7 +100,11 @@ const localBusiness = {
     reviewCount: '2400',
     bestRating: '5',
   },
-  sameAs: [],
+  sameAs: [
+    'https://www.instagram.com/myappliancerepair',
+    'https://www.yelp.com/writeareview/biz/4qpGmPtt9HvAqeKYkFw4Bw',
+    'https://share.google/aktwu5fUEtjV6Eo40',
+  ],
 };
 
 const website = {
@@ -97,14 +113,7 @@ const website = {
   '@id': 'https://myappliance.us/#website',
   url: 'https://myappliance.us',
   name: 'MyAppliance Repair LLC',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://myappliance.us/blog?q={search_term_string}',
-    },
-    'query-input': 'required name=search_term_string',
-  },
+  inLanguage: 'en-US',
 };
 
 const services = [
@@ -117,18 +126,29 @@ const services = [
     provider: { '@id': 'https://myappliance.us/#business' },
     areaServed: { '@type': 'State', name: 'Connecticut' },
     serviceType: 'Appliance Repair',
-    url: 'https://myappliance.us',
+    url: 'https://myappliance.us/services/refrigerator-repair',
   },
   {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'Washer & Dryer Repair Connecticut',
+    name: 'Washing Machine Repair Connecticut',
     description:
-      'Expert washer and dryer repair across Connecticut. We diagnose and fix all issues including spin failures, leaks, no-heat problems, and loud noises.',
+      'Expert washing machine repair across Connecticut. We diagnose and fix spin failures, leaks, drain issues, loud noises, and other common washer problems.',
     provider: { '@id': 'https://myappliance.us/#business' },
     areaServed: { '@type': 'State', name: 'Connecticut' },
     serviceType: 'Appliance Repair',
-    url: 'https://myappliance.us',
+    url: 'https://myappliance.us/services/washer-repair',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Clothes Dryer Repair Connecticut',
+    description:
+      'Clothes dryer repair across Connecticut for no-heat, long-dry, squeaking, thumping, belt, and vent-related dryer problems.',
+    provider: { '@id': 'https://myappliance.us/#business' },
+    areaServed: { '@type': 'State', name: 'Connecticut' },
+    serviceType: 'Appliance Repair',
+    url: 'https://myappliance.us/services/dryer-repair',
   },
   {
     '@context': 'https://schema.org',
@@ -139,7 +159,7 @@ const services = [
     provider: { '@id': 'https://myappliance.us/#business' },
     areaServed: { '@type': 'State', name: 'Connecticut' },
     serviceType: 'Appliance Repair',
-    url: 'https://myappliance.us',
+    url: 'https://myappliance.us/services/dishwasher-repair',
   },
   {
     '@context': 'https://schema.org',
@@ -150,18 +170,7 @@ const services = [
     provider: { '@id': 'https://myappliance.us/#business' },
     areaServed: { '@type': 'State', name: 'Connecticut' },
     serviceType: 'Appliance Repair',
-    url: 'https://myappliance.us',
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Air Conditioner Repair Connecticut',
-    description:
-      'Air conditioner repair services in Connecticut. We service window units, portable ACs, and mini-splits. Licensed technicians, 90-day warranty.',
-    provider: { '@id': 'https://myappliance.us/#business' },
-    areaServed: { '@type': 'State', name: 'Connecticut' },
-    serviceType: 'Appliance Repair',
-    url: 'https://myappliance.us',
+    url: 'https://myappliance.us/services/oven-range-repair',
   },
 ];
 

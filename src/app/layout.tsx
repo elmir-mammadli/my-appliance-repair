@@ -23,15 +23,18 @@ export const metadata: Metadata = {
     template: '%s | MyAppliance Repair LLC',
   },
   description:
-    "Connecticut's trusted appliance repair experts. Same-day service for refrigerators, washers, dryers, dishwashers & more. Licensed, insured, 90-day warranty. Call now!",
+    "Same-day appliance repair in Connecticut for refrigerators, washers, dryers, dishwashers, ovens, and freezers. Licensed, insured technicians with a 90-day warranty.",
   keywords: [
     'appliance repair Connecticut',
     'CT appliance repair',
     'refrigerator repair CT',
     'washer repair Connecticut',
+    'washing machine repair Connecticut',
     'dryer repair CT',
-    'dishwasher repair Connecticut',
     'appliance repair near me',
+    'appliance repair New Haven',
+    'appliance repair Hamden',
+    'dishwasher repair Connecticut',
     'MyAppliance Repair LLC',
   ],
   authors: [{ name: 'MyAppliance Repair LLC', url: 'https://myappliance.us' }],
@@ -54,7 +57,7 @@ export const metadata: Metadata = {
     siteName: 'MyAppliance Repair LLC',
     title: 'MyAppliance Repair LLC | CT Appliance Repair Services',
     description:
-      "Connecticut's trusted appliance repair experts. Same-day service for refrigerators, washers, dryers, dishwashers & more. Licensed, insured, 90-day warranty. Call now!",
+      "Same-day appliance repair in Connecticut for refrigerators, washers, dryers, dishwashers, ovens, and freezers. Licensed, insured technicians with a 90-day warranty.",
     images: [
       {
         url: '/images/og-image.png',
@@ -68,7 +71,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'MyAppliance Repair LLC | CT Appliance Repair Services',
     description:
-      "Connecticut's trusted appliance repair experts. Same-day service for refrigerators, washers, dryers, dishwashers & more. Licensed, insured, 90-day warranty. Call now!",
+      "Same-day appliance repair in Connecticut for refrigerators, washers, dryers, dishwashers, ovens, and freezers. Licensed, insured technicians with a 90-day warranty.",
     images: ['/images/og-image.png'],
   },
   verification: {},

@@ -153,8 +153,8 @@ const STORY_FACTS = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
       </svg>
     ),
-    label: 'Founded',
-    value: '2008',
+    label: 'Ownership',
+    value: 'Locally Owned & Operated',
   },
   {
     icon: (
@@ -256,7 +256,7 @@ export default function AboutContent() {
                 knew there had to be a better way.
               </p>
               <p>
-                In 2008, he launched MyAppliance Repair LLC with one simple promise: show up when we say we will,
+                He launched MyAppliance Repair LLC with one simple promise: show up when we say we will,
                 fix it right the first time, and charge a fair price. No bait-and-switch diagnostics. No pressure
                 to replace an appliance that can still be saved. Just honest, skilled work backed by a real
                 warranty.

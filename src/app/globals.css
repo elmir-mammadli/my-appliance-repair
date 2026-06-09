@@ -14,16 +14,32 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-source-sans-3), Arial, sans-serif;
+  text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-lexend), Arial, sans-serif;
+}
+
+a,
+button,
+input,
+select,
+textarea,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+:where(a, button, input, select, textarea, [role="button"]):focus-visible {
+  outline: 3px solid #f97316;
+  outline-offset: 3px;
 }
 
 /* Blog prose styles */

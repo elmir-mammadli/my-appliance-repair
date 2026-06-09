@@ -16,16 +16,26 @@ import HiringModal from '@/components/HiringModal';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Appliance Repair Connecticut | Same-Day Service | MyAppliance Repair LLC',
+  title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
   description:
-    'Fast, reliable appliance repair across Connecticut. Refrigerators, washers, dryers, dishwashers & more. Licensed techs, 90-day warranty, veteran & senior discounts. Book online!',
+    'Same-day appliance repair in Connecticut for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Trusted in New Haven, Hamden, West Haven, and nearby CT towns. Licensed techs, 90-day warranty.',
+  keywords: [
+    'appliance repair Connecticut',
+    'appliance repair near me',
+    'refrigerator repair Connecticut',
+    'washing machine repair Connecticut',
+    'dryer repair Connecticut',
+    'dishwasher repair Connecticut',
+    'appliance repair New Haven',
+    'appliance repair Hamden',
+  ],
   alternates: { canonical: 'https://myappliance.us' },
   openGraph: {
     type: 'website',
     url: 'https://myappliance.us',
-    title: 'Appliance Repair Connecticut | Same-Day Service | MyAppliance Repair LLC',
+    title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
     description:
-      'Fast, reliable appliance repair across Connecticut. Refrigerators, washers, dryers, dishwashers & more. Licensed techs, 90-day warranty, veteran & senior discounts. Book online!',
+      'Same-day appliance repair in Connecticut for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Trusted in New Haven, Hamden, West Haven, and nearby CT towns.',
     images: [
       {
         url: '/images/og-image.png',
@@ -34,6 +44,13 @@ export const metadata: Metadata = {
         alt: 'MyAppliance Repair LLC - Connecticut Appliance Repair Services',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
+    description:
+      'Same-day appliance repair in Connecticut for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Trusted across New Haven County and nearby CT towns.',
+    images: ['/images/og-image.png'],
   },
 };
 

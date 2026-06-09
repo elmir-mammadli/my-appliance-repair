@@ -105,7 +105,7 @@ export default function WhyUs() {
               Connecticut&apos;s Most Trusted Appliance Repair Service
             </h2>
             <p className="text-lg text-slate-600 mb-10 leading-relaxed">
-              We&apos;ve been repairing appliances for Connecticut homeowners since 2008. Our commitment to quality, transparency, and fast service has made us the #1 rated appliance repair company in the state.
+              Connecticut homeowners count on us for quality, transparency, and fast service. That commitment has made us the #1 rated appliance repair company in the state.
             </p>
             <div className="space-y-7">
               {reasons.map((reason, index) => (
