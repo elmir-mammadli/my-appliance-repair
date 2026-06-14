@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    sitemap: 'https://myappliance.us/sitemap.xml',
+    sitemap: 'https://www.myappliance.us/sitemap.xml',
   }
 }

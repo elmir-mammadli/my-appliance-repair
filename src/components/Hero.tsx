@@ -21,7 +21,7 @@ export default function Hero() {
     <section className="border-b border-slate-100 bg-white pt-20" aria-label="Hero section">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
         <div className="max-w-2xl">
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700">
             Appliance Repair Near You
             <span className="h-1.5 w-1.5 rounded-full bg-[#F97316]" aria-hidden="true" />
             New Haven, Hamden, West Haven & across CT
@@ -114,8 +114,8 @@ export default function Hero() {
           <div className="relative overflow-hidden rounded-[2rem] border border-blue-100 bg-slate-100 shadow-2xl shadow-slate-200">
             <div className="relative aspect-[4/5]">
               <Image
-                src="/images/hero/dishwasher.jpg"
-                alt="Connecticut technician performing same-day dishwasher repair service"
+                src="/images/hero/ref.jpg"
+                alt="Connecticut technician performing same-day refrigerator repair service"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 45vw"

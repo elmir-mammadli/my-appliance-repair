@@ -17,13 +17,13 @@ const sourceSans3 = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://myappliance.us'),
+  metadataBase: new URL('https://www.myappliance.us'),
   title: {
-    default: 'MyAppliance Repair LLC | CT Appliance Repair Services',
-    template: '%s | MyAppliance Repair LLC',
+    default: 'Same-Day Appliance Repair in CT | 90-Day Warranty | MyAppliance Repair',
+    template: '%s | MyAppliance Repair',
   },
   description:
-    "Same-day appliance repair in Connecticut for refrigerators, washers, dryers, dishwashers, ovens, and freezers. Licensed, insured technicians with a 90-day warranty.",
+    "Licensed CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.",
   keywords: [
     'appliance repair Connecticut',
     'CT appliance repair',
@@ -53,14 +53,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://myappliance.us',
+    url: 'https://www.myappliance.us',
     siteName: 'MyAppliance Repair LLC',
-    title: 'MyAppliance Repair LLC | CT Appliance Repair Services',
+    title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | MyAppliance Repair',
     description:
-      "Same-day appliance repair in Connecticut for refrigerators, washers, dryers, dishwashers, ovens, and freezers. Licensed, insured technicians with a 90-day warranty.",
+      "Licensed CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.",
     images: [
       {
-        url: '/images/og-image.png',
+        url: '/images/appliance-repair-connecticut-og.jpg',
         width: 1200,
         height: 630,
         alt: 'MyAppliance Repair LLC - Connecticut Appliance Repair Services',
@@ -69,10 +69,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MyAppliance Repair LLC | CT Appliance Repair Services',
+    title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | MyAppliance Repair',
     description:
-      "Same-day appliance repair in Connecticut for refrigerators, washers, dryers, dishwashers, ovens, and freezers. Licensed, insured technicians with a 90-day warranty.",
-    images: ['/images/og-image.png'],
+      "Licensed CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.",
+    images: ['/images/appliance-repair-connecticut-og.jpg'],
   },
   verification: {},
   icons: {

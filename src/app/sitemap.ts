@@ -3,7 +3,7 @@ import { getAllSlugs } from '@/lib/posts'
 import { getAllCitySlugs } from '@/lib/cities'
 import { getAllServiceSlugs } from '@/lib/services'
 
-const BASE_URL = 'https://myappliance.us'
+const BASE_URL = 'https://www.myappliance.us'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogSlugs = getAllSlugs()
