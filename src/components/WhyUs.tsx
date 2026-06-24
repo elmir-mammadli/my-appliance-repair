@@ -56,8 +56,8 @@ const reasons = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
       </svg>
     ),
-    title: 'All Parts In Stock',
-    description: 'Our vans are stocked with thousands of OEM parts. Most repairs completed in a single visit — no waiting.',
+    title: 'OEM Parts, Commonly Stocked',
+    description: 'Our vans carry OEM parts for the most common failures, so most repairs finish in a single visit.',
   },
 ];
 
@@ -126,9 +126,9 @@ export default function WhyUs() {
                     </svg>
                   ))}
                 </div>
-                <span className="font-bold text-2xl">4.9/5</span>
+                <span className="font-bold text-2xl">5.0</span>
               </div>
-              <p className="text-blue-100 text-lg font-medium">Over 2,400 verified reviews across Google, Yelp & HomeAdvisor</p>
+              <p className="text-blue-100 text-lg font-medium">Perfect rating across Google &amp; Thumbtack</p>
             </div>
 
             {/* Badges Grid */}

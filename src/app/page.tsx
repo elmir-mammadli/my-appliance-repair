@@ -79,7 +79,7 @@ const faqSchema = {
       name: 'How long does a typical repair take?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most repairs are completed in 1–2 hours on the first visit. Our vans carry thousands of OEM parts for all major brands, which means we rarely need to schedule a second visit to wait for a part.',
+        text: "Most repairs are completed in 1–2 hours on the first visit. Our vans carry OEM parts for the most common failures, so most calls finish in one visit. If the part isn't on board, we order it and come back.",
       },
     },
     {

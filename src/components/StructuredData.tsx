@@ -96,8 +96,8 @@ const localBusiness = {
   priceRange: '$$',
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    reviewCount: '30',
+    ratingValue: '5.0',
+    reviewCount: '38',
     bestRating: '5',
   },
   sameAs: [

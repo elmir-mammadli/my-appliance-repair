@@ -21,10 +21,10 @@ export default function Hero() {
     <section className="border-b border-slate-100 bg-white pt-20" aria-label="Hero section">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
         <div className="max-w-2xl">
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700">
-            Appliance Repair Near You
-            <span className="h-1.5 w-1.5 rounded-full bg-[#F97316]" aria-hidden="true" />
-            New Haven, Hamden, West Haven & across CT
+          <p className="mb-6 flex flex-col items-start gap-1 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 sm:inline-flex sm:flex-row sm:items-center sm:gap-2 sm:rounded-full">
+            <span>Appliance Repair Near You</span>
+            <span className="hidden h-1.5 w-1.5 rounded-full bg-[#F97316] sm:inline-block" aria-hidden="true" />
+            <span>New Haven, Hamden, West Haven & across CT</span>
           </p>
 
           <h1 className="mb-6 text-5xl font-bold leading-[1.02] tracking-tight text-blue-950 lg:text-6xl">
@@ -59,8 +59,7 @@ export default function Hero() {
 
           <div className="mb-8 flex flex-wrap gap-3 text-sm text-slate-600">
             {[
-              '4.9/5 rating',
-              '2,400+ verified reviews',
+              '5.0 ★ across Google & Thumbtack',
               'Same-day when available',
               'Diagnostic waived with repair',
             ].map((item) => (

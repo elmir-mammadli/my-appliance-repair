@@ -86,8 +86,8 @@ const WHY_VALUES: ValueCard[] = [
 
 const STATS = [
   { value: '10+', label: 'Years Experience' },
-  { value: '2,500+', label: 'Repairs Completed' },
-  { value: '4.9★', label: 'Average Rating' },
+  { value: '90+', label: 'Repairs This Month' },
+  { value: '5.0★', label: 'Average Rating' },
   { value: '39', label: 'Brands Serviced' },
   { value: 'All of CT', label: 'Coverage Area' },
 ];

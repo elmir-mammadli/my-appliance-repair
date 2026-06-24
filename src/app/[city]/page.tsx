@@ -101,7 +101,7 @@ const faqs = [
   },
   {
     q: 'Do you service all appliance brands in {city}?',
-    a: 'Yes — we service all major brands including Samsung, LG, Whirlpool, GE, Bosch, KitchenAid, Maytag, Frigidaire, Electrolux, and more. Our vans carry OEM parts for hundreds of models.',
+    a: 'Yes — we service all major brands including Samsung, LG, Whirlpool, GE, Bosch, KitchenAid, Maytag, Frigidaire, Electrolux, and more. Our vans carry OEM parts for the most common failures across these brands.',
   },
 ];
 
@@ -131,8 +131,8 @@ export default async function CityPage({
     priceRange: '$$',
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '2400',
+      ratingValue: '5.0',
+      reviewCount: '38',
       bestRating: '5',
     },
   };
@@ -214,7 +214,7 @@ export default async function CityPage({
             Appliances We Repair in {city.name}
           </h2>
           <p className="text-slate-500 text-center mb-10">
-            All major brands. OEM parts stocked on every van.
+            All major brands. OEM parts on board for the most common repairs.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((svc) => (
@@ -243,7 +243,7 @@ export default async function CityPage({
               { title: 'Same-Day Service', body: 'Call before noon and we typically arrive the same day. Morning, afternoon, and evening slots available across all of Connecticut.' },
               { title: 'Licensed & Insured', body: 'All technicians are CT state licensed, background-checked, and fully insured. Your home is in safe hands.' },
               { title: '90-Day Warranty', body: 'Every repair is backed by a 90-day parts and labor warranty. If the same issue returns, we fix it free of charge.' },
-              { title: 'OEM Parts on Every Van', body: 'We stock thousands of original manufacturer parts so most repairs are completed in a single visit — no waiting for ordered parts.' },
+              { title: 'OEM Parts on Board', body: "We carry OEM parts for the most common failures, so most repairs finish in a single visit. If a part isn't on board, we order it and come back." },
             ].map((item) => (
               <div key={item.title} className="flex gap-4">
                 <div className="w-8 h-8 bg-[#ffb81c] rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">

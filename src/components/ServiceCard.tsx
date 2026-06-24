@@ -87,7 +87,7 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
 
         {activeTab === 'parts' && (
           <div>
-            <p className="text-xs text-slate-400 mb-3">On the van today:</p>
+            <p className="text-xs text-slate-400 mb-3">Commonly stocked:</p>
             <div className="flex flex-wrap gap-1.5" aria-label={`Common parts replaced for ${service.title}`}>
               {service.parts.map((part) => (
                 <span key={part} className="text-xs bg-blue-50 border border-blue-100 text-blue-700 px-2.5 py-1 rounded-md font-medium">
