@@ -37,10 +37,10 @@ textarea,
   touch-action: manipulation;
 }
 
-:where(a, button, input, select, textarea, [role="button"]):focus-visible {
+/* :where(a, button, input, select, textarea, [role="button"]):focus-visible {
   outline: 3px solid #f97316;
-  outline-offset: 3px;
-}
+  outline-offset: 1px;
+} */
 
 /* Blog prose styles */
 .prose h2 {

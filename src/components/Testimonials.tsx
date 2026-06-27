@@ -19,6 +19,24 @@ const testimonials = [
     text: 'Our microwave stopped heating and was making unusual noises. The technician arrived on time, quickly diagnosed the issue, and fixed it the same day. Very professional, honest pricing, and great communication.',
     appliance: 'Microwave repair',
   },
+  {
+    name: 'Patricia L.',
+    initials: 'PL',
+    text: 'My washing machine was leaking and I was worried it would be a huge expense. The tech came out quickly, found the issue, and had the part on hand. Fair price and he cleaned up everything before leaving.',
+    appliance: 'Washer repair',
+  },
+  {
+    name: 'David K.',
+    initials: 'DK',
+    text: 'Called on a Saturday morning about my refrigerator not cooling. Someone was at my house by noon. Diagnosed a failing compressor start relay, replaced it on the spot, and saved me from losing a fridge full of food.',
+    appliance: 'Refrigerator repair',
+  },
+  {
+    name: 'Maria T.',
+    initials: 'MT',
+    text: 'Dryer stopped heating mid-cycle. MyAppliance sent a tech the next morning who found a burned heating element. He had the part in his van and fixed it in under an hour. Excellent service from start to finish.',
+    appliance: 'Dryer repair',
+  },
 ];
 
 function GoogleWordmark() {
@@ -64,7 +82,6 @@ export default function Testimonials() {
               ))}
             </div>
             <p className="mt-2 text-3xl font-bold">5.0/5</p>
-            <p className="mt-1 text-sm text-blue-200">Based on 15 Google reviews</p>
             <a
               href={GOOGLE_REVIEWS_URL}
               target="_blank"

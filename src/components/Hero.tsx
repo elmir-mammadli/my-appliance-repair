@@ -19,9 +19,9 @@ const popularCities = [
 export default function Hero() {
   return (
     <section className="border-b border-slate-100 bg-white pt-20" aria-label="Hero section">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
         <div className="max-w-2xl">
-          <p className="mb-6 flex flex-col items-start gap-1 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 sm:inline-flex sm:flex-row sm:items-center sm:gap-2 sm:rounded-full">
+          <p className="mb-6 flex flex-col items-start gap-1  py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 sm:inline-flex sm:flex-row sm:items-center sm:gap-2 sm:rounded-full">
             <span>Appliance Repair Near You</span>
             <span className="hidden h-1.5 w-1.5 rounded-full bg-[#F97316] sm:inline-block" aria-hidden="true" />
             <span>New Haven, Hamden, West Haven & across CT</span>
@@ -57,7 +57,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="mb-8 flex flex-wrap gap-3 text-sm text-slate-600">
+          <div className="mb-8 flex flex-wrap text-sm text-slate-600">
             {[
               '5.0 ★ across Google & Thumbtack',
               'Same-day when available',
@@ -113,8 +113,8 @@ export default function Hero() {
           <div className="relative overflow-hidden rounded-[2rem] border border-blue-100 bg-slate-100 shadow-2xl shadow-slate-200">
             <div className="relative aspect-[4/5]">
               <Image
-                src="/images/hero/ref.jpg"
-                alt="Connecticut technician performing same-day refrigerator repair service"
+                src="/images/hero/dishwasher.jpg"
+                alt="Connecticut technician performing same-day dishwasher repair service"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 45vw"
@@ -132,7 +132,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="absolute -left-4 top-6 rounded-2xl border border-white/70 bg-white/95 p-4 shadow-lg backdrop-blur sm:-left-6">
+          <div className="absolute hidden md:block -left-4 top-6 rounded-2xl border border-white/70 bg-white/95 p-4 shadow-lg backdrop-blur sm:-left-6">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
               Most searched
             </p>
