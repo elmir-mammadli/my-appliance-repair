@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Leave a Review | MyAppliance Repair LLC',
   description:
     'Share your experience with MyAppliance Repair LLC. Leave a review on Google, Yelp, or Thumbtack, or follow us on Instagram.',
-  alternates: { canonical: 'https://myappliance.us/socials' },
+  alternates: { canonical: 'https://www.myappliance.us/socials' },
   robots: { index: false, follow: false },
 };
 

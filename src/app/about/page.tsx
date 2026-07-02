@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'About Us | Licensed CT Appliance Repair Experts | MyAppliance Repair LLC',
   description:
     "Learn about MyAppliance Repair LLC — Connecticut's trusted local appliance repair service. Licensed technicians, 90-day warranty, 2,500+ repairs completed across CT.",
-  alternates: { canonical: 'https://myappliance.us/about' },
+  alternates: { canonical: 'https://www.myappliance.us/about' },
 };
 
 function jsonLd(data: object): string {
@@ -21,14 +21,14 @@ const aboutPageSchema = {
   name: 'About MyAppliance Repair LLC',
   description:
     "Connecticut's trusted local appliance repair service. Licensed technicians, 90-day warranty, 2,500+ repairs completed across CT.",
-  url: 'https://myappliance.us/about',
+  url: 'https://www.myappliance.us/about',
   mainEntity: {
     '@type': 'LocalBusiness',
-    '@id': 'https://myappliance.us/#business',
+    '@id': 'https://www.myappliance.us/#business',
     name: 'MyAppliance Repair LLC',
     description:
       "Connecticut's most trusted appliance repair service. Licensed & insured technicians, 90-day warranty, same-day appointments available.",
-    url: 'https://myappliance.us',
+    url: 'https://www.myappliance.us',
     telephone: '+19592616736',
     email: 'service@myappliance.us',
     areaServed: {

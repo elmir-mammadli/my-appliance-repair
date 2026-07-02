@@ -36,10 +36,10 @@ export async function generateMetadata({
     title: `${post.title} | MyAppliance Repair LLC Blog`,
     description,
     keywords: `${post.category.toLowerCase()}, appliance repair Connecticut, ${post.title.toLowerCase()}`,
-    alternates: { canonical: `https://myappliance.us/blog/${slug}` },
+    alternates: { canonical: `https://www.myappliance.us/blog/${slug}` },
     openGraph: {
       type: 'article',
-      url: `https://myappliance.us/blog/${slug}`,
+      url: `https://www.myappliance.us/blog/${slug}`,
       title: `${post.title} | MyAppliance Repair LLC Blog`,
       description,
       publishedTime: post.date,
@@ -87,20 +87,20 @@ export default async function PostPage({
     author: {
       '@type': 'Organization',
       name: 'MyAppliance Repair LLC Team',
-      url: 'https://myappliance.us',
+      url: 'https://www.myappliance.us',
     },
     publisher: {
       '@type': 'Organization',
       name: 'MyAppliance Repair LLC',
-      url: 'https://myappliance.us',
+      url: 'https://www.myappliance.us',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://myappliance.us/images/og-image.png',
+        url: 'https://www.myappliance.us/images/og-image.png',
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://myappliance.us/blog/${post.slug}`,
+      '@id': `https://www.myappliance.us/blog/${post.slug}`,
     },
   };
 
@@ -112,19 +112,19 @@ export default async function PostPage({
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://myappliance.us',
+        item: 'https://www.myappliance.us',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Blog',
-        item: 'https://myappliance.us/blog',
+        item: 'https://www.myappliance.us/blog',
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: post.title,
-        item: `https://myappliance.us/blog/${post.slug}`,
+        item: `https://www.myappliance.us/blog/${post.slug}`,
       },
     ],
   };

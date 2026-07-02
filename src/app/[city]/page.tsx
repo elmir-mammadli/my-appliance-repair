@@ -23,10 +23,10 @@ export async function generateMetadata({
   return {
     title: `Appliance Repair ${city.name}, CT | Same-Day Service | MyAppliance Repair LLC`,
     description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Licensed techs, 90-day warranty. Call (959) 261-6736.`,
-    alternates: { canonical: `https://myappliance.us/${city.slug}` },
+    alternates: { canonical: `https://www.myappliance.us/${city.slug}` },
     openGraph: {
       type: 'website',
-      url: `https://myappliance.us/${city.slug}`,
+      url: `https://www.myappliance.us/${city.slug}`,
       title: `Appliance Repair ${city.name}, CT | Same-Day Service | MyAppliance Repair LLC`,
       description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Licensed techs, 90-day warranty.`,
       images: [{ url: '/images/og-image.png', width: 1200, height: 630, alt: `Appliance Repair ${city.name} CT` }],
@@ -119,9 +119,9 @@ export default async function CityPage({
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'HomeAndConstructionBusiness',
-    '@id': 'https://myappliance.us/#business',
+    '@id': 'https://www.myappliance.us/#business',
     name: 'MyAppliance Repair LLC',
-    url: 'https://myappliance.us',
+    url: 'https://www.myappliance.us',
     telephone: '+19592616736',
     email: 'service@myappliance.us',
     description: `Licensed appliance repair service in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers, ovens, and more. 90-day parts and labor warranty.`,
@@ -141,8 +141,8 @@ export default async function CityPage({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://myappliance.us' },
-      { '@type': 'ListItem', position: 2, name: `Appliance Repair ${city.name}`, item: `https://myappliance.us/${city.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.myappliance.us' },
+      { '@type': 'ListItem', position: 2, name: `Appliance Repair ${city.name}`, item: `https://www.myappliance.us/${city.slug}` },
     ],
   };
 

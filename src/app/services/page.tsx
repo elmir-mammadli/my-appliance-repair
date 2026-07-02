@@ -18,10 +18,10 @@ export const metadata: Metadata = {
   title: 'Appliance Repair Services in Connecticut | Same-Day, OEM Parts',
   description:
     'Appliances we repair in Connecticut. Washers, dryers, fridges, dishwashers, ovens, and the rest. Same-day service when slots are open, OEM parts on the truck, 90 days on parts and labor.',
-  alternates: { canonical: 'https://myappliance.us/services' },
+  alternates: { canonical: 'https://www.myappliance.us/services' },
   openGraph: {
     type: 'website',
-    url: 'https://myappliance.us/services',
+    url: 'https://www.myappliance.us/services',
     title: 'Appliance Repair Services in Connecticut | MY APPLIANCE Repair',
     description:
       'Appliances we repair in Connecticut. Washers, dryers, fridges, dishwashers, ovens, and the rest. Same-day when slots are open, OEM parts on the truck, 90 days on parts and labor.',
@@ -40,8 +40,8 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://myappliance.us' },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://myappliance.us/services' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.myappliance.us' },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.myappliance.us/services' },
   ],
 };
 
@@ -52,7 +52,7 @@ const itemListSchema = {
     '@type': 'ListItem',
     position: i + 1,
     name: s.title,
-    url: `https://myappliance.us/services/${s.slug}`,
+    url: `https://www.myappliance.us/services/${s.slug}`,
   })),
 };
 
