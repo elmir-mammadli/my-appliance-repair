@@ -29,10 +29,10 @@ export const metadata: Metadata = {
     'appliance repair New Haven',
     'appliance repair Hamden',
   ],
-  alternates: { canonical: 'https://myappliance.us' },
+  alternates: { canonical: 'https://www.myappliance.us' },
   openGraph: {
     type: 'website',
-    url: 'https://myappliance.us',
+    url: 'https://www.myappliance.us',
     title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
     description:
       'Same-day appliance repair in Connecticut for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Trusted in New Haven, Hamden, West Haven, and nearby CT towns.',

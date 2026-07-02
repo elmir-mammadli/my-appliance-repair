@@ -2,7 +2,7 @@
 
 > Licensed appliance repair company serving Connecticut. Same-day service, 90-day parts and labor warranty, licensed and insured technicians.
 
-- **Website:** https://myappliance.us
+- **Website:** https://www.myappliance.us
 - **Phone:** (959) 261-6736
 - **Email:** service@myappliance.us
 - **Hours:** Monday–Saturday, 8:00 AM – 6:00 PM
@@ -38,8 +38,8 @@ New Haven, Hamden, West Haven, East Haven, North Haven, Woodbridge, Orange, Beth
 
 ## Pages
 
-- [Home](https://myappliance.us) — Main page with services, pricing, and booking
-- [Blog](https://myappliance.us/blog) — Appliance repair tips and guides
-- [About](https://myappliance.us/about) — About our company
-- [Privacy Policy](https://myappliance.us/privacy)
-- [Terms of Service](https://myappliance.us/terms)
+- [Home](https://www.myappliance.us) — Main page with services, pricing, and booking
+- [Blog](https://www.myappliance.us/blog) — Appliance repair tips and guides
+- [About](https://www.myappliance.us/about) — About our company
+- [Privacy Policy](https://www.myappliance.us/privacy)
+- [Terms of Service](https://www.myappliance.us/terms)

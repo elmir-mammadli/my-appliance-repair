@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Privacy Policy | MyAppliance Repair LLC',
   description: 'Privacy Policy for MyAppliance Repair LLC — how we collect, use, and protect your personal information.',
-  alternates: { canonical: 'https://myappliance.us/privacy' },
+  alternates: { canonical: 'https://www.myappliance.us/privacy' },
   robots: { index: true, follow: true },
 };
 
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
 
           <p className="text-slate-600 leading-relaxed mb-10">
             MY Appliance Repair (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) operates the website{' '}
-            <a href="https://myappliance.us" className="text-blue-700 hover:underline">myappliance.us</a>{' '}
+            <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">myappliance.us</a>{' '}
             and provides home appliance repair services throughout Connecticut. This Privacy Policy explains what
             personal information we collect, how we use it, and your rights regarding that information.
           </p>
@@ -248,7 +248,7 @@ export default function PrivacyPage() {
             </p>
             <p className="text-slate-600 text-sm">
               Website:{' '}
-              <a href="https://myappliance.us" className="text-blue-700 hover:underline">
+              <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">
                 myappliance.us
               </a>
             </p>

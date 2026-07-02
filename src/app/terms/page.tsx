@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Terms of Service | MyAppliance Repair LLC',
   description: 'Terms of Service for MyAppliance Repair LLC — the rules and conditions governing our appliance repair services in Connecticut.',
-  alternates: { canonical: 'https://myappliance.us/terms' },
+  alternates: { canonical: 'https://www.myappliance.us/terms' },
   robots: { index: true, follow: true },
 };
 
@@ -43,7 +43,7 @@ export default function TermsPage() {
 
           <p className="text-slate-600 leading-relaxed mb-10">
             Please read these Terms of Service carefully before using the website{' '}
-            <a href="https://myappliance.us" className="text-blue-700 hover:underline">myappliance.us</a>{' '}
+            <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">myappliance.us</a>{' '}
             or scheduling appliance repair services with MY Appliance Repair (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;). By accessing our website or booking our services, you agree to be bound by these Terms.
           </p>
 
@@ -234,7 +234,7 @@ export default function TermsPage() {
             </p>
             <p className="text-slate-600 text-sm">
               Website:{' '}
-              <a href="https://myappliance.us" className="text-blue-700 hover:underline">
+              <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">
                 myappliance.us
               </a>
             </p>

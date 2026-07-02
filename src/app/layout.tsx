@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     'dishwasher repair Connecticut',
     'MyAppliance Repair LLC',
   ],
-  authors: [{ name: 'MyAppliance Repair LLC', url: 'https://myappliance.us' }],
+  authors: [{ name: 'MyAppliance Repair LLC', url: 'https://www.myappliance.us' }],
   creator: 'MyAppliance Repair LLC',
   publisher: 'MyAppliance Repair LLC',
   robots: {

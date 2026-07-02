@@ -40,10 +40,10 @@ export async function generateMetadata({
     title,
     description,
     keywords: `${service.title.toLowerCase()} Connecticut, ${service.shortName.toLowerCase()} repair near me, ${service.brands.join(', ')}, same-day appliance repair CT`,
-    alternates: { canonical: `https://myappliance.us/services/${slug}` },
+    alternates: { canonical: `https://www.myappliance.us/services/${slug}` },
     openGraph: {
       type: 'website',
-      url: `https://myappliance.us/services/${slug}`,
+      url: `https://www.myappliance.us/services/${slug}`,
       title: `${title} | MY APPLIANCE Repair`,
       description,
       images: [
@@ -79,8 +79,8 @@ export default async function ServicePage({
       '@type': 'LocalBusiness',
       name: 'MY APPLIANCE Repair',
       telephone: '+1-959-261-6736',
-      url: 'https://myappliance.us',
-      image: 'https://myappliance.us/og-image.svg',
+      url: 'https://www.myappliance.us',
+      image: 'https://www.myappliance.us/og-image.svg',
       areaServed: {
         '@type': 'State',
         name: 'Connecticut',
@@ -106,13 +106,13 @@ export default async function ServicePage({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://myappliance.us' },
-      { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://myappliance.us/#services' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.myappliance.us' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.myappliance.us/#services' },
       {
         '@type': 'ListItem',
         position: 3,
         name: service.title,
-        item: `https://myappliance.us/services/${service.slug}`,
+        item: `https://www.myappliance.us/services/${service.slug}`,
       },
     ],
   };
