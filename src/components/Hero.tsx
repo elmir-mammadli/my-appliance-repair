@@ -21,22 +21,20 @@ export default function Hero() {
     <section className="border-b border-slate-100 bg-white pt-20" aria-label="Hero section">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
         <div className="max-w-2xl">
-          <p className="mb-6 flex flex-col items-start gap-1  py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 sm:inline-flex sm:flex-row sm:items-center sm:gap-2 sm:rounded-full">
+          <p className="mb-4 flex flex-col items-start gap-1 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 sm:mb-6 sm:inline-flex sm:flex-row sm:items-center sm:gap-2 sm:rounded-full">
             <span>Appliance Repair Near You</span>
             <span className="hidden h-1.5 w-1.5 rounded-full bg-[#F97316] sm:inline-block" aria-hidden="true" />
             <span>New Haven, Hamden, West Haven & across CT</span>
           </p>
 
-          <h1 className="mb-6 text-5xl font-bold leading-[1.02] tracking-tight text-blue-950 lg:text-6xl">
-            Same-Day Appliance Repair
-            <br />
-            in <span className="text-[#ffb81c]">Connecticut</span>
+          <h1 className="mb-5 text-4xl font-bold leading-[1.05] tracking-tight text-blue-950 sm:mb-6 sm:text-5xl sm:leading-[1.02] lg:text-6xl">
+            Same-Day Appliance Repair in <span className="text-[#ffb81c]">Connecticut</span>
           </h1>
 
-          <p className="mb-8 max-w-xl text-lg leading-relaxed text-slate-600">
-            Looking for appliance repair near you in Connecticut? We repair refrigerators,
-            washing machines, dryers, dishwashers, ovens, freezers, and more with licensed,
-            insured technicians, written estimates before work begins, and a 90-day labor warranty.
+          <p className="mb-6 max-w-xl text-base leading-relaxed text-slate-600 sm:mb-8 sm:text-lg">
+            Licensed, insured technicians repair refrigerators, washers, dryers, dishwashers,
+            ovens, and freezers across Connecticut — with a written estimate before work begins
+            and a 90-day labor warranty.
           </p>
 
           <div className="mb-6 flex flex-col gap-4 sm:flex-row">

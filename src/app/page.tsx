@@ -63,7 +63,7 @@ const faqSchema = {
       name: 'How much does appliance repair cost in Connecticut?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most appliance repairs in CT range from $120–$400 depending on the appliance and the part needed. We provide a full written estimate before any work begins — no hidden fees, ever. The diagnostic fee is waived when you proceed with the repair.',
+        text: 'Most appliance repairs in CT range from $120–$400 depending on the appliance and the part needed. We provide a full written estimate before any work begins — no hidden fees, ever. The $89 service call fee covers the diagnostic and is waived when you proceed with the repair.',
       },
     },
     {

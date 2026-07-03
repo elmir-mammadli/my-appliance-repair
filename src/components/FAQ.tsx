@@ -8,7 +8,7 @@ const faqs = [
     questions: [
       {
         q: 'How much does appliance repair cost in Connecticut?',
-        a: 'Most appliance repairs in CT range from $120–$400 depending on the appliance and the part needed. We provide a full written estimate before any work begins — no hidden fees, ever. The diagnostic fee is waived when you proceed with the repair.',
+        a: 'Most appliance repairs in CT range from $120–$400 depending on the appliance and the part needed. We provide a full written estimate before any work begins — no hidden fees, ever. The $89 service call fee covers the diagnostic and is waived when you proceed with the repair.',
       },
       {
         q: 'Do you offer same-day appliance repair?',
@@ -129,7 +129,7 @@ export default function FAQ() {
   const [activeCategory, setActiveCategory] = useState(0);
 
   return (
-    <section className="py-20 lg:py-28 bg-white" aria-labelledby="faq-heading">
+    <section id="faq" className="scroll-mt-20 py-20 lg:py-28 bg-white" aria-labelledby="faq-heading">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <span className="inline-block text-blue-600 font-semibold text-sm tracking-widest uppercase mb-3">Got Questions?</span>
