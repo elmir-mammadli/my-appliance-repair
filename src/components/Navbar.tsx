@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { openBookingModal } from '@/lib/booking';
+import AnnouncementBar from './AnnouncementBar';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,12 +29,15 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
-        isScrolled
-          ? 'shadow-md py-3'
-          : 'border-b border-slate-200 py-5'
+        isScrolled ? 'shadow-md' : 'border-b border-slate-200'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <AnnouncementBar />
+      <div
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between transition-all duration-300 ${
+          isScrolled ? 'py-3' : 'py-5'
+        }`}
+      >
         {/* Logo */}
         <Link href="/" className="flex items-center group cursor-pointer">
           <Image
