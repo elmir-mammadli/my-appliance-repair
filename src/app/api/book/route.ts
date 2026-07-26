@@ -1,64 +1,65 @@
-export const runtime ='nodejs';
+export const runtime = 'nodejs';
 
-import { NextRequest, NextResponse } from'next/server';
-import { google } from'googleapis';
-import { Resend } from'resend';
+import { NextRequest, NextResponse } from 'next/server';
+import { google } from 'googleapis';
+import { Resend } from 'resend';
 
 async function appendToSheet(data: Record<string, string>) {
- const auth = new google.auth.GoogleAuth({
- credentials: {
- client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
- private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g,'\n'),
- },
- scopes: ['https://www.googleapis.com/auth/spreadsheets'],
- });
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    },
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  });
 
- const sheets = google.sheets({ version:'v4', auth });
- const sheetId = process.env.GOOGLE_SHEET_ID!;
- const tab = process.env.GOOGLE_SHEET_TAB ??'Service Requests';
+  const sheets = google.sheets({ version: 'v4', auth });
+  const sheetId = process.env.GOOGLE_SHEET_ID!;
+  const tab = process.env.GOOGLE_SHEET_TAB ?? 'Service Requests';
 
- const now = new Date().toLocaleString('en-US', { timeZone:'America/New_York' });
+  const now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
 
- const row = [
- data.name, // Full Name
- data.phone, // Phone
- data.email ||'', // Email
- data.address ||'', // Service Address
- data.zip, // ZIP Code
- data.appliance, // Appliance
- data.brand ||'', // Brand
- data.issue, // Issue Description
- data.urgency, // Urgency
- data.timeSlot ||'', // Preferred Time
-'New', // Status
-'', // Assigned Technician
-'', // Parts Needed
- data.date ||'', // Appointment Date
- now, // Created Time
- now, // Last Modified
-'', // Completion Time
- ];
+  const row = [
+    data.name, // Full Name
+    data.phone, // Phone
+    data.email || '', // Email
+    data.address || '', // Service Address
+    data.zip, // ZIP Code
+    data.appliance, // Appliance
+    data.brand || '', // Brand
+    data.issue, // Issue Description
+    data.urgency, // Urgency
+    data.timeSlot || '', // Preferred Time
+    'New', // Status
+    '', // Assigned Technician
+    '', // Parts Needed
+    data.date || '', // Appointment Date
+    now, // Created Time
+    now, // Last Modified
+    '', // Completion Time
+  ];
 
- const existing = await sheets.spreadsheets.values.get({
- spreadsheetId: sheetId,
- range:`${tab}!A:A`,
- });
- const nextRow = (existing.data.values?.length ?? 1) + 1;
+  const existing = await sheets.spreadsheets.values.get({
+    spreadsheetId: sheetId,
+    range: `${tab}!A:A`,
+  });
+  const nextRow = (existing.data.values?.length ?? 1) + 1;
 
- await sheets.spreadsheets.values.update({
- spreadsheetId: sheetId,
- range:`${tab}!A${nextRow}:Q${nextRow}`,
- valueInputOption:'USER_ENTERED',
- requestBody: { values: [row] },
- });
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: sheetId,
+    range: `${tab}!A${nextRow}:Q${nextRow}`,
+    valueInputOption: 'USER_ENTERED',
+    requestBody: { values: [row] },
+  });
 }
 
 async function sendNotification(data: Record<string, string>) {
- const urgencyColor = data.urgency ==='emergency' ?'#dc2626' : data.urgency ==='today' ?'#ea580c' :'#2563eb';
- const notificationEmail = process.env.NOTIFICATION_EMAIL!;
- const sheetUrl =`https://docs.google.com/spreadsheets/d/${process.env.GOOGLE_SHEET_ID}`;
+  const urgencyColor =
+    data.urgency === 'emergency' ? '#dc2626' : data.urgency === 'today' ? '#ea580c' : '#2563eb';
+  const notificationEmail = process.env.NOTIFICATION_EMAIL!;
+  const sheetUrl = `https://docs.google.com/spreadsheets/d/${process.env.GOOGLE_SHEET_ID}`;
 
- const html =`<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>New Repair Request</title></head>
 <body style="margin:0;padding:0;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
@@ -100,7 +101,7 @@ async function sendNotification(data: Record<string, string>) {
  </tr>
  <tr>
  <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Email</p></td>
- <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.email ||'—'}</p></td>
+ <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.email || '—'}</p></td>
  </tr>
  <tr>
  <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">ZIP Code</p></td>
@@ -108,7 +109,7 @@ async function sendNotification(data: Record<string, string>) {
  </tr>
  <tr>
  <td style="padding:8px 0;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Service Address</p></td>
- <td style="padding:8px 0;"><p style="margin:0;color:#112654;font-size:14px;font-weight:600;">${data.address ||'—'}</p></td>
+ <td style="padding:8px 0;"><p style="margin:0;color:#112654;font-size:14px;font-weight:600;">${data.address || '—'}</p></td>
  </tr>
  </table>
 
@@ -120,7 +121,7 @@ async function sendNotification(data: Record<string, string>) {
  </tr>
  <tr>
  <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Brand</p></td>
- <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.brand ||'—'}</p></td>
+ <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.brand || '—'}</p></td>
  </tr>
  <tr>
  <td style="padding:8px 0;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Issue</p></td>
@@ -132,11 +133,11 @@ async function sendNotification(data: Record<string, string>) {
  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
  <tr>
  <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;width:38%;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Preferred Date</p></td>
- <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;font-weight:600;">${data.date ||'—'}</p></td>
+ <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;font-weight:600;">${data.date || '—'}</p></td>
  </tr>
  <tr>
  <td style="padding:8px 0;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Preferred Time</p></td>
- <td style="padding:8px 0;"><p style="margin:0;color:#112654;font-size:14px;">${data.timeSlot ||'Any time'}</p></td>
+ <td style="padding:8px 0;"><p style="margin:0;color:#112654;font-size:14px;">${data.timeSlot || 'Any time'}</p></td>
  </tr>
  </table>
 
@@ -158,19 +159,19 @@ async function sendNotification(data: Record<string, string>) {
 </body>
 </html>`;
 
- const resend = new Resend(process.env.RESEND_API_KEY);
- await resend.emails.send({
- from:'MyAppliance Repair LLC <notifications@myappliance.us>',
- to: notificationEmail,
- subject:`🔧 New Lead — ${data.appliance} · ${data.urgency.toUpperCase()} · ${data.name}`,
- html,
- });
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  await resend.emails.send({
+    from: 'MyAppliance Repair LLC <notifications@myappliance.us>',
+    to: notificationEmail,
+    subject: `🔧 New Lead — ${data.appliance} · ${data.urgency.toUpperCase()} · ${data.name}`,
+    html,
+  });
 }
 
 async function sendConfirmation(data: Record<string, string>) {
- if (!data.email) return;
+  if (!data.email) return;
 
- const html =`<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Booking Confirmation</title></head>
 <body style="margin:0;padding:0;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
@@ -193,19 +194,19 @@ async function sendConfirmation(data: Record<string, string>) {
  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
  <tr>
  <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;width:40%;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Appliance</p></td>
- <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;font-weight:700;">${data.appliance}${data.brand ?` (${data.brand})` :''}</p></td>
+ <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;font-weight:700;">${data.appliance}${data.brand ? ` (${data.brand})` : ''}</p></td>
  </tr>
  <tr>
  <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Service Address</p></td>
- <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.address ||'—'}</p></td>
+ <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.address || '—'}</p></td>
  </tr>
  <tr>
  <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Preferred Date</p></td>
- <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;font-weight:600;">${data.date ||'—'}</p></td>
+ <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;font-weight:600;">${data.date || '—'}</p></td>
  </tr>
  <tr>
  <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Preferred Time</p></td>
- <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.timeSlot ||'Any time'}</p></td>
+ <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.timeSlot || 'Any time'}</p></td>
  </tr>
  <tr>
  <td style="padding:8px 0;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Issue</p></td>
@@ -224,7 +225,7 @@ async function sendConfirmation(data: Record<string, string>) {
  <tr><td style="padding:10px 0;border-bottom:1px solid #f1f5f9;">
  <table cellpadding="0" cellspacing="0"><tr>
  <td style="width:28px;vertical-align:top;padding-top:1px;"><span style="display:inline-block;width:20px;height:20px;background:#dbeafe;color:#1d4ed8;border-radius:50%;font-size:11px;font-weight:800;text-align:center;line-height:20px;">2</span></td>
- <td style="padding-left:8px;"><p style="margin:0;color:#334155;font-size:13px;">A technician arrives in your preferred time window${data.date ?` on <strong>${data.date}</strong>` :''}.</p></td>
+ <td style="padding-left:8px;"><p style="margin:0;color:#334155;font-size:13px;">A technician arrives in your preferred time window${data.date ? ` on <strong>${data.date}</strong>` : ''}.</p></td>
  </tr></table>
  </td></tr>
  <tr><td style="padding:10px 0;">
@@ -253,43 +254,43 @@ async function sendConfirmation(data: Record<string, string>) {
 </body>
 </html>`;
 
- const resend = new Resend(process.env.RESEND_API_KEY);
- await resend.emails.send({
- from:'MyAppliance Repair LLC <notifications@myappliance.us>',
- to: data.email,
- subject:`Booking Confirmed — ${data.appliance} Repair · MyAppliance`,
- html,
- });
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  await resend.emails.send({
+    from: 'MyAppliance Repair LLC <notifications@myappliance.us>',
+    to: data.email,
+    subject: `Booking Confirmed — ${data.appliance} Repair · MyAppliance`,
+    html,
+  });
 }
 
 export async function POST(req: NextRequest) {
- const data = await req.json();
+  const data = await req.json();
 
- let sheetOk = false;
- try {
- await appendToSheet(data);
- sheetOk = true;
- } catch (err) {
- console.error('[/api/book] sheet error:', err);
- }
+  let sheetOk = false;
+  try {
+    await appendToSheet(data);
+    sheetOk = true;
+  } catch (err) {
+    console.error('[/api/book] sheet error:', err);
+  }
 
- try {
- await sendNotification(data);
- } catch (err) {
- console.error('[/api/book] email error:', err);
- }
+  try {
+    await sendNotification(data);
+  } catch (err) {
+    console.error('[/api/book] email error:', err);
+  }
 
- if (data.email) {
- try {
- await sendConfirmation(data);
- } catch (err) {
- console.error('[/api/book] confirmation email error:', err);
- }
- }
+  if (data.email) {
+    try {
+      await sendConfirmation(data);
+    } catch (err) {
+      console.error('[/api/book] confirmation email error:', err);
+    }
+  }
 
- if (!sheetOk) {
- return NextResponse.json({ error:'Failed to submit booking' }, { status: 500 });
- }
+  if (!sheetOk) {
+    return NextResponse.json({ error: 'Failed to submit booking' }, { status: 500 });
+  }
 
- return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true });
 }

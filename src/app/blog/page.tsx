@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   title: 'Appliance Repair Tips & Guides | CT Homeowners Blog | MyAppliance Repair LLC',
   description:
     "Expert appliance repair tips, maintenance guides, and cost-saving advice for Connecticut homeowners. Stay informed with MyAppliance Repair LLC's blog.",
-  keywords: 'appliance repair tips Connecticut, washer dryer maintenance, refrigerator problems, dishwasher repair, appliance maintenance',
+  keywords:
+    'appliance repair tips Connecticut, washer dryer maintenance, refrigerator problems, dishwasher repair, appliance maintenance',
   alternates: { canonical: 'https://www.myappliance.us/blog' },
 };
 
@@ -74,8 +75,7 @@ export default function BlogPage() {
 
           {/* Headline */}
           <h1 className="text-6xl sm:text-7xl lg:text-[6rem] xl:text-[7rem] font-extrabold text-blue-950 leading-[1.05] lg:leading-[0.9] tracking-[-0.04em] mb-8 max-w-5xl">
-            Expert Tips &amp;{' '}
-            <span className="text-blue-700">Appliance Insights</span>
+            Expert Tips &amp; <span className="text-blue-700">Appliance Insights</span>
           </h1>
 
           {/* Bottom rule + description */}
@@ -109,8 +109,13 @@ export default function BlogPage() {
                   className="object-cover motion-safe:group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                   sizes="(max-width: 1024px) 100vw, 62vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-950/70 via-blue-950/10 to-transparent" aria-hidden="true" />
-                <span className={`absolute top-4 left-4 inline-block text-[11px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 ${featured.accentColor}`}>
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-blue-950/70 via-blue-950/10 to-transparent"
+                  aria-hidden="true"
+                />
+                <span
+                  className={`absolute top-4 left-4 inline-block text-[11px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 ${featured.accentColor}`}
+                >
                   {featured.category}
                 </span>
               </div>
@@ -120,12 +125,11 @@ export default function BlogPage() {
                 <h2 className="text-3xl lg:text-[2.5rem] font-extrabold text-blue-950 tracking-[-0.02em] leading-[1.05] mb-4 group-hover:text-blue-800 transition-colors duration-200">
                   {featured.title}
                 </h2>
-                <p className="text-slate-600 leading-relaxed mb-6 text-base">
-                  {featured.excerpt}
-                </p>
+                <p className="text-slate-600 leading-relaxed mb-6 text-base">{featured.excerpt}</p>
                 <div className="border-t border-blue-100 pt-4">
                   <p className="text-[13px] text-slate-500 font-medium">
-                    {formatDate(featured.date)} <span className="text-blue-300">·</span> {featured.readTime} <span className="text-blue-300">·</span> {featured.author}
+                    {formatDate(featured.date)} <span className="text-blue-300">·</span>{' '}
+                    {featured.readTime} <span className="text-blue-300">·</span> {featured.author}
                   </p>
                 </div>
               </div>
@@ -192,14 +196,26 @@ export default function BlogPage() {
             Need Appliance Repair in Connecticut?
           </h2>
           <p className="text-blue-200 text-lg mb-8 max-w-xl mx-auto">
-            Same-day service across all 169 CT towns. Licensed, insured, and backed by a 90-day warranty.
+            Same-day service across all 169 CT towns. Licensed, insured, and backed by a 90-day
+            warranty.
           </p>
           <a
             href="tel:+19592616736"
             className="inline-flex items-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold px-8 py-4 rounded-xl transition-all duration-200 text-base"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              />
             </svg>
             Call (959) 261-6736
           </a>
