@@ -25,7 +25,7 @@ except ImportError:
 # ---------------------------------------------------------------------------
 
 POSTS_JSON_PATH = Path(__file__).parent.parent.parent / "content" / "posts.json"
-COMPANY_NAME = "MY APPLIANCE Repair"
+COMPANY_NAME = "My Appliance Repair"
 COMPANY_URL = "myappliance.us"
 AUTHOR = "Elmir R."
 MODEL = "claude-sonnet-4-6"
