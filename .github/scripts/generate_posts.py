@@ -48,7 +48,7 @@ CATEGORY_COLORS: dict[str, tuple[str, str]] = {
 
 # Unsplash images keyed by category
 CATEGORY_IMAGES: dict[str, str] = {
-    "Refrigerators":    "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=800&q=80",
+    "Refrigerators":    "https://images.unsplash.com/photo-1721613877687-c9099b698faa?q=800&q=80",
     "Dishwashers":      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80",
     "Maintenance":      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80",
     "Tips & Advice":    "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
