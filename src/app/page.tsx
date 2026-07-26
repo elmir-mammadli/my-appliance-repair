@@ -6,6 +6,7 @@ import Services from'@/components/Services';
 import RecentRepairs from'@/components/RecentRepairs';
 import WhyUs from'@/components/WhyUs';
 import Discounts from'@/components/Discounts';
+import RecentJobs from'@/components/RecentJobs';
 import Coverage from'@/components/Coverage';
 import Testimonials from'@/components/Testimonials';
 import FAQ from'@/components/FAQ';
@@ -63,7 +64,7 @@ const faqSchema = {
  name:'How much does appliance repair cost in Connecticut?',
  acceptedAnswer: {
 '@type':'Answer',
- text:'Most appliance repairs in CT range from $120–$400 depending on the appliance and the part needed. We provide a full written estimate before any work begins — no hidden fees, ever. The $89 service call fee covers the diagnostic and is waived when you proceed with the repair.',
+ text:'Most appliance repairs in CT range from $175–$400 depending on the appliance and the part needed. We provide a full written estimate before any work begins — no hidden fees, ever. The $89 service call fee covers the diagnostic and is waived when you proceed with the repair.',
  },
  },
  {
@@ -71,7 +72,7 @@ const faqSchema = {
  name:'Do you offer same-day appliance repair?',
  acceptedAnswer: {
 '@type':'Answer',
- text:'Yes. Call before noon and we can usually dispatch a technician to your Connecticut home the same day. We offer morning (8am–12pm), afternoon (12pm–4pm), and evening (4pm–7pm) slots. Emergency service is available 24/7.',
+ text:'Yes. Call before noon and we can usually dispatch a technician to your Connecticut home the same day. We offer morning (8am–12pm), afternoon (12pm–4pm), and evening (4pm–7pm) slots. Emergency service is available with an extra surcharge for after-hours calls. We service emergency calls in New Haven, Hamden, West Haven, and nearby towns in Connecticut.',
  },
  },
  {
@@ -208,6 +209,7 @@ export default function Home() {
  <Testimonials />
  <BrandsGrid />
  <Services />
+ <RecentJobs />
  <Coverage />
  <RecentRepairs />
  <WhyUs />

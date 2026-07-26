@@ -38,7 +38,7 @@ export default function Hero() {
  </p>
 
  <div className="mb-6 flex flex-col gap-4 sm:flex-row">
- <BookingButton  className="inline-flex cursor-pointer min-h-12 items-center justify-center gap-2 bg-[#ffb81c] px-8 py-4 text-base font-bold text-gray-900 shadow-md transition-colors duration-200 hover:bg-[#e6a619]">
+ <BookingButton  className="inline-flex cursor-pointer min-h-12 items-center justify-center gap-2 bg-[#ffb81c] px-8 py-4 text-base font-bold text-gray-900 transition-colors duration-200 hover:bg-[#c9920d]">
  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
  </svg>

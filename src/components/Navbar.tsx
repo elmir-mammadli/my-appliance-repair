@@ -79,7 +79,7 @@ export default function Navbar() {
  </a>
  <button
  onClick={() => openBookingModal()}
- className='flex items-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold px-5 py-2.5 transition-colors duration-200 cursor-pointer shadow-sm'
+ className='flex items-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold px-5 py-2.5 transition-all duration-100 cursor-pointer shadow-[4px_4px_0_#172554] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#172554] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none'
  >
  Book a Repair
  </button>
@@ -137,7 +137,7 @@ export default function Navbar() {
 ))}
  <button
  onClick={() => { setIsMobileOpen(false); openBookingModal(); }}
- className="mt-2 flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-semibold px-5 py-3 transition-colors duration-200 cursor-pointer w-full"
+ className="mt-2 flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-semibold px-5 py-3 transition-all duration-100 cursor-pointer w-full shadow-[4px_4px_0_#172554] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#172554] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
  >
  Book a Repair
  </button>

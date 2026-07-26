@@ -5,6 +5,7 @@ import Footer from'@/components/Footer';
 import BookingModal from'@/components/BookingModal';
 import BookingButton from'@/components/BookingButton';
 import ServiceCard from'@/components/ServiceCard';
+import RecentJobs from'@/components/RecentJobs';
 import { services } from'@/lib/services';
 
 function jsonLd(data: object): string {
@@ -172,6 +173,8 @@ export default function ServicesIndexPage() {
  </div>
  </div>
  </section>
+
+ <RecentJobs />
 
  {/* ── How It Works ── */}
  <section className="py-20 lg:py-28 bg-white" aria-labelledby="process-heading">
