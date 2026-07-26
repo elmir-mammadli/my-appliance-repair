@@ -28,7 +28,7 @@ POSTS_JSON_PATH = Path(__file__).parent.parent.parent / "content" / "posts.json"
 COMPANY_NAME = "MY APPLIANCE Repair"
 COMPANY_URL = "myappliance.us"
 AUTHOR = "Elmir R."
-MODEL = "claude-opus-4-5"
+MODEL = "claude-sonnet-4-6"
 POSTS_PER_RUN = 2
 
 # Color gradients keyed by category
