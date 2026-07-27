@@ -201,7 +201,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           </p>
 
           <h1 className="text-4xl lg:text-5xl font-bold text-blue-950 leading-tight tracking-tight mb-6">
-            Appliance Repair in{''}
+            Appliance Repair in{' '}
             <span className="text-[#ffb81c]">{city.name}, CT</span>
           </h1>
 
