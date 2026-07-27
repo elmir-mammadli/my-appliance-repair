@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BookingModal from '@/components/BookingModal';
+import BlogCategoryCard from '@/components/BlogCategoryCard';
 import { posts } from '@/lib/posts';
 
 export const metadata: Metadata = {
@@ -100,24 +100,9 @@ export default function BlogPage() {
 
           <Link href={`/blog/${featured.slug}`} className="group block">
             <div className="overflow-hidden border border-blue-200 grid lg:grid-cols-[1.6fr_1fr]">
-              {/* Left: image with category badge + gradient overlay */}
+              {/* Left: category card */}
               <div className="relative aspect-video lg:aspect-auto lg:min-h-[360px] overflow-hidden">
-                <Image
-                  src={featured.image}
-                  alt={featured.title}
-                  fill
-                  className="object-cover motion-safe:group-hover:scale-[1.03] transition-transform duration-500 ease-out"
-                  sizes="(max-width: 1024px) 100vw, 62vw"
-                />
-                <div
-                  className="absolute inset-0 bg-gradient-to-t from-blue-950/70 via-blue-950/10 to-transparent"
-                  aria-hidden="true"
-                />
-                <span
-                  className={`absolute top-4 left-4 inline-block text-[11px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 ${featured.accentColor}`}
-                >
-                  {featured.category}
-                </span>
+                <BlogCategoryCard category={featured.category} className="absolute inset-0" />
               </div>
 
               {/* Right: text content */}
@@ -154,13 +139,7 @@ export default function BlogPage() {
                 <article className="flex flex-col">
                   {/* Card image */}
                   <div className="relative aspect-video overflow-hidden mb-4">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover motion-safe:group-hover:scale-[1.04] transition-transform duration-500 ease-out"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
+                    <BlogCategoryCard category={post.category} className="absolute inset-0" />
                   </div>
 
                   {/* Category kicker — single consistent editorial accent (TC uses one accent, not per-category) */}
