@@ -123,25 +123,6 @@ const services = [
   },
 ];
 
-const faqs = [
-  {
-    q: 'How quickly can you get to me in {city}?',
-    a: "We have technicians throughout Connecticut and can typically reach {city} the same day. Call before noon and we'll usually have someone at your door that afternoon. We offer morning, afternoon, and evening slots.",
-  },
-  {
-    q: 'How much does appliance repair cost in {city}?',
-    a: 'Most appliance repairs in Connecticut range from $120–$400 depending on the appliance and the part needed. We provide a full written estimate before any work begins — no hidden fees. The $89 service call fee covers the diagnostic and is waived when you proceed with the repair.',
-  },
-  {
-    q: 'What warranty do you provide on repairs in {city}?',
-    a: 'Every repair comes with a 90-day parts and labor warranty. If the same issue returns within 90 days, we come back and fix it at no additional charge. We only use OEM (original manufacturer) parts.',
-  },
-  {
-    q: 'Do you service all appliance brands in {city}?',
-    a: 'Yes — we service all major brands including Samsung, LG, Whirlpool, GE, Bosch, KitchenAid, Maytag, Frigidaire, Electrolux, and more. Our vans carry OEM parts for the most common failures across these brands.',
-  },
-];
-
 export default async function CityPage({ params }: { params: Promise<{ city: string }> }) {
   const { city: slug } = await params;
   const city = getCityBySlug(slug);
@@ -224,11 +205,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             <span className="text-[#ffb81c]">{city.name}, CT</span>
           </h1>
 
-          <p className="text-lg text-slate-500 leading-relaxed mb-10 max-w-2xl">
-            Same-day appliance repair for {city.name} homeowners. Our licensed technicians service
-            all major brands — refrigerators, washers, dryers, dishwashers, ovens, and more. We
-            carry OEM parts and back every repair with a 90-day warranty.
-          </p>
+          <p className="text-lg text-slate-500 leading-relaxed mb-10 max-w-2xl">{city.intro}</p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-10">
             <BookingButton className="inline-flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold px-8 py-4 text-base transition-colors duration-200 cursor-pointer shadow-md">
@@ -411,14 +388,10 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             Appliance Repair FAQ — {city.name}
           </h2>
           <div className="space-y-6">
-            {faqs.map((faq) => (
+            {city.faqs.map((faq) => (
               <div key={faq.q} className="bg-blue-50 p-6">
-                <h3 className="font-bold text-blue-950 mb-2">
-                  {faq.q.replace(/\{city\}/g, city.name)}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed">
-                  {faq.a.replace(/\{city\}/g, city.name)}
-                </p>
+                <h3 className="font-bold text-blue-950 mb-2">{faq.q}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{faq.a}</p>
               </div>
             ))}
           </div>
