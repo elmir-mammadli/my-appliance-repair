@@ -47,7 +47,7 @@ export default function TermsPage() {
               myappliance.us
             </a>
             {''}
-            or scheduling appliance repair services with MY Appliance Repair (&ldquo;we,&rdquo;
+            or scheduling appliance repair services with My Appliance Repair (&ldquo;we,&rdquo;
             &ldquo;our,&rdquo; or &ldquo;us&rdquo;). By accessing our website or booking our
             services, you agree to be bound by these Terms.
           </p>
@@ -70,7 +70,7 @@ export default function TermsPage() {
             2. Description of Services
           </h2>
           <p className="text-slate-600 leading-relaxed mb-4">
-            MY Appliance Repair provides residential and light-commercial home appliance repair
+            My Appliance Repair provides residential and light-commercial home appliance repair
             services throughout the State of Connecticut. Our services include, but are not limited
             to, repair of:
           </p>
@@ -255,7 +255,7 @@ export default function TermsPage() {
           <h2 className="text-2xl font-bold text-blue-900 mb-4 mt-10">9. Intellectual Property</h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             All content on the myappliance.us website — including text, graphics, logos, images, and
-            software — is the property of MY Appliance Repair or its content suppliers and is
+            software — is the property of My Appliance Repair or its content suppliers and is
             protected by applicable copyright, trademark, and other intellectual property laws. You
             may not reproduce, distribute, modify, or create derivative works from any content on
             this website without our express written permission. You are granted a limited,
@@ -322,7 +322,7 @@ export default function TermsPage() {
             If you have questions about these Terms of Service, please contact us:
           </p>
           <div className="bg-blue-50 p-6 mt-4 mb-10">
-            <p className="font-semibold text-blue-900 mb-1">MY Appliance Repair</p>
+            <p className="font-semibold text-blue-900 mb-1">My Appliance Repair</p>
             <p className="text-slate-600 text-sm">Serving Connecticut</p>
             <p className="text-slate-600 text-sm mt-2">
               Email:{''}

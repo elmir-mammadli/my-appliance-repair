@@ -40,7 +40,7 @@ export async function generateMetadata({
     openGraph: {
       type: 'website',
       url: `https://www.myappliance.us/services/${slug}`,
-      title: `${title} | MY APPLIANCE Repair`,
+      title: `${title} | My Appliance Repair`,
       description,
       images: [
         {
@@ -69,7 +69,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     description: service.intro,
     provider: {
       '@type': 'LocalBusiness',
-      name: 'MY APPLIANCE Repair',
+      name: 'My Appliance Repair',
       telephone: '+1-959-261-6736',
       url: 'https://www.myappliance.us',
       image: 'https://www.myappliance.us/og-image.svg',

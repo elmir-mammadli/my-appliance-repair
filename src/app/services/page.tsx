@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://www.myappliance.us/services',
-    title: 'Appliance Repair Services in Connecticut | MY APPLIANCE Repair',
+    title: 'Appliance Repair Services in Connecticut | My Appliance Repair',
     description:
       'Appliances we repair in Connecticut. Washers, dryers, fridges, dishwashers, ovens, and the rest. Same-day when slots are open, OEM parts on the truck, 90 days on parts and labor.',
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         url: '/og-image.svg',
         width: 1200,
         height: 630,
-        alt: 'MY APPLIANCE Repair Services',
+        alt: 'My Appliance Repair Services',
       },
     ],
   },

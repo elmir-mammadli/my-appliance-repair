@@ -42,7 +42,7 @@ export default function PrivacyPage() {
       <section className="bg-white py-16 lg:py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-slate-600 leading-relaxed mb-10">
-            MY Appliance Repair (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) operates
+            My Appliance Repair (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) operates
             the website{''}
             <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">
               myappliance.us
