@@ -88,7 +88,7 @@ const otherIcon = (
 const pricingFaqs = [
   {
     q: 'How much does this repair cost in Connecticut?',
-    a: 'Most appliance repairs in CT run $120 to $400 depending on the part and how long the job takes. Premium brands like Sub-Zero, Wolf, Thermador, and Miele often run higher because their parts cost more. You get a written estimate before we start any work. The $89 service call fee is waived when you go ahead with the repair.',
+    a: 'Most appliance repairs in CT run $120 to $400 depending on the part and how long the job takes. Premium brands like Sub-Zero, Wolf, Thermador, and Miele often run higher because their parts cost more. You get a written estimate before we start any work. The $99 service call fee is waived when you go ahead with the repair.',
   },
   {
     q: 'Do you offer same-day service?',
