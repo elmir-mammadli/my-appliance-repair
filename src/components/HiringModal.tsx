@@ -126,8 +126,21 @@ export default function HiringModal() {
     if (!validate()) return;
     setSubmitting(true);
     try {
-      // Simulate submission — wire to an API route when ready
-      await new Promise((res) => setTimeout(res, 800));
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          experience: form.experience,
+          availability: form.availability,
+          why: form.why,
+          brands,
+          cvFileName: cvFile?.name ?? null,
+        }),
+      });
+      if (!res.ok) throw new Error('server error');
       setSubmitted(true);
     } catch {
       alert('Something went wrong. Please call us directly at (959) 261-6736.');

@@ -581,7 +581,7 @@ export default function ContactForm() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] disabled:bg-[#ffb81c]/50 text-gray-900 font-bold py-4 transition-all duration-200 cursor-pointer shadow-md hover:shadow-lg text-lg disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] disabled:bg-[#ffb81c]/50 text-gray-900 font-bold py-4 transition-all duration-200 cursor-pointer text-lg disabled:cursor-not-allowed"
                   aria-disabled={submitting}
                 >
                   {submitting ? (
@@ -629,8 +629,8 @@ export default function ContactForm() {
                   )}
                 </button>
 
-                <p className="text-center text-xs text-slate-400">
-                  By submitting, you agree to receive a call from our team. No spam — ever.
+                <p className="text-xs text-slate-400">
+                  By submitting, you consent to receive communications from us, including follow-up calls, product announcements, and our newsletter. You may unsubscribe at any time.
                 </p>
               </div>
             </form>
