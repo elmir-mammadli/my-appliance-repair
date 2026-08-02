@@ -237,8 +237,8 @@ export default function Discounts() {
               <span className="text-white font-bold text-lg">Returning Customer Loyalty Bonus</span>
             </div>
             <p className="text-blue-200 text-sm leading-relaxed max-w-xl">
-              Had us out before? Get <span className="text-white font-semibold">$30 off</span> your
-              next repair — no ID required. Just mention you&apos;re a returning customer when you
+              Had us out before? Get <span className="text-white font-semibold">$30 off</span>&nbsp;your
+              next repair, no ID required. Just mention you&apos;re a returning customer when you
               book.
             </p>
           </div>
