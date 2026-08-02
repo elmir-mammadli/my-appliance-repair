@@ -2,16 +2,9 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-interface Suggestion {
-  display_name: string;
-  address: {
-    house_number?: string;
-    road?: string;
-    city?: string;
-    town?: string;
-    village?: string;
-    postcode?: string;
-  };
+interface Prediction {
+  place_id: string;
+  description: string;
 }
 
 interface Props {
@@ -21,49 +14,28 @@ interface Props {
   error?: string;
 }
 
-function formatAddress(s: Suggestion): string {
-  const a = s.address;
-  const street = [a.house_number, a.road].filter(Boolean).join('');
-  const city = a.city || a.town || a.village || '';
-  return [street, city, 'CT'].filter(Boolean).join(',');
-}
-
 export default function AddressAutocomplete({ id, value, onChange, error }: Props) {
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [predictions, setPredictions] = useState<Prediction[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const fetchSuggestions = useCallback(async (query: string) => {
-    if (query.length < 3) {
-      setSuggestions([]);
+  const fetchPredictions = useCallback(async (query: string) => {
+    if (query.length < 1) {
+      setPredictions([]);
       setOpen(false);
       return;
     }
     setLoading(true);
     try {
-      const params = new URLSearchParams({
-        q: query + ', Connecticut',
-        format: 'json',
-        addressdetails: '1',
-        countrycodes: 'us',
-        limit: '5',
-        'accept-language': 'en',
-      });
-      const res = await fetch(`https://nominatim.openstreetmap.org/search?${params}`, {
-        headers: { 'User-Agent': 'MyApplianceRepair/1.0 (myappliance.us)' },
-      });
-      const data: Suggestion[] = await res.json();
-      const ct = data.filter(
-        (s) =>
-          s.display_name.toLowerCase().includes('connecticut') &&
-          (s.address.road || s.address.house_number),
-      );
-      setSuggestions(ct);
-      setOpen(ct.length > 0);
+      const res = await fetch(`/api/places?input=${encodeURIComponent(query)}`);
+      const data = await res.json();
+      const results: Prediction[] = data.predictions ?? [];
+      setPredictions(results);
+      setOpen(results.length > 0);
     } catch {
-      setSuggestions([]);
+      setPredictions([]);
     } finally {
       setLoading(false);
     }
@@ -73,12 +45,14 @@ export default function AddressAutocomplete({ id, value, onChange, error }: Prop
     const v = e.target.value;
     onChange(v);
     if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => fetchSuggestions(v), 350);
+    debounceRef.current = setTimeout(() => fetchPredictions(v), 300);
   };
 
-  const handleSelect = (s: Suggestion) => {
-    onChange(formatAddress(s));
-    setSuggestions([]);
+  const handleSelect = (p: Prediction) => {
+    // Strip trailing ", USA" that Google appends
+    const address = p.description.replace(/, USA$/, '');
+    onChange(address);
+    setPredictions([]);
     setOpen(false);
   };
 
@@ -101,7 +75,7 @@ export default function AddressAutocomplete({ id, value, onChange, error }: Prop
           autoComplete="off"
           value={value}
           onChange={handleInput}
-          onFocus={() => suggestions.length > 0 && setOpen(true)}
+          onFocus={() => predictions.length > 0 && setOpen(true)}
           placeholder="123 Main St, New Haven"
           className={`w-full px-4 py-3 border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 ${
             error ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'
@@ -128,15 +102,14 @@ export default function AddressAutocomplete({ id, value, onChange, error }: Prop
         )}
       </div>
 
-      {open && suggestions.length > 0 && (
-        <ul className="absolute z-50 w-full mt-1 bg-white border border-slate-200 shadow-lg overflow-hidden">
-          {suggestions.map((s, i) => {
-            const formatted = formatAddress(s);
-            return (
-              <li key={i}>
+      {open && predictions.length > 0 && (
+        <div className="absolute z-50 w-full mt-1 bg-white border border-slate-200 shadow-lg overflow-hidden">
+          <ul>
+            {predictions.map((p) => (
+              <li key={p.place_id}>
                 <button
                   type="button"
-                  onMouseDown={() => handleSelect(s)}
+                  onMouseDown={() => handleSelect(p)}
                   className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-blue-50 transition-colors duration-150 border-b border-slate-100 last:border-0"
                 >
                   <svg
@@ -157,12 +130,23 @@ export default function AddressAutocomplete({ id, value, onChange, error }: Prop
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  <span className="text-sm text-blue-950 truncate">{formatted}</span>
+                  <span className="text-sm text-blue-950 truncate">
+                    {p.description.replace(/, USA$/, '')}
+                  </span>
                 </button>
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+          <div className="flex justify-end items-center px-3 py-1.5 border-t border-slate-100 bg-white">
+            {/* Required by Google Places API ToS */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png"
+              alt="Powered by Google"
+              className="h-4 w-auto"
+            />
+          </div>
+        </div>
       )}
     </div>
   );
