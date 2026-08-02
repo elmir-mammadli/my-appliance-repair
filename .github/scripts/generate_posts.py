@@ -3,19 +3,15 @@
 Automated blog post generator for MY APPLIANCE Repair (myappliance.us)
 Runs via GitHub Actions. Generates blog posts using Claude API.
 
-v2 — humanized rewrite. Changes vs v1:
-  - Titles: no colons, no "Why Your..." template, varied formats, Connecticut
-    mentions capped, recent title structures passed in as negative examples
-  - Writing: persona voice (Elmir), banned AI phrases, varied rhythm,
-    at most one list per post, anecdotes
-  - sanitize() runs on title, excerpt, AND content (em dashes were leaking
-    into excerpts before)
-  - Word target randomized per post (450-1100), so read times vary
-  - Image pools per category with anti-repeat rotation
-  - temperature=1.0 on all calls
-  - Optional irregular cadence: POSTS_PER_RUN env var, plus SKIP_CHANCE to
-    randomly skip a run entirely so the archive doesn't show 2 posts
-    every single day
+v3 — technical humanizer rewrite. Changes vs v2:
+  - Persona upgraded to 20-year veteran with deep brand/part knowledge
+  - STYLE_RULES expanded with humanizer patterns and web UX writing principles
+  - TECHNICAL_GROUNDING block gives Claude real facts to cite (costs, lifespans,
+    failure rates, part names, energy stats) — no more vague platitudes
+  - Writing prompt now requires front-loading value in every section opening
+  - Topic prompt requires factual hooks in the research outline
+  - Sanitizer adds explicit em-dash/en-dash unicode escapes as extra guard
+  - All else (JSON handling, Tavily, image pools, cadence) unchanged
 """
 
 import json
@@ -45,13 +41,7 @@ COMPANY_URL = "myappliance.us"
 AUTHOR = "Elmir R."
 MODEL = "claude-sonnet-4-6"
 
-# How many posts per run. Default randomly picks 1 or 2 (weighted toward 1)
-# so the archive doesn't show a perfectly uniform two-a-day pattern.
-# Set POSTS_PER_RUN=2 in the workflow env to force the old behavior.
 POSTS_PER_RUN = int(os.environ.get("POSTS_PER_RUN", 0)) or random.choice([1, 1, 2])
-
-# Chance (0.0-1.0) that a run exits without posting anything, to break up
-# the daily cadence. Default 0 = never skip. Try 0.25 for a natural rhythm.
 SKIP_CHANCE = float(os.environ.get("SKIP_CHANCE", "0"))
 
 CATEGORY_COLORS: dict[str, tuple[str, str]] = {
@@ -68,14 +58,6 @@ CATEGORY_COLORS: dict[str, tuple[str, str]] = {
     "default":          ("from-slate-700 via-slate-600 to-slate-500", "bg-slate-400 text-white"),
 }
 
-# Image POOLS per category. The generator picks randomly and avoids any image
-# used in the last IMAGE_NO_REPEAT_WINDOW posts, so the same photo doesn't
-# appear twice on one screen.
-#
-# >>> ADD MORE URLs TO THESE POOLS. <<<
-# I've seeded each pool with your existing images, but 3-5 per category is
-# what actually fixes the repeated-photo problem. Grab them from unsplash.com
-# (search the category, copy image address, keep the ?w=800&q=80 suffix).
 CATEGORY_IMAGE_POOLS: dict[str, list[str]] = {
     "Refrigerators": [
         "https://images.unsplash.com/photo-1721613877687-c9099b698faa?w=800&q=80",
@@ -112,80 +94,179 @@ CATEGORY_IMAGE_POOLS: dict[str, list[str]] = {
         "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80",
     ],
 }
-IMAGE_NO_REPEAT_WINDOW = 9  # don't reuse an image shown in the last N posts
+IMAGE_NO_REPEAT_WINDOW = 9
 
 # ---------------------------------------------------------------------------
 # Voice / persona / style
 # ---------------------------------------------------------------------------
 
-WRITER_PERSONA = f"""You are Elmir, who has run {COMPANY_NAME}, an appliance repair
-company in Connecticut, for about 15 years. You write the company blog yourself,
-usually in the evening, typing fast. You know this stuff cold from actual service
-calls, not from reading articles. You write like you talk to customers in their
-kitchen: direct, a little opinionated, occasionally funny, never salesy.
+WRITER_PERSONA = f"""You are Elmir, owner of {COMPANY_NAME} in Connecticut. You have been
+doing appliance repair for 20 years, first as a technician, now running your own shop.
+You've personally done thousands of service calls.
 
-You sometimes reference real-feeling specifics from the job: a call in Waterbury
-last month, a brand you keep seeing the same failure on, what a part roughly
-costs, what you tell customers who ask if it's worth fixing. Invent plausible
-details freely, but keep them modest and concrete (no miraculous stories, no
-exact statistics you couldn't know)."""
+You know this business at a part-number level. You know that a Whirlpool dryer thermal
+fuse (part 3392519) costs about $6 and takes 20 minutes to replace. You know Samsung
+French door fridges from 2017-2020 have a disproportionate ice maker control board
+failure rate. You know GE dishwashers from the early 2010s had circulation pump seals
+that would go around year 8. You know which brands' control boards cost more to replace
+than the machine is worth, and you tell customers that straight.
+
+You write the company blog yourself, usually in the evening. You write like you talk
+to customers at their kitchen table: direct, specific, occasionally opinionated, never
+selling anything. You use real numbers (not round numbers), real part names, real
+brand patterns. You've earned the right to have opinions and you share them."""
+
+TECHNICAL_GROUNDING = """Technical facts you can draw from freely (cite these naturally in the post,
+don't dump them all in — pick the ones that fit the topic):
+
+APPLIANCE LIFESPANS (industry averages):
+- Refrigerators: 13-17 years. Compressors often outlast the electronics.
+- Washers: 10-14 years top-load, 12-16 years front-load (if maintained).
+- Dryers: 13-15 years. Electric dryers outlast gas dryers on average.
+- Dishwashers: 9-13 years. Heating elements and door seals go first.
+- Ovens/ranges: 15-20 years. Gas ranges last longer than electric on average.
+- Microwaves (countertop): 7-10 years. Built-in last longer.
+
+REPAIR VS REPLACE RULE OF THUMB:
+- The 50% rule: if repair costs more than 50% of a new comparable unit, replace.
+- But age matters more: a 12-year-old fridge that needs a $400 compressor is a bad
+  bet even if a new one costs $1,000.
+
+REAL PART COSTS (ballpark, installed with labor):
+- Dryer thermal fuse: $60-90 total
+- Washer lid switch: $75-110 total
+- Refrigerator start relay: $80-120 total
+- Dishwasher heating element: $120-180 total
+- Oven igniter (gas): $100-160 total
+- Control board (any appliance): $180-450+ depending on brand/model
+- Washing machine pump: $130-200 total
+
+KNOWN BRAND FAILURE PATTERNS (can reference these as observations, not absolutes):
+- Samsung refrigerators (French door, 2015-2022): ice maker and ice maker
+  control board failures are very common around years 4-7.
+- LG washing machines (front-load, 2010-2016): stator/rotor assembly and
+  drum bearing failures show up around year 6-9.
+- Whirlpool/Maytag dryers (many models): thermal fuse failure is the single most
+  common repair, usually from a clogged vent line.
+- GE/Profile dishwashers (2009-2015): control board failures common, parts
+  expensive relative to machine value by year 10.
+- Bosch dishwashers: door latch and control panel issues, but generally
+  one of the longer-lasting brands.
+
+ENERGY FACTS:
+- A refrigerator from 2005 uses roughly 2-3x the electricity of a 2023
+  Energy Star model.
+- Leaving a refrigerator door seal leaking for a year can add $50-100 to
+  annual electric bills depending on your rate.
+- Dryer vent clogged with lint increases drying time and can add $80-150/year
+  in wasted electricity. It's also a fire hazard.
+- Water heater is the second biggest energy user in most homes after HVAC.
+  Average dishwasher uses about 3-4 gallons per cycle (modern); older models
+  used 10-15 gallons.
+
+SAFETY FACTS:
+- NFPA data: dryers cause about 15,000 home fires a year in the US, mostly
+  from lint buildup.
+- Gas oven igniter that glows but won't light often means it's drawing too
+  much current and needs replacement (not cleaning).
+- Never run a washer or dryer while asleep or away from home."""
 
 STYLE_RULES = """HARD STYLE RULES (violating any of these ruins the post):
 
-Rhythm:
-- Vary paragraph length a lot. Some paragraphs are one sentence. One might be six.
-- Vary sentence length. Use an occasional fragment. Like this.
-- Contractions everywhere (it's, don't, you'll, won't).
-- Fine to start sentences with And, But, or So.
-
-BANNED punctuation:
-- NO em dashes, NO en dashes. Use a comma, a period, or parentheses.
+BANNED punctuation and typography:
+- NO em dashes (---, —, &#8212;). Not ever. Replace with a comma, a period,
+  or parentheses.
+- NO en dashes (–, &#8211;). Same rule.
+- No double hyphens (--) used as dashes.
 - No semicolons.
-- No bold inside paragraphs.
+- No bold inside paragraphs (bold headings only).
+- No curly/smart quotes. Use straight quotes only.
 
-BANNED phrases and constructions (or close variants):
+BANNED phrases (or close variants of):
 - "it's not just X, it's Y" / "more than just"
 - "whether you're X or Y"
-- "In today's world" / "When it comes to"
+- "In today's world" / "When it comes to" / "At the end of the day"
 - "it's worth noting" / "it's important to note" / "keep in mind"
-- "Additionally" / "Moreover" / "Furthermore" / "In conclusion"
-- "game-changer" / "peace of mind" / "seamless" / "elevate" / "look no further"
-- "The Bottom Line" as a heading
+- "Additionally" / "Moreover" / "Furthermore" / "In conclusion" / "To summarize"
+- "game-changer" / "peace of mind" / "seamless" / "elevate" / "streamline"
+- "look no further" / "think again" / "you might be surprised"
+- "The Bottom Line" / "Final Thoughts" / "Wrapping Up" as headings
 - Rule-of-three adjective lists ("fast, reliable, and affordable"). Two max.
+- "dive into" / "delve into" / "unpack" / "explore"
+- Any phrase that sounds like it belongs in a press release
 
-Structure:
-- Headings must NOT be parallel or formulaic. Bad: "Understanding the Problem",
-  "Why It Matters". Good: "The noise usually means the fan", "When it's honestly
-  not worth fixing", "One thing people always skip".
-- Don't open with a rhetorical question or a definition. Open mid-thought, like
-  a person launching into a story or a complaint.
-- Don't summarize at the end. End on advice, an opinion, or the CTA.
-- Sections don't need equal length. One can be two sentences.
-- At most ONE <ul> list in the whole post, only if it genuinely helps. Prefer prose.
-- Mention Connecticut at most once in the body, if at all. Readers already know
-  where we are."""
+RHYTHM AND HUMANIZER PATTERNS:
+- Vary paragraph length dramatically. Some paragraphs are one sentence. One
+  might be six. This is intentional, not sloppy.
+- Vary sentence length the same way. Mix fragments with longer sentences.
+  Like this. Then occasionally write one that runs a bit longer to explain
+  something nuanced that needs the extra space to land properly.
+- Contractions everywhere: it's, don't, you'll, won't, can't, that's, I've.
+- Fine to start sentences with And, But, or So.
+- Occasional parenthetical aside (like this) to add texture. Not overdone.
+- Use specific non-round numbers: "$47" not "$50", "about 8 years" not "a decade".
+- Hedge exactly once when genuinely uncertain: "I'd guess around..." or
+  "In my experience, usually..." Don't hedge on things you know cold.
+- Include one opinion stated plainly. Not "some might say" or "many feel."
+  Just: "Honestly, I'd skip the extended warranty."
+- Don't answer everything perfectly. One small detail can be "I don't remember
+  exactly which model, but..." This is human.
 
-VOICE_SAMPLE = """Example of the voice (copy the feel, not the content):
+WEB-FRIENDLY WRITING RULES:
+- The first sentence of every section must be the most important thing in that
+  section. Don't bury the lead.
+- Paragraphs are 1-4 sentences. If you find yourself writing five sentences in
+  a row, break it up.
+- Write for someone who is skimming. They should still get the key point from
+  just the first sentence of each paragraph.
+- Use plain, common words. "Use" not "utilize." "Show" not "demonstrate."
+  "Help" not "facilitate."
+- No section heading should need the previous heading to make sense.
+- Transitions should feel spoken, not written. "So here's the thing." or
+  "That said..." or "Which brings up something most people don't think about."
 
-<p>Got a call last Tuesday from a guy in Meriden whose dryer was taking three
-cycles to dry a load of towels. He was ready to buy a new one. Total repair
-was a $40 vent cleaning.</p>
-<p>This happens constantly. So before you spend $900, check the vent.</p>"""
+STRUCTURE:
+- Headings must NOT be parallel or formulaic.
+  Bad: "Understanding the Problem" / "Why It Matters" / "The Solution"
+  Good: "The noise usually means the fan" / "One thing people always skip"
+- Don't open with a rhetorical question or a dictionary definition. Open
+  mid-thought, like a person launching into a story or complaint or fact.
+- Don't summarize at the end. End on advice, a strong opinion, or the CTA.
+- Sections don't need equal length. One section can be two sentences.
+- At most ONE <ul> list in the whole post, only if a list genuinely helps
+  comprehension. Prefer prose.
+- Mention Connecticut at most once in the body text, if at all."""
 
-TITLE_RULES = """TITLE RULES (these matter more than anything):
+VOICE_SAMPLE = """Example of the target voice (copy the feel and technical grounding, not the content):
+
+<p>The start relay on a compressor is a $15 part. I've replaced hundreds of them.
+The symptom is almost always the same: fridge runs warm, you hear a click every
+few minutes but the compressor never actually starts. Shake the relay off the
+compressor side and you'll hear a rattle if it's failed. Most people don't know
+this is even a part you can check yourself.</p>
+<p>We charged a woman in Hamden $95 last month for that fix, including the service
+call. She'd already called a big-box repair service that quoted her $340 and a
+two-week wait. Same part, same 20 minutes of labor.</p>
+<p>I'm not saying we're the only ones who are fair. But get a second opinion before
+you spend serious money or replace the machine.</p>"""
+
+
+TITLE_RULES = """TITLE RULES:
 - NO colons. No "Main Title: Subtitle" structure, ever.
-- Do NOT start with "Why Your". Do not use "A Guide to", "Survival Guide",
+- Do NOT start with "Why Your". No "A Guide to", "Survival Guide",
   "Everything You Need to Know", "The Hidden Cost of", or "The Ultimate".
-- Do NOT put "Connecticut" or "CT" in the title unless the topic is genuinely
-  about the state (a law, a utility program). Weather topics don't count.
-- Keep it under ~60 characters when you can.
-- Pick a DIFFERENT format than the recent titles listed below. Rotate between:
-  a plain statement ("Hard water is quietly wrecking your dishwasher"),
-  a question ("Ice maker died again this spring?"),
+- Do NOT put "Connecticut" or "CT" in the title unless the post is specifically
+  about a state regulation, utility rebate program, or Connecticut-specific topic.
+  Seasonal weather topics don't count.
+- Aim for under 60 characters.
+- The title should read like something a person typed, not an SEO template.
+- Rotate between these formats (pick a DIFFERENT format than the recent titles below):
+  a plain statement of fact ("Hard water is quietly wrecking your dishwasher"),
+  a direct question ("Ice maker died again?"),
   an imperative ("Stop rinsing your dishes before the dishwasher"),
-  a mild joke ("Your fridge hates July as much as you do"),
-  a specific observation ("That clicking noise is almost always the start relay").
-- It should read like something a person typed, not an SEO template."""
+  a mild observation ("Your fridge hates July as much as you do"),
+  a specific technical finding ("That clicking noise is almost always the start relay"),
+  a counterintuitive claim ("Newer isn't always better for washing machines")."""
 
 
 # ---------------------------------------------------------------------------
@@ -222,7 +303,6 @@ def get_colors(category: str) -> tuple[str, str]:
 
 
 def pick_image(category: str, existing_posts: list[dict]) -> str:
-    """Pick an image from the category pool, avoiding recently used ones."""
     pool = CATEGORY_IMAGE_POOLS.get(category, CATEGORY_IMAGE_POOLS["default"])
     recent = {p.get("image") for p in existing_posts[:IMAGE_NO_REPEAT_WINDOW]}
     fresh = [u for u in pool if u not in recent]
@@ -251,25 +331,38 @@ def response_text(response) -> str:
 # ---------------------------------------------------------------------------
 
 BANNED_REPLACEMENTS = [
-    (r"\s*[\u2014\u2013]\s*", ", "),          # em/en dash -> comma
-    (r"\s+--\s+", ", "),                       # double dash
-    (r";\s+", ", "),                           # semicolons in prose
+    # Em dashes and en dashes — every possible encoding
+    (r"—", ", "),                           # em dash (unicode)
+    (r"–", ", "),                           # en dash (unicode)
+    (r"&#8212;", ", "),                          # em dash (HTML entity)
+    (r"&#8211;", ", "),                          # en dash (HTML entity)
+    (r"&mdash;", ", "),                          # em dash (named entity)
+    (r"&ndash;", ", "),                          # en dash (named entity)
+    (r"\s*---+\s*", ", "),                       # triple+ hyphen dash
+    (r"\s+--\s+", ", "),                         # double hyphen used as dash
+    # Semicolons in prose
+    (r";\s+", ", "),
+    # Banned AI filler phrases
     (r"(?i)\bit'?s (?:also )?worth noting that\s*", ""),
     (r"(?i)\bit'?s important to (?:note|remember|understand) that\s*", ""),
     (r"(?i)\bkeep in mind that\s*", ""),
     (r"(?i)\bin today'?s (?:world|fast-paced world|market),?\s*", ""),
     (r"(?i)\bwhen it comes to\b", "with"),
-    (r"(?i)(<p>)(?:Additionally|Moreover|Furthermore|In conclusion),\s*", r"\1"),
+    (r"(?i)\bat the end of the day,?\s*", ""),
+    (r"(?i)(<p>)(?:Additionally|Moreover|Furthermore|In conclusion|To summarize),\s*", r"\1"),
     (r"(?i)\. (?:Additionally|Moreover|Furthermore),\s*", ". "),
-    (r"[\u201c\u201d]", '"'),                  # curly quotes -> straight
-    (r"[\u2018\u2019]", "'"),
+    # Curly quotes -> straight
+    (r"[“”]", '"'),
+    (r"[‘’]", "'"),
 ]
 
 
 def sanitize(text: str) -> str:
     for pattern, repl in BANNED_REPLACEMENTS:
         text = re.sub(pattern, repl, text)
+    # Capitalize first letter after <p> tag if it slipped through lowercase
     text = re.sub(r"(<p>)([a-z])", lambda m: m.group(1) + m.group(2).upper(), text)
+    # Clean up double commas left by replacements
     text = re.sub(r",\s*,", ",", text)
     text = re.sub(r"  +", " ", text)
     return text.strip()
@@ -277,7 +370,6 @@ def sanitize(text: str) -> str:
 
 def sanitize_title(title: str) -> str:
     title = sanitize(title)
-    # If a colon slipped through anyway, keep only the front half.
     if ":" in title:
         title = title.split(":")[0].strip()
     return title.strip(' "')
@@ -322,7 +414,7 @@ def gather_research(tavily, topic_hint: str, month_year: str) -> str:
         all_results.extend(tavily_search(tavily, q))
     if not all_results:
         return ""
-    lines = ["Recent news and data from the web (paraphrase, never quote):"]
+    lines = ["Recent news and data from the web (paraphrase, never quote directly):"]
     for r in all_results:
         title = r.get("title", "").strip()
         snippet = r.get("content", "").strip()[:300]
@@ -344,34 +436,40 @@ def pick_topic_and_outline(client, existing_slugs, existing_titles, attempt):
 
 You're planning your next blog post.
 
-All existing post titles (do NOT duplicate these topics):
+All existing post titles (do NOT duplicate any of these topics):
 {existing_list}
 
 Requirements for the new topic:
 - Genuinely useful to homeowners: appliance repair, maintenance, energy savings,
-  buying advice, troubleshooting, seasonal tips, or smart home appliances
-- Something not already covered above
-- Ground it in what you actually see on service calls
+  buying advice, troubleshooting, seasonal issues, or smart home appliances
+- Must not duplicate anything already covered above
+- Must be grounded in real patterns from service calls, not generic advice
 
 {TITLE_RULES}
 
 The 5 most recent titles are below. Your new title must NOT resemble any of
-their structures or openings:
+their structures or opening words:
 {recent_titles}
 
-The EXCERPT must also sound human: no colons, no em dashes, no "Learn how to",
-no "Discover". Write it like the first thing you'd say to a customer about it.
-Don't put "Connecticut" in the excerpt.
+The EXCERPT must sound human: no colons, no em dashes, no "Learn how to",
+no "Discover", no "In this post". Write it like the first thing you'd say
+to a customer. Don't mention Connecticut in the excerpt.
+
+For the RESEARCH SUMMARY, include:
+- The main angle and what makes this post different from generic advice
+- At least one specific fact, stat, or part cost that will appear in the post
+- At least one brand or model pattern to reference (can be a common one you see)
+- 4-6 loose section ideas with concrete details, not just headings
+- One anecdote seed from a real-feeling service call
+- Any seasonal or regional context if it fits naturally
 
 Format your response EXACTLY like this:
 TITLE: [title following all the rules above]
 SLUG: [kebab-case-url-slug]
 CATEGORY: [one of: Refrigerators, Dishwashers, Maintenance, Tips & Advice, Smart Home, Technology, Washers & Dryers, Ovens & Ranges, Energy Savings, Safety]
-EXCERPT: [casual one-or-two sentence hook, max 155 characters]
+EXCERPT: [casual one-or-two sentence hook, max 155 characters, no em dashes]
 RESEARCH SUMMARY:
-[Outline for the post: the main angle, 4-6 loose section ideas, specific tips
-or numbers to include, one or two anecdote seeds from service calls, any
-seasonal context. Bullet points fine.]"""
+[outline as described above]"""
 
     try:
         response = client.messages.create(
@@ -423,9 +521,7 @@ seasonal context. Bullet points fine.]"""
 
 def write_post(client, research, web_context=""):
     context_block = f"\n{web_context}\n" if web_context else ""
-
-    # Varied length per post -> varied read times on the index page
-    target_words = random.randrange(450, 1101, 50)
+    target_words = random.randrange(500, 1100, 50)
 
     link_options = [
         '<a href="/#booking" style="color:#1e3a5f;font-weight:600;">book a service call</a>',
@@ -438,29 +534,48 @@ def write_post(client, research, web_context=""):
 
 {STYLE_RULES}
 
+{TECHNICAL_GROUNDING}
+
 {VOICE_SAMPLE}
 {context_block}
-Write the blog post.
+Write the blog post now.
 
-Title (already rendered by the site, don't repeat it): {research["title"]}
+Title (already rendered by the site — do NOT repeat it in the content): {research["title"]}
 Category: {research["category"]}
-Length: roughly {target_words} words. Don't pad to hit a number. If you're done
-saying what you have to say, stop.
+Target length: roughly {target_words} words. If you're done saying what you have
+to say before that, stop. Don't pad to hit a number.
 
-Rough outline (deviate freely, follow your own train of thought):
+Outline (deviate freely if your own train of thought goes somewhere better):
 {research["research_summary"]}
+
+WHAT MAKES THIS POST TECHNICALLY AUTHORITATIVE:
+- Use at least two specific numbers from the Technical Grounding block (costs,
+  years, stats) that are relevant to this topic. Cite them naturally in prose.
+- Name at least one specific part by its function (thermal fuse, start relay,
+  control board, circulation pump, door latch, etc.). Explain in one sentence
+  what it does and what it costs to fix, roughly.
+- Name at least one brand or model pattern if it's honest and relevant.
+- State at least one thing confidently that the reader probably doesn't know
+  and that will change how they think about this appliance.
+
+HUMANIZER CHECKLIST (all of these must appear somewhere in the post):
+- One anecdote or reference to a specific service call (city, symptom, outcome)
+- One opinion stated directly, not hedged ("I'd skip the warranty", "Don't bother")
+- At least two very short paragraphs (1 sentence each)
+- One longer paragraph (4-5 sentences) that builds to a point
+- One sentence that starts with And, But, or So
 
 Branding, kept light:
 - Mention "{COMPANY_NAME}" once or twice, naturally, in first person ("we").
-- Work these two links into sentences mid-paragraph (not in a CTA block):
+- Work these two links into mid-paragraph sentences (not in a standalone CTA block):
   {chosen_links[0]}
   {chosen_links[1]}
-- End with ONE short, casual closing paragraph that includes
+- End with ONE short, casual closing paragraph (two sentences max) that includes
   <a href="/#booking" style="color:#1e3a5f;font-weight:600;">schedule a repair</a>.
-  Two sentences max, no hype.
+  No hype. No "Don't hesitate to." Just practical.
 
 Output ONLY the HTML body content using <p>, <h2>, <h3>, and at most one <ul>.
-No <h1>, no code fences, no preamble."""
+No <h1>. No code fences. No preamble. No postamble."""
 
     try:
         response = client.messages.create(
@@ -561,7 +676,7 @@ def main() -> None:
         all_posts_so_far = new_posts + existing_posts
         post = generate_post(client, all_posts_so_far, i, tavily=tavily)
         if post:
-            new_posts.insert(0, post)  # newest first among today's posts
+            new_posts.insert(0, post)
         else:
             print(f"  Skipping post {i + 1} due to errors.", file=sys.stderr)
 
