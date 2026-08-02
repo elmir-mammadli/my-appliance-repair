@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { cities } from '@/lib/cities';
 
 const quickLinks = [
   { label: 'Home', href: '/' },
@@ -72,7 +73,7 @@ export default function Footer() {
       </h2>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Col 1 — Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Image
@@ -176,7 +177,26 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 4 — Connect With Us */}
+          {/* Col 4 — Service Areas */}
+          <div>
+            <h3 className="text-white font-bold text-base mb-5 font-[family-name:var(--font-lexend)]">
+              Service Areas
+            </h3>
+            <ul className="grid grid-cols-2 gap-x-3 gap-y-1">
+              {cities.map((city) => (
+                <li key={city.slug}>
+                  <Link
+                    href={`/${city.slug}`}
+                    className="text-xs text-blue-200/70 hover:text-white transition-colors duration-200"
+                  >
+                    {city.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 5 — Connect With Us */}
           <div>
             <h3 className="text-white font-bold text-base mb-5 font-[family-name:var(--font-lexend)]">
               Connect With Us

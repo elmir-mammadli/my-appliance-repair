@@ -730,7 +730,7 @@ export default function AboutContent() {
             </a>
           </div>
           <p className="text-blue-500 text-sm mt-8">
-            Have a question?{''}
+            Have a question?{' '}
             <a
               href="mailto:service@myappliance.us"
               className="text-blue-300 hover:text-white transition-colors duration-200 underline underline-offset-2"
