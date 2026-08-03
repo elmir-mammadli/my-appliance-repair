@@ -126,20 +126,17 @@ export default function HiringModal() {
     if (!validate()) return;
     setSubmitting(true);
     try {
-      const res = await fetch('/api/apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          phone: form.phone,
-          email: form.email,
-          experience: form.experience,
-          availability: form.availability,
-          why: form.why,
-          brands,
-          cvFileName: cvFile?.name ?? null,
-        }),
-      });
+      const fd = new FormData();
+      fd.append('name', form.name);
+      fd.append('phone', form.phone);
+      fd.append('email', form.email);
+      fd.append('experience', form.experience);
+      fd.append('availability', form.availability);
+      fd.append('why', form.why);
+      fd.append('brands', JSON.stringify(brands));
+      if (cvFile) fd.append('cv', cvFile, cvFile.name);
+
+      const res = await fetch('/api/apply', { method: 'POST', body: fd });
       if (!res.ok) throw new Error('server error');
       setSubmitted(true);
     } catch {
@@ -223,7 +220,7 @@ export default function HiringModal() {
               <p className="text-slate-500 mb-6 max-w-md mx-auto">
                 Thanks, <strong className="text-blue-950">{form.name}</strong>! We&apos;ve received
                 your application and will review it shortly. We&apos;ll be in touch within{' '}
-                <strong className="text-blue-950">2 business days</strong> at{''}
+                <strong className="text-blue-950">2 business days</strong> at{' '}
                 <strong className="text-blue-950">{form.phone}</strong>.
               </p>
               <button

@@ -4,17 +4,29 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 export async function POST(req: NextRequest) {
-  const data = await req.json();
-  const { name, phone, email, experience, availability, why, brands, cvFileName } = data as {
-    name: string;
-    phone: string;
-    email: string;
-    experience: string;
-    availability: string;
-    why: string;
-    brands: string[];
-    cvFileName?: string;
-  };
+  const fd = await req.formData();
+
+  const name         = fd.get('name')         as string;
+  const phone        = fd.get('phone')        as string;
+  const email        = fd.get('email')        as string;
+  const experience   = fd.get('experience')   as string;
+  const availability = fd.get('availability') as string;
+  const why          = fd.get('why')          as string;
+  const brands: string[] = JSON.parse((fd.get('brands') as string) || '[]');
+  const cvEntry      = fd.get('cv');
+
+  let cvFileName: string | null = null;
+  let cvAttachment: { filename: string; content: Buffer; contentType: string } | null = null;
+
+  if (cvEntry instanceof File && cvEntry.size > 0) {
+    cvFileName = cvEntry.name;
+    const bytes = await cvEntry.arrayBuffer();
+    cvAttachment = {
+      filename: cvEntry.name,
+      content: Buffer.from(bytes),
+      contentType: cvEntry.type || 'application/octet-stream',
+    };
+  }
 
   const notificationEmail = process.env.NOTIFICATION_EMAIL!;
 
@@ -65,7 +77,7 @@ export async function POST(req: NextRequest) {
  <p style="margin:0 0 12px;color:#112654;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-bottom:2px solid #f1f5f9;padding-bottom:8px;">Why They Want to Join</p>
  <p style="margin:0 0 24px;color:#334155;font-size:14px;line-height:1.6;">${why.replace(/\n/g, '<br>')}</p>
 
- ${cvFileName ? `<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;padding:12px 16px;"><p style="margin:0;color:#166534;font-size:13px;"><strong>CV attached:</strong> ${cvFileName} — follow up with applicant to collect the file.</p></div>` : ''}
+ ${cvFileName ? `<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;padding:12px 16px;"><p style="margin:0;color:#166534;font-size:13px;"><strong>CV attached:</strong> ${cvFileName}</p></div>` : ''}
 
  </td></tr>
 
@@ -87,6 +99,7 @@ export async function POST(req: NextRequest) {
       to: notificationEmail,
       subject: `New Application — ${name} · ${experience} · ${availability}`,
       html,
+      ...(cvAttachment ? { attachments: [cvAttachment] } : {}),
     });
   } catch (err) {
     console.error('[/api/apply] email error:', err);

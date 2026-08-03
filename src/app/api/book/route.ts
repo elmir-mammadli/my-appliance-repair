@@ -163,7 +163,7 @@ async function sendNotification(data: Record<string, string>) {
   await resend.emails.send({
     from: 'MyAppliance Repair LLC <notifications@myappliance.us>',
     to: notificationEmail,
-    subject: `🔧 New Lead — ${data.appliance} · ${data.urgency.toUpperCase()} · ${data.name}`,
+    subject: `🔧 New Lead: ${data.appliance} · ${data.urgency.toUpperCase()} · ${data.name}`,
     html,
   });
 }
