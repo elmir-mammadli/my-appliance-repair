@@ -1,11 +1,12 @@
 export const runtime = 'nodejs';
+export const maxDuration = 60;
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getPostBySlug } from '@/lib/posts';
 
 const VOICE_ID = process.env.ELEVENLABS_VOICE_ID ?? 'IKne3meq5aSn9XLyUdCD'; // Charlie
-const MODEL_ID = 'eleven_turbo_v2_5';
-const MAX_CHARS = 4500;
+const MODEL_ID = 'eleven_flash_v2_5'; // fastest model — lowest latency
+const MAX_CHARS = 2000;
 
 function htmlToText(html: string): string {
   return html
@@ -58,10 +59,10 @@ export async function GET(
 
   if (!elRes.ok) {
     const err = await elRes.text();
-    console.error('[/api/audio] ElevenLabs error:', elRes.status, err);
+    console.error('[audio/%s] ElevenLabs %d: %s', slug, elRes.status, err);
     return NextResponse.json(
-      { error: 'Audio generation failed', detail: err },
-      { status: elRes.status },
+      { error: 'Audio generation failed', status: elRes.status, detail: err },
+      { status: 502 },
     );
   }
 
