@@ -147,7 +147,7 @@ export default function RecentJobs() {
               Recent Jobs
             </h2>
             <p className="text-slate-500 max-w-md text-base">
-              Real technician visits across Connecticut — photos taken on-site after every completed
+              Real technician visits across Connecticut: photos taken on-site after every completed
               repair.
             </p>
           </div>
