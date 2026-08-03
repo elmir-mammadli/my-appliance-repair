@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 interface Props {
   slug: string;
@@ -18,6 +18,7 @@ function formatTime(seconds: number): string {
 
 export default function BlogAudioPlayer({ slug, title }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [mounted, setMounted] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -25,6 +26,8 @@ export default function BlogAudioPlayer({ slug, title }: Props) {
   const [duration, setDuration] = useState(0);
   const [error, setError] = useState(false);
   const [speedIdx, setSpeedIdx] = useState(0);
+
+  useEffect(() => { setMounted(true); }, []);
 
   const handlePlayPause = useCallback(async () => {
     const audio = audioRef.current;
@@ -66,6 +69,28 @@ export default function BlogAudioPlayer({ slug, title }: Props) {
 
   const progress = duration > 0 && isFinite(duration) ? (currentTime / duration) * 100 : 0;
   const showTime = duration > 0 && isFinite(duration);
+
+  if (!mounted) {
+    return (
+      <div className="mb-8 border border-slate-200 bg-white overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-3 bg-slate-50 border-b border-slate-100">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded bg-slate-200 animate-pulse" />
+            <div className="w-36 h-4 rounded bg-slate-200 animate-pulse" />
+          </div>
+        </div>
+        <div className="px-5 py-4">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-slate-200 animate-pulse flex-shrink-0" />
+            <div className="flex-1 space-y-3">
+              <div className="w-24 h-4 rounded bg-slate-200 animate-pulse" />
+              <div className="w-full h-2 rounded-full bg-slate-200 animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mb-8 border border-slate-200 bg-white overflow-hidden">
@@ -144,9 +169,9 @@ export default function BlogAudioPlayer({ slug, title }: Props) {
               </div>
 
               {/* Time display */}
-              <span className="text-xs text-slate-500 tabular-nums">
+              <span className={`text-xs tabular-nums ${error ? 'text-red-500 font-medium' : 'text-slate-500'}`}>
                 {error
-                  ? 'Unavailable'
+                  ? 'Audio unavailable'
                   : showTime
                     ? `${formatTime(currentTime)} / ${formatTime(duration)}`
                     : loading
