@@ -2,7 +2,7 @@ name: Generate Daily Blog Posts
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # 9 AM UTC = ~5 AM ET daily
+    - cron: '0 9 */3 * *'  # 9 AM UTC = ~5 AM ET every 3 days
   workflow_dispatch:  # Allow manual trigger for testing
 
 jobs:
