@@ -3,6 +3,11 @@ export interface CityFaq {
   a: string;
 }
 
+export interface CityReason {
+  title: string;
+  body: string;
+}
+
 export interface City {
   slug: string;
   name: string;
@@ -10,6 +15,8 @@ export interface City {
   region: string;
   intro: string;
   faqs: CityFaq[];
+  whyUs: CityReason[];
+  neighborhoods: string[];
 }
 
 export const cities: City[] = [
@@ -38,6 +45,25 @@ export const cities: City[] = [
         a: "Same day in most cases if you call before noon. Downtown and East Rock are close to where our techs already run jobs most mornings, so it's usually one of our shorter drives of the day.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Our techs are already running East Rock, Wooster Square, and Fair Haven most mornings, so a New Haven call usually just slots into a route that's already headed your way.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Every tech we send into a pre-war triple-decker is CT licensed, background-checked, and comfortable working around original knob-and-tube wiring without cutting corners.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Landlords and renters both get the same 90-day parts and labor warranty, which matters in a city where a lot of appliances change hands between tenants.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "City apartments tend to run mid-size, common models, so we stock the parts that fail most in that class and finish most New Haven jobs in one visit.",
+      },
+    ],
+    neighborhoods: ['East Rock', 'Wooster Square', 'Fair Haven', 'Westville', 'Downtown / Yale'],
   },
   {
     slug: 'hamden',
@@ -64,6 +90,25 @@ export const cities: City[] = [
         a: "Washing machines that won't spin, honestly. A lot of the older homes have washers on uneven basement floors, and once the machine's out of level it throws the bearing off fast.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Hamden is home base for us, so it isn't a detour on the route, it's the start of it. Call before noon and there's almost always a same-day slot for Spring Glen, Whitneyville, or Mount Carmel.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Our whole crew is CT licensed and insured, and the techs who cover Hamden day to day know the difference between a ranch off Whitney Ave and a Mount Carmel colonial before they even ring the bell.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Every repair carries a 90-day parts and labor warranty, homeowner or landlord. In the Quinnipiac rental turnover season that guarantee has saved more than a few property managers a second service call.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "Because we're out here so often, our vans carry OEM parts for the exact washer and dryer models that fail most on Hamden's uneven basement floors, so most visits finish in one stop.",
+      },
+    ],
+    neighborhoods: ['Whitneyville', 'Spring Glen', 'Mount Carmel', 'Highwood', 'Centerville'],
   },
   {
     slug: 'west-haven',
@@ -90,6 +135,25 @@ export const cities: City[] = [
         a: "We do, regularly. Property managers over there call us because we're fast and we don't nickel and dime them on the estimate.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "We route around Beach Street traffic instead of through it, so Savin Rock and Allingtown calls still land same day even during the busiest summer weekends.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Salt-air corrosion means a tech sometimes has to work around a rusted-out bracket or panel, and every one of ours is licensed, insured, and trained not to force a repair that isn't safe.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Coastal appliances age faster, so we back every West Haven repair with a 90-day parts and labor warranty instead of a shorter window some shops offer.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We keep replacement vent caps, seals, and housings on the van specifically for shoreline corrosion issues, since it's such a common call this close to the water.",
+      },
+    ],
+    neighborhoods: ['Savin Rock', 'Allingtown', 'Sea Bluff', 'West Shore', 'Oak Street'],
   },
   {
     slug: 'east-haven',
@@ -116,6 +180,25 @@ export const cities: City[] = [
         a: "Very. A lot of those homes still have their original panels from the sixties, so we always check the breaker before assuming the appliance itself is the problem.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "East Haven is small enough that our techs cover Momauguin, Foxon, and Short Beach back to back, so same-day slots are easy to hold even on short notice.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Every technician is CT licensed and insured, and knows to check a sixties-era breaker panel before writing off the appliance as the problem.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Whether it's a converted Short Beach cottage or a ranch off Main Street, every repair gets the same 90-day parts and labor warranty.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We stock the sensors and igniters that fail most on East Haven's older ovens and ranges, so most calls close out without a second trip.",
+      },
+    ],
+    neighborhoods: ['Momauguin', 'Foxon', 'Short Beach', 'Fort Hale', 'Main Street'],
   },
   {
     slug: 'north-haven',
@@ -142,6 +225,25 @@ export const cities: City[] = [
         a: "Same day almost always. It's a central spot for us and easy to reach from wherever our other North Haven jobs are that morning.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "North Haven sits central to our other routes, so whether you're off Route 5 or out toward Clintonville, same-day slots are the norm, not the exception.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Our licensed, insured techs handle both ends of town, from builder-grade units in the newer plazas-adjacent subdivisions to decades-old appliances on the Quinnipiac riverside.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Older or newer, every North Haven repair is backed by the same 90-day parts and labor warranty, no exceptions for vintage.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We carry common parts for newer builder-grade models and can special order for older farmhouse units, telling you the cost difference upfront either way.",
+      },
+    ],
+    neighborhoods: ['Clintonville', 'Broadway / Route 5 Corridor', 'Skiff Street', 'Quinnipiac Riverside'],
   },
   {
     slug: 'woodbridge',
@@ -168,6 +270,25 @@ export const cities: City[] = [
         a: "Usually same week, often same day if you call in the morning. Woodbridge isn't as dense as some towns, but it's not out of our normal route.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Woodbridge isn't as dense as New Haven, but it's a short run from Amity and our other western towns, so most calls off Center or Racebrook still land same day.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Every tech is CT licensed and insured and knows to check for well-water scale buildup on a dishwasher or washer before assuming a part has simply failed.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Well water shortens appliance life, so the 90-day parts and labor warranty matters more here than in towns on city water, and we back it the same way.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We carry the heating elements and spray arms that fail first from hard well water, which covers most Woodbridge dishwasher calls in a single visit.",
+      },
+    ],
+    neighborhoods: ['Woodbridge Center', 'Racebrook Road Corridor', 'Amity', 'Country Club Road Area'],
   },
   {
     slug: 'orange',
@@ -194,6 +315,25 @@ export const cities: City[] = [
         a: "Sometimes. A handful of the older colonials still have original wiring that wasn't built for today's appliance loads, so we always check the breaker box first if something keeps tripping.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "We build Fair Grounds event traffic into the schedule ahead of time, so a High Plains or Grassy Hill appointment rarely gets bumped by a busy Post Road afternoon.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed, insured techs handle both the newer High Plains builds and the older colonials near town center, checking original wiring first when something keeps tripping a breaker.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Every Orange repair, residential or the occasional Post Road commercial call, carries the same 90-day parts and labor warranty.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We keep builder-grade dishwasher racks and spray arms on the van since that's the most common failure point in Orange's newer developments.",
+      },
+    ],
+    neighborhoods: ['High Plains', 'Grassy Hill', 'Turkey Hill', 'Racebrook', 'Orange Center'],
   },
   {
     slug: 'bethany',
@@ -220,6 +360,25 @@ export const cities: City[] = [
         a: "Sometimes a day longer if our schedule that week is packed with closer jobs, but we don't push Bethany calls to the back of the line. Most weeks it's still same day.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Bethany gets fewer calls than a town like New Haven, but we don't treat it as an afterthought, most weeks it's still a same-day appointment if you call in the morning.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed and insured techs who are used to hard well water and septic setups, which changes what actually fails on a washer or dishwasher out here.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Hard Bethany well water is rough on appliances, so the 90-day parts and labor warranty carries real weight for the calls we run out here.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We stock the scale-prone parts that fail fastest on hard well water so a Bethany dishwasher or washer repair doesn't need a second, far-out trip.",
+      },
+    ],
+    neighborhoods: ['Bethany Center', 'Downs Road', 'Amity Area', 'Pole Bridge Road'],
   },
   {
     slug: 'branford',
@@ -246,6 +405,25 @@ export const cities: City[] = [
         a: "Yes, and that's actually a common call, an appliance that sat unused all winter and needs a once-over before the family comes back for summer.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "We route around the Stony Creek dock crowds in summer, so Short Beach and Indian Neck calls hold their same-day slot even on a packed Thimble Islands weekend.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed, insured techs who've worked enough Branford shoreline homes to know how to fix a unit in a snug older appliance closet without tearing the surround apart.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Salt-air wear means a repair sometimes needs a follow-up look, which is exactly what the 90-day parts and labor warranty is there for.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We carry vent covers and housings suited to salt-air corrosion, since that's the most common failure we see this close to Long Island Sound.",
+      },
+    ],
+    neighborhoods: ['Stony Creek', 'Short Beach', 'Indian Neck', 'Pine Orchard', 'Branford Center'],
   },
   {
     slug: 'milford',
@@ -272,6 +450,25 @@ export const cities: City[] = [
         a: "Refrigerators and ice makers, by a wide margin. More people home for the summer means the fridge just works harder, and it shows.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Milford's coastline runs long, but Woodmont, Walnut Beach, and Devon are all normal stops for us, so same-day is standard even during peak summer season.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed, insured techs who know to check a converted cottage's appliance hookups against modern spec before assuming the unit itself is what failed.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Salt-air wear plus the added strain of a busy summer fridge means the 90-day parts and labor warranty gets used, and honored, more here than most towns.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We keep ice maker and refrigerator parts stocked heading into summer since that's Milford's most common seasonal call by a wide margin.",
+      },
+    ],
+    neighborhoods: ['Woodmont', 'Walnut Beach', 'Devon', 'Point Beach', 'Downtown Milford'],
   },
   {
     slug: 'shelton',
@@ -298,6 +495,25 @@ export const cities: City[] = [
         a: "We do, and it's one of the more common relationships we have in town. Fast turnaround matters a lot when a unit's occupied and the tenant's without a fridge.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Same-day holds up whether it's a Constitution Boulevard condo or a Huntington farmhouse, our vans handle Shelton's hills fine outside of a heavy snow day.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed, insured techs who work both sides of town, from quick builder-grade condo swaps to the more involved diagnosing that older White Hills homes sometimes need.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "New condo or old farmhouse, every Shelton repair gets the same 90-day parts and labor warranty, no fine print based on the building's age.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We keep common builder-grade parts on hand for the condo corridor and can source the less common parts older Huntington and White Hills units sometimes need.",
+      },
+    ],
+    neighborhoods: ['Huntington', 'White Hills', 'Long Hill', 'Constitution Boulevard Corridor', 'Downtown Shelton'],
   },
   {
     slug: 'derby',
@@ -324,6 +540,25 @@ export const cities: City[] = [
         a: "Pretty fast. It's one of our quicker towns to fully cover since nothing's more than a few minutes from anything else.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Derby is small enough that our techs can cross the whole city in minutes, which makes it one of our easiest towns to hold a tight same-day window in.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed, insured techs who double check a two-family home's actual hookup setup before quoting anything, since those get modified more here than in newer towns.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Every Derby repair, downtown two-family or otherwise, carries the standard 90-day parts and labor warranty.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We stock compressor and condenser fan parts since those are the most common failure on Derby's older, well-built refrigerators.",
+      },
+    ],
+    neighborhoods: ['Downtown Derby', 'Home Place', 'Hawthorne Avenue Area', 'Derby Landing'],
   },
   {
     slug: 'ansonia',
@@ -350,6 +585,25 @@ export const cities: City[] = [
         a: "Usually in the same range as anywhere else, $120 to $400 depending on the part. Age of the home doesn't change pricing, just sometimes the diagnosis takes an extra few minutes.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Same-day holds for Ansonia's hillside streets except in a real ice storm, our techs know which roads get tricky first and plan around them.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed, insured techs who check an old mill-town electrical panel first when something keeps tripping, and tell you honestly if the panel, not the appliance, is overdue.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Downtown multi-family or hillside single home, every Ansonia repair carries the same 90-day parts and labor warranty.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "Shared basement laundry in Ansonia's older multi-families wears out belts and bearings fast, so those are exactly the parts we keep stocked for this town.",
+      },
+    ],
+    neighborhoods: ['Downtown Ansonia', 'Hilltop', 'Woodbridge Avenue Area', 'Riverside'],
   },
   {
     slug: 'naugatuck',
@@ -376,6 +630,25 @@ export const cities: City[] = [
         a: "Yes, we know a lot of Naugatuck folks commute out of town for work, so evening slots are one of our more popular options here.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "We offer evening slots as well as same-day daytime appointments, since a lot of Naugatuck residents commute out to Waterbury and need a window that works around that.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed, insured techs who bring the right tools for the low-ceilinged basements common in Naugatuck's older borough homes.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Every Naugatuck repair, hillside or downtown, carries the standard 90-day parts and labor warranty.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We stock washer suspension springs and bearings since that's the most common failure on machines that have run in the same Naugatuck basement for fifteen or twenty years.",
+      },
+    ],
+    neighborhoods: ['Union City', 'Salem', 'City Hill', 'Downtown Borough'],
   },
   {
     slug: 'cheshire',
@@ -402,6 +675,25 @@ export const cities: City[] = [
         a: "Usually same day if you call in the morning. It's a central spot for us between our other New Haven County stops.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Cheshire sits central between our other New Haven County stops, so it's one of the more predictable same-day towns on our route.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed, insured techs who move quick through Cheshire's modern hookups and know the sturdier older colonials near town center often just need a part, not a replacement.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Standard 90-day parts and labor warranty on every Cheshire repair, new development or town center colonial alike.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We keep dishwasher filters and drain hoses stocked since a clogged one is Cheshire's most common newer-development call by a wide margin.",
+      },
+    ],
+    neighborhoods: ['Cheshire Center', 'West Main', 'Mixville', 'Highland'],
   },
   {
     slug: 'meriden',
@@ -428,6 +720,25 @@ export const cities: City[] = [
         a: "Both, and pretty evenly. We work with a handful of landlords in town who call us directly when a tenant's appliance goes down.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Meriden sits right off 91 and Route 15, which keeps it central to our route, same-day service is common here even on short notice.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed, insured techs who know Hanover's shared basement laundry setups as well as the electronics in a newer East Side fridge.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Renter or homeowner, hundred-year-old triple-decker or five-year-old build, every Meriden repair gets the same 90-day parts and labor warranty.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We carry ice maker and water line parts for the newer East Side builds, since that's the most common call in that part of town.",
+      },
+    ],
+    neighborhoods: ['Hanover', 'East Side', 'West Side', 'South Meriden'],
   },
   {
     slug: 'wallingford',
@@ -454,6 +765,25 @@ export const cities: City[] = [
         a: "Yes, every repair anywhere in our service area gets the same 90-day parts and labor warranty. Doesn't matter which town you're in.",
       },
     ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Wallingford's center and the Yalesville side get equal attention on our route, so same-day availability doesn't shift depending on which part of town you're in.",
+      },
+      {
+        title: 'Licensed & Insured',
+        body: "Licensed, insured techs who know the long vent runs in Wallingford's older center-of-town homes tend to clog faster than newer Community Lake construction.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Same 90-day parts and labor warranty here as anywhere else in our service area, center of town or out toward Yalesville.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We keep dryer vent kits on hand for the long-run clogging issue that's the most common Wallingford dryer complaint.",
+      },
+    ],
+    neighborhoods: ['Yalesville', 'Community Lake', 'Wallingford Center', 'North Farms'],
   },
 ];
 

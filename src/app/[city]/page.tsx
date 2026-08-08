@@ -313,24 +313,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             Why {city.name} Residents Choose Us
           </h2>
           <div className="grid sm:grid-cols-2 gap-8">
-            {[
-              {
-                title: 'Same-Day Service',
-                body: 'Call before noon and we typically arrive the same day. Morning, afternoon, and evening slots available across all of Connecticut.',
-              },
-              {
-                title: 'Licensed & Insured',
-                body: 'All technicians are CT state licensed, background-checked, and fully insured. Your home is in safe hands.',
-              },
-              {
-                title: '90-Day Warranty',
-                body: 'Every repair is backed by a 90-day parts and labor warranty. If the same issue returns, we fix it free of charge.',
-              },
-              {
-                title: 'OEM Parts on Board',
-                body: "We carry OEM parts for the most common failures, so most repairs finish in a single visit. If a part isn't on board, we order it and come back.",
-              },
-            ].map((item) => (
+            {city.whyUs.map((item) => (
               <div key={item.title} className="flex gap-4">
                 <div className="w-8 h-8 bg-[#ffb81c] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <svg
@@ -351,6 +334,29 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                   <p className="text-sm text-slate-500 leading-relaxed">{item.body}</p>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Neighborhoods */}
+      <section className="py-16 bg-white border-t border-slate-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-blue-950 mb-3 text-center">
+            Neighborhoods We Serve in {city.name}
+          </h2>
+          <p className="text-slate-500 text-center mb-8 max-w-2xl mx-auto">
+            From {city.neighborhoods[0]} to {city.neighborhoods[city.neighborhoods.length - 1]}, our
+            techs know {city.name} block by block.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {city.neighborhoods.map((n) => (
+              <span
+                key={n}
+                className="px-4 py-2 bg-blue-50 border border-blue-100 text-blue-950 text-sm font-medium"
+              >
+                {n}
+              </span>
             ))}
           </div>
         </div>
