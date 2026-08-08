@@ -185,7 +185,7 @@ async function sendConfirmation(data: Record<string, string>) {
  </td></tr>
 
  <tr><td style="background:#ffb81c;padding:14px 32px;">
- <p style="margin:0;color:#112654;font-size:14px;font-weight:700;">Hi ${data.name} — your booking request is confirmed. We&apos;ll call you within 30 minutes.</p>
+ <p style="margin:0;color:#112654;font-size:14px;font-weight:700;">Hi ${data.name}, your booking request is confirmed. We&apos;ll call you within 30 minutes.</p>
  </td></tr>
 
  <tr><td style="background:#ffffff;padding:28px 32px;">
