@@ -8,7 +8,7 @@ import BookingModal from '@/components/BookingModal';
 import BookingButton from '@/components/BookingButton';
 import { posts, getPostBySlug, getRelatedPosts } from '@/lib/posts';
 import ViewCounter from '@/components/ViewCounter';
-import BlogAudioPlayer from '@/components/BlogAudioPlayer';
+// import BlogAudioPlayer from '@/components/BlogAudioPlayer';
 
 function jsonLd(data: object): string {
   return JSON.stringify(data)
@@ -247,10 +247,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main content */}
-            <div className="lg:col-span-2">
+            {/* Temporary turn off the blog audio player */}
+            {/* <div className="lg:col-span-2">
               <BlogAudioPlayer slug={post.slug} title={post.title} />
               <div className="prose" dangerouslySetInnerHTML={{ __html: post.content }} />
-            </div>
+            </div> */}
 
             {/* Sidebar */}
             <aside className="lg:col-span-1">

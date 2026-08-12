@@ -43,11 +43,11 @@ export default function PrivacyPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-slate-600 leading-relaxed mb-10">
             My Appliance Repair (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) operates
-            the website{''}
+            the website{' '}
             <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">
               myappliance.us
             </a>
-            {''}
+            {' '}
             and provides home appliance repair services throughout Connecticut. This Privacy Policy
             explains what personal information we collect, how we use it, and your rights regarding
             that information.
@@ -201,8 +201,8 @@ export default function PrivacyPage() {
             </li>
           </ul>
           <p className="text-slate-600 leading-relaxed mb-6">
-            To exercise any of these rights, please contact us at{''}
-            <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">
+            To exercise any of these rights, please contact us at{' '}
+            <a href="mailto:service@myappliance.us" className="text-blue-700 underline hover:underline">
               service@myappliance.us
             </a>
             . We will respond to your request within a reasonable timeframe.
@@ -245,11 +245,11 @@ export default function PrivacyPage() {
             </li>
           </ul>
           <p className="text-slate-600 leading-relaxed mb-6">
-            To submit a CTDPA rights request, email us at{''}
-            <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">
+            To submit a CTDPA rights request, email us at{' '}
+            <a href="mailto:service@myappliance.us" className="text-blue-700 underline hover:underline">
               service@myappliance.us
             </a>
-            {''}
+            {' '}
             with the subject line &ldquo;CTDPA Rights Request.&rdquo; We will respond within 45 days
             as required by law, with an option to extend for an additional 45 days when reasonably
             necessary.
@@ -288,11 +288,11 @@ export default function PrivacyPage() {
             Our website and services are not directed to children under the age of 13. We do not
             knowingly collect personal information from children under 13. If you believe that we
             have inadvertently collected information from a child under 13, please contact us
-            immediately at{''}
-            <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">
+            immediately at{' '}
+            <a href="mailto:service@myappliance.us" className="text-blue-700 underline hover:underline">
               service@myappliance.us
             </a>
-            {''}
+            {' '}
             and we will take steps to delete that information as promptly as possible.
           </p>
 
@@ -334,18 +334,24 @@ export default function PrivacyPage() {
             data practices, please contact us:
           </p>
           <div className="bg-blue-50 p-6 mt-4 mb-10">
-            <p className="font-semibold text-blue-900 mb-1">MY Appliance Repair</p>
+            <p className="font-semibold text-blue-900 mb-1">MyAppliance Repair, LLC</p>
             <p className="text-slate-600 text-sm">Serving Connecticut</p>
             <p className="text-slate-600 text-sm mt-2">
-              Email:{''}
+              Phone:{' '}
+              <a href="tel:959-261-6736" className="text-blue-700 hover:underline">
+                959-261-6736
+              </a>
+            </p>
+            <p className="text-slate-600 text-sm">
+              Email:{' '}
               <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">
                 service@myappliance.us
               </a>
             </p>
             <p className="text-slate-600 text-sm">
-              Website:{''}
+              Website:{' '}
               <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">
-                myappliance.us
+                www.myappliance.us
               </a>
             </p>
           </div>
@@ -353,11 +359,11 @@ export default function PrivacyPage() {
           {/* Cross-link */}
           <div className="border-t border-slate-200 pt-8">
             <p className="text-slate-500 text-sm">
-              Also see our{''}
+              Also see our{' '}
               <Link href="/terms" className="text-blue-700 hover:underline font-medium">
                 Terms of Service
               </Link>
-              {''}for the rules and conditions governing use of our services.
+              {' '}for the rules and conditions governing use of our services.
             </p>
           </div>
         </div>
