@@ -248,10 +248,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main content */}
             {/* Temporary turn off the blog audio player */}
-            {/* <div className="lg:col-span-2">
-              <BlogAudioPlayer slug={post.slug} title={post.title} />
+            <div className="lg:col-span-2">
               <div className="prose" dangerouslySetInnerHTML={{ __html: post.content }} />
-            </div> */}
+            </div>
 
             {/* Sidebar */}
             <aside className="lg:col-span-1">
