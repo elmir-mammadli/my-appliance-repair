@@ -30,28 +30,34 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) return {};
 
+  // Search snippet can afford ~155-160 chars; social previews truncate closer to 125.
   const description = post.excerpt.length > 160 ? post.excerpt.slice(0, 157) + '...' : post.excerpt;
+  const socialDescription =
+    post.excerpt.length > 125 ? post.excerpt.slice(0, 122).replace(/\s+\S*$/, '') + '...' : post.excerpt;
 
   return {
-    title: `${post.title} | MyAppliance Repair LLC Blog`,
+    // Bare title — the root layout's `%s | MyAppliance Repair` template adds the
+    // brand suffix, so this shouldn't repeat it or the <title> doubles up.
+    title: post.title,
     description,
     keywords: `${post.category.toLowerCase()}, appliance repair Connecticut, ${post.title.toLowerCase()}`,
     alternates: { canonical: `https://www.myappliance.us/blog/${slug}` },
     openGraph: {
       type: 'article',
       url: `https://www.myappliance.us/blog/${slug}`,
-      title: `${post.title} | MyAppliance Repair LLC Blog`,
-      description,
+      siteName: 'MyAppliance Repair LLC',
+      locale: 'en_US',
+      title: post.title,
+      description: socialDescription,
       publishedTime: post.date,
       authors: ['MyAppliance Repair LLC Team'],
-      images: [
-        {
-          url: post.image,
-          width: 800,
-          height: 600,
-          alt: post.title,
-        },
-      ],
+      // Image itself comes from the co-located opengraph-image.tsx file convention,
+      // which takes priority over anything set here — no need to duplicate it.
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: socialDescription,
     },
   };
 }
