@@ -25,7 +25,7 @@ export default function Navbar() {
     { href: '/#testimonials', label: 'Reviews' },
     { href: '/#faq', label: 'FAQ' },
     { href: '/about', label: 'About' },
-    { href: '/#join-us', label: 'Join Our Team' },
+    { href: '/blog', label: 'Our Blog' },
   ];
 
   return (

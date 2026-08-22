@@ -224,7 +224,7 @@ export default function Testimonials() {
               ))}
             </div>
             <p className="mt-2 text-3xl font-bold">5.0 / 5</p>
-            <p className="text-sm text-blue-300 mt-0.5">42 Google reviews</p>
+            <p className="text-sm text-blue-300 mt-0.5">60+ Google reviews</p>
             <a
               href={GOOGLE_REVIEWS_URL}
               target="_blank"

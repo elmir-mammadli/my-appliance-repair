@@ -25,7 +25,7 @@ const brands = [
   { name: 'Sharp', tier: 'standard' },
   { name: 'Panasonic', tier: 'standard' },
   { name: 'Insignia', tier: 'standard' },
-  { name: 'Crosley', tier: 'standard' },
+  { name: 'THOR', tier: 'standard' },
   { name: 'Magic Chef', tier: 'standard' },
   { name: 'Admiral', tier: 'standard' },
   { name: 'Estate', tier: 'standard' },
@@ -49,7 +49,7 @@ export default function BrandsGrid() {
         </div>
 
         <div className="mb-6">
-          <p className="mb-3 text-center text-xs font-bold uppercase tracking-widest text-blue-400">
+          <p className="mb-3 text-center text-xs font-semibold uppercase tracking-widest text-blue-600">
             Premium & Luxury
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -67,7 +67,7 @@ export default function BrandsGrid() {
         </div>
 
         <div className="mb-6">
-          <p className="mb-3 text-center text-xs font-bold uppercase tracking-widest text-slate-400">
+          <p className="mb-3 text-center text-xs font-semibold uppercase tracking-widest text-slate-400">
             Major Brands
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -85,7 +85,7 @@ export default function BrandsGrid() {
         </div>
 
         <div className="mb-8">
-          <p className="mb-3 text-center text-xs font-bold uppercase tracking-widest text-slate-300">
+          <p className="mb-3 text-center text-xs font-semibold uppercase tracking-widest text-slate-300">
             And Many More
           </p>
           <div className="flex flex-wrap justify-center gap-2">
@@ -103,12 +103,12 @@ export default function BrandsGrid() {
         </div>
 
         <p className="text-center text-sm text-slate-400">
-          Don&apos;t see your brand?{''}
+          Don&apos;t see your brand?{' '}
           <a
             href="tel:+19592616736"
             className="font-semibold text-blue-600 transition-colors duration-200 hover:text-blue-800"
           >
-            Call us — we most likely service it.
+            Call us. We most likely service it.
           </a>
         </p>
       </div>

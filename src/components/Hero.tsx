@@ -16,6 +16,9 @@ const popularCities = [
   { href: '/north-haven', label: 'North Haven' },
 ];
 
+const THUMBTACK_URL =
+  'https://www.thumbtack.com/reviews/services/580267695654707208/write-customer-review';
+
 export default function Hero() {
   return (
     <section className="border-b border-slate-100 bg-white pt-20" aria-label="Hero section">
@@ -153,6 +156,43 @@ export default function Hero() {
                 className="absolute inset-0 bg-gradient-to-t from-blue-950/90 via-blue-950/25 to-transparent"
                 aria-hidden="true"
               />
+
+              <a
+                href={THUMBTACK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute right-3 top-3 z-10 flex items-center gap-2.5 border border-slate-100 bg-white/95 px-3 py-2.5 shadow-lg backdrop-blur transition-transform duration-200 hover:-translate-y-0.5 sm:right-4 sm:top-4 sm:px-3.5"
+              >
+                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-black">
+                  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                      fill="#FFF"
+                      d="M8.973 10.385a3.71 3.71 0 01-.564 1.957L8 13l-.409-.658a3.704 3.704 0 01-.564-1.957v-3.14C7.51 6.62 8.231 6.4 8.973 6.4v3.985zM4 5.69V4h8v1.69H4z"
+                    />
+                  </svg>
+                </span>
+                <div className="leading-tight">
+                  <p className="text-xs font-bold uppercase tracking-wide text-blue-950">
+                    Exceptional
+                  </p>
+                  <div className="mt-0.5 flex items-center gap-1">
+                    <div className="flex gap-px" aria-hidden="true">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <svg
+                          key={i}
+                          className="h-2.5 w-2.5 text-[#ffb81c]"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <span className="text-[11px] font-medium text-slate-500">113 on Thumbtack</span>
+                  </div>
+                </div>
+              </a>
+
               <div className="absolute inset-x-0 bottom-0 p-7">
                 <p className="mb-1.5 text-xs font-bold uppercase tracking-[0.24em] text-[#ffb81c]">
                   Refrigerator, washer, dryer, dishwasher & oven repair
@@ -175,7 +215,7 @@ export default function Hero() {
             </ul>
           </div>
 
-          <div className="hidden md:block absolute -bottom-5 right-4 bg-blue-950 px-5 py-4 text-white shadow-xl sm:right-6">
+          <div className="hidden md:block absolute -bottom-5 right-4 bg-blue-950 px-5 py-4 text-white sm:right-6">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300">
               Service promise
             </p>
