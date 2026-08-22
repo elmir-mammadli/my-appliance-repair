@@ -175,7 +175,7 @@ export default function BlogPage() {
             Need Appliance Repair in Connecticut?
           </h2>
           <p className="text-blue-200 text-lg mb-8 max-w-xl mx-auto">
-            Same-day service across all 169 CT towns. Licensed, insured, and backed by a 90-day
+            Same-day service across all 169 CT towns. Insured and backed by a 90-day
             warranty.
           </p>
           <a

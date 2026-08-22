@@ -2,12 +2,18 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
-import {
-  HonourStarIcon,
-  StarCircleIcon,
-  LeafyGreenIcon,
-  LicenseIcon,
-} from '@hugeicons/core-free-icons';
+import { Shield01Icon, LeafyGreenIcon, Award01Icon } from '@hugeicons/core-free-icons';
+
+const ThumbtackMark = (
+  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-black">
+    <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true">
+      <path
+        fill="#FFF"
+        d="M8.973 10.385a3.71 3.71 0 01-.564 1.957L8 13l-.409-.658a3.704 3.704 0 01-.564-1.957v-3.14C7.51 6.62 8.231 6.4 8.973 6.4v3.985zM4 5.69V4h8v1.69H4z"
+      />
+    </svg>
+  </span>
+);
 
 const reasons = [
   {
@@ -27,9 +33,9 @@ const reasons = [
         />
       </svg>
     ),
-    title: 'Licensed & Insured',
+    title: 'Fully Insured',
     description:
-      'Fully licensed in Connecticut with comprehensive insurance. Your home and appliances are always protected.',
+      'Every technician we send is covered by comprehensive liability insurance. Your home and appliances are always protected.',
   },
   {
     icon: (
@@ -224,17 +230,33 @@ export default function WhyUs() {
             {/* Badges Grid */}
             <div className="grid grid-cols-2 gap-4">
               {[
-                { title: 'BBB Accredited', subtitle: 'A+ Rating since 2010', icon: HonourStarIcon },
-                { title: 'HomeAdvisor', subtitle: 'Top Rated Pro 2024', icon: StarCircleIcon },
-                { title: 'EPA Certified', subtitle: 'Refrigerant Handling', icon: LeafyGreenIcon },
-                { title: 'CT Licensed', subtitle: '#HIC.0642318', icon: LicenseIcon },
+                {
+                  title: 'Thumbtack Platinum',
+                  subtitle: '"Exceptional" Rating',
+                  icon: ThumbtackMark,
+                },
+                {
+                  title: 'Fully Insured',
+                  subtitle: 'General Liability',
+                  icon: <HugeiconsIcon icon={Shield01Icon} size={24} className="text-blue-700" />,
+                },
+                {
+                  title: 'EPA Certified',
+                  subtitle: 'Refrigerant Handling',
+                  icon: <HugeiconsIcon icon={LeafyGreenIcon} size={24} className="text-blue-700" />,
+                },
+                {
+                  title: '10+ Years',
+                  subtitle: 'Serving Connecticut',
+                  icon: <HugeiconsIcon icon={Award01Icon} size={24} className="text-blue-700" />,
+                },
               ].map((badge) => (
                 <div
                   key={badge.title}
                   className="bg-blue-50 border border-blue-200 p-4 text-center hover:border-blue-400 hover:shadow-md transition-all duration-200 cursor-default"
                 >
                   <div className="flex justify-center mb-2" aria-hidden="true">
-                    <HugeiconsIcon icon={badge.icon} size={24} className="text-blue-700" />
+                    {badge.icon}
                   </div>
                   <div className="font-bold text-blue-900 text-sm">{badge.title}</div>
                   <div className="text-blue-500 text-xs mt-0.5">{badge.subtitle}</div>

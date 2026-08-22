@@ -8,7 +8,7 @@ export default function NotFoundActions() {
     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
       <Link
         href="/"
-        className="inline-flex items-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-semibold px-8 py-3.5 transition-colors duration-200 shadow-sm text-base"
+        className="inline-flex items-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-semibold px-8 py-3.5 transition-colors duration-200 text-base"
       >
         <svg
           className="w-5 h-5"

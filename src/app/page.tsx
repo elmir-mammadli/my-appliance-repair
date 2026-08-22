@@ -19,7 +19,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
   description:
-    'Same-day appliance repair in Connecticut for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Trusted in New Haven, Hamden, West Haven, and nearby CT towns. Licensed techs, 90-day warranty.',
+    'Same-day appliance repair in Connecticut for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Trusted in New Haven, Hamden, West Haven, and nearby CT towns. Insured techs, 90-day warranty.',
   keywords: [
     'appliance repair Connecticut',
     'appliance repair near me',

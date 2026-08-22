@@ -17,7 +17,7 @@ const localBusiness = {
   image: 'https://www.myappliance.us/images/appliance-repair-connecticut-og.jpg',
   logo: 'https://www.myappliance.us/logo.svg',
   description:
-    'Licensed appliance repair service in Connecticut. Same-day service for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Licensed, insured, 90-day parts and labor warranty.',
+    'Insured appliance repair service in Connecticut. Same-day service for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Fully insured, 90-day parts and labor warranty.',
   slogan: 'Same-day appliance repair in Connecticut',
   knowsAbout: [
     'Appliance repair',
@@ -308,10 +308,10 @@ const faq = {
     },
     {
       '@type': 'Question',
-      name: 'Are you licensed and insured?',
+      name: 'Are you insured?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. MyAppliance Repair LLC is fully licensed and insured in Connecticut. Our technicians are experienced professionals who service all major appliance brands.',
+        text: 'Yes. MyAppliance Repair LLC carries full liability insurance in Connecticut. Appliance repair is not a trade that requires CT home improvement contractor (HIC) licensing, so our technicians instead hold EPA certification for refrigerant handling and are experienced professionals who service all major appliance brands.',
       },
     },
   ],

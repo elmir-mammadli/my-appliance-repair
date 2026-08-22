@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: '%s | MyAppliance Repair',
   },
   description:
-    'Licensed CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.',
+    'Insured CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.',
   keywords: [
     'appliance repair Connecticut',
     'CT appliance repair',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     siteName: 'MyAppliance Repair LLC',
     title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | MyAppliance Repair',
     description:
-      'Licensed CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.',
+      'Insured CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.',
     images: [
       {
         url: '/images/appliance-repair-connecticut-og.jpg',
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | MyAppliance Repair',
     description:
-      'Licensed CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.',
+      'Insured CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.',
     images: ['/images/appliance-repair-connecticut-og.jpg'],
   },
   verification: {},

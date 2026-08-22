@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import AboutContent from '@/components/AboutContent';
 
 export const metadata: Metadata = {
-  title: 'About Us | Licensed CT Appliance Repair Experts | MyAppliance Repair LLC',
+  title: 'About Us | Insured CT Appliance Repair Experts | MyAppliance Repair LLC',
   description:
-    "Learn about MyAppliance Repair LLC — Connecticut's trusted local appliance repair service. Licensed technicians, 90-day warranty, 2,500+ repairs completed across CT.",
+    "Learn about MyAppliance Repair LLC — Connecticut's trusted local appliance repair service. Insured technicians, 90-day warranty, 2,500+ repairs completed across CT.",
   alternates: { canonical: 'https://www.myappliance.us/about' },
 };
 
@@ -20,14 +20,14 @@ const aboutPageSchema = {
   '@type': 'AboutPage',
   name: 'About MyAppliance Repair LLC',
   description:
-    "Connecticut's trusted local appliance repair service. Licensed technicians, 90-day warranty, 2,500+ repairs completed across CT.",
+    "Connecticut's trusted local appliance repair service. Insured technicians, 90-day warranty, 2,500+ repairs completed across CT.",
   url: 'https://www.myappliance.us/about',
   mainEntity: {
     '@type': 'LocalBusiness',
     '@id': 'https://www.myappliance.us/#business',
     name: 'MyAppliance Repair LLC',
     description:
-      "Connecticut's most trusted appliance repair service. Licensed & insured technicians, 90-day warranty, same-day appointments available.",
+      "Connecticut's most trusted appliance repair service. Insured technicians, 90-day warranty, same-day appointments available.",
     url: 'https://www.myappliance.us',
     telephone: '+19592616736',
     email: 'service@myappliance.us',
@@ -36,11 +36,6 @@ const aboutPageSchema = {
       name: 'Connecticut',
     },
     hasCredential: [
-      {
-        '@type': 'EducationalOccupationalCredential',
-        name: 'CT State Licensed Appliance Technician',
-        credentialCategory: 'license',
-      },
       {
         '@type': 'EducationalOccupationalCredential',
         name: 'EPA 608 Certified',

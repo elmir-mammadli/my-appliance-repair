@@ -286,7 +286,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 </div>
                 <h2 className="font-bold text-lg mb-2 leading-snug">Need Appliance Repair?</h2>
                 <p className="text-blue-200 text-sm leading-relaxed mb-5">
-                  Same-day service across Connecticut. Licensed technicians, 90-day warranty on all
+                  Same-day service across Connecticut. Insured technicians, 90-day warranty on all
                   repairs.
                 </p>
                 <BookingButton className="w-full bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold py-3 transition-all duration-200 text-sm cursor-pointer">

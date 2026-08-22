@@ -8,7 +8,6 @@ const quickLinks = [
   { label: 'About Us', href: '/about' },
   { label: 'Blog & Tips', href: '/blog' },
   { label: 'Book a Repair', href: '/#book' },
-  { label: 'Careers', href: '/#join' },
 ];
 
 const serviceLinks = [
@@ -85,7 +84,7 @@ export default function Footer() {
               style={{ filter: 'brightness(0) invert(1)' }}
             />
             <p className="text-sm leading-relaxed mb-6">
-              Connecticut&apos;s trusted appliance repair experts. Licensed, insured technicians
+              Connecticut&apos;s trusted appliance repair experts. Insured technicians
               with a 90-day warranty on every repair.
             </p>
 
@@ -326,7 +325,7 @@ export default function Footer() {
                 clipRule="evenodd"
               />
             </svg>
-            <span>CT License #HIC.0642318</span>
+            <span>Fully Insured &amp; EPA Certified</span>
           </div>
         </div>
       </div>

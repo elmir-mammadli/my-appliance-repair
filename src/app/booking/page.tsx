@@ -6,20 +6,20 @@ import BookingForm from '@/components/BookingForm';
 export const metadata: Metadata = {
   title: 'Book Appliance Repair in CT | Same-Day Service | MyAppliance Repair',
   description:
-    'Book same-day appliance repair in Connecticut online. Licensed technicians, 90-day warranty, free diagnostic with any paid repair. Serving New Haven County and surrounding areas.',
+    'Book same-day appliance repair in Connecticut online. Insured technicians, 90-day warranty, free diagnostic with any paid repair. Serving New Haven County and surrounding areas.',
   alternates: { canonical: 'https://www.myappliance.us/booking' },
   openGraph: {
     type: 'website',
     url: 'https://www.myappliance.us/booking',
     title: 'Book Appliance Repair | MyAppliance Repair LLC',
     description:
-      'Schedule same-day appliance repair in CT. Free estimate, 90-day warranty, licensed techs.',
+      'Schedule same-day appliance repair in CT. Free estimate, 90-day warranty, insured techs.',
     images: [{ url: '/images/og-image.png', width: 1200, height: 630 }],
   },
 };
 
 const trustBadges = [
-  'Licensed & Insured',
+  'Fully Insured',
   'Same-day available',
   '90-day warranty',
   'Free estimate',

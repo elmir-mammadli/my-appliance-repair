@@ -82,7 +82,7 @@ export default function TermsPage() {
             <li>Microwaves and other household appliances</li>
           </ul>
           <p className="text-slate-600 leading-relaxed mb-6">
-            All services are performed by trained, licensed technicians. We service most major
+            All services are performed by trained, insured technicians. We service most major
             appliance brands. Service availability may vary by location within Connecticut. We
             reserve the right to decline service at our discretion.
           </p>

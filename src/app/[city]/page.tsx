@@ -22,13 +22,13 @@ export async function generateMetadata({
 
   return {
     title: `Appliance Repair ${city.name}, CT | Same-Day Service | MyAppliance Repair LLC`,
-    description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Licensed techs, 90-day warranty. Call (959) 261-6736.`,
+    description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Insured techs, 90-day warranty. Call (959) 261-6736.`,
     alternates: { canonical: `https://www.myappliance.us/${city.slug}` },
     openGraph: {
       type: 'website',
       url: `https://www.myappliance.us/${city.slug}`,
       title: `Appliance Repair ${city.name}, CT | Same-Day Service | MyAppliance Repair LLC`,
-      description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Licensed techs, 90-day warranty.`,
+      description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Insured techs, 90-day warranty.`,
       images: [
         {
           url: '/images/og-image.png',
@@ -138,7 +138,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
     url: 'https://www.myappliance.us',
     telephone: '+19592616736',
     email: 'service@myappliance.us',
-    description: `Licensed appliance repair service in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers, ovens, and more. 90-day parts and labor warranty.`,
+    description: `Insured appliance repair service in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers, ovens, and more. 90-day parts and labor warranty.`,
     areaServed: [
       {
         '@type': 'City',
@@ -249,7 +249,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
 
           <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-500">
             {[
-              'Licensed & Insured',
+              'Fully Insured',
               'Same-day available',
               '90-day warranty',
               'OEM parts',
@@ -411,7 +411,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             Ready to Schedule Your Repair in {city.name}?
           </h2>
           <p className="text-blue-200 mb-8 max-w-lg mx-auto">
-            Same-day appointments available. Licensed technicians, 90-day warranty, OEM parts on
+            Same-day appointments available. Insured technicians, 90-day warranty, OEM parts on
             every van.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

@@ -35,7 +35,7 @@ export default function Hero() {
           </h1>
 
           <p className="mb-6 max-w-xl text-base leading-relaxed text-slate-600 sm:mb-8 sm:text-lg">
-            Licensed, insured technicians repair refrigerators, washers, dryers, dishwashers, ovens,
+            Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens,
             and freezers across Connecticut, with a written estimate before work begins and a
             90-day labor warranty.
           </p>

@@ -163,14 +163,14 @@ export default function NotFound() {
 
           {/* Helpful link row */}
           <p className="mt-8 text-sm text-slate-500">
-            Need help?{''}
+            Need help?{' '}
             <a
               href="tel:+19592616736"
               className="text-blue-700 hover:text-blue-900 font-medium underline underline-offset-2 transition-colors duration-200"
             >
-              Call (959) 261-6736
+              Call (959) 261-6736.
             </a>
-            {''}— we&apos;re available 7 days a week.
+            {' '}We&apos;re available 7 days a week.
           </p>
         </div>
       </main>

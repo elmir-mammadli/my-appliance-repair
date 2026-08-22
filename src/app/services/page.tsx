@@ -126,7 +126,7 @@ export default function ServicesIndexPage() {
 
           <div className="max-w-3xl">
             <p className="text-sm font-semibold text-blue-600 tracking-wide uppercase mb-6">
-              CT · Licensed and insured · Same-day service
+              CT · Insured · Same-day service
             </p>
             <h1 className="text-5xl lg:text-6xl font-bold text-blue-950 leading-[1.1] tracking-tight mb-6">
               Appliances we <span className="text-[#ffb81c]">repair</span> in Connecticut

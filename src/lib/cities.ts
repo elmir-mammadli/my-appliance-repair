@@ -51,8 +51,8 @@ export const cities: City[] = [
         body: "Our techs are already running East Rock, Wooster Square, and Fair Haven most mornings, so a New Haven call usually just slots into a route that's already headed your way.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Every tech we send into a pre-war triple-decker is CT licensed, background-checked, and comfortable working around original knob-and-tube wiring without cutting corners.",
+        title: 'Fully Insured',
+        body: "Every tech we send into a pre-war triple-decker is fully insured, background-checked, and comfortable working around original knob-and-tube wiring without cutting corners.",
       },
       {
         title: '90-Day Warranty',
@@ -96,8 +96,8 @@ export const cities: City[] = [
         body: "Hamden is home base for us, so it isn't a detour on the route, it's the start of it. Call before noon and there's almost always a same-day slot for Spring Glen, Whitneyville, or Mount Carmel.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Our whole crew is CT licensed and insured, and the techs who cover Hamden day to day know the difference between a ranch off Whitney Ave and a Mount Carmel colonial before they even ring the bell.",
+        title: 'Fully Insured',
+        body: "Our whole crew is fully insured, and the techs who cover Hamden day to day know the difference between a ranch off Whitney Ave and a Mount Carmel colonial before they even ring the bell.",
       },
       {
         title: '90-Day Warranty',
@@ -141,8 +141,8 @@ export const cities: City[] = [
         body: "We route around Beach Street traffic instead of through it, so Savin Rock and Allingtown calls still land same day even during the busiest summer weekends.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Salt-air corrosion means a tech sometimes has to work around a rusted-out bracket or panel, and every one of ours is licensed, insured, and trained not to force a repair that isn't safe.",
+        title: 'Fully Insured',
+        body: "Salt-air corrosion means a tech sometimes has to work around a rusted-out bracket or panel, and every one of ours is insured and trained not to force a repair that isn't safe.",
       },
       {
         title: '90-Day Warranty',
@@ -186,8 +186,8 @@ export const cities: City[] = [
         body: "East Haven is small enough that our techs cover Momauguin, Foxon, and Short Beach back to back, so same-day slots are easy to hold even on short notice.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Every technician is CT licensed and insured, and knows to check a sixties-era breaker panel before writing off the appliance as the problem.",
+        title: 'Fully Insured',
+        body: "Every technician is fully insured, and knows to check a sixties-era breaker panel before writing off the appliance as the problem.",
       },
       {
         title: '90-Day Warranty',
@@ -231,8 +231,8 @@ export const cities: City[] = [
         body: "North Haven sits central to our other routes, so whether you're off Route 5 or out toward Clintonville, same-day slots are the norm, not the exception.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Our licensed, insured techs handle both ends of town, from builder-grade units in the newer plazas-adjacent subdivisions to decades-old appliances on the Quinnipiac riverside.",
+        title: 'Fully Insured',
+        body: "Our insured techs handle both ends of town, from builder-grade units in the newer plazas-adjacent subdivisions to decades-old appliances on the Quinnipiac riverside.",
       },
       {
         title: '90-Day Warranty',
@@ -276,8 +276,8 @@ export const cities: City[] = [
         body: "Woodbridge isn't as dense as New Haven, but it's a short run from Amity and our other western towns, so most calls off Center or Racebrook still land same day.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Every tech is CT licensed and insured and knows to check for well-water scale buildup on a dishwasher or washer before assuming a part has simply failed.",
+        title: 'Fully Insured',
+        body: "Every tech is fully insured and knows to check for well-water scale buildup on a dishwasher or washer before assuming a part has simply failed.",
       },
       {
         title: '90-Day Warranty',
@@ -321,8 +321,8 @@ export const cities: City[] = [
         body: "We build Fair Grounds event traffic into the schedule ahead of time, so a High Plains or Grassy Hill appointment rarely gets bumped by a busy Post Road afternoon.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed, insured techs handle both the newer High Plains builds and the older colonials near town center, checking original wiring first when something keeps tripping a breaker.",
+        title: 'Fully Insured',
+        body: "Insured techs handle both the newer High Plains builds and the older colonials near town center, checking original wiring first when something keeps tripping a breaker.",
       },
       {
         title: '90-Day Warranty',
@@ -366,8 +366,8 @@ export const cities: City[] = [
         body: "Bethany gets fewer calls than a town like New Haven, but we don't treat it as an afterthought, most weeks it's still a same-day appointment if you call in the morning.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed and insured techs who are used to hard well water and septic setups, which changes what actually fails on a washer or dishwasher out here.",
+        title: 'Fully Insured',
+        body: "Insured techs who are used to hard well water and septic setups, which changes what actually fails on a washer or dishwasher out here.",
       },
       {
         title: '90-Day Warranty',
@@ -411,8 +411,8 @@ export const cities: City[] = [
         body: "We route around the Stony Creek dock crowds in summer, so Short Beach and Indian Neck calls hold their same-day slot even on a packed Thimble Islands weekend.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed, insured techs who've worked enough Branford shoreline homes to know how to fix a unit in a snug older appliance closet without tearing the surround apart.",
+        title: 'Fully Insured',
+        body: "Insured techs who've worked enough Branford shoreline homes to know how to fix a unit in a snug older appliance closet without tearing the surround apart.",
       },
       {
         title: '90-Day Warranty',
@@ -456,8 +456,8 @@ export const cities: City[] = [
         body: "Milford's coastline runs long, but Woodmont, Walnut Beach, and Devon are all normal stops for us, so same-day is standard even during peak summer season.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed, insured techs who know to check a converted cottage's appliance hookups against modern spec before assuming the unit itself is what failed.",
+        title: 'Fully Insured',
+        body: "Insured techs who know to check a converted cottage's appliance hookups against modern spec before assuming the unit itself is what failed.",
       },
       {
         title: '90-Day Warranty',
@@ -501,8 +501,8 @@ export const cities: City[] = [
         body: "Same-day holds up whether it's a Constitution Boulevard condo or a Huntington farmhouse, our vans handle Shelton's hills fine outside of a heavy snow day.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed, insured techs who work both sides of town, from quick builder-grade condo swaps to the more involved diagnosing that older White Hills homes sometimes need.",
+        title: 'Fully Insured',
+        body: "Insured techs who work both sides of town, from quick builder-grade condo swaps to the more involved diagnosing that older White Hills homes sometimes need.",
       },
       {
         title: '90-Day Warranty',
@@ -546,8 +546,8 @@ export const cities: City[] = [
         body: "Derby is small enough that our techs can cross the whole city in minutes, which makes it one of our easiest towns to hold a tight same-day window in.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed, insured techs who double check a two-family home's actual hookup setup before quoting anything, since those get modified more here than in newer towns.",
+        title: 'Fully Insured',
+        body: "Insured techs who double check a two-family home's actual hookup setup before quoting anything, since those get modified more here than in newer towns.",
       },
       {
         title: '90-Day Warranty',
@@ -591,8 +591,8 @@ export const cities: City[] = [
         body: "Same-day holds for Ansonia's hillside streets except in a real ice storm, our techs know which roads get tricky first and plan around them.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed, insured techs who check an old mill-town electrical panel first when something keeps tripping, and tell you honestly if the panel, not the appliance, is overdue.",
+        title: 'Fully Insured',
+        body: "Insured techs who check an old mill-town electrical panel first when something keeps tripping, and tell you honestly if the panel, not the appliance, is overdue.",
       },
       {
         title: '90-Day Warranty',
@@ -636,8 +636,8 @@ export const cities: City[] = [
         body: "We offer evening slots as well as same-day daytime appointments, since a lot of Naugatuck residents commute out to Waterbury and need a window that works around that.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed, insured techs who bring the right tools for the low-ceilinged basements common in Naugatuck's older borough homes.",
+        title: 'Fully Insured',
+        body: "Insured techs who bring the right tools for the low-ceilinged basements common in Naugatuck's older borough homes.",
       },
       {
         title: '90-Day Warranty',
@@ -681,8 +681,8 @@ export const cities: City[] = [
         body: "Cheshire sits central between our other New Haven County stops, so it's one of the more predictable same-day towns on our route.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed, insured techs who move quick through Cheshire's modern hookups and know the sturdier older colonials near town center often just need a part, not a replacement.",
+        title: 'Fully Insured',
+        body: "Insured techs who move quick through Cheshire's modern hookups and know the sturdier older colonials near town center often just need a part, not a replacement.",
       },
       {
         title: '90-Day Warranty',
@@ -726,8 +726,8 @@ export const cities: City[] = [
         body: "Meriden sits right off 91 and Route 15, which keeps it central to our route, same-day service is common here even on short notice.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed, insured techs who know Hanover's shared basement laundry setups as well as the electronics in a newer East Side fridge.",
+        title: 'Fully Insured',
+        body: "Insured techs who know Hanover's shared basement laundry setups as well as the electronics in a newer East Side fridge.",
       },
       {
         title: '90-Day Warranty',
@@ -771,8 +771,8 @@ export const cities: City[] = [
         body: "Wallingford's center and the Yalesville side get equal attention on our route, so same-day availability doesn't shift depending on which part of town you're in.",
       },
       {
-        title: 'Licensed & Insured',
-        body: "Licensed, insured techs who know the long vent runs in Wallingford's older center-of-town homes tend to clog faster than newer Community Lake construction.",
+        title: 'Fully Insured',
+        body: "Insured techs who know the long vent runs in Wallingford's older center-of-town homes tend to clog faster than newer Community Lake construction.",
       },
       {
         title: '90-Day Warranty',
