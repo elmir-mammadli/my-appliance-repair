@@ -17,7 +17,7 @@ const popularCities = [
 ];
 
 const THUMBTACK_URL =
-  'https://www.thumbtack.com/reviews/services/580267695654707208/write-customer-review';
+  'https://www.thumbtack.com/ct/hamden/appliance-repair/my-appliance-repair-llc/service/580267695654707208';
 
 export default function Hero() {
   return (
