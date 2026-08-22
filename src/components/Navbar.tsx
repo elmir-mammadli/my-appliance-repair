@@ -179,6 +179,13 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <Link
+            href="/#join-us"
+            onClick={() => setIsMobileOpen(false)}
+            className="flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-blue-900 font-semibold px-5 py-3 transition-colors duration-200 cursor-pointer w-full"
+          >
+            Join Our Team
+          </Link>
           <button
             onClick={() => {
               setIsMobileOpen(false);
