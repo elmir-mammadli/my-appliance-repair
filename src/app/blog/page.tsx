@@ -80,9 +80,9 @@ export default function BlogPage() {
 
           {/* Bottom rule + description */}
           <div className="border-t border-blue-200 pt-6">
-            <p className="text-lg lg:text-xl text-slate-700 leading-relaxed max-w-2xl">
+            <p className="text-lg lg:text-xl text-slate-700 leading-relaxed max-w-5xl">
               Practical guides and maintenance advice from Connecticut&apos;s appliance repair
-              specialists — so your appliances last longer and cost you less.
+              specialists, so your appliances last longer and cost you less.
             </p>
           </div>
         </div>
