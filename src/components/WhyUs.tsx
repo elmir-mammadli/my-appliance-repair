@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Shield01Icon, LeafyGreenIcon, Award01Icon } from '@hugeicons/core-free-icons';
+import { Shield01Icon, LeafyGreenIcon } from '@hugeicons/core-free-icons';
 
 const ThumbtackMark = (
   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-black">
@@ -78,27 +78,6 @@ const reasons = [
     title: '90-Day Warranty',
     description:
       'Every repair comes with a 90-day parts and labor warranty. We stand behind our work, guaranteed.',
-  },
-  {
-    icon: (
-      <svg
-        className="w-7 h-7"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        aria-hidden="true"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1.5}
-          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-        />
-      </svg>
-    ),
-    title: 'Certified Technicians',
-    description:
-      'Our technicians are factory-trained and certified on all major appliance brands. 10+ years average experience.',
   },
   {
     icon: (
@@ -244,11 +223,6 @@ export default function WhyUs() {
                   title: 'EPA Certified',
                   subtitle: 'Refrigerant Handling',
                   icon: <HugeiconsIcon icon={LeafyGreenIcon} size={24} className="text-blue-700" />,
-                },
-                {
-                  title: '10+ Years',
-                  subtitle: 'Serving Connecticut',
-                  icon: <HugeiconsIcon icon={Award01Icon} size={24} className="text-blue-700" />,
                 },
               ].map((badge) => (
                 <div
