@@ -5,14 +5,33 @@ import Footer from '@/components/Footer';
 import BookingModal from '@/components/BookingModal';
 import BlogCategoryCard from '@/components/BlogCategoryCard';
 import { posts } from '@/lib/posts';
+import { SERVICE_AREAS } from '@/lib/business';
 
 export const metadata: Metadata = {
-  title: 'Appliance Repair Tips & Guides | CT Homeowners Blog | MyAppliance Repair LLC',
+  // Bare title — the root layout's `%s | MyAppliance Repair` template adds the brand.
+  title: 'Appliance Repair Tips for CT Homeowners',
   description:
     "Expert appliance repair tips, maintenance guides, and cost-saving advice for Connecticut homeowners. Stay informed with MyAppliance Repair LLC's blog.",
   keywords:
     'appliance repair tips Connecticut, washer dryer maintenance, refrigerator problems, dishwasher repair, appliance maintenance',
   alternates: { canonical: 'https://www.myappliance.us/blog' },
+  // Without these the page inherits the root layout's OG block wholesale, which
+  // advertises the homepage title and og:url on every share of /blog.
+  openGraph: {
+    type: 'website',
+    url: 'https://www.myappliance.us/blog',
+    siteName: 'MyAppliance Repair LLC',
+    locale: 'en_US',
+    title: 'Appliance Repair Tips & Guides for CT Homeowners',
+    description:
+      'Maintenance guides, repair-or-replace advice, and cost breakdowns from Connecticut appliance technicians.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Appliance Repair Tips & Guides for CT Homeowners',
+    description:
+      'Maintenance guides, repair-or-replace advice, and cost breakdowns from Connecticut appliance technicians.',
+  },
 };
 
 const breadcrumbSchema = {
@@ -175,8 +194,8 @@ export default function BlogPage() {
             Need Appliance Repair in Connecticut?
           </h2>
           <p className="text-blue-200 text-lg mb-8 max-w-xl mx-auto">
-            Same-day service across all 169 CT towns. Insured and backed by a 90-day
-            warranty.
+            Serving {SERVICE_AREAS.length} Connecticut communities. Same-day appointments when available,
+            insured technicians, and a 90-day warranty.
           </p>
           <a
             href="tel:+19592616736"

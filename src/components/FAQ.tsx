@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { APPLIANCE_REPAIR_COST_ANSWER } from '@/lib/business';
 
 const faqs = [
   {
@@ -8,7 +9,7 @@ const faqs = [
     questions: [
       {
         q: 'How much does appliance repair cost in Connecticut?',
-        a: 'Most appliance repairs in CT range from $120–$400 depending on the appliance and the part needed. We provide a full written estimate before any work begins — no hidden fees, ever. The $99 service call fee covers the diagnostic and is waived when you proceed with the repair.',
+        a: APPLIANCE_REPAIR_COST_ANSWER,
       },
       {
         q: 'Do you offer same-day appliance repair?',
@@ -149,7 +150,7 @@ export default function FAQ() {
           </h2>
           <p className="text-slate-500 max-w-xl mx-auto">
             Specific answers to the questions CT homeowners ask most. If yours isn&apos;t here, call
-            us — we&apos;ll diagnose it over the phone.
+            us, we&apos;ll diagnose it over the phone.
           </p>
         </div>
 

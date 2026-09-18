@@ -20,15 +20,20 @@ export async function generateMetadata({
   const city = getCityBySlug(slug);
   if (!city) return {};
 
+  const socialDescription = `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Insured techs, 90-day warranty.`;
+
   return {
-    title: `Appliance Repair ${city.name}, CT | Same-Day Service | MyAppliance Repair LLC`,
-    description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Insured techs, 90-day warranty. Call (959) 261-6736.`,
+    // Bare of the brand — the root layout's `%s | MyAppliance Repair` template appends it.
+    title: `Appliance Repair ${city.name}, CT | Same-Day Service`,
+    description: `${socialDescription} Call (959) 261-6736.`,
     alternates: { canonical: `https://www.myappliance.us/${city.slug}` },
     openGraph: {
       type: 'website',
       url: `https://www.myappliance.us/${city.slug}`,
+      siteName: 'MyAppliance Repair LLC',
+      locale: 'en_US',
       title: `Appliance Repair ${city.name}, CT | Same-Day Service | MyAppliance Repair LLC`,
-      description: `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Insured techs, 90-day warranty.`,
+      description: socialDescription,
       images: [
         {
           url: '/images/og-image.png',
@@ -37,6 +42,13 @@ export async function generateMetadata({
           alt: `Appliance Repair ${city.name} CT`,
         },
       ],
+    },
+    // Otherwise every city page inherits the root card, which names Hamden and New Haven.
+    twitter: {
+      card: 'summary_large_image',
+      title: `Appliance Repair ${city.name}, CT | Same-Day Service`,
+      description: socialDescription,
+      images: ['/images/og-image.png'],
     },
   };
 }
@@ -51,6 +63,7 @@ function jsonLd(data: object): string {
 const services = [
   {
     name: 'Refrigerator Repair',
+    href: '/services/refrigerator-repair',
     desc: 'Cooling issues, ice maker failures, noisy compressors, and more.',
     icon: (
       <path
@@ -63,6 +76,7 @@ const services = [
   },
   {
     name: 'Washer Repair',
+    href: '/services/washer-repair',
     desc: "Won't spin, leaking, loud noises, error codes — all makes and models.",
     icon: (
       <path
@@ -75,6 +89,7 @@ const services = [
   },
   {
     name: 'Dryer Repair',
+    href: '/services/dryer-repair',
     desc: 'No heat, long drying times, squeaking, tumbling issues fixed fast.',
     icon: (
       <path
@@ -87,6 +102,7 @@ const services = [
   },
   {
     name: 'Dishwasher Repair',
+    href: '/services/dishwasher-repair',
     desc: 'Not cleaning, not draining, leaking, door latch problems.',
     icon: (
       <path
@@ -99,6 +115,7 @@ const services = [
   },
   {
     name: 'Oven & Range Repair',
+    href: '/services/oven-range-repair',
     desc: 'Gas ignition failures, uneven heating, broken elements, control boards.',
     icon: (
       <path
@@ -147,12 +164,6 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
       },
     ],
     priceRange: '$$',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5.0',
-      reviewCount: '38',
-      bestRating: '5',
-    },
   };
 
   const breadcrumbSchema = {
@@ -285,23 +296,39 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             All major brands. OEM parts on board for the most common repairs.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((svc) => (
-              <div key={svc.name} className="bg-white p-6 border border-blue-100 shadow-sm">
-                <div className="w-10 h-10 bg-blue-950 flex items-center justify-center mb-4">
-                  <svg
-                    className="w-5 h-5 text-[#ffb81c]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    {svc.icon}
-                  </svg>
+            {services.map((svc) => {
+              const content = (
+                <>
+                  <div className="w-10 h-10 bg-blue-950 flex items-center justify-center mb-4">
+                    <svg
+                      className="w-5 h-5 text-[#ffb81c]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      {svc.icon}
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-blue-950 mb-1.5">{svc.name}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{svc.desc}</p>
+                </>
+              );
+
+              return svc.href ? (
+                <Link
+                  key={svc.name}
+                  href={svc.href}
+                  className="bg-white p-6 border border-blue-100 shadow-sm hover:border-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors"
+                >
+                  {content}
+                </Link>
+              ) : (
+                <div key={svc.name} className="bg-white p-6 border border-blue-100 shadow-sm">
+                  {content}
                 </div>
-                <h3 className="font-bold text-blue-950 mb-1.5">{svc.name}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{svc.desc}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

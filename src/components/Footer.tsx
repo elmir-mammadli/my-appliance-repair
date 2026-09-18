@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { cities } from '@/lib/cities';
+import { SERVICE_AREAS } from '@/lib/business';
 
 const quickLinks = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/#services' },
+  { label: 'Services', href: '/services' },
   { label: 'About Us', href: '/about' },
   { label: 'Blog & Tips', href: '/blog' },
-  { label: 'Book a Repair', href: '/#book' },
+  { label: 'Book a Repair', href: '/booking' },
 ];
 
 const serviceLinks = [
@@ -84,8 +85,8 @@ export default function Footer() {
               style={{ filter: 'brightness(0) invert(1)' }}
             />
             <p className="text-sm leading-relaxed mb-6">
-              Connecticut&apos;s trusted appliance repair experts. Insured technicians
-              with a 90-day warranty on every repair.
+              Connecticut&apos;s trusted appliance repair experts. Insured technicians with a 90-day
+              warranty on every repair.
             </p>
 
             <ul className="space-y-3 text-sm">
@@ -182,16 +183,24 @@ export default function Footer() {
               Service Areas
             </h3>
             <ul className="grid grid-cols-2 gap-x-3 gap-y-1">
-              {cities.map((city) => (
-                <li key={city.slug}>
-                  <Link
-                    href={`/${city.slug}`}
-                    className="text-xs text-blue-200/70 hover:text-white transition-colors duration-200"
-                  >
-                    {city.name}
-                  </Link>
-                </li>
-              ))}
+              {SERVICE_AREAS.map((name) => {
+                const city = cities.find((entry) => entry.name === name);
+
+                return (
+                  <li key={name}>
+                    {city ? (
+                      <Link
+                        href={`/${city.slug}`}
+                        className="text-xs text-blue-200/70 hover:text-white transition-colors duration-200"
+                      >
+                        {name}
+                      </Link>
+                    ) : (
+                      <span className="text-xs text-blue-200/70">{name}</span>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

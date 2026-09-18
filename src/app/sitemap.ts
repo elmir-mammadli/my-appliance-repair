@@ -18,18 +18,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const cityEntries: MetadataRoute.Sitemap = citySlugs.map((slug) => ({
     url: `${BASE_URL}/${slug}`,
-    lastModified: new Date(),
     changeFrequency: 'monthly',
     priority: 0.85,
   }));
 
   const serviceEntries: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
     url: `${BASE_URL}/services/${slug}`,
-    lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.9,
   }));
 
+  // Omit lastModified until we track actual content updates. A build timestamp
+  // would incorrectly mark unchanged pages as fresh on every deployment.
   return [
     {
       url: BASE_URL,
@@ -53,7 +53,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/services`,
-      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.95,
     },

@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | MyAppliance Repair LLC',
+  title: 'Privacy Policy',
   description:
     'Privacy Policy for MyAppliance Repair LLC — how we collect, use, and protect your personal information.',
   alternates: { canonical: 'https://www.myappliance.us/privacy' },
@@ -48,7 +48,7 @@ export default function PrivacyPage() {
               myappliance.us
             </a>
             {' '}
-            and provides home appliance repair services throughout Connecticut. This Privacy Policy
+            and provides home appliance repair services in select Connecticut communities. This Privacy Policy
             explains what personal information we collect, how we use it, and your rights regarding
             that information.
           </p>

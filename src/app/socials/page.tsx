@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Leave a Review | MyAppliance Repair LLC',
+  title: 'Leave a Review',
   description:
     'Share your experience with MyAppliance Repair LLC. Leave a review on Google, Yelp, or Thumbtack, or follow us on Instagram.',
   alternates: { canonical: 'https://www.myappliance.us/socials' },

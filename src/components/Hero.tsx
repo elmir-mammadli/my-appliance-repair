@@ -188,7 +188,7 @@ export default function Hero() {
                         </svg>
                       ))}
                     </div>
-                    <span className="text-[11px] font-medium text-slate-500">113 on Thumbtack</span>
+                    <span className="text-[11px] font-medium text-slate-500">145+ on Thumbtack</span>
                   </div>
                 </div>
               </a>

@@ -1,3 +1,5 @@
+import { REVIEW_RATINGS } from '@/lib/business';
+
 const GOOGLE_REVIEWS_URL = 'https://share.google/aktwu5fUEtjV6Eo40';
 
 interface Review {
@@ -216,15 +218,15 @@ export default function Testimonials() {
           </div>
 
           <div className="bg-blue-950 px-6 py-5 text-white flex-shrink-0">
-            <div className="flex gap-1" aria-label="5 out of 5 stars">
+            <div className="flex gap-1" aria-label={`${REVIEW_RATINGS.google.rating} out of 5 stars on Google`}>
               {[1, 2, 3, 4, 5].map((i) => (
                 <svg key={i} className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               ))}
             </div>
-            <p className="mt-2 text-3xl font-bold">5.0 / 5</p>
-            <p className="text-sm text-blue-300 mt-0.5">60+ Google reviews</p>
+            <p className="mt-2 text-3xl font-bold">{REVIEW_RATINGS.google.rating.toFixed(1)} / 5</p>
+            <p className="text-sm text-blue-300 mt-0.5">{REVIEW_RATINGS.google.count} Google reviews</p>
             <a
               href={GOOGLE_REVIEWS_URL}
               target="_blank"
@@ -239,46 +241,9 @@ export default function Testimonials() {
       </div>
 
       {/* Marquee rows */}
-      <div className="relative overflow-hidden">
-        {/* Left fade */}
-        <div
-          className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-24 sm:w-40"
-          style={{ background: 'linear-gradient(to right, #eff6ff, transparent)' }}
-          aria-hidden="true"
-        />
-        {/* Right fade */}
-        <div
-          className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-24 sm:w-40"
-          style={{ background: 'linear-gradient(to left, #eff6ff, transparent)' }}
-          aria-hidden="true"
-        />
-
-        {/* Row 1 — scrolls right */}
-        <div className="mb-4">
-          <div
-            className="marquee-track flex w-max gap-4 my-1"
-            style={{ animation: 'marquee-right 90s linear infinite' }}
-            aria-hidden="true"
-          >
-            {[...row1, ...row1].map((review, i) => (
-              <ReviewCard key={`r1-${i}`} review={review} />
-            ))}
-          </div>
+      <div className="relative *:overflow-hidden *:whitespace-nowrap px-2 md:px-10 flex items-center justify-center">
+        <iframe src="https://client.housecallpro.com/reviews/widget/df1659f3-6394-40e5-8a29-57e343c26b67" className="w-full max-w-none h-250" height="1000" width="1000"></iframe>
         </div>
-
-        {/* Row 2 — scrolls left */}
-        <div>
-          <div
-            className="marquee-track flex w-max gap-4"
-            style={{ animation: 'marquee-left 90s linear infinite' }}
-            aria-hidden="true"
-          >
-            {[...row2, ...row2].map((review, i) => (
-              <ReviewCard key={`r2-${i}`} review={review} />
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* CTA */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8 text-center">
@@ -288,7 +253,7 @@ export default function Testimonials() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-900 transition-colors duration-200"
         >
-          See all 42 reviews on Google
+          See all {REVIEW_RATINGS.google.count} reviews on Google
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>

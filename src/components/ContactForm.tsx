@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { isCtZip } from '@/lib/zip';
+import { SERVICE_CALL_FEE } from '@/lib/business';
 import DatePicker from '@/components/DatePicker';
 
 const appliances = [
@@ -160,8 +161,8 @@ export default function ContactForm() {
               Schedule Your Repair Today
             </h2>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              Fill out the form and we&apos;ll contact you within 30 minutes to confirm your
-              appointment. Same-day service available in most Connecticut areas.
+              Fill out the form and we&apos;ll contact you to confirm your appointment and service
+              coverage. Same-day appointments depend on availability in our service cities.
             </p>
 
             {/* Contact Methods */}
@@ -222,7 +223,7 @@ export default function ContactForm() {
               <h3 className="font-bold text-lg mb-3">Our Service Guarantee</h3>
               <ul className="space-y-2">
                 {[
-                  'Free diagnostic with any paid repair',
+                  `$${SERVICE_CALL_FEE} service call — waived with repair`,
                   'Written estimate before work begins',
                   '90-day parts & labor warranty',
                 ].map((item) => (
@@ -367,7 +368,7 @@ export default function ContactForm() {
                               clipRule="evenodd"
                             />
                           </svg>
-                          We service your area
+                          Connecticut ZIP — we’ll confirm coverage for your address.
                         </p>
                       ) : (
                         <p
@@ -387,7 +388,7 @@ export default function ContactForm() {
                               clipRule="evenodd"
                             />
                           </svg>
-                          Outside our service area (CT only)
+                          Please enter a Connecticut ZIP code
                         </p>
                       ))
                     )}

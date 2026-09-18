@@ -15,11 +15,12 @@ import ContactForm from '@/components/ContactForm';
 import JoinUs from '@/components/JoinUs';
 import HiringModal from '@/components/HiringModal';
 import Footer from '@/components/Footer';
+import { APPLIANCE_REPAIR_COST_ANSWER, SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
 
 export const metadata: Metadata = {
   title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
   description:
-    'Same-day appliance repair in Connecticut for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Trusted in New Haven, Hamden, West Haven, and nearby CT towns. Insured techs, 90-day warranty.',
+    `Appliance repair in ${SERVICE_AREAS.length} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. $${SERVICE_CALL_FEE} service call, on-site repair quotes, and a 90-day warranty.`,
   keywords: [
     'appliance repair Connecticut',
     'appliance repair near me',
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     url: 'https://www.myappliance.us',
     title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
     description:
-      'Same-day appliance repair in Connecticut for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Trusted in New Haven, Hamden, West Haven, and nearby CT towns.',
+      `Appliance repair in ${SERVICE_AREAS.length} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. On-site repair quotes and a 90-day warranty.`,
     images: [
       {
         url: '/images/og-image.png',
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
     description:
-      'Same-day appliance repair in Connecticut for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Trusted across New Haven County and nearby CT towns.',
+      `Appliance repair in ${SERVICE_AREAS.length} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. On-site repair quotes and a 90-day warranty.`,
     images: ['/images/og-image.png'],
   },
 };
@@ -64,7 +65,7 @@ const faqSchema = {
       name: 'How much does appliance repair cost in Connecticut?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most appliance repairs in CT range from $175–$400 depending on the appliance and the part needed. We provide a full written estimate before any work begins — no hidden fees, ever. The $99 service call fee covers the diagnostic and is waived when you proceed with the repair.',
+        text: APPLIANCE_REPAIR_COST_ANSWER,
       },
     },
     {

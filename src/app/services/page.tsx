@@ -16,7 +16,9 @@ function jsonLd(data: object): string {
 }
 
 export const metadata: Metadata = {
-  title: 'Appliance Repair Services in Connecticut | Same-Day, OEM Parts',
+  // Kept short — the root template appends ' | MyAppliance Repair' (21 chars) and
+  // anything past ~65 total gets truncated in the SERP.
+  title: 'Appliance Repair Services in Connecticut',
   description:
     'Appliances we repair in Connecticut. Washers, dryers, fridges, dishwashers, ovens, and the rest. Same-day service when slots are open, OEM parts on the truck, 90 days on parts and labor.',
   alternates: { canonical: 'https://www.myappliance.us/services' },

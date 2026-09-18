@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { isCtZip } from '@/lib/zip';
+import { SERVICE_CALL_FEE } from '@/lib/business';
 import DatePicker from '@/components/DatePicker';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
 
@@ -174,8 +175,8 @@ export default function BookingForm({
               {submitted
                 ? 'Request received!'
                 : step === 1
-                  ? "Step 1 of 2 — Let's check your area"
-                  : 'Step 2 of 2 — Repair details'}
+                  ? "Step 1 of 2: Let's check your area"
+                  : 'Step 2 of 2: Repair details'}
             </p>
           </div>
         </div>
@@ -301,7 +302,7 @@ export default function BookingForm({
           <form onSubmit={handleStep1Next} noValidate aria-label="Step 1: Contact check">
             <div className="space-y-5">
               <p className="text-sm text-slate-500 text-center pb-1">
-                Quick check — 2 fields and we&apos;ll confirm we service your area.
+                Quick check: 2 fields and we&apos;ll confirm we service your area.
               </p>
 
               {/* Phone */}
@@ -381,7 +382,7 @@ export default function BookingForm({
                           clipRule="evenodd"
                         />
                       </svg>
-                      Great — we service your area!
+                      Connecticut ZIP — we’ll confirm coverage for your address.
                     </p>
                   ) : (
                     <p
@@ -401,7 +402,7 @@ export default function BookingForm({
                           clipRule="evenodd"
                         />
                       </svg>
-                      Outside our service area (CT only)
+                      Please enter a Connecticut ZIP code
                     </p>
                   ))
                 )}
@@ -500,7 +501,7 @@ export default function BookingForm({
                 </p>
                 <ul className="space-y-2.5">
                   {[
-                    'Free diagnostic with any paid repair',
+                    `$${SERVICE_CALL_FEE} service call — waived with repair`,
                     'Written estimate before work begins',
                     '90-day parts & labor warranty',
                   ].map((item) => (

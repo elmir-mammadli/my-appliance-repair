@@ -6,7 +6,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BookingModal from '@/components/BookingModal';
 import BookingButton from '@/components/BookingButton';
-import { posts, getPostBySlug, getRelatedPosts } from '@/lib/posts';
+import { posts, getPostBySlug, getRelatedPosts, getServiceSlugForPost } from '@/lib/posts';
+import { getServiceBySlug } from '@/lib/services';
 import ViewCounter from '@/components/ViewCounter';
 // import BlogAudioPlayer from '@/components/BlogAudioPlayer';
 
@@ -76,6 +77,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!post) notFound();
 
   const related = getRelatedPosts(post.slug, 2);
+  const parentServiceSlug = getServiceSlugForPost(post);
+  const parentService = parentServiceSlug ? getServiceBySlug(parentServiceSlug) : undefined;
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -260,8 +263,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
             {/* Sidebar */}
             <aside className="lg:col-span-1">
+              <div className="sticky top-24 flex flex-col gap-4">
               {/* CTA Card */}
-              <div className="bg-blue-950 p-6 text-white sticky top-24">
+              <div className="bg-blue-950 p-6 text-white">
                 <div className="w-10 h-10 bg-[#ffb81c] flex items-center justify-center mb-4">
                   <svg
                     className="w-5 h-5 text-gray-900"
@@ -286,7 +290,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 </div>
                 <h2 className="font-bold text-lg mb-2 leading-snug">Need Appliance Repair?</h2>
                 <p className="text-blue-200 text-sm leading-relaxed mb-5">
-                  Same-day service across Connecticut. Insured technicians, 90-day warranty on all
+                  Same-day appointments in our service area when available. Insured technicians, 90-day warranty on all
                   repairs.
                 </p>
                 <BookingButton className="w-full bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold py-3 transition-all duration-200 text-sm cursor-pointer">
@@ -312,6 +316,38 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   </svg>
                   (959) 261-6736
                 </a>
+              </div>
+
+              {/* Parent service — gives every post an editorial link into /services */}
+              {parentService && (
+                <Link
+                  href={`/services/${parentService.slug}`}
+                  className="group block bg-white border border-blue-100 p-6 shadow-sm hover:shadow-lg transition-all duration-300"
+                >
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.14em] text-blue-600 mb-2">
+                    Related service
+                  </span>
+                  <h2 className="font-bold text-blue-900 text-lg leading-snug mb-2 group-hover:text-blue-700 transition-colors duration-200">
+                    {parentService.title} in Connecticut
+                  </h2>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    {parentService.subtitle}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-blue-700 group-hover:text-blue-800 font-bold text-sm">
+                    See what we fix
+                    <svg
+                      className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </Link>
+              )}
               </div>
             </aside>
           </div>

@@ -1,3 +1,5 @@
+import { SERVICE_AREA_SCHEMA } from '@/lib/business';
+
 function jsonLd(data: object): string {
   return JSON.stringify(data)
     .replace(/</g, '\\u003c')
@@ -27,98 +29,7 @@ const localBusiness = {
     'Dishwasher repair',
     'Oven repair',
   ],
-  areaServed: [
-    {
-      '@type': 'City',
-      name: 'New Haven',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Hamden',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'West Haven',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'East Haven',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'North Haven',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Woodbridge',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Orange',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Bethany',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Branford',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Milford',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Shelton',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    { '@type': 'City', name: 'Derby', containedInPlace: { '@type': 'State', name: 'Connecticut' } },
-    {
-      '@type': 'City',
-      name: 'Ansonia',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Naugatuck',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Cheshire',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Meriden',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-    {
-      '@type': 'City',
-      name: 'Wallingford',
-      containedInPlace: { '@type': 'State', name: 'Connecticut' },
-    },
-  ],
-  serviceArea: {
-    '@type': 'GeoCircle',
-    geoMidpoint: {
-      '@type': 'GeoCoordinates',
-      latitude: 41.353,
-      longitude: -72.9587,
-    },
-    geoRadius: '25000',
-  },
+  areaServed: SERVICE_AREA_SCHEMA,
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Appliance Repair Services',
@@ -182,16 +93,11 @@ const localBusiness = {
     },
   ],
   priceRange: '$$',
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '38',
-    bestRating: '5',
-  },
   sameAs: [
     'https://www.instagram.com/myappliancerepair',
     'https://www.yelp.com/writeareview/biz/4qpGmPtt9HvAqeKYkFw4Bw',
     'https://share.google/aktwu5fUEtjV6Eo40',
+    'https://www.thumbtack.com/ct/hamden/appliance-repair/my-appliance-repair-llc/service/580267695654707208',
   ],
 };
 
@@ -212,7 +118,7 @@ const services = [
     description:
       'Professional refrigerator repair in Connecticut. We fix all makes and models including Samsung, LG, Whirlpool, GE, and more. Same-day service available.',
     provider: { '@id': 'https://www.myappliance.us/#business' },
-    areaServed: { '@type': 'State', name: 'Connecticut' },
+    areaServed: SERVICE_AREA_SCHEMA,
     serviceType: 'Appliance Repair',
     url: 'https://www.myappliance.us/services/refrigerator-repair',
   },
@@ -221,9 +127,9 @@ const services = [
     '@type': 'Service',
     name: 'Washing Machine Repair Connecticut',
     description:
-      'Expert washing machine repair across Connecticut. We diagnose and fix spin failures, leaks, drain issues, loud noises, and other common washer problems.',
+      'Expert washing machine repair in our Connecticut service communities. We diagnose and fix spin failures, leaks, drain issues, loud noises, and other common washer problems.',
     provider: { '@id': 'https://www.myappliance.us/#business' },
-    areaServed: { '@type': 'State', name: 'Connecticut' },
+    areaServed: SERVICE_AREA_SCHEMA,
     serviceType: 'Appliance Repair',
     url: 'https://www.myappliance.us/services/washer-repair',
   },
@@ -232,9 +138,9 @@ const services = [
     '@type': 'Service',
     name: 'Clothes Dryer Repair Connecticut',
     description:
-      'Clothes dryer repair across Connecticut for no-heat, long-dry, squeaking, thumping, belt, and vent-related dryer problems.',
+      'Clothes dryer repair in our Connecticut service communities for no-heat, long-dry, squeaking, thumping, belt, and vent-related dryer problems.',
     provider: { '@id': 'https://www.myappliance.us/#business' },
-    areaServed: { '@type': 'State', name: 'Connecticut' },
+    areaServed: SERVICE_AREA_SCHEMA,
     serviceType: 'Appliance Repair',
     url: 'https://www.myappliance.us/services/dryer-repair',
   },
@@ -245,7 +151,7 @@ const services = [
     description:
       'Reliable dishwasher repair in Connecticut. We fix cleaning issues, drainage problems, door latch failures, and all common dishwasher faults.',
     provider: { '@id': 'https://www.myappliance.us/#business' },
-    areaServed: { '@type': 'State', name: 'Connecticut' },
+    areaServed: SERVICE_AREA_SCHEMA,
     serviceType: 'Appliance Repair',
     url: 'https://www.myappliance.us/services/dishwasher-repair',
   },
@@ -256,66 +162,11 @@ const services = [
     description:
       'Gas and electric oven repair in Connecticut. We fix ignition failures, uneven heating, control board issues, and all oven and range problems.',
     provider: { '@id': 'https://www.myappliance.us/#business' },
-    areaServed: { '@type': 'State', name: 'Connecticut' },
+    areaServed: SERVICE_AREA_SCHEMA,
     serviceType: 'Appliance Repair',
     url: 'https://www.myappliance.us/services/oven-range-repair',
   },
 ];
-
-const faq = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Do you offer same-day appliance repair in Connecticut?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. We offer same-day appliance repair throughout Connecticut, including Hamden, New Haven, West Haven, North Haven, and surrounding areas. Call us to confirm availability for your location.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How much does appliance repair cost in Connecticut?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Repair costs vary by appliance and issue. We offer free estimates before any work begins so you know the price upfront. Most common repairs range from $100–$350 including parts and labor.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What appliances do you repair?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'We repair refrigerators, washing machines, dryers, dishwashers, ovens, ranges, and freezers. We service all major brands including Samsung, LG, Whirlpool, GE, Maytag, KitchenAid, and more.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Do you offer a warranty on repairs?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. All repairs come with a 90-day parts and labor warranty. If the same issue returns within 90 days, we fix it at no additional charge.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What areas in Connecticut do you serve?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'We serve most of Connecticut including Hamden, New Haven, West Haven, East Haven, North Haven, Woodbridge, Orange, Branford, Milford, Shelton, Cheshire, Meriden, Wallingford, and more.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Are you insured?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. MyAppliance Repair LLC carries full liability insurance in Connecticut. Appliance repair is not a trade that requires CT home improvement contractor (HIC) licensing, so our technicians instead hold EPA certification for refrigerant handling and are experienced professionals who service all major appliance brands.',
-      },
-    },
-  ],
-};
 
 export default function StructuredData() {
   return (
@@ -325,7 +176,6 @@ export default function StructuredData() {
         dangerouslySetInnerHTML={{ __html: jsonLd(localBusiness) }}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(website) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(faq) }} />
       {services.map((service, i) => (
         <script
           key={i}

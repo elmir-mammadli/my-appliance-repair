@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
 import { Lexend, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
 import StructuredData from '@/components/StructuredData';
@@ -16,6 +17,8 @@ const sourceSans3 = Source_Sans_3({
   display: 'swap',
 });
 
+const serviceDescription = `Appliance repair in ${SERVICE_AREAS.length} Connecticut communities. $${SERVICE_CALL_FEE} service call; repair quote provided on-site. Insured technicians, 90-day warranty.`;
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.myappliance.us'),
   title: {
@@ -23,7 +26,7 @@ export const metadata: Metadata = {
     template: '%s | MyAppliance Repair',
   },
   description:
-    'Insured CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.',
+    serviceDescription,
   keywords: [
     'appliance repair Connecticut',
     'CT appliance repair',
@@ -57,7 +60,7 @@ export const metadata: Metadata = {
     siteName: 'MyAppliance Repair LLC',
     title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | MyAppliance Repair',
     description:
-      'Insured CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.',
+      serviceDescription,
     images: [
       {
         url: '/images/appliance-repair-connecticut-og.jpg',
@@ -71,7 +74,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | MyAppliance Repair',
     description:
-      'Insured CT technicians repair fridges, washers, dryers, dishwashers & more. Same-day service, free estimates, 90-day warranty. Serving Hamden, New Haven & all of Connecticut.',
+      serviceDescription,
     images: ['/images/appliance-repair-connecticut-og.jpg'],
   },
   verification: {},

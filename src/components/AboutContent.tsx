@@ -7,6 +7,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BookingModal from '@/components/BookingModal';
 import { openBookingModal } from '@/lib/booking';
+import { SERVICE_AREAS } from '@/lib/business';
+import { cities } from '@/lib/cities';
 
 function useFadeIn(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -103,7 +105,7 @@ const WHY_VALUES: ValueCard[] = [
     ),
     title: 'Same-Day & Next-Day Appointments',
     description:
-      "A broken appliance can't wait. We offer same-day and next-day slots across Connecticut so your home gets back to normal fast.",
+      'Ask about same-day and next-day appointments in our service area. Available times depend on your location and technician schedules.',
   },
   {
     icon: (
@@ -133,7 +135,7 @@ const STATS = [
   { value: '100+', label: 'Repairs This Month' },
   { value: '5.0★', label: 'Average Rating' },
   { value: '20', label: 'Brands Serviced' },
-  { value: 'All of CT', label: 'Coverage Area' },
+  { value: String(SERVICE_AREAS.length), label: 'Towns & Cities Served' },
 ];
 
 const CREDENTIALS: Credential[] = [
@@ -211,19 +213,6 @@ const CREDENTIALS: Credential[] = [
     label: '6+ Years Experience',
     sub: 'Serving Connecticut',
   },
-];
-
-const CT_CITIES = [
-  'Hartford',
-  'New Haven',
-  'Bridgeport',
-  'Stamford',
-  'Waterbury',
-  'Norwalk',
-  'Danbury',
-  'New Britain',
-  'Greenwich',
-  'West Hartford',
 ];
 
 export default function AboutContent() {
@@ -398,35 +387,47 @@ export default function AboutContent() {
             We Come to You
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-900 mb-6">
-            Serving all of Connecticut
+            Serving {SERVICE_AREAS.length} Connecticut communities
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-            Whether you&apos;re in Hartford, New Haven, Bridgeport, Stamford, Waterbury, Norwalk, or
-            anywhere in between &mdash; we&apos;re likely already in your area today. MyAppliance
-            Repair LLC covers all 169 Connecticut towns and cities, with same-day availability
-            across most of the state.
+            MyAppliance Repair LLC serves the towns and cities listed below, including New Haven,
+            Hamden, Bristol, Waterbury, Trumbull, Stratford, and Madison. Contact us to check
+            appointment availability for your address.
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-10">
-            {CT_CITIES.map((city) => (
-              <span
-                key={city}
-                className="inline-flex items-center gap-1.5 bg-white border border-blue-200 text-blue-800 text-sm font-medium px-4 py-2"
-              >
-                <svg
-                  className="w-3.5 h-3.5 text-[#ffb81c]"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  aria-hidden="true"
+            {SERVICE_AREAS.map((name) => {
+              const city = cities.find((entry) => entry.name === name);
+
+              return (
+                <span
+                  key={name}
+                  className="inline-flex items-center gap-1.5 bg-white border border-blue-200 text-blue-800 text-sm font-medium px-4 py-2"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                {city}
-              </span>
-            ))}
+                  <svg
+                    className="w-3.5 h-3.5 text-[#ffb81c]"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  {city ? (
+                    <Link
+                      href={`/${city.slug}`}
+                      className="hover:text-blue-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+                    >
+                      {name}
+                    </Link>
+                  ) : (
+                    name
+                  )}
+                </span>
+              );
+            })}
           </div>
           <Link
             href="/#coverage"
@@ -466,8 +467,8 @@ export default function AboutContent() {
             Book your repair today
           </h2>
           <p className="text-blue-300 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            Same-day and next-day appointments available across Connecticut. Fast, honest,
-            warrantied repairs &mdash; guaranteed.
+            Check same-day and next-day availability in the towns and cities we serve. Every repair
+            includes our 90-day parts and labor warranty.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button

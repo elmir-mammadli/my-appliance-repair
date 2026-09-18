@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import { APPLIANCE_REPAIR_COST_ANSWER } from '@/lib/business';
 
 // Must match an option in BookingModal.tsx`appliances` array.
 export type ApplianceValue =
@@ -88,7 +89,7 @@ const otherIcon = (
 const pricingFaqs = [
   {
     q: 'How much does this repair cost in Connecticut?',
-    a: 'Most appliance repairs in CT run $120 to $400 depending on the part and how long the job takes. Premium brands like Sub-Zero, Wolf, Thermador, and Miele often run higher because their parts cost more. You get a written estimate before we start any work. The $99 service call fee is waived when you go ahead with the repair.',
+    a: APPLIANCE_REPAIR_COST_ANSWER,
   },
   {
     q: 'Do you offer same-day service?',
@@ -458,6 +459,16 @@ export function getAllServiceSlugs(): string[] {
   return services.map((s) => s.slug);
 }
 
+/**
+ * Walks forward from the current service and wraps around, so every service —
+ * `more-appliances` included — picks up inbound links. Slicing from the front
+ * instead meant the last services in the list were never linked from anywhere.
+ */
 export function getRelatedServices(currentSlug: string, count = 3): Service[] {
-  return services.filter((s) => s.slug !== currentSlug).slice(0, count);
+  const start = services.findIndex((s) => s.slug === currentSlug);
+  if (start === -1) return services.slice(0, count);
+
+  return Array.from({ length: Math.min(count, services.length - 1) }, (_, i) => {
+    return services[(start + 1 + i) % services.length];
+  });
 }

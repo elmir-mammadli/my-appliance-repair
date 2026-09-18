@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { cities } from '@/lib/cities';
+import { SERVICE_AREAS } from '@/lib/business';
 
 const ServiceAreaMap = dynamic(() => import('./ServiceAreaMapInner'), {
   ssr: false,
@@ -48,11 +49,11 @@ export default function Coverage() {
             id="coverage-heading"
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
-            Serving Greater New Haven, CT
+            Serving {SERVICE_AREAS.length} Connecticut Communities
           </h2>
           <p className="text-lg text-blue-200 max-w-2xl mx-auto">
-            We serve New Haven and the surrounding communities across New Haven County — same-day
-            service, local technicians, no travel fees.
+            Appliance repair in New Haven, Hamden, Bristol, Waterbury, and the towns listed below.
+            Contact us to check appointment availability in your area.
           </p>
         </div>
 
@@ -87,26 +88,18 @@ export default function Coverage() {
                   </div>
                   <p className="text-lg font-semibold text-white">Interactive service area map</p>
                   <p className="max-w-sm text-sm leading-relaxed text-blue-200">
-                    The map loads as you reach this section so the homepage stays lighter and faster
-                    up top.
+                    Explore the Connecticut towns and cities we serve.
                   </p>
                 </div>
               )}
             </div>
-            <div className="grid grid-cols-3 gap-4 mt-6">
-              {[
-                { value: '17', label: 'Cities Served' },
-                { value: '30 min', label: 'Avg. Response' },
-                { value: 'Same-Day', label: 'Availability' },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="text-center bg-blue-700/40 py-3 px-2 border border-blue-500/30"
-                >
-                  <div className="text-xl font-bold text-orange-400">{stat.value}</div>
-                  <div className="text-blue-300 text-xs mt-0.5">{stat.label}</div>
-                </div>
-              ))}
+            <div className="mt-6 border-t border-blue-500/30 pt-5">
+              <p className="text-lg font-bold text-white">
+                {SERVICE_AREAS.length} towns and cities served
+              </p>
+              <p className="mt-1 text-sm text-blue-200">
+                Markers show the communities we serve, not business locations.
+              </p>
             </div>
           </div>
 
@@ -126,38 +119,47 @@ export default function Coverage() {
                     clipRule="evenodd"
                   />
                 </svg>
-                Greater New Haven Area
+                Towns &amp; Cities We Serve
               </h3>
               <div className="grid grid-cols-2 gap-2">
-                {cities.map((city) => (
-                  <Link
-                    key={city.slug}
-                    href={`/${city.slug}`}
-                    className="flex items-center gap-2 px-2 py-1.5 text-sm text-blue-200 transition-colors duration-200 hover:bg-blue-700/30 hover:text-white"
-                  >
-                    <svg
-                      className="w-3.5 h-3.5 text-green-400 flex-shrink-0"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    {city.name}
-                  </Link>
-                ))}
+                {SERVICE_AREAS.map((name) => {
+                  const city = cities.find((entry) => entry.name === name);
+
+                  return (
+                    <div key={name} className="flex items-center gap-2 px-2 text-sm text-blue-200">
+                      <svg
+                        className="w-3.5 h-3.5 text-green-400 flex-shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      {city ? (
+                        <Link
+                          href={`/${city.slug}`}
+                          className="flex-1 py-1.5 transition-colors duration-200 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                        >
+                          {name}
+                        </Link>
+                      ) : (
+                        <span className="py-1.5">{name}</span>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
             <div className="bg-orange-500/20 border border-orange-400/30 p-5">
               <p className="text-orange-300 font-semibold mb-1">Don&apos;t see your city?</p>
               <p className="text-blue-200 text-sm">
-                Give us a call — we may be able to accommodate nearby towns depending on technician
-                availability.
+                Call us to confirm whether your address is in our service area and check available
+                appointments.
               </p>
               <a
                 href="tel:+19592616736"

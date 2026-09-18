@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import { SERVICE_AREA_SCHEMA } from '@/lib/business';
 import AboutContent from '@/components/AboutContent';
 
 export const metadata: Metadata = {
-  title: 'About Us | Insured CT Appliance Repair Experts | MyAppliance Repair LLC',
+  title: 'About Us | Insured CT Appliance Repair Experts',
   description:
     "Learn about MyAppliance Repair LLC — Connecticut's trusted local appliance repair service. Insured technicians, 90-day warranty, 2,500+ repairs completed across CT.",
   alternates: { canonical: 'https://www.myappliance.us/about' },
@@ -31,10 +32,7 @@ const aboutPageSchema = {
     url: 'https://www.myappliance.us',
     telephone: '+19592616736',
     email: 'service@myappliance.us',
-    areaServed: {
-      '@type': 'State',
-      name: 'Connecticut',
-    },
+    areaServed: SERVICE_AREA_SCHEMA,
     hasCredential: [
       {
         '@type': 'EducationalOccupationalCredential',
@@ -42,12 +40,6 @@ const aboutPageSchema = {
         credentialCategory: 'certification',
       },
     ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5.0',
-      reviewCount: '38',
-      bestRating: '5',
-    },
   },
 };
 

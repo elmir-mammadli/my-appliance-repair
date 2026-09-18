@@ -1,3 +1,5 @@
+import { APPLIANCE_REPAIR_COST_ANSWER } from '@/lib/business';
+
 export interface CityFaq {
   q: string;
   a: string;
@@ -582,7 +584,7 @@ export const cities: City[] = [
       },
       {
         q: "What does a typical repair cost look like for an older Ansonia home?",
-        a: "Usually in the same range as anywhere else, $120 to $400 depending on the part. Age of the home doesn't change pricing, just sometimes the diagnosis takes an extra few minutes.",
+        a: APPLIANCE_REPAIR_COST_ANSWER,
       },
     ],
     whyUs: [

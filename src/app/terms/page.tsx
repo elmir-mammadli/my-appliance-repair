@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
+import { SERVICE_CALL_FEE } from '@/lib/business';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | MyAppliance Repair LLC',
+  title: 'Terms of Service',
   description:
     'Terms of Service for MyAppliance Repair LLC — the rules and conditions governing our appliance repair services in Connecticut.',
   alternates: { canonical: 'https://www.myappliance.us/terms' },
@@ -71,7 +72,7 @@ export default function TermsPage() {
           </h2>
           <p className="text-slate-600 leading-relaxed mb-4">
             My Appliance Repair provides residential and light-commercial home appliance repair
-            services throughout the State of Connecticut. Our services include, but are not limited
+            services in our listed Connecticut service communities. Our services include, but are not limited
             to, repair of:
           </p>
           <ul className="list-disc list-outside pl-5 space-y-2 text-slate-600 mb-6">
@@ -123,7 +124,7 @@ export default function TermsPage() {
           <h2 className="text-2xl font-bold text-blue-900 mb-4 mt-10">4. Payment Terms</h2>
           <ul className="list-disc list-outside pl-5 space-y-2 text-slate-600 mb-6">
             <li>
-              <strong>Service Call Fee:</strong> A service call (diagnostic) fee is charged for each
+              <strong>Service Call Fee:</strong> A ${SERVICE_CALL_FEE} service call (diagnostic) fee is charged for each
               visit. This fee covers the technician&apos;s travel, time, and diagnostic assessment
               of your appliance. The service call fee is applicable even if no repair is performed.
             </li>

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { REPAIR_PRICING_DESCRIPTION, SERVICE_AREA_SCHEMA } from '@/lib/business';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -8,6 +9,7 @@ import BookingModal from '@/components/BookingModal';
 import BookingButton from '@/components/BookingButton';
 import ServiceFAQ from '@/components/ServiceFAQ';
 import { services, getServiceBySlug, getRelatedServices } from '@/lib/services';
+import { getPostsForService } from '@/lib/posts';
 
 function jsonLd(data: object): string {
   return JSON.stringify(data)
@@ -60,6 +62,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   if (!service) notFound();
 
   const related = getRelatedServices(service.slug, 3);
+  const guides = getPostsForService(service.slug, 3);
 
   const serviceSchema = {
     '@context': 'https://schema.org',
@@ -73,24 +76,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       telephone: '+1-959-261-6736',
       url: 'https://www.myappliance.us',
       image: 'https://www.myappliance.us/og-image.svg',
-      areaServed: {
-        '@type': 'State',
-        name: 'Connecticut',
-      },
+      areaServed: SERVICE_AREA_SCHEMA,
     },
-    areaServed: {
-      '@type': 'State',
-      name: 'Connecticut',
-    },
+    areaServed: SERVICE_AREA_SCHEMA,
     offers: {
       '@type': 'Offer',
       priceCurrency: 'USD',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        minPrice: 120,
-        maxPrice: 400,
-        priceCurrency: 'USD',
-      },
+      description: REPAIR_PRICING_DESCRIPTION,
     },
   };
 
@@ -103,7 +95,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         '@type': 'ListItem',
         position: 2,
         name: 'Services',
-        item: 'https://www.myappliance.us/#services',
+        item: 'https://www.myappliance.us/services',
       },
       {
         '@type': 'ListItem',
@@ -579,8 +571,59 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
+      {/* ── Guides ── the only editorial path into /blog from a service page ── */}
+      {guides.length > 0 && (
+        <section className="py-20 lg:py-28 bg-white" aria-labelledby="guides-heading">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-14">
+              <span className="inline-block text-blue-600 font-semibold text-sm tracking-widest uppercase mb-3">
+                Before you book
+              </span>
+              <h2 id="guides-heading" className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">
+                {service.shortName} guides worth reading first
+              </h2>
+              <p className="text-slate-600 max-w-2xl mx-auto">
+                Some {service.shortName.toLowerCase()} faults have a fix you can try yourself.
+                These are the ones our techs get called out for most.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {guides.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group bg-blue-50 border border-blue-100 shadow-sm hover:shadow-lg transition-all duration-300 p-6 flex flex-col"
+                >
+                  <span className="self-start text-[10px] font-bold uppercase tracking-[0.14em] text-blue-600 mb-3">
+                    {post.category}
+                  </span>
+                  <h3 className="font-bold text-blue-900 text-lg leading-snug mb-2 group-hover:text-blue-700 transition-colors duration-200">
+                    {post.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed flex-1">{post.excerpt}</p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-blue-700 group-hover:text-blue-800 font-bold text-sm">
+                    Read the guide
+                    <svg
+                      className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── FAQ subset ── */}
-      <section className="py-20 lg:py-28 bg-white" aria-labelledby="faq-heading">
+      <section className="py-20 lg:py-28 bg-blue-50" aria-labelledby="faq-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="inline-block text-blue-600 font-semibold text-sm tracking-widest uppercase mb-3">
