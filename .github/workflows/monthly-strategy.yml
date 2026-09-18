@@ -47,11 +47,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add content/seo-strategy-*.md
           MONTH_LABEL=$(python3 -c "
-from datetime import datetime
-now = datetime.utcnow()
-m, y = (now.month % 12) + 1, now.year + (1 if now.month == 12 else 0)
-print(datetime(y, m, 1).strftime('%B %Y'))
-")
+          from datetime import datetime
+          now = datetime.utcnow()
+          m, y = (now.month % 12) + 1, now.year + (1 if now.month == 12 else 0)
+          print(datetime(y, m, 1).strftime('%B %Y'))
+          ")
           git commit -m "seo: monthly strategy for ${MONTH_LABEL}"
           git push
 
