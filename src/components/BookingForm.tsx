@@ -565,7 +565,7 @@ export default function BookingForm({
                 <span className="text-sm font-semibold text-blue-950 ml-1">5.0</span>
                 <span className="text-sm text-slate-400 ml-1">· Google &amp; Thumbtack</span>
               </div>
-              <div className="hidden pt-6 pb-10 lg:block">
+              <div className="hidden pt-10 lg:block">
                 <div className="aspect-[1122/1230] overflow-hidden">
                   <Image
                     src="/images/form-img.png"
