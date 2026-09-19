@@ -20,6 +20,21 @@ const appliances = [
 
 const timeSlots = ['Morning (8am–12pm)', 'Afternoon (12pm–4pm)', 'Evening (4pm–7pm)'];
 
+const issueSuggestions: Record<string, readonly string[]> = {
+  Washer: ["Won't spin", "Won't drain", 'Leaking water', 'Shaking or loud noises'],
+  Dryer: ['Not heating', 'Takes too long to dry', "Won't start", 'Squeaking or thumping'],
+  Refrigerator: ['Not cooling', 'Leaking water', 'Ice maker not working', 'Making loud noises'],
+  Dishwasher: ['Dishes not getting clean', "Won't drain", 'Leaking water', "Won't start"],
+  'Oven / Range': ['Not heating', 'Heating unevenly', "Burner won't light", 'Showing an error code'],
+  Cooktop: ["Burner won't heat", "Burner won't light", 'Keeps clicking', 'Controls not responding'],
+  Microwave: ['Not heating', "Won't turn on", 'Turntable not spinning', 'Buttons not responding'],
+  Freezer: ['Not freezing', 'Too much frost', 'Leaking water', 'Making loud noises'],
+  Other: ["Won't turn on", 'Not working properly', 'Making unusual noises', 'Showing an error code'],
+};
+
+const hasIssueSuggestion = (issue: string, suggestion: string) =>
+  issue.toLowerCase().includes(suggestion.toLowerCase());
+
 interface FormState {
   name: string;
   phone: string;
@@ -70,10 +85,20 @@ export default function BookingForm({
   const [checking, setChecking] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const suggestions = issueSuggestions[form.appliance] ?? [];
 
   const handleChange = (field: keyof FormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
+
+  const addIssueSuggestion = (suggestion: string) => {
+    setForm((prev) => {
+      if (hasIssueSuggestion(prev.issue, suggestion)) return prev;
+      const issue = prev.issue.trimEnd();
+      return { ...prev, issue: `${issue}${issue ? ' ' : ''}${suggestion}.` };
+    });
+    setErrors((prev) => ({ ...prev, issue: undefined }));
   };
 
   const validateStep1 = (): boolean => {
@@ -684,15 +709,52 @@ export default function BookingForm({
                       *
                     </span>
                   </label>
+                  {suggestions.length > 0 && (
+                    <div className="mb-3">
+                      <p id="bf-issue-help" className="mb-2 text-xs text-slate-500">
+                        Choose an issue or describe your own.
+                      </p>
+                      <div
+                        role="group"
+                        aria-label={`Common issues for ${form.appliance}`}
+                        className="flex flex-wrap gap-1.5"
+                      >
+                        {suggestions.map((suggestion) => {
+                          const added = hasIssueSuggestion(form.issue, suggestion);
+                          return (
+                            <button
+                              key={suggestion}
+                              type="button"
+                              onClick={() => addIssueSuggestion(suggestion)}
+                              disabled={added}
+                              aria-controls="bf-issue"
+                              className={`inline-flex min-h-9 items-center gap-1.5 rounded-none border px-2.5 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                                added
+                                  ? 'border-blue-200 bg-blue-50 text-blue-700'
+                                  : 'cursor-pointer border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-800'
+                              }`}
+                            >
+                              <span aria-hidden="true">{added ? '' : '+'}</span>
+                              {suggestion}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                   <textarea
                     id="bf-issue"
                     rows={3}
                     value={form.issue}
-                    onChange={(e) => handleChange('issue', e.target.value)}
-                    placeholder="e.g. Washer won't spin, makes grinding noise..."
+                    onChange={(e) => handleChange('issue', e.target.value.replace(/\r?\n/g, ' '))}
+                    placeholder="Tell us what's happening and when it started..."
                     className={`w-full px-4 py-3 border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none transition-colors ${errors.issue ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
                     aria-required="true"
-                    aria-describedby={errors.issue ? 'bf-issue-error' : undefined}
+                    aria-describedby={
+                      [suggestions.length ? 'bf-issue-help' : '', errors.issue ? 'bf-issue-error' : '']
+                        .filter(Boolean)
+                        .join('') || undefined
+                    }
                   />
                   {errors.issue && (
                     <p id="bf-issue-error" className="text-red-500 text-xs mt-1" role="alert">
