@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { isCtZip } from '@/lib/zip';
 import { SERVICE_CALL_FEE } from '@/lib/business';
 import DatePicker from '@/components/DatePicker';
@@ -563,6 +564,55 @@ export default function BookingForm({
                 ))}
                 <span className="text-sm font-semibold text-blue-950 ml-1">5.0</span>
                 <span className="text-sm text-slate-400 ml-1">· Google &amp; Thumbtack</span>
+              </div>
+              <div className="hidden pt-6 pb-10 lg:block">
+                <div className="aspect-[1122/1230] overflow-hidden">
+                  <Image
+                    src="/images/form-img.png"
+                    alt="Smiling technician in a MyAppliance Repair uniform"
+                    width={1122}
+                    height={1402}
+                    sizes="280px"
+                    className="h-auto w-full object-contain"
+                  />
+                </div>
+                <div className="relative border-t-2 border-[#ffb81c] bg-blue-950 px-4 py-3 text-white">
+                  <p className="text-center text-sm font-semibold">Your home. Our care.</p>
+                  <div className="mt-2 flex items-center justify-center gap-3">
+                    <a href="https://share.google/aktwu5fUEtjV6Eo40" target="_blank" rel="noopener noreferrer" aria-label="Review us on Google (opens in a new tab)" title="Review us on Google" className="flex h-11 w-11 items-center justify-center bg-white/10 transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffb81c]">
+                      <svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true">
+                  <path
+                    fill="#4285F4"
+                    d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M11.69 28.18c-.44-1.32-.69-2.73-.69-4.18s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"
+                  />
+                </svg>
+                    </a>
+                    <a href="https://www.instagram.com/myappliancerepair" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram (opens in a new tab)" title="Follow us on Instagram" className="flex h-11 w-11 items-center justify-center bg-white/10 transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffb81c]">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="5" />
+                        <circle cx="12" cy="12" r="4" />
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                      </svg>
+                    </a>
+                    <a href="https://www.facebook.com/myappliancerepairllc" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook (opens in a new tab)" title="Follow us on Facebook" className="flex h-11 w-11 items-center justify-center bg-white/10 transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffb81c]">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M13.5 22v-9h3l.5-3.5h-3.5V7.25c0-1 .3-1.75 1.75-1.75H17V2.35A23 23 0 0 0 14.45 2C11.9 2 10 3.55 10 6.4v3.1H7V13h3v9h3.5Z" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
