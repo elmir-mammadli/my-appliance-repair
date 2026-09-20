@@ -48,7 +48,7 @@ export default function PrivacyPage() {
               myappliance.us
             </a>
             {' '}
-            and provides home appliance repair services in select Connecticut communities. This Privacy Policy
+            and provides home appliance repair services in select Connecticut communities and Bergen County, New Jersey. This Privacy Policy
             explains what personal information we collect, how we use it, and your rights regarding
             that information.
           </p>
@@ -335,7 +335,7 @@ export default function PrivacyPage() {
           </p>
           <div className="bg-blue-50 p-6 mt-4 mb-10">
             <p className="font-semibold text-blue-900 mb-1">MyAppliance Repair, LLC</p>
-            <p className="text-slate-600 text-sm">Serving Connecticut</p>
+            <p className="text-slate-600 text-sm">Serving Connecticut and Bergen County, NJ</p>
             <p className="text-slate-600 text-sm mt-2">
               Phone:{' '}
               <a href="tel:959-261-6736" className="text-blue-700 hover:underline">
