@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import type { BranchId } from '@/lib/branches';
 
 interface Prediction {
   place_id: string;
@@ -8,13 +9,14 @@ interface Prediction {
 }
 
 interface Props {
+  branchId?: BranchId;
   id?: string;
   value: string;
   onChange: (value: string) => void;
   error?: string;
 }
 
-export default function AddressAutocomplete({ id, value, onChange, error }: Props) {
+export default function AddressAutocomplete({ id, value, onChange, error, branchId = 'ct' }: Props) {
   const [predictions, setPredictions] = useState<Prediction[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -29,7 +31,7 @@ export default function AddressAutocomplete({ id, value, onChange, error }: Prop
     }
     setLoading(true);
     try {
-      const res = await fetch(`/api/places?input=${encodeURIComponent(query)}`);
+      const res = await fetch(`/api/places?input=${encodeURIComponent(query)}&branch=${branchId}`);
       const data = await res.json();
       const results: Prediction[] = data.predictions ?? [];
       setPredictions(results);
@@ -39,7 +41,7 @@ export default function AddressAutocomplete({ id, value, onChange, error }: Prop
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [branchId]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value;
@@ -76,7 +78,7 @@ export default function AddressAutocomplete({ id, value, onChange, error }: Prop
           value={value}
           onChange={handleInput}
           onFocus={() => predictions.length > 0 && setOpen(true)}
-          placeholder="123 Main St, New Haven"
+          placeholder={branchId === 'nj' ? '123 Main St, Hackensack, NJ' : '123 Main St, New Haven'}
           className={`w-full px-4 py-3 border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 ${
             error ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'
           }`}

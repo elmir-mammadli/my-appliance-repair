@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const input = req.nextUrl.searchParams.get('input') ?? '';
+  const isNj = req.nextUrl.searchParams.get('branch') === 'nj';
   if (input.length < 1) return NextResponse.json({ predictions: [] });
 
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
@@ -16,9 +17,9 @@ export async function GET(req: NextRequest) {
     input,
     types: 'address',
     components: 'country:us',
-    // Bias results toward Connecticut (center ~Meriden)
-    location: '41.5382,-72.8070',
-    radius: '90000',
+    // Suggestions are not proof of coverage; booking also checks ZIP/municipality.
+    location: isNj ? '40.9455,-74.0712' : '41.5382,-72.8070',
+    radius: isNj ? '30000' : '90000',
     key: apiKey,
   });
 
@@ -28,10 +29,12 @@ export async function GET(req: NextRequest) {
     );
     const data = await res.json();
 
-    // Keep only CT results
+    // Keep suggestions in the selected state.
     const predictions = (data.predictions ?? []).filter(
       (p: { description: string }) =>
-        p.description.includes(', CT,') || p.description.includes(', Connecticut'),
+        isNj
+          ? p.description.includes(', NJ,') || p.description.includes(', New Jersey')
+          : p.description.includes(', CT,') || p.description.includes(', Connecticut'),
     );
 
     return NextResponse.json({ predictions });

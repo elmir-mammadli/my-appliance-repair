@@ -1,21 +1,31 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
+import { NJ_PATH, type BranchId } from '@/lib/branches';
 import { useState, useEffect, useCallback } from 'react';
 import type { OpenBookingDetail } from '@/lib/booking';
 import BookingForm from '@/components/BookingForm';
 
 export default function BookingModal() {
+  const pathname = usePathname();
+  const [initialBranch, setInitialBranch] = useState<BranchId>('ct');
+  const [initialMunicipality, setInitialMunicipality] = useState('');
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [initialAppliance, setInitialAppliance] = useState<string | undefined>();
 
-  const openModal = useCallback((appliance?: string) => {
-    setInitialAppliance(appliance);
-    setStep(1);
-    setOpen(true);
-    setTimeout(() => setVisible(true), 10);
-  }, []);
+  const openModal = useCallback(
+    (detail?: OpenBookingDetail) => {
+      setInitialAppliance(detail?.appliance);
+      setInitialMunicipality(detail?.municipality ?? '');
+      setInitialBranch(detail?.branchId ?? (pathname.startsWith(NJ_PATH) ? 'nj' : 'ct'));
+      setStep(1);
+      setOpen(true);
+      setTimeout(() => setVisible(true), 10);
+    },
+    [pathname],
+  );
 
   const closeModal = useCallback(() => {
     setVisible(false);
@@ -28,7 +38,7 @@ export default function BookingModal() {
   useEffect(() => {
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<OpenBookingDetail>).detail;
-      openModal(detail?.appliance);
+      openModal(detail);
     };
     window.addEventListener('open-booking', handler);
     return () => window.removeEventListener('open-booking', handler);
@@ -74,6 +84,8 @@ export default function BookingModal() {
         <BookingForm
           onClose={closeModal}
           initialAppliance={initialAppliance}
+          initialBranch={initialBranch}
+          initialMunicipality={initialMunicipality}
           onStepChange={setStep}
           stickyHeader
         />

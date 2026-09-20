@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next';
 import { getAllSlugs } from '@/lib/posts';
 import { getAllCitySlugs } from '@/lib/cities';
 import { getAllServiceSlugs } from '@/lib/services';
+import { BERGEN_TOWNS } from '@/lib/bergen';
+import { NJ_PATH, NJ_BOOKING_ENABLED } from '@/lib/branches';
 
 const BASE_URL = 'https://www.myappliance.us';
 
@@ -68,6 +70,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...cityEntries,
     ...serviceEntries,
+    ...(NJ_BOOKING_ENABLED ? [
+      { url: `${BASE_URL}${NJ_PATH}` },
+      { url: `${BASE_URL}${NJ_PATH}/booking` },
+      ...BERGEN_TOWNS.map(({ slug }) => ({ url: `${BASE_URL}${NJ_PATH}/${slug}` })),
+    ] : []),
     ...blogEntries,
   ];
 }

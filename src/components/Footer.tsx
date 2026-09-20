@@ -1,3 +1,5 @@
+import StructuredData from './StructuredData';
+import { NJ_PATH } from '@/lib/branches';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cities } from '@/lib/cities';
@@ -9,6 +11,7 @@ const quickLinks = [
   { label: 'About Us', href: '/about' },
   { label: 'Blog & Tips', href: '/blog' },
   { label: 'Book a Repair', href: '/booking' },
+  { label: 'Bergen County, NJ', href: NJ_PATH },
 ];
 
 const serviceLinks = [
@@ -68,6 +71,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#080f1e] text-blue-200/70" aria-labelledby="footer-heading">
+      <StructuredData />
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
