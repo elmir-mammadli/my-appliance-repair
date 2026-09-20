@@ -281,7 +281,9 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
                     className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]"
                   />
                 </div>
-                <h3 className="text-xl font-semibold text-blue-950">{repair.name} repair</h3>
+                <h3 className="text-xl font-semibold text-blue-950">
+                  {repair.appliance === 'Other' ? repair.name : `${repair.name} repair`}
+                </h3>
                 <p className="mt-2 text-sm text-slate-500">{repair.symptoms}</p>
                 <BookingButton
                   branchId="nj"

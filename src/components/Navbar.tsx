@@ -174,6 +174,8 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       <div
+        inert={!isMobileOpen}
+        aria-hidden={!isMobileOpen}
         className={`xl:hidden bg-white border-t border-blue-100 overflow-hidden transition-all duration-300 ${
           isMobileOpen ? 'max-h-none opacity-100' : 'max-h-0 opacity-0'
         }`}

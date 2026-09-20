@@ -1,108 +1,63 @@
-# Bergen County expansion plan
+# Bergen County expansion
 
-Draft — September 20, 2026. Planning only; NJ phone number, operating model, coverage, launch date, pricing, hours, and dispatch ownership still need confirmation.
+Implementation on `nj-branch` — September 20, 2026. This branch has not been deployed to production.
 
-## Recommended direction
+## Confirmed operating details
 
-Keep one website, myappliance.us, with distinct Connecticut and Bergen County experiences. Add NJ under `/new-jersey/bergen-county/`. Preserve existing CT URLs, canonical URLs, and the current homepage hero during the first release. Add clear navigation to the new branch. A future brand-wide homepage is a separate decision after establishing an NJ presence and taking a fresh Search Console baseline.
+- NJ phone: **(201) 403-0001**.
+- Ready to accept requests from **all 70 Bergen County municipalities**.
+- **$99 service call**, with the existing fee-waiver policy when proceeding with repair.
+- Same dispatch inbox, Google Sheet, hours (**Mon–Sun 8am–6pm**), and **90-day parts and labor warranty** as CT.
+- Repair prices are quoted by the technician after diagnosis; no fixed repair-price ranges were added.
 
-This is an implementation recommendation, not a guarantee of indexing or rankings. The September 17 Search Console screenshots are historical; export fresh data before launch.
+## Implemented website scope
 
-## What the repository currently does
+The county landing page is `/new-jersey/bergen-county`, with a dedicated booking page at `/new-jersey/bergen-county/booking`.
 
-| Area | Finding | Required change |
-| --- | --- | --- |
-| Business data | `src/lib/business.ts` has one CT city list, pricing policy, and review totals. Phone numbers are repeated across components. | Central branch records for CT and NJ, including operational status, phone, coverage, services, hours, fees, warranty, review links, and dispatch settings. |
-| Booking | `BookingForm.tsx` and `ContactForm.tsx` reject non-CT ZIPs through `isCtZip`. | Both forms must support approved coverage, display the applicable branch, and preserve details when switching. |
-| Address suggestions | `/api/places` biases to CT and filters out other states. | Use the selected branch to bias suggestions; validate the actual service address separately. |
-| Lead delivery | `/api/book` uses one sheet/tab and notification recipient. Rows have no branch field. Customer emails contain CT phone and area text. | Validate coverage on the server, resolve the receiving branch, label/store branch and landing page, route notifications, and use the correct contact details in customer emails. |
-| Booking status | Email subject currently says “Booking Confirmed.” The form collects preferred times without checking a dispatch calendar. | Use request-received wording unless dispatch actually confirms a slot. |
-| SEO | Root layout injects CT business/service structured data site-wide; inherited metadata is CT-focused. | Keep shared brand data global and place branch/service data on the appropriate pages; override NJ metadata and social previews. |
-| Coverage | Maps, city pages, and footer lists describe CT. | Separate branch coverage views based on confirmed towns; no automatic claim of statewide NJ coverage. |
+Ten initial town pages are nested under the county path: Hackensack, Teaneck, Fort Lee, Fair Lawn, Garfield, Englewood, Bergenfield, Paramus, Ridgewood, and Lodi. This is an editorial starting set, not a claim about search-volume rankings. Each has its own introduction, practical preparation advice, and local FAQ. All 70 municipalities remain selectable for booking; they do not need separate SEO pages.
 
-## Decisions needed from the owner
+Existing CT URLs, homepage hero, and canonical URLs are preserved. CT navigation and footer now link to New Jersey. NJ pages use the NJ number in navigation, calls to action, booking, and footer. Existing CT business structured data remains on CT pages; NJ pages provide their own business/service graph without inventing an address or NJ review history. NJ titles, social metadata, breadcrumbs, and sitemap entries are included.
 
-- NJ phone number, who answers it, and missed-call handling.
-- Real operating base, separate NJ team, and whether customers can visit the location.
-- Opening date; whether any prelaunch inquiries should be accepted and who handles them.
-- Launch towns, exclusions, service boundaries, and verified ZIP/address coverage.
-- NJ service call fee, waiver policy, warranty, working hours, appointment windows, and appliances supported. Do not assume the CT $99 policy applies.
-- Shared or separate dispatch recipients and job queue; whether existing spreadsheet users/automations depend on current columns.
-- NJ photos, technician/team details, and eventual NJ Google review URL. Existing CT reviews can be used only with clear attribution to their actual source/branch.
+## Booking and dispatch
 
-## Website and phone behavior
+Both the modal and inline forms route using the service ZIP code. NJ requests also require a Bergen municipality. Town-page booking buttons preselect the municipality, while appliance buttons preselect the appliance. Changing service region preserves entered repair details and updates the form’s contact number.
 
-| Visitor context | Proposed behavior |
+The API derives the branch from location and ignores a submitted branch ID. ZIPs are routing hints, not exact county boundaries: dispatch still confirms the actual address and available appointment. Requests from unsupported ZIPs are directed to call. Address suggestions use a branch-specific state filter and geographic bias; suggestions are not a service-coverage guarantee.
+
+The existing dispatch environment variables are reused. No separate NJ inbox or credentials are required. Existing Google Sheet columns A:Q keep their order. New requests append these fields:
+
+| Column | Header |
 | --- | --- |
-| Existing CT page | CT number, CT coverage, and CT booking defaults remain consistent. |
-| NJ branch or NJ town page | NJ number in header, page calls to action, mobile call control, booking sidebar, footer contact, and confirmation messages. |
-| Homepage | Retain its current CT content for launch; add a clearly labeled Bergen County link and a compact location switcher outside the hero. |
-| Shared booking entry | Ask for service location/ZIP, identify the eligible branch, and let the customer confirm it. |
-| Customer changes region | Navigate to that region's real URL and preserve entered booking details; do not overwrite a CT page's contact identity based only on a remembered preference. |
-| Unsupported or ambiguous address | Explain that coverage needs confirmation; do not claim availability or silently route to the wrong branch. |
+| R | Branch |
+| S | Municipality |
+| T | Source page |
 
-Use explicit URLs and user choice. Do not rely on IP location to redirect customers or make NJ content discoverable. A saved preference can help on neutral entry points, but the page URL controls its branch identity. The booking API must independently validate the service location; a browser-supplied branch ID alone is insufficient.
+Add those labels to the existing sheet’s header row when releasing, and check downstream tools that assume exactly 17 columns. The code writes values to R:T even before labels are added. No live sheet data or headers were changed during implementation.
 
-ZIP codes are useful initial routing signals, not exact county boundaries. Use a maintained list and address/town confirmation for boundary cases. Accepting every NJ ZIP would overstate Bergen County coverage.
+Customer emails say **Request Received**, use the applicable branch phone, and leave appointment confirmation to dispatch. Source-page tracking stores only a relative path; URL query parameters are excluded. Customer-provided text is escaped for email HTML. Sheet writes use the append API so simultaneous submissions do not calculate the same row number.
 
-## Initial page scope
+## Verification
 
-1. `/new-jersey/bergen-county/`: the main NJ landing page, with the local phone, confirmed towns, actual services, service call policy, hours, team information, and usable booking flow.
-2. A small number of useful town pages under `/new-jersey/bergen-county/[town]/`, only where coverage and distinct local information are ready. Town-page quantity follows useful content and operational priorities.
-3. Add selected NJ appliance-service pages later if they answer a distinct customer need; do not launch every town × appliance combination.
+- Production build and TypeScript validation passed.
+- Six focused routing/validation tests passed; run `npm run test:branches` without starting a browser or server.
+- Generated HTML checked for all 12 NJ routes: correct canonical, NJ phone, indexability, and no inherited CT business schema.
+- Desktop and mobile browser review completed. NJ modal, town preselection, inline-form branch switching, and preservation of repair details across region changes checked.
+- No test request was submitted to the live dispatch inbox or Google Sheet. Delivery through the real email/Sheets integrations still needs a controlled release smoke test.
 
-Use descriptive titles, self-canonicals for distinct NJ pages, crawlable links, breadcrumbs, and sitemap inclusion at launch. Keep CT links/URLs working. A genuine NJ page should not canonicalize to a CT page. State-level `hreflang` is not needed for these English US pages.
+## Release and follow-up
 
-Useful NJ content includes real service availability, actual coverage limitations, branch contact details, technician introductions, supported appliances, clear pricing policy, and local job examples once available. Do not invent NJ jobs or present CT review totals as reviews earned by the new branch.
+1. Review the branch preview and set the R:T sheet header labels.
+2. Deploy the reviewed branch through the normal Vercel workflow; verify the NJ number answers and run a clearly labeled controlled booking test.
+3. Check `/sitemap.xml`, then inspect the county page and a small sample of town pages in Search Console. Indexing and rankings are not guaranteed by deployment.
+4. Measure NJ calls, accepted requests, completed jobs, and town-page performance before adding more pages. Add real NJ photos, job examples, and reviews as they become available.
 
-Google's doorway and scaled-content guidance supports building useful regional pages rather than repeating town names across near-identical pages: [Google Search spam policies](https://developers.google.com/search/docs/essentials/spam-policies#doorway-abuse).
+`NEXT_PUBLIC_NJ_BOOKING_ENABLED=false` pauses NJ online intake while preserving CT booking. Because this is a public build-time variable, **rebuild/redeploy** after changing it. The paused build also excludes NJ URLs from the sitemap and marks them noindex. County pages remain accessible and callers can still contact the team.
 
-## Google Business Profile and branch identity
+No Google Business Profile was created. A separate NJ profile should represent a qualifying real operation; no public street address is invented by this implementation.
 
-If the NJ operation qualifies as a distinct location with separate staff and service area, create its own Business Profile, with the NJ phone and NJ landing page. A new phone number or service-area page alone does not establish eligibility. Retain the existing CT profile.
+## Reference sources
 
-For a service-area operation that does not receive customers at its address, hide the address on the profile. Use the real operating location for verification; a virtual mailing address is not a substitute. Google currently permits up to 20 service-area entries, so the profile's coverage list should be selected from the actual operating area rather than copied from an unlimited website list.
-
-Sources: [Business representation guidelines](https://support.google.com/business/answer/3038177?hl=en), [Service-area settings](https://support.google.com/business/answer/9157481?hl=en).
-
-Use stable identifiers for the shared organization and each actual branch in structured data. Reference the relevant branch from its services, with matching visible phone, area, and hours. Do not invent a public address merely to qualify for a Google enhancement; validate against [Google's LocalBusiness requirements](https://developers.google.com/search/docs/appearance/structured-data/local-business).
-
-## Delivery sequence
-
-### 1. Confirm operating details and capture the baseline
-
-Complete the owner decisions above. Export current CT indexing, landing-page traffic, and conversions. Establish a launch checklist and the NJ dispatch owner.
-
-### 2. Introduce branch support with CT behavior preserved
-
-Centralize branch data and phone rendering; update both booking forms, address suggestions, backend validation, spreadsheet fields, notification routing, and email templates. Append fields or migrate carefully so existing spreadsheet columns and workflows keep working. Keep NJ unavailable publicly until its details and routing are ready.
-
-### 3. Build and review NJ content in preview
-
-Build the Bergen County page, region navigation, coverage map, and branch-specific metadata/schema. Review on mobile and desktop. Preview pages should remain out of the production sitemap and search index until ready. No NJ page should accidentally inherit CT-only metadata or present a CT service as the NJ provider.
-
-### 4. Launch and verify
-
-Enable NJ coverage only when the phone, dispatch, and service start date are ready. Publish the branch page, add internal links and sitemap entries, and inspect priority URLs in Search Console. Verify the eligible NJ Business Profile and link it to the branch page. Indexing requests are optional signals, not guarantees; no need to repeatedly request every URL.
-
-### 5. Measure and expand
-
-Report phone-link clicks, booking submissions, accepted leads, and completed jobs separately by branch. Track source page/campaign without sending customer contact details to analytics. Review actual towns generating jobs, call quality, indexing, and conversion before expanding content. Gather NJ-specific photos and reviews as real jobs are completed.
-
-## Launch acceptance checks
-
-- Every CT entry point still shows the expected CT phone and coverage.
-- Every NJ entry point shows the confirmed NJ phone, including mobile and error/success states.
-- Modal and inline booking both route valid CT and NJ requests correctly; unsupported and boundary addresses have deliberate behavior.
-- Notification recipient, job record, and customer email agree on branch and contact number.
-- Server-side checks prevent an incorrect client branch from misrouting a request.
-- Testing uses a test recipient/queue so preview requests do not create real appointments or customer messages.
-- Region selection and switching work on mobile without losing form details.
-- Published NJ pages return 200, allow indexing, have correct canonicals, are internally linked, and appear in the sitemap.
-- Structured data and metadata do not conflict with visible branch information.
-- Review totals and links are accurately attributed; new-branch reviews are not fabricated or borrowed as branch totals.
-- A rollout can disable NJ intake without breaking CT booking or changing existing CT URLs.
-
-## First implementation milestone
-
-Make the site's business data, phone components, and booking pipeline support two branches while CT remains the only active branch. Then activate the Bergen County experience with confirmed operational details. This foundation should precede a large batch of NJ pages.
+- [Bergen County municipality directory](https://bergencountynj.gov/municipalities/)
+- [Google doorway and scaled-content policies](https://developers.google.com/search/docs/essentials/spam-policies#doorway-abuse)
+- [Google business representation guidelines](https://support.google.com/business/answer/3038177?hl=en)
+- [Google service-area settings](https://support.google.com/business/answer/9157481?hl=en)

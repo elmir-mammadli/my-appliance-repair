@@ -194,7 +194,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <div className="font-bold text-blue-900">{branch.phone}</div>
-                  <div className="text-sm text-slate-500">Available 24/7 for emergencies</div>
+                  <div className="text-sm text-slate-500">{branch.hours}</div>
                 </div>
               </a>
 
