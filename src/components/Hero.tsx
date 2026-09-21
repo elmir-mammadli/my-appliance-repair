@@ -78,7 +78,7 @@ export default function Hero() {
             </BookingButton>
             <a
               href="tel:+19592616736"
-              className="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-blue-950 bg-white px-8 py-4 text-base font-bold text-blue-950 transition-colors duration-200 hover:bg-blue-950 hover:text-white"
+              className="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-white bg-transparent px-8 py-4 text-base font-bold text-white transition-colors duration-200 hover:border-[#ffb81c] hover:text-[#ffb81c]"
             >
               <svg
                 className="h-5 w-5"
@@ -98,9 +98,29 @@ export default function Hero() {
             </a>
           </div>
 
-          <p className="mt-5 text-sm text-blue-100/75">
-            $99 service call · Written estimate · 90-day warranty
-          </p>
+          <div className="mt-5 flex flex-wrap text-sm text-blue-100/85">
+            {[
+              '5.0 ★ across Google & Thumbtack',
+              'Same-day when available',
+              'Diagnostic waived with repair',
+            ].map((item) => (
+              <span key={item} className="inline-flex items-center gap-2 px-3 py-2 first:pl-0">
+                <svg
+                  className="h-4 w-4 flex-shrink-0 text-[#ffb81c]"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
