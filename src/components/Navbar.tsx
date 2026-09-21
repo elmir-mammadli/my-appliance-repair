@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { ArrowUpRight } from 'lucide-react';
 import { BRANCHES, NJ_PATH } from '@/lib/branches';
 import { openBookingModal } from '@/lib/booking';
 import AnnouncementBar from './AnnouncementBar';
@@ -26,7 +27,7 @@ export default function Navbar() {
     { href: `${NJ_PATH}#coverage`, label: 'Coverage' },
     { href: `${NJ_PATH}#how-it-works`, label: 'How It Works' },
     { href: `${NJ_PATH}#faq`, label: 'FAQ' },
-    { href: '/', label: 'Connecticut ↗' },
+    { href: '/', label: 'Connecticut', arrow: true },
   ] : [
     { href: '/services', label: 'Services' },
     { href: '/#coverage', label: 'Coverage' },
@@ -35,7 +36,7 @@ export default function Navbar() {
     { href: '/#faq', label: 'FAQ' },
     { href: '/about', label: 'About' },
     { href: '/blog', label: 'Our Blog' },
-    { href: NJ_PATH, label: 'New Jersey ↗' },
+    { href: NJ_PATH, label: 'New Jersey', arrow: true },
   ];
 
   return (
@@ -70,7 +71,10 @@ export default function Navbar() {
               href={link.href}
               className="font-medium text-slate-600 hover:text-blue-900 transition-colors duration-200 cursor-pointer"
             >
-              {link.label}
+              <span className="inline-flex items-center gap-1">
+                {link.label}
+                {link.arrow && <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />}
+              </span>
             </a>
           ))}
         </nav>
@@ -188,7 +192,10 @@ export default function Navbar() {
               onClick={() => setIsMobileOpen(false)}
               className="text-blue-900 font-medium py-2 hover:text-blue-600 transition-colors duration-200 cursor-pointer border-b border-blue-50 last:border-0"
             >
-              {link.label}
+              <span className="inline-flex items-center gap-1">
+                {link.label}
+                {link.arrow && <ArrowUpRight className="h-4 w-4" aria-hidden="true" />}
+              </span>
             </a>
           ))}
           <button

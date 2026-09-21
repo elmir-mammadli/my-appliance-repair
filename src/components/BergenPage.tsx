@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 import BookingButton from './BookingButton';
 import { BRANCHES, NJ_PATH } from '@/lib/branches';
 import { BERGEN_MUNICIPALITIES, BERGEN_TOWNS, type BergenTown } from '@/lib/bergen';
@@ -195,7 +196,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <BookingButton branchId="nj" municipality={town?.name} className={buttonClass}>
-                  Schedule a repair <span aria-hidden="true">↗</span>
+                  Schedule a repair <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
                 </BookingButton>
                 <a
                   href={`tel:${branch.telephone}`}
@@ -291,7 +292,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
                   appliance={repair.appliance}
                   className="mt-4 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-blue-700 hover:text-blue-950"
                 >
-                  Request service <span aria-hidden="true">↗</span>
+                  Request service <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </BookingButton>
               </article>
             ))}
@@ -366,7 +367,8 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
                 href={`tel:${branch.telephone}`}
                 className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-blue-700"
               >
-                Check your address: {branch.phone} ↗
+                Check your address: {branch.phone}
+                <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" />
               </a>
             </div>
             <div>
@@ -379,12 +381,10 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
                     className="group flex min-h-14 items-center justify-between gap-2 border-b border-slate-200 py-3 font-medium text-blue-950 hover:text-blue-600"
                   >
                     <span>{place.name}</span>
-                    <span
-                      className="transition-transform group-hover:translate-x-1"
+                    <ArrowUpRight
+                      className="h-4 w-4 transition-transform group-hover:translate-x-1"
                       aria-hidden="true"
-                    >
-                      ↗
-                    </span>
+                    />
                   </Link>
                 ))}
               </div>
@@ -436,7 +436,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
             municipality={town?.name}
             className={`${buttonClass} shrink-0`}
           >
-            Book my repair ↗
+            Book my repair <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
           </BookingButton>
         </section>
       </main>

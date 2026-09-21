@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowUpRight } from 'lucide-react';
 import { BRANCHES, NJ_PATH } from '@/lib/branches';
 
 export default function BergenFooter() {
@@ -37,8 +38,8 @@ export default function BergenFooter() {
           <Link href={`${NJ_PATH}/booking`} className="hover:text-white">
             Request a repair
           </Link>
-          <Link href="/" className="hover:text-white">
-            Connecticut branch ↗
+          <Link href="/" className="inline-flex items-center gap-1 hover:text-white">
+            Connecticut branch <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </Link>
           <div className="flex gap-5">
             <a
@@ -46,14 +47,18 @@ export default function BergenFooter() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Instagram ↗
+              <span className="inline-flex items-center gap-1">
+                Instagram <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </span>
             </a>
             <a
               href="https://www.facebook.com/myappliancerepairllc"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Facebook ↗
+              <span className="inline-flex items-center gap-1">
+                Facebook <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </span>
             </a>
           </div>
         </nav>
