@@ -194,14 +194,46 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-blue-100">
                 Your home has enough moving parts. Let us take care of the ones that stop working.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <BookingButton branchId="nj" municipality={town?.name} className={buttonClass}>
-                  Schedule a repair <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <BookingButton
+                  branchId="nj"
+                  municipality={town?.name}
+                  className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 bg-[#ffb81c] px-8 py-4 text-base font-bold text-gray-900 transition-colors duration-200 hover:bg-[#c9920d]"
+                >
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  Schedule a Repair
                 </BookingButton>
                 <a
                   href={`tel:${branch.telephone}`}
-                  className="inline-flex min-h-12 items-center border-b border-white/50 px-1 py-3 font-semibold hover:text-[#ffb81c]"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-white bg-transparent px-8 py-4 text-base font-bold text-white transition-colors duration-200 hover:border-[#ffb81c] hover:text-[#ffb81c]"
                 >
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
                   {branch.phone}
                 </a>
               </div>
