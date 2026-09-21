@@ -22,7 +22,60 @@ const THUMBTACK_URL =
 export default function Hero() {
   return (
     <section className="border-b border-slate-100 bg-white pt-20" aria-label="Hero section">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
+      <div className="relative isolate overflow-hidden bg-blue-950 text-white lg:hidden">
+        <Image
+          src="/images/hero/dishwasher.jpg"
+          alt="MyAppliance technician working on a dishwasher"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[65%_center] opacity-40"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[#101d40] via-[#101d40]/90 to-[#101d40]/35"
+          aria-hidden="true"
+        />
+
+        <div className="nj-entrance relative px-6 pb-12 pt-20">
+          <nav aria-label="Breadcrumb" className="mb-10 flex gap-3 text-sm text-blue-100/75">
+            <Link href="/" className="hover:text-white">
+              Home
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">Connecticut</span>
+          </nav>
+
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-[#ffb81c]">
+            MyAppliance Repair · Connecticut
+          </p>
+          <h1 className="max-w-sm text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">
+            Appliance repair
+            <br />
+            in Connecticut<span className="text-[#ffb81c]">.</span>
+          </h1>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-blue-100">
+            Your home has enough moving parts. Let us take care of the ones that stop working.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <BookingButton className="inline-flex min-h-12 items-center justify-center gap-3 bg-[#ffb81c] px-6 py-3.5 font-semibold text-blue-950 transition-colors hover:bg-[#ffd071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400">
+              Schedule a repair <span aria-hidden="true">↗</span>
+            </BookingButton>
+            <a
+              href="tel:+19592616736"
+              className="inline-flex min-h-12 items-center border-b border-white/50 px-1 py-3 font-semibold hover:text-[#ffb81c]"
+            >
+              (959) 261-6736
+            </a>
+          </div>
+
+          <p className="mt-5 text-sm text-blue-100/75">
+            $99 service call · Written estimate · 90-day warranty
+          </p>
+        </div>
+      </div>
+
+      <div className="mx-auto hidden max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
         <div className="max-w-2xl">
           <p className="mb-4 flex flex-col items-start gap-1 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 sm:mb-6 sm:inline-flex sm:flex-row sm:items-center sm:gap-2">
             <span>Appliance Repair Near You</span>
