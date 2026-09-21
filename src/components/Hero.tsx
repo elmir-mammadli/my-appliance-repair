@@ -49,22 +49,51 @@ export default function Hero() {
             MyAppliance Repair · Connecticut
           </p>
           <h1 className="max-w-sm text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">
-            Appliance repair
-            <br />
-            in Connecticut<span className="text-[#ffb81c]">.</span>
+            Same-Day Appliance Repair in{' '}
+            <span className="text-[#ffb81c]">Connecticut</span>
           </h1>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-blue-100">
-            Your home has enough moving parts. Let us take care of the ones that stop working.
+            Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens,
+            and freezers across Connecticut, with a written estimate before work begins and a
+            90-day labor warranty.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
-            <BookingButton className="inline-flex min-h-12 items-center justify-center gap-3 bg-[#ffb81c] px-6 py-3.5 font-semibold text-blue-950 transition-colors hover:bg-[#ffd071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400">
-              Schedule a repair <span aria-hidden="true">↗</span>
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <BookingButton className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 bg-[#ffb81c] px-8 py-4 text-base font-bold text-gray-900 transition-colors duration-200 hover:bg-[#c9920d]">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              Schedule a Repair
             </BookingButton>
             <a
               href="tel:+19592616736"
-              className="inline-flex min-h-12 items-center border-b border-white/50 px-1 py-3 font-semibold hover:text-[#ffb81c]"
+              className="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-blue-950 bg-white px-8 py-4 text-base font-bold text-blue-950 transition-colors duration-200 hover:bg-blue-950 hover:text-white"
             >
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                />
+              </svg>
               (959) 261-6736
             </a>
           </div>
