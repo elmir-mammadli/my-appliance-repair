@@ -68,7 +68,7 @@ export default function BrandsGrid() {
                   alt={`${brand.name} logo`}
                   fill
                   sizes="(min-width: 1024px) 160px, (min-width: 640px) 30vw, 45vw"
-                  className="object-contain"
+                  className={`object-contain ${brand.name === 'Maytag' ? 'scale-200' : ''}`}
                 />
               </div>
             </li>
