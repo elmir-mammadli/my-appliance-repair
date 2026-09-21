@@ -37,16 +37,9 @@ export default function Hero() {
         />
 
         <div className="nj-entrance relative px-6 pb-12 pt-20">
-          <nav aria-label="Breadcrumb" className="mb-10 flex gap-3 text-sm text-blue-100/75">
-            <Link href="/" className="hover:text-white">
-              Home
-            </Link>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page">Connecticut</span>
-          </nav>
-
-          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-[#ffb81c]">
-            MyAppliance Repair · Connecticut
+          <p className="mb-5 flex flex-col items-start gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#ffb81c]">
+            <span>Appliance Repair Near You</span>
+            <span>New Haven, Hamden, West Haven &amp; across CT</span>
           </p>
           <h1 className="max-w-sm text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">
             Same-Day Appliance Repair in{' '}
