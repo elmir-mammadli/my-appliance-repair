@@ -1,112 +1,90 @@
-const brands = [
-  { name: 'Sub-Zero', tier: 'premium' },
-  { name: 'Viking', tier: 'premium' },
-  { name: 'Thermador', tier: 'premium' },
-  { name: 'Miele', tier: 'premium' },
-  { name: 'Wolf', tier: 'premium' },
-  { name: 'Dacor', tier: 'premium' },
-  { name: 'Fisher & Paykel', tier: 'premium' },
-  { name: 'Whirlpool', tier: 'major' },
-  { name: 'Samsung', tier: 'major' },
-  { name: 'LG', tier: 'major' },
-  { name: 'GE', tier: 'major' },
-  { name: 'Bosch', tier: 'major' },
-  { name: 'KitchenAid', tier: 'major' },
-  { name: 'Maytag', tier: 'major' },
-  { name: 'Electrolux', tier: 'major' },
-  { name: 'Kenmore', tier: 'major' },
-  { name: 'Frigidaire', tier: 'standard' },
-  { name: 'Amana', tier: 'standard' },
-  { name: 'Speed Queen', tier: 'standard' },
-  { name: 'Hotpoint', tier: 'standard' },
-  { name: 'GE Profile', tier: 'standard' },
-  { name: 'Haier', tier: 'standard' },
-  { name: 'Hisense', tier: 'standard' },
-  { name: 'Sharp', tier: 'standard' },
-  { name: 'Panasonic', tier: 'standard' },
-  { name: 'Insignia', tier: 'standard' },
-  { name: 'THOR', tier: 'standard' },
-  { name: 'Magic Chef', tier: 'standard' },
-  { name: 'Admiral', tier: 'standard' },
-  { name: 'Estate', tier: 'standard' },
+import Image from 'next/image';
+
+const featuredBrands = [
+  { name: 'Sub-Zero', logo: '/images/brands/sub-zero.svg' },
+  { name: 'Wolf', logo: '/images/brands/wolf.svg' },
+  { name: 'Thermador', logo: '/images/brands/thermador.jpg' },
+  { name: 'Miele', logo: '/images/brands/miele.svg' },
+  { name: 'Fisher & Paykel', logo: '/images/brands/fisher-paykel.png' },
+  { name: 'Whirlpool', logo: '/images/brands/whirlpool.svg' },
+  { name: 'Samsung', logo: '/images/brands/samsung.svg' },
+  { name: 'LG', logo: '/images/brands/lg.svg' },
+  { name: 'GE Appliances', logo: '/images/brands/ge-appliances.svg' },
+  { name: 'Bosch', logo: '/images/brands/bosch.svg' },
+  { name: 'KitchenAid', logo: '/images/brands/kitchenaid.svg' },
+  { name: 'Maytag', logo: '/images/brands/maytag.svg' },
+  { name: 'Electrolux', logo: '/images/brands/electrolux.svg' },
+  { name: 'Frigidaire', logo: '/images/brands/frigidaire.svg' },
+  { name: 'Amana', logo: '/images/brands/amana.png' },
+  { name: 'Speed Queen', logo: '/images/brands/speed-queen.png' },
+  { name: 'Haier', logo: '/images/brands/haier.svg' },
+  { name: 'Panasonic', logo: '/images/brands/panasonic.svg' },
+];
+
+const additionalBrands = [
+  'Viking',
+  'Dacor',
+  'Kenmore',
+  'Hotpoint',
+  'GE Profile',
+  'Hisense',
+  'Sharp',
+  'Insignia',
+  'THOR',
+  'Magic Chef',
+  'Admiral',
+  'Estate',
 ];
 
 export default function BrandsGrid() {
   return (
-    <section className="border-y border-blue-100 bg-white py-16" aria-labelledby="brands-heading">
+    <section className="border-y border-blue-100 bg-slate-50 py-16" aria-labelledby="brands-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
           <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-widest text-blue-600">
             All Brands Welcome
           </span>
-          <h2 id="brands-heading" className="mb-2 text-2xl font-bold text-blue-900 sm:text-3xl">
+          <h2 id="brands-heading" className="mb-3 text-2xl font-bold text-blue-900 sm:text-3xl">
             We Repair Every Major Brand
           </h2>
-          <p className="mx-auto max-w-xl text-slate-500">
+          <p className="mx-auto max-w-xl text-slate-600">
             From everyday laundry rooms to premium kitchen packages, our technicians work on the
             brands Connecticut homeowners call about most.
           </p>
         </div>
 
-        <div className="mb-6">
-          <p className="mb-3 text-center text-xs font-semibold uppercase tracking-widest text-blue-600">
-            Premium & Luxury
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {brands
-              .filter((brand) => brand.tier === 'premium')
-              .map((brand) => (
-                <div
-                  key={brand.name}
-                  className=" border border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 px-5 py-2.5 text-sm font-bold text-blue-900"
-                >
-                  {brand.name}
-                </div>
-              ))}
-          </div>
-        </div>
+        <ul
+          className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6"
+          aria-label="Appliance brands we repair"
+        >
+          {featuredBrands.map((brand) => (
+            <li
+              key={brand.name}
+              className="flex min-h-28 items-center justify-center border border-slate-200 bg-white px-5 py-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] sm:min-h-32"
+            >
+              <div className="relative h-12 w-full">
+                <Image
+                  src={brand.logo}
+                  alt={`${brand.name} logo`}
+                  fill
+                  sizes="(min-width: 1024px) 160px, (min-width: 640px) 30vw, 45vw"
+                  className="object-contain"
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
 
-        <div className="mb-6">
-          <p className="mb-3 text-center text-xs font-semibold uppercase tracking-widest text-slate-400">
-            Major Brands
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {brands
-              .filter((brand) => brand.tier === 'major')
-              .map((brand) => (
-                <div
-                  key={brand.name}
-                  className=" border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm"
-                >
-                  {brand.name}
-                </div>
-              ))}
-          </div>
-        </div>
+        <p className="mx-auto mt-8 max-w-4xl text-center text-sm leading-7 text-slate-500">
+          We also service {additionalBrands.slice(0, -1).join(', ')}, and{' '}
+          {additionalBrands.at(-1)} appliances.
+        </p>
 
-        <div className="mb-8">
-          <p className="mb-3 text-center text-xs font-semibold uppercase tracking-widest text-slate-300">
-            And Many More
-          </p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {brands
-              .filter((brand) => brand.tier === 'standard')
-              .map((brand) => (
-                <div
-                  key={brand.name}
-                  className=" border border-slate-100 bg-slate-50 px-4 py-2 text-xs font-medium text-slate-500"
-                >
-                  {brand.name}
-                </div>
-              ))}
-          </div>
-        </div>
-
-        <p className="text-center text-sm text-slate-400">
+        <p className="mt-3 text-center text-sm text-slate-500">
           Don&apos;t see your brand?{' '}
           <a
             href="tel:+19592616736"
-            className="font-semibold text-blue-600 transition-colors duration-200 hover:text-blue-800"
+            className="font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4 transition-colors duration-200 hover:text-blue-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
           >
             Call us. We most likely service it.
           </a>
