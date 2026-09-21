@@ -36,7 +36,15 @@ const additionalBrands = [
   'Estate',
 ];
 
-export default function BrandsGrid() {
+interface BrandsGridProps {
+  regionName?: string;
+  telephone?: string;
+}
+
+export default function BrandsGrid({
+  regionName = 'Connecticut',
+  telephone = '+19592616736',
+}: BrandsGridProps = {}) {
   return (
     <section className="border-y border-blue-100 bg-slate-50 py-16" aria-labelledby="brands-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -49,7 +57,7 @@ export default function BrandsGrid() {
           </h2>
           <p className="mx-auto max-w-xl text-slate-600">
             From everyday laundry rooms to premium kitchen packages, our technicians work on the
-            brands Connecticut homeowners call about most.
+            brands {regionName} homeowners call about most.
           </p>
         </div>
 
@@ -83,7 +91,7 @@ export default function BrandsGrid() {
         <p className="mt-3 text-center text-sm text-slate-500">
           Don&apos;t see your brand?{' '}
           <a
-            href="tel:+19592616736"
+            href={`tel:${telephone}`}
             className="font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4 transition-colors duration-200 hover:text-blue-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
           >
             Call us. We most likely service it.

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import BookingButton from './BookingButton';
+import BrandsGrid from './BrandsGrid';
 import { BRANCHES, NJ_PATH } from '@/lib/branches';
 import { BERGEN_MUNICIPALITIES, BERGEN_TOWNS, type BergenTown } from '@/lib/bergen';
 import { APPLIANCE_REPAIR_COST_ANSWER } from '@/lib/business';
@@ -330,6 +331,8 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
             ))}
           </div>
         </section>
+
+        <BrandsGrid regionName="Bergen County" telephone={branch.telephone} />
 
         <section
           id="how-it-works"
