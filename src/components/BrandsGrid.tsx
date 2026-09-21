@@ -62,7 +62,7 @@ export default function BrandsGrid() {
               key={brand.name}
               className="flex min-h-28 items-center justify-center border border-slate-200 bg-white px-5 py-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] sm:min-h-32"
             >
-              <div className="relative h-12 w-full">
+              <div className="relative h-12 w-full overflow-hidden">
                 <Image
                   src={brand.logo}
                   alt={`${brand.name} logo`}
