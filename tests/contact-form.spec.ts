@@ -78,7 +78,7 @@ test.describe('Contact Form', () => {
   test('rejects out-of-state ZIP', async ({ page }) => {
     const form = page.locator('#contact form');
     await form.locator('#zip').fill('10001');
-    await expect(form.getByText('Please enter a Connecticut ZIP code')).toBeVisible();
+    await expect(form.getByText('Please call us to check coverage for this ZIP code')).toBeVisible();
   });
 
   test('accepts Connecticut ZIP', async ({ page }) => {
@@ -216,7 +216,7 @@ test.describe('Booking Modal', () => {
     await page.getByRole('button', { name: /Schedule a Repair/i }).first().click();
     const modal = page.getByRole('dialog');
     await modal.locator('#m-zip').fill('90210');
-    await expect(modal.getByText('Please enter a Connecticut ZIP code')).toBeVisible();
+    await expect(modal.getByText('Please call us to check coverage for this ZIP code')).toBeVisible();
   });
 
   test('submits successfully and shows confirmation inside modal', async ({ page }) => {

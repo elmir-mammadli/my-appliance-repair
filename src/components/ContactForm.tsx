@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { isCtZip } from '@/lib/zip';
+import { BRANCHES, branchForZip, coverageError } from '@/lib/branches';
+import MunicipalitySelect from '@/components/MunicipalitySelect';
 import { SERVICE_CALL_FEE } from '@/lib/business';
 import DatePicker from '@/components/DatePicker';
 
@@ -20,6 +21,7 @@ const appliances = [
 const timeSlots = ['Morning (8am–12pm)', 'Afternoon (12pm–4pm)', 'Evening (4pm–7pm)'];
 
 interface FormState {
+  municipality: string;
   name: string;
   phone: string;
   email: string;
@@ -33,6 +35,7 @@ interface FormState {
 }
 
 const initialState: FormState = {
+  municipality: '',
   name: '',
   phone: '',
   email: '',
@@ -47,6 +50,8 @@ const initialState: FormState = {
 
 export default function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState);
+  const branchId = branchForZip(form.zip) ?? 'ct';
+  const branch = BRANCHES[branchId];
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -59,8 +64,7 @@ export default function ContactForm() {
       newErrors.phone = 'Please enter a valid phone number';
     if (!form.zip.trim()) newErrors.zip = 'ZIP code is required';
     else if (!/^\d{5}$/.test(form.zip)) newErrors.zip = 'Please enter a valid 5-digit ZIP code';
-    else if (!isCtZip(form.zip))
-      newErrors.zip = 'Sorry, we only service Connecticut (ZIP 06001–06928)';
+    else { const error = coverageError(form.zip, form.municipality); if (error) newErrors.zip = error; }
     if (!form.appliance) newErrors.appliance = 'Please select an appliance';
     if (!form.issue.trim()) newErrors.issue = 'Please describe the issue';
     if (!form.date) newErrors.date = 'Please select a preferred date';
@@ -81,12 +85,12 @@ export default function ContactForm() {
       const res = await fetch('/api/book', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, branchId, sourcePage: window.location.pathname }),
       });
       if (!res.ok) throw new Error('Request failed');
       setSubmitted(true);
     } catch {
-      alert('Something went wrong. Please call us directly at (959) 261-6736.');
+      alert(`Something went wrong. Please call us directly at ${branch.phone}.`);
     } finally {
       setSubmitting(false);
     }
@@ -128,10 +132,10 @@ export default function ContactForm() {
           <div className="bg-blue-50 border border-blue-200 p-6 mb-8">
             <p className="text-blue-800 font-medium">Need immediate assistance?</p>
             <a
-              href="tel:+19592616736"
+              href={`tel:${branch.telephone}`}
               className="text-blue-700 font-bold text-xl hover:text-blue-900 transition-colors duration-200 cursor-pointer"
             >
-              Call (959) 261-6736
+              Call {branch.phone}
             </a>
           </div>
           <button
@@ -168,9 +172,9 @@ export default function ContactForm() {
             {/* Contact Methods */}
             <div className="space-y-4 mb-8">
               <a
-                href="tel:+19592616736"
+                href={`tel:${branch.telephone}`}
                 className="flex items-center gap-4 p-5 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-all duration-200 cursor-pointer group"
-                aria-label="Call us at (959) 261-6736"
+                aria-label={`Call us at ${branch.phone}`}
               >
                 <div className="w-12 h-12 bg-blue-700 flex items-center justify-center text-white flex-shrink-0 group-hover:bg-blue-800 transition-colors duration-200">
                   <svg
@@ -189,8 +193,8 @@ export default function ContactForm() {
                   </svg>
                 </div>
                 <div>
-                  <div className="font-bold text-blue-900">(959) 261-6736</div>
-                  <div className="text-sm text-slate-500">Available 24/7 for emergencies</div>
+                  <div className="font-bold text-blue-900">{branch.phone}</div>
+                  <div className="text-sm text-slate-500">{branch.hours}</div>
                 </div>
               </a>
 
@@ -351,7 +355,7 @@ export default function ContactForm() {
                       </p>
                     ) : (
                       form.zip.length === 5 &&
-                      (isCtZip(form.zip) ? (
+                      (branchForZip(form.zip) ? (
                         <p
                           id="zip-status"
                           className="text-green-600 text-xs mt-1 flex items-center gap-1"
@@ -368,7 +372,7 @@ export default function ContactForm() {
                               clipRule="evenodd"
                             />
                           </svg>
-                          Connecticut ZIP — we’ll confirm coverage for your address.
+                          {branchId === 'ct' ? 'Connecticut ZIP' : branch.name} — we’ll confirm coverage for your address.
                         </p>
                       ) : (
                         <p
@@ -388,14 +392,15 @@ export default function ContactForm() {
                               clipRule="evenodd"
                             />
                           </svg>
-                          Please enter a Connecticut ZIP code
+                          Please call us to check coverage for this ZIP code
                         </p>
                       ))
                     )}
                   </div>
                 </div>
 
-                {/* Email */}
+                {branchId === 'nj' && <MunicipalitySelect id="contact-municipality" value={form.municipality} onChange={(value) => { handleChange('municipality', value); setErrors((prev) => ({ ...prev, zip: undefined })); }} />}
+              {/* Email */}
                 <div>
                   <label
                     htmlFor="email"

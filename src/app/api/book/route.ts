@@ -3,6 +3,8 @@ export const runtime = 'nodejs';
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import { Resend } from 'resend';
+import { BRANCHES, type BranchId } from '@/lib/branches';
+import { validateBookingRequest, escapeEmailData } from '@/lib/booking-request';
 
 async function appendToSheet(data: Record<string, string>) {
   const auth = new google.auth.GoogleAuth({
@@ -37,23 +39,22 @@ async function appendToSheet(data: Record<string, string>) {
     now, // Created Time
     now, // Last Modified
     '', // Completion Time
+    data.branchName, // R: Branch (existing A:Q columns retained)
+    data.municipality, // S: Municipality
+    data.sourcePage, // T: Source page
   ];
 
-  const existing = await sheets.spreadsheets.values.get({
+  await sheets.spreadsheets.values.append({
     spreadsheetId: sheetId,
-    range: `${tab}!A:A`,
-  });
-  const nextRow = (existing.data.values?.length ?? 1) + 1;
-
-  await sheets.spreadsheets.values.update({
-    spreadsheetId: sheetId,
-    range: `${tab}!A${nextRow}:Q${nextRow}`,
-    valueInputOption: 'USER_ENTERED',
+    range: `${tab}!A:T`,
+    valueInputOption: 'RAW',
+    insertDataOption: 'INSERT_ROWS',
     requestBody: { values: [row] },
   });
 }
 
 async function sendNotification(data: Record<string, string>) {
+  const branch = BRANCHES[data.branchId as BranchId];
   const urgencyColor =
     data.urgency === 'emergency' ? '#dc2626' : data.urgency === 'today' ? '#ea580c' : '#2563eb';
   const notificationEmail = process.env.NOTIFICATION_EMAIL!;
@@ -71,7 +72,7 @@ async function sendNotification(data: Record<string, string>) {
  <table width="100%" cellpadding="0" cellspacing="0"><tr>
  <td>
  <p style="margin:0;color:#ffb81c;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">MyAppliance Repair LLC</p>
- <h1 style="margin:6px 0 0;color:#ffffff;font-size:22px;font-weight:700;">New Repair Request</h1>
+ <h1 style="margin:6px 0 0;color:#ffffff;font-size:22px;font-weight:700;">New Repair Request · ${branch.name}</h1>
  </td>
  <td align="right">
  <span style="display:inline-block;background:${urgencyColor};color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:4px;">${data.urgency}</span>
@@ -105,7 +106,7 @@ async function sendNotification(data: Record<string, string>) {
  </tr>
  <tr>
  <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">ZIP Code</p></td>
- <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.zip}</p></td>
+ <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;"><p style="margin:0;color:#112654;font-size:14px;">${data.zip} ${data.municipality}</p></td>
  </tr>
  <tr>
  <td style="padding:8px 0;"><p style="margin:0;color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Service Address</p></td>
@@ -149,7 +150,7 @@ async function sendNotification(data: Record<string, string>) {
  </td></tr>
 
  <tr><td style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 32px;border-radius:0 0 4px 4px;">
- <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">MyAppliance Repair LLC · myappliance.us · (959) 261-6736</p>
+ <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">MyAppliance Repair LLC · ${branch.name} · ${branch.phone}</p>
  <p style="margin:6px 0 0;color:#cbd5e1;font-size:11px;text-align:center;">This notification was sent to ${notificationEmail} · Do not reply to this email</p>
  </td></tr>
 
@@ -163,12 +164,13 @@ async function sendNotification(data: Record<string, string>) {
   await resend.emails.send({
     from: 'MyAppliance Repair LLC <notifications@myappliance.us>',
     to: notificationEmail,
-    subject: `🔧 New Lead: ${data.appliance} · ${data.urgency.toUpperCase()} · ${data.name}`,
+    subject: `🔧 ${branch.name} Lead: ${data.appliance} · ${data.urgency.toUpperCase()} · ${data.name}`,
     html,
   });
 }
 
-async function sendConfirmation(data: Record<string, string>) {
+async function sendConfirmation(data: Record<string, string>, recipient: string) {
+  const branch = BRANCHES[data.branchId as BranchId];
   if (!data.email) return;
 
   const html = `<!DOCTYPE html>
@@ -185,7 +187,7 @@ async function sendConfirmation(data: Record<string, string>) {
  </td></tr>
 
  <tr><td style="background:#ffb81c;padding:14px 32px;">
- <p style="margin:0;color:#112654;font-size:14px;font-weight:700;">Hi ${data.name}, your booking request is confirmed. We&apos;ll call you within 30 minutes.</p>
+ <p style="margin:0;color:#112654;font-size:14px;font-weight:700;">Hi ${data.name}, we have received your ${branch.name} repair request. We will contact you to confirm your service address and appointment availability.</p>
  </td></tr>
 
  <tr><td style="background:#ffffff;padding:28px 32px;">
@@ -238,14 +240,14 @@ async function sendConfirmation(data: Record<string, string>) {
 
  <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:16px 20px;text-align:center;">
  <p style="margin:0 0 4px;color:#64748b;font-size:13px;">Questions? Reach us anytime:</p>
- <a href="tel:+19592616736" style="display:inline-block;background:#112654;color:#ffffff;font-size:14px;font-weight:700;padding:10px 24px;border-radius:4px;text-decoration:none;">(959) 261-6736</a>
+ <a href="tel:${branch.telephone}" style="display:inline-block;background:#112654;color:#ffffff;font-size:14px;font-weight:700;padding:10px 24px;border-radius:4px;text-decoration:none;">${branch.phone}</a>
  </div>
 
  </td></tr>
 
  <tr><td style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 32px;border-radius:0 0 4px 4px;">
- <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">MyAppliance Repair LLC · myappliance.us · (959) 261-6736</p>
- <p style="margin:6px 0 0;color:#cbd5e1;font-size:11px;text-align:center;">This confirmation was sent to ${data.email} · Connecticut service area</p>
+ <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">MyAppliance Repair LLC · ${branch.name} · ${branch.phone}</p>
+ <p style="margin:6px 0 0;color:#cbd5e1;font-size:11px;text-align:center;">This confirmation was sent to ${data.email} · ${branch.name} service area</p>
  </td></tr>
 
  </table>
@@ -257,40 +259,41 @@ async function sendConfirmation(data: Record<string, string>) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
     from: 'MyAppliance Repair LLC <notifications@myappliance.us>',
-    to: data.email,
-    subject: `Booking Confirmed — ${data.appliance} Repair · MyAppliance`,
+    to: recipient,
+    subject: `Request Received — ${branch.name} · ${data.appliance} Repair`,
     html,
   });
 }
 
 export async function POST(req: NextRequest) {
-  const data = await req.json();
-
-  let sheetOk = false;
+  let input: unknown;
+  try {
+    input = await req.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
+  }
+  const result = validateBookingRequest(input);
+  if (!result.ok) return NextResponse.json({ error: result.error }, { status: 400 });
+  const data = result.data;
   try {
     await appendToSheet(data);
-    sheetOk = true;
   } catch (err) {
     console.error('[/api/book] sheet error:', err);
+    return NextResponse.json({ error: 'Failed to submit booking' }, { status: 500 });
   }
 
+  const emailData = escapeEmailData(data);
   try {
-    await sendNotification(data);
+    await sendNotification(emailData);
   } catch (err) {
     console.error('[/api/book] email error:', err);
   }
-
   if (data.email) {
     try {
-      await sendConfirmation(data);
+      await sendConfirmation(emailData, data.email);
     } catch (err) {
       console.error('[/api/book] confirmation email error:', err);
     }
   }
-
-  if (!sheetOk) {
-    return NextResponse.json({ error: 'Failed to submit booking' }, { status: 500 });
-  }
-
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, branch: data.branchId });
 }

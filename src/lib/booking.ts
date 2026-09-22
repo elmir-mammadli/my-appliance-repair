@@ -1,4 +1,8 @@
+import type { BranchId } from './branches';
+
 export interface OpenBookingDetail {
+  branchId?: BranchId;
+  municipality?: string;
   appliance?: string;
 }
 

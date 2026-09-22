@@ -22,7 +22,102 @@ const THUMBTACK_URL =
 export default function Hero() {
   return (
     <section className="border-b border-slate-100 bg-white pt-20" aria-label="Hero section">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
+      <div className="relative isolate overflow-hidden bg-blue-950 text-white lg:hidden">
+        <Image
+          src="/images/hero/dishwasher.jpg"
+          alt="MyAppliance technician working on a dishwasher"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[65%_center] opacity-40"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[#101d40] via-[#101d40]/90 to-[#101d40]/35"
+          aria-hidden="true"
+        />
+
+        <div className="nj-entrance relative px-6 pb-12 pt-18">
+          <p className="mb-5 flex flex-col items-start gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#ffb81c]">
+            <span>Appliance Repair Near You</span>
+            <span>New Haven, Hamden &amp; across CT</span>
+          </p>
+          <h1 className="max-w-sm text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">
+            Same-Day Appliance Repair in&nbsp;
+            <span className="text-[#ffb81c]">Connecticut</span>
+          </h1>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-blue-100">
+            Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens,
+            and freezers across Connecticut, with a written estimate before work begins and a
+            90-day labor warranty.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <BookingButton className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 bg-[#ffb81c] px-8 py-4 text-base font-bold text-gray-900 transition-colors duration-200 hover:bg-[#c9920d]">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              Schedule a Repair
+            </BookingButton>
+            <a
+              href="tel:+19592616736"
+              className="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-white bg-transparent px-8 py-4 text-base font-bold text-white transition-colors duration-200 hover:border-[#ffb81c] hover:text-[#ffb81c]"
+            >
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                />
+              </svg>
+              (959) 261-6736
+            </a>
+          </div>
+
+          <div className="mt-5 flex flex-wrap text-sm text-blue-100/85">
+            {[
+              '5.0 ★ across Google & Thumbtack',
+              'Same-day when available',
+              'Diagnostic waived with repair',
+            ].map((item) => (
+              <span key={item} className="inline-flex items-center gap-2 py-1">
+                <svg
+                  className="h-4 w-4 flex-shrink-0 text-[#ffb81c]"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto hidden max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
         <div className="max-w-2xl">
           <p className="mb-4 flex flex-col items-start gap-1 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 sm:mb-6 sm:inline-flex sm:flex-row sm:items-center sm:gap-2">
             <span>Appliance Repair Near You</span>
@@ -86,7 +181,7 @@ export default function Hero() {
               'Same-day when available',
               'Diagnostic waived with repair',
             ].map((item) => (
-              <span key={item} className="inline-flex items-center gap-2 bg-slate-50 px-3.5 py-2">
+              <span key={item} className="inline-flex items-center gap-2 bg-slate-50 px-3.5  py-2">
                 <svg
                   className="h-4 w-4 flex-shrink-0 text-[#ffb81c]"
                   fill="currentColor"

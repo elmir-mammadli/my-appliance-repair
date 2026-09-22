@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { isCtZip } from '@/lib/zip';
-import { SERVICE_CALL_FEE } from '@/lib/business';
+import { BRANCHES, branchForZip, coverageError, type BranchId } from '@/lib/branches';
+import MunicipalitySelect from '@/components/MunicipalitySelect';
 import DatePicker from '@/components/DatePicker';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
 
@@ -37,6 +37,7 @@ const hasIssueSuggestion = (issue: string, suggestion: string) =>
   issue.toLowerCase().includes(suggestion.toLowerCase());
 
 interface FormState {
+  municipality: string;
   name: string;
   phone: string;
   email: string;
@@ -51,6 +52,7 @@ interface FormState {
 }
 
 const initialState: FormState = {
+  municipality: '',
   name: '',
   phone: '',
   email: '',
@@ -65,6 +67,8 @@ const initialState: FormState = {
 };
 
 interface BookingFormProps {
+  initialBranch?: BranchId;
+  initialMunicipality?: string;
   onClose?: () => void;
   initialAppliance?: string;
   onStepChange?: (step: 1 | 2) => void;
@@ -76,16 +80,21 @@ export default function BookingForm({
   initialAppliance,
   onStepChange,
   stickyHeader = false,
+  initialBranch = 'ct',
+  initialMunicipality = '',
 }: BookingFormProps) {
   const [step, setStep] = useState<1 | 2>(1);
   const [form, setForm] = useState<FormState>({
     ...initialState,
     appliance: initialAppliance ?? '',
+    municipality: initialMunicipality,
   });
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [checking, setChecking] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const branchId = branchForZip(form.zip) ?? initialBranch;
+  const branch = BRANCHES[branchId];
   const suggestions = issueSuggestions[form.appliance] ?? [];
 
   const handleChange = (field: keyof FormState, value: string) => {
@@ -109,7 +118,10 @@ export default function BookingForm({
       errs.phone = 'Please enter a valid phone number';
     if (!form.zip.trim()) errs.zip = 'ZIP code is required';
     else if (!/^\d{5}$/.test(form.zip)) errs.zip = 'Please enter a valid 5-digit ZIP';
-    else if (!isCtZip(form.zip)) errs.zip = 'Sorry, we only service Connecticut (ZIP 06001–06928)';
+    else {
+      const error = coverageError(form.zip, form.municipality);
+      if (error) errs.zip = error;
+    }
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -138,18 +150,19 @@ export default function BookingForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateStep1()) { setStep(1); onStepChange?.(1); return; }
     if (!validateStep2()) return;
     setSubmitting(true);
     try {
       const res = await fetch('/api/book', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, branchId, sourcePage: window.location.pathname }),
       });
       if (!res.ok) throw new Error('Request failed');
       setSubmitted(true);
     } catch {
-      alert('Something went wrong. Please call us directly at (959) 261-6736.');
+      alert(`Something went wrong. Please call us directly at ${branch.phone}.`);
     } finally {
       setSubmitting(false);
     }
@@ -157,7 +170,7 @@ export default function BookingForm({
 
   const resetForm = () => {
     setSubmitted(false);
-    setForm({ ...initialState, appliance: initialAppliance ?? '' });
+    setForm({ ...initialState, appliance: initialAppliance ?? '', municipality: initialMunicipality });
     setStep(1);
     onStepChange?.(1);
   };
@@ -307,10 +320,10 @@ export default function BookingForm({
             </ol>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="tel:+19592616736"
+                href={`tel:${branch.telephone}`}
                 className="inline-flex items-center justify-center gap-2 bg-blue-950 hover:bg-blue-900 text-white font-bold px-6 py-3 transition-colors duration-200"
               >
-                Call (959) 261-6736
+                Call {branch.phone}
               </a>
               <button
                 onClick={() => {
@@ -328,7 +341,7 @@ export default function BookingForm({
           <form onSubmit={handleStep1Next} noValidate aria-label="Step 1: Contact check">
             <div className="space-y-5">
               <p className="text-sm text-slate-500 text-center pb-1">
-                Quick check: 2 fields and we&apos;ll confirm we service your area.
+                Service team: {branch.name}. We’ll confirm your address and availability.
               </p>
 
               {/* Phone */}
@@ -348,7 +361,7 @@ export default function BookingForm({
                   autoComplete="tel"
                   value={form.phone}
                   onChange={(e) => handleChange('phone', e.target.value)}
-                  placeholder="(203) 555-0100"
+                  placeholder={branchId === 'nj' ? '(201) 555-0100' : '(203) 555-0100'}
                   autoFocus
                   className={`w-full px-4 py-3.5 border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors text-base ${errors.phone ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
                   aria-required="true"
@@ -379,7 +392,7 @@ export default function BookingForm({
                   autoComplete="postal-code"
                   value={form.zip}
                   onChange={(e) => handleChange('zip', e.target.value)}
-                  placeholder="06510"
+                  placeholder={branchId === 'nj' ? '07601' : '06510'}
                   maxLength={5}
                   className={`w-full px-4 py-3.5 border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors text-base ${errors.zip ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
                   aria-required="true"
@@ -391,7 +404,7 @@ export default function BookingForm({
                   </p>
                 ) : (
                   form.zip.length === 5 &&
-                  (isCtZip(form.zip) ? (
+                  (branchForZip(form.zip) ? (
                     <p
                       id="bf-zip-status"
                       className="text-green-600 text-xs mt-1 flex items-center gap-1"
@@ -408,7 +421,7 @@ export default function BookingForm({
                           clipRule="evenodd"
                         />
                       </svg>
-                      Connecticut ZIP — we’ll confirm coverage for your address.
+                      {branchId === 'ct' ? 'Connecticut ZIP' : branch.name} — we’ll confirm coverage for your address.
                     </p>
                   ) : (
                     <p
@@ -428,11 +441,13 @@ export default function BookingForm({
                           clipRule="evenodd"
                         />
                       </svg>
-                      Please enter a Connecticut ZIP code
+                      Please call us to check coverage for this ZIP code
                     </p>
                   ))
                 )}
               </div>
+
+              {branchId === 'nj' && <MunicipalitySelect id="bf-municipality" value={form.municipality} onChange={(value) => { handleChange('municipality', value); setErrors((prev) => ({ ...prev, zip: undefined })); }} />}
 
               <button
                 type="submit"
@@ -495,7 +510,7 @@ export default function BookingForm({
                   Contact Us Directly
                 </p>
                 <a
-                  href="tel:+19592616736"
+                  href={`tel:${branch.telephone}`}
                   className="flex items-center gap-3 p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors duration-200 cursor-pointer"
                 >
                   <div className="w-10 h-10 bg-blue-700 flex items-center justify-center text-white flex-shrink-0">
@@ -515,8 +530,8 @@ export default function BookingForm({
                     </svg>
                   </div>
                   <div>
-                    <div className="font-bold text-blue-950 text-sm">(959) 261-6736</div>
-                    <div className="text-xs text-slate-500">Mon–Sun 8am–6pm</div>
+                    <div className="font-bold text-blue-950 text-sm">{branch.phone}</div>
+                    <div className="text-xs text-slate-500">{branch.hours}</div>
                   </div>
                 </a>
               </div>
@@ -527,7 +542,7 @@ export default function BookingForm({
                 </p>
                 <ul className="space-y-2.5">
                   {[
-                    `$${SERVICE_CALL_FEE} service call — waived with repair`,
+                    `$${branch.fee} service call — waived with repair`,
                     'Written estimate before work begins',
                     '90-day parts & labor warranty',
                   ].map((item) => (
@@ -550,7 +565,7 @@ export default function BookingForm({
                 </ul>
               </div>
 
-              <div className="flex gap-1" aria-label="5 out of 5 stars">
+              {branchId === 'ct' && <div className="flex gap-1" aria-label="5 out of 5 stars">
                 {[1, 2, 3, 4, 5].map((s) => (
                   <svg
                     key={s}
@@ -564,7 +579,7 @@ export default function BookingForm({
                 ))}
                 <span className="text-sm font-semibold text-blue-950 ml-1">5.0</span>
                 <span className="text-sm text-slate-400 ml-1">· Google &amp; Thumbtack</span>
-              </div>
+              </div>}
               <div className="hidden pt-10 lg:block">
                 <div className="aspect-[1122/1230] overflow-hidden">
                   <Image
@@ -579,7 +594,7 @@ export default function BookingForm({
                 <div className="relative border-t-2 border-[#ffb81c] bg-blue-950 px-4 py-3 text-white">
                   <p className="text-center text-sm font-semibold">Your home. Our care.</p>
                   <div className="mt-2 flex items-center justify-center gap-3">
-                    <a href="https://share.google/aktwu5fUEtjV6Eo40" target="_blank" rel="noopener noreferrer" aria-label="Review us on Google (opens in a new tab)" title="Review us on Google" className="flex h-11 w-11 items-center justify-center bg-white/10 transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffb81c]">
+                    {branchId === 'ct' && <a href="https://share.google/aktwu5fUEtjV6Eo40" target="_blank" rel="noopener noreferrer" aria-label="Review us on Google (opens in a new tab)" title="Review us on Google" className="flex h-11 w-11 items-center justify-center bg-white/10 transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffb81c]">
                       <svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true">
                   <path
                     fill="#4285F4"
@@ -598,7 +613,7 @@ export default function BookingForm({
                     d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"
                   />
                 </svg>
-                    </a>
+                    </a>}
                     <a href="https://www.instagram.com/myappliancerepair" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram (opens in a new tab)" title="Follow us on Instagram" className="flex h-11 w-11 items-center justify-center bg-white/10 transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffb81c]">
                       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
                         <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -660,6 +675,7 @@ export default function BookingForm({
                     </span>
                   </label>
                   <AddressAutocomplete
+                    branchId={branchId}
                     id="bf-address"
                     value={form.address}
                     onChange={(v) => handleChange('address', v)}

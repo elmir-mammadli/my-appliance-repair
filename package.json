@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:branches": "playwright test --config=playwright.unit.config.ts"
   },
   "dependencies": {
     "@hugeicons/core-free-icons": "^4.0.0",
