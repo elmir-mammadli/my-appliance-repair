@@ -285,6 +285,9 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
           </section>
         )}
 
+        <BrandsGrid regionName="Bergen County" telephone={branch.telephone} />
+
+
         <section
           id="services"
           className="mx-auto max-w-7xl scroll-mt-28 px-6 py-16 lg:px-8 lg:py-20"
@@ -331,8 +334,6 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
             ))}
           </div>
         </section>
-
-        <BrandsGrid regionName="Bergen County" telephone={branch.telephone} />
 
         <section
           id="how-it-works"

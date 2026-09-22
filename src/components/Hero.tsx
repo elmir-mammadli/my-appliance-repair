@@ -36,7 +36,7 @@ export default function Hero() {
           aria-hidden="true"
         />
 
-        <div className="nj-entrance relative px-6 pb-12 pt-14">
+        <div className="nj-entrance relative px-6 pb-12 pt-18">
           <p className="mb-5 flex flex-col items-start gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#ffb81c]">
             <span>Appliance Repair Near You</span>
             <span>New Haven, Hamden &amp; across CT</span>
@@ -181,7 +181,7 @@ export default function Hero() {
               'Same-day when available',
               'Diagnostic waived with repair',
             ].map((item) => (
-              <span key={item} className="inline-flex items-center gap-2 bg-slate-50 px-3.5 py-2">
+              <span key={item} className="inline-flex items-center gap-2 bg-slate-50 px-3.5  py-2">
                 <svg
                   className="h-4 w-4 flex-shrink-0 text-[#ffb81c]"
                   fill="currentColor"
