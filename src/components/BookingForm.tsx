@@ -93,6 +93,50 @@ export default function BookingForm({
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.currentTarget;
+    let digits = input.value.replace(/\D/g, '');
+    let caretDigits = input.value
+      .slice(0, input.selectionStart ?? input.value.length)
+      .replace(/\D/g, '').length;
+    const inputType = (event.nativeEvent as InputEvent).inputType;
+
+    // Backspace/Delete beside a separator should remove a digit, not get stuck.
+    if (digits === form.phone.replace(/\D/g, '') && inputType?.startsWith('delete')) {
+      const index = inputType === 'deleteContentBackward' ? caretDigits - 1 : caretDigits;
+      if (index >= 0 && index < digits.length) {
+        digits = digits.slice(0, index) + digits.slice(index + 1);
+        caretDigits = index;
+      }
+    }
+
+    // Accept pasted US numbers with a country code as well as local numbers.
+    if (digits.length === 11 && digits.startsWith('1')) {
+      digits = digits.slice(1);
+      caretDigits = Math.max(0, caretDigits - 1);
+    }
+    digits = digits.slice(0, 10);
+    const formatted = !digits
+      ? ''
+      : digits.length <= 3
+        ? `(${digits}`
+        : digits.length <= 6
+          ? `(${digits.slice(0, 3)}) ${digits.slice(3)}`
+          : `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+    handleChange('phone', formatted);
+
+    // Keep the caret next to the edited digit when changing the middle of a number.
+    let caret = 0;
+    let count = 0;
+    while (caret < formatted.length && count < caretDigits) {
+      if (/\d/.test(formatted[caret])) count += 1;
+      caret += 1;
+    }
+    requestAnimationFrame(() => {
+      if (document.activeElement === input) input.setSelectionRange(caret, caret);
+    });
+  };
+
   const addIssueSuggestion = (suggestion: string) => {
     setForm((prev) => {
       if (hasIssueSuggestion(prev.issue, suggestion)) return prev;
@@ -351,7 +395,7 @@ export default function BookingForm({
                   type="tel"
                   autoComplete="tel"
                   value={form.phone}
-                  onChange={(e) => handleChange('phone', e.target.value)}
+                  onChange={handlePhoneChange}
                   placeholder="(203) 555-0100"
                   autoFocus
                   className={`w-full px-4 py-3.5 border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors text-base ${errors.phone ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
