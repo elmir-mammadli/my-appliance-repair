@@ -217,7 +217,7 @@ export default function Testimonials() {
             </p>
           </div>
 
-          <div className="bg-blue-950 px-6 py-5 text-white flex-shrink-0">
+          <div className="bg-blue-950 px-6 py-5 text-white shrink-0">
             <div className="flex gap-1" aria-label={`${REVIEW_RATINGS.google.rating} out of 5 stars on Google`}>
               {[1, 2, 3, 4, 5].map((i) => (
                 <svg key={i} className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -226,7 +226,7 @@ export default function Testimonials() {
               ))}
             </div>
             <p className="mt-2 text-3xl font-bold">{REVIEW_RATINGS.google.rating.toFixed(1)} / 5</p>
-            <p className="text-sm text-blue-300 mt-0.5">{REVIEW_RATINGS.google.count} Google reviews</p>
+            <p className="text-sm text-blue-300 mt-0.5">{REVIEW_RATINGS.google.count}+ Google reviews</p>
             <a
               href={GOOGLE_REVIEWS_URL}
               target="_blank"

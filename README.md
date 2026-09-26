@@ -20,6 +20,25 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Address autocomplete
+
+The booking page and booking modal share an accessible address autocomplete field.
+Selecting a suggestion fills the service address and ZIP code; both remain editable.
+Customers can also type an address manually if Google is unavailable or has no match.
+
+Set `GOOGLE_PLACES_API_KEY` in `.env.local` and your deployment environment. Enable
+[Places API (New)](https://developers.google.com/maps/documentation/places/web-service/cloud-setup)
+and billing for its Google Cloud project. Restrict the key to Places API (New) and,
+where your hosting supports a fixed outbound IP, to the server's IP. The key is used
+only by `/api/places`; do not prefix it with `NEXT_PUBLIC_` or paste it into components.
+No Maps JavaScript API or map widget is required. Restart the server after changing
+environment variables.
+
+Lookups use Connecticut address suggestions, a session token per search/selection,
+and Place Details to retrieve the ZIP. They do not guarantee service coverage.
+Run `npx playwright test tests/address-autocomplete.spec.ts` against a current local
+server (or build first); these tests mock Places and do not submit real bookings.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

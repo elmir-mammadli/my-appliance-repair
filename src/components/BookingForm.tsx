@@ -117,7 +117,11 @@ export default function BookingForm({
   const validateStep2 = (): boolean => {
     const errs: Partial<FormState> = {};
     if (!form.name.trim()) errs.name = 'Name is required';
+    if (!form.email.trim()) errs.email = 'Email is required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
+      errs.email = 'Please enter a valid email address';
     if (!form.address.trim()) errs.address = 'Service address is required';
+    if (!isCtZip(form.zip)) errs.zip = 'Please enter a valid Connecticut ZIP code';
     if (!form.appliance) errs.appliance = 'Please select an appliance';
     if (!form.issue.trim()) errs.issue = 'Please describe the issue';
     if (!form.date) errs.date = 'Please select a preferred date';
@@ -144,7 +148,7 @@ export default function BookingForm({
       const res = await fetch('/api/book', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, email: form.email.trim() }),
       });
       if (!res.ok) throw new Error('Request failed');
       setSubmitted(true);
@@ -663,11 +667,40 @@ export default function BookingForm({
                     id="bf-address"
                     value={form.address}
                     onChange={(v) => handleChange('address', v)}
+                    onAddressSelect={({ address, zip }) => {
+                      setForm((prev) => ({ ...prev, address, zip }));
+                      setErrors((prev) => ({ ...prev, address: undefined, zip: undefined }));
+                    }}
                     error={errors.address}
                   />
-                  {errors.address && (
-                    <p className="text-red-500 text-xs mt-1" role="alert">
-                      {errors.address}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="bf-service-zip"
+                    className="block text-sm font-semibold text-blue-950 mb-1.5"
+                  >
+                    Service ZIP Code{' '}
+                    <span className="text-red-500" aria-hidden="true">
+                      *
+                    </span>
+                  </label>
+                  <input
+                    id="bf-service-zip"
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="postal-code"
+                    maxLength={5}
+                    value={form.zip}
+                    onChange={(event) => handleChange('zip', event.target.value.replace(/\D/g, ''))}
+                    aria-required="true"
+                    aria-invalid={!!errors.zip}
+                    aria-describedby={errors.zip ? 'bf-service-zip-error' : undefined}
+                    className={`w-full px-4 py-3 border bg-white text-blue-950 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.zip ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
+                  />
+                  {errors.zip && (
+                    <p id="bf-service-zip-error" className="text-red-500 text-xs mt-1" role="alert">
+                      {errors.zip}
                     </p>
                   )}
                 </div>
@@ -679,19 +712,28 @@ export default function BookingForm({
                     className="block text-sm font-semibold text-blue-950 mb-1.5"
                   >
                     Email{' '}
-                    <span className="text-slate-400 font-normal text-xs">
-                      (optional — for confirmation)
+                    <span className="text-red-500" aria-hidden="true">
+                      *
                     </span>
                   </label>
                   <input
                     id="bf-email"
                     type="email"
+                    required
+                    aria-required="true"
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? 'bf-email-error' : undefined}
                     autoComplete="email"
                     value={form.email}
                     onChange={(e) => handleChange('email', e.target.value)}
                     placeholder="john@example.com"
-                    className="w-full px-4 py-3 border border-slate-200 hover:border-blue-300 bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                    className={`w-full px-4 py-3 border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${errors.email ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
                   />
+                  {errors.email && (
+                    <p id="bf-email-error" className="text-red-500 text-xs mt-1" role="alert">
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
 
                 {/* Appliance + Brand */}
