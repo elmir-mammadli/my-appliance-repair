@@ -205,7 +205,7 @@ export default function Discounts() {
             We Honor Those Who Serve Our Community
           </h2>
           <p className="text-blue-200 text-lg max-w-2xl mx-auto leading-relaxed">
-            MyAppliance Repair LLC is proud to offer special pricing for the people who keep our
+            My Appliance Repair LLC is proud to offer special pricing for the people who keep our
             communities safe, educated, and protected. Discounts apply to labor on all repair
             services.
           </p>

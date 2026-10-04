@@ -1,0 +1,30 @@
+Request received: Washer repair · My Appliance Repair
+
+MY APPLIANCE REPAIR LLC
+Repair request received
+
+Hi Alex Morgan, thanks for choosing My Appliance Repair.
+We’ll call you within 30 minutes to confirm your appointment and service address.
+
+YOUR REQUEST
+Appliance: Washer · LG
+Preferred date: Sun, Sep 27, 2026
+Preferred time: Morning (8am–12pm)
+Service address: 123 Sample Street, Hamden, CT 06518
+Your concern: The washer won’t spin. Water is left in the drum after the cycle.
+
+WHAT HAPPENS NEXT
+1. We’ll call (203) 555-0148 to review your request and agree on a visit time.
+2. Once scheduled, please make sure the technician can access the appliance. Have the model number handy if available.
+3. Your $99 service call covers the diagnostic and is waived when you proceed with the repair. You approve the written quote before work begins.
+
+Need to change a detail? Call (959) 261-6736.
+
+ANOTHER APPLIANCE ACTING UP?
+Mention it when we call. We repair refrigerators, washers, dryers, dishwashers, ovens, ranges, and more.
+Explore our services: https://www.myappliance.us/services
+
+Fully insured · 90-day parts & labor warranty
+My Appliance Repair LLC · https://www.myappliance.us · (959) 261-6736
+Sent to alex@example.com because you requested a technician visit.
+This email acknowledges your request; your appointment is confirmed by phone.

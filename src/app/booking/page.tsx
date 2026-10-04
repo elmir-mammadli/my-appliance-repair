@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://www.myappliance.us/booking',
-    title: 'Book Appliance Repair | MyAppliance Repair LLC',
+    title: 'Book Appliance Repair | My Appliance Repair LLC',
     description:
       `Schedule appliance repair in our Connecticut service area. $${SERVICE_CALL_FEE} service call, on-site repair quote, and a 90-day warranty.`,
     images: [{ url: '/images/og-image.png', width: 1200, height: 630 }],

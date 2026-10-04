@@ -16,7 +16,7 @@ function jsonLd(data: object): string {
 }
 
 export const metadata: Metadata = {
-  // Kept short — the root template appends ' | MyAppliance Repair' (21 chars) and
+  // Kept short — the root template appends ' | My Appliance Repair' (22 chars) and
   // anything past ~65 total gets truncated in the SERP.
   title: 'Appliance Repair Services in Connecticut',
   description:

@@ -13,7 +13,7 @@ const reviews: Review[] = [
   {
     name: 'Niyazi Yilmaz',
     initials: 'NY',
-    text: 'I called MyAppliance Repair at 10 AM and they had Nijat at my door by 1:30 that same afternoon. He walked me through everything and even installed my disposal press button — all without me asking.',
+    text: 'I called My Appliance Repair at 10 AM and they had Nijat at my door by 1:30 that same afternoon. He walked me through everything and even installed my disposal press button — all without me asking.',
     appliance: 'Dishwasher repair',
   },
   {
@@ -43,7 +43,7 @@ const reviews: Review[] = [
   {
     name: 'Maria Torres',
     initials: 'MT',
-    text: 'Dryer stopped heating mid-cycle. MyAppliance sent a tech the next morning who found a burned heating element. He had the part in his van and fixed it in under an hour. Excellent service from start to finish.',
+    text: 'Dryer stopped heating mid-cycle. My Appliance Repair sent a tech the next morning who found a burned heating element. He had the part in his van and fixed it in under an hour. Excellent service from start to finish.',
     appliance: 'Dryer repair',
   },
   {

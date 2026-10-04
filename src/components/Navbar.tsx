@@ -44,7 +44,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center group cursor-pointer">
           <Image
             src="/logo.svg"
-            alt="MyAppliance Repair LLC"
+            alt="My Appliance Repair LLC"
             width={160}
             height={53}
             className="h-11 w-auto transition-transform duration-200 group-hover:scale-105"

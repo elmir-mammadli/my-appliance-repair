@@ -78,7 +78,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Image
               src="/logo.svg"
-              alt="MyAppliance Repair LLC"
+              alt="My Appliance Repair LLC"
               width={180}
               height={60}
               className="h-11 w-auto mb-5"
@@ -312,7 +312,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-14 border-t border-white/10 pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-200/40">
-          <p>&copy; {currentYear} MyAppliance Repair LLC. All rights reserved.</p>
+          <p>&copy; {currentYear} My Appliance Repair LLC. All rights reserved.</p>
           <div className="flex gap-5">
             <Link href="/privacy" className="hover:text-white transition-colors duration-200">
               Privacy Policy

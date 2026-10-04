@@ -617,7 +617,7 @@ export default function BookingForm({
                 <div className="aspect-[1122/1230] overflow-hidden">
                   <Image
                     src="/images/form-img.png"
-                    alt="Smiling technician in a MyAppliance Repair uniform"
+                    alt="Smiling technician in a My Appliance Repair uniform"
                     width={1122}
                     height={1402}
                     sizes="280px"

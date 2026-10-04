@@ -22,8 +22,8 @@ const serviceDescription = `Appliance repair in ${SERVICE_AREAS.length} Connecti
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.myappliance.us'),
   title: {
-    default: 'Same-Day Appliance Repair in CT | 90-Day Warranty | MyAppliance Repair',
-    template: '%s | MyAppliance Repair',
+    default: 'Same-Day Appliance Repair in CT | 90-Day Warranty | My Appliance Repair',
+    template: '%s | My Appliance Repair',
   },
   description:
     serviceDescription,
@@ -38,11 +38,11 @@ export const metadata: Metadata = {
     'appliance repair New Haven',
     'appliance repair Hamden',
     'dishwasher repair Connecticut',
-    'MyAppliance Repair LLC',
+    'My Appliance Repair LLC',
   ],
-  authors: [{ name: 'MyAppliance Repair LLC', url: 'https://www.myappliance.us' }],
-  creator: 'MyAppliance Repair LLC',
-  publisher: 'MyAppliance Repair LLC',
+  authors: [{ name: 'My Appliance Repair LLC', url: 'https://www.myappliance.us' }],
+  creator: 'My Appliance Repair LLC',
+  publisher: 'My Appliance Repair LLC',
   robots: {
     index: true,
     follow: true,
@@ -57,8 +57,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://www.myappliance.us',
-    siteName: 'MyAppliance Repair LLC',
-    title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | MyAppliance Repair',
+    siteName: 'My Appliance Repair LLC',
+    title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | My Appliance Repair',
     description:
       serviceDescription,
     images: [
@@ -66,13 +66,13 @@ export const metadata: Metadata = {
         url: '/images/appliance-repair-connecticut-og.jpg',
         width: 1200,
         height: 630,
-        alt: 'MyAppliance Repair LLC - Connecticut Appliance Repair Services',
+        alt: 'My Appliance Repair LLC - Connecticut Appliance Repair Services',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | MyAppliance Repair',
+    title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | My Appliance Repair',
     description:
       serviceDescription,
     images: ['/images/appliance-repair-connecticut-og.jpg'],

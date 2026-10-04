@@ -261,7 +261,7 @@ export default function AboutContent() {
             Our Story
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
-            About MyAppliance Repair LLC
+            About My Appliance Repair LLC
           </h1>
           <p className="text-blue-300 text-lg sm:text-xl max-w-2xl leading-relaxed">
             Connecticut&apos;s trusted appliance repair team &mdash; insured, local, and here when
@@ -390,7 +390,7 @@ export default function AboutContent() {
             Serving {SERVICE_AREAS.length} Connecticut communities
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-            MyAppliance Repair LLC serves the towns and cities listed below, including New Haven,
+            My Appliance Repair LLC serves the towns and cities listed below, including New Haven,
             Hamden, Bristol, Waterbury, Trumbull, Stratford, and Madison. Contact us to check
             appointment availability for your address.
           </p>

@@ -1,4 +1,4 @@
-# MyAppliance Repair LLC
+# My Appliance Repair LLC
 
 > Licensed appliance repair company serving Connecticut. Same-day service, 90-day parts and labor warranty, licensed and insured technicians.
 
@@ -10,7 +10,7 @@
 
 ## About
 
-MyAppliance Repair LLC is a Connecticut-based appliance repair company. We provide fast, reliable repair services for all major home appliances. Our technicians are licensed, insured, and experienced with all major brands including Samsung, LG, Whirlpool, GE, Maytag, Bosch, KitchenAid, and Frigidaire. Every repair comes with a 90-day parts and labor warranty.
+My Appliance Repair LLC is a Connecticut-based appliance repair company. We provide fast, reliable repair services for all major home appliances. Our technicians are licensed, insured, and experienced with all major brands including Samsung, LG, Whirlpool, GE, Maytag, Bosch, KitchenAid, and Frigidaire. Every repair comes with a 90-day parts and labor warranty.
 
 ## Services
 

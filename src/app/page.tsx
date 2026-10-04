@@ -43,7 +43,7 @@ export const metadata: Metadata = {
         url: '/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'MyAppliance Repair LLC - Connecticut Appliance Repair Services',
+        alt: 'My Appliance Repair LLC - Connecticut Appliance Repair Services',
       },
     ],
   },

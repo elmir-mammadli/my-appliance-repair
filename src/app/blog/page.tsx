@@ -8,10 +8,10 @@ import { posts } from '@/lib/posts';
 import { SERVICE_AREAS } from '@/lib/business';
 
 export const metadata: Metadata = {
-  // Bare title — the root layout's `%s | MyAppliance Repair` template adds the brand.
+  // Bare title — the root layout's `%s | My Appliance Repair` template adds the brand.
   title: 'Appliance Repair Tips for CT Homeowners',
   description:
-    "Expert appliance repair tips, maintenance guides, and cost-saving advice for Connecticut homeowners. Stay informed with MyAppliance Repair LLC's blog.",
+    "Expert appliance repair tips, maintenance guides, and cost-saving advice for Connecticut homeowners. Stay informed with My Appliance Repair LLC's blog.",
   keywords:
     'appliance repair tips Connecticut, washer dryer maintenance, refrigerator problems, dishwasher repair, appliance maintenance',
   alternates: { canonical: 'https://www.myappliance.us/blog' },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://www.myappliance.us/blog',
-    siteName: 'MyAppliance Repair LLC',
+    siteName: 'My Appliance Repair LLC',
     locale: 'en_US',
     title: 'Appliance Repair Tips & Guides for CT Homeowners',
     description:

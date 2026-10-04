@@ -5,7 +5,7 @@ import Image from 'next/image';
 export const metadata: Metadata = {
   title: 'Leave a Review',
   description:
-    'Share your experience with MyAppliance Repair LLC. Leave a review on Google, Yelp, or Thumbtack, or follow us on Instagram.',
+    'Share your experience with My Appliance Repair LLC. Leave a review on Google, Yelp, or Thumbtack, or follow us on Instagram.',
   alternates: { canonical: 'https://www.myappliance.us/socials' },
   robots: { index: false, follow: false },
 };
@@ -182,7 +182,7 @@ export default function SocialsPage() {
           <div className=" bg-white/80 px-6 py-4 shadow-[0_8px_32px_-12px_rgba(30,58,138,0.18)] ring-1 ring-blue-100 backdrop-blur-sm">
             <Image
               src="/logo.svg"
-              alt="MyAppliance Repair LLC"
+              alt="My Appliance Repair LLC"
               width={200}
               height={66}
               className="h-12 w-auto sm:h-14"
@@ -343,7 +343,7 @@ export default function SocialsPage() {
           href="tel:+19592616736"
           className="socials-fade-in mt-8 flex items-center justify-center gap-2.5 border border-blue-200 bg-white/70 px-6 py-4 text-base font-semibold text-blue-900 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-blue-300 hover:bg-white hover:shadow-md active:scale-[0.98] font-[family-name:var(--font-lexend)]"
           style={{ animationDelay: `${120 + (reviewLinks.length + 1) * 80}ms` }}
-          aria-label="Call MyAppliance Repair at (959) 261-6736"
+          aria-label="Call My Appliance Repair at (959) 261-6736"
         >
           <svg
             className="h-5 w-5"
@@ -386,7 +386,7 @@ export default function SocialsPage() {
             myappliance.us
           </Link>
           <p className="mt-3 text-xs text-slate-500 font-[family-name:var(--font-source-sans-3)]">
-            &copy; 2025 MyAppliance Repair LLC &middot; Connecticut
+            &copy; 2025 My Appliance Repair LLC &middot; Connecticut
           </p>
         </footer>
       </div>

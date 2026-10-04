@@ -1,7 +1,7 @@
 import { posts } from '@/lib/posts';
 
 const BASE_URL = 'https://www.myappliance.us';
-const SITE_TITLE = 'MyAppliance Blog';
+const SITE_TITLE = 'My Appliance Repair Blog';
 const SITE_DESCRIPTION =
   'Appliance repair tips, guides, and advice for Connecticut homeowners.';
 

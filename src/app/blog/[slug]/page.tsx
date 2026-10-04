@@ -37,7 +37,7 @@ export async function generateMetadata({
     post.excerpt.length > 125 ? post.excerpt.slice(0, 122).replace(/\s+\S*$/, '') + '...' : post.excerpt;
 
   return {
-    // Bare title — the root layout's `%s | MyAppliance Repair` template adds the
+    // Bare title — the root layout's `%s | My Appliance Repair` template adds the
     // brand suffix, so this shouldn't repeat it or the <title> doubles up.
     title: post.title,
     description,
@@ -46,12 +46,12 @@ export async function generateMetadata({
     openGraph: {
       type: 'article',
       url: `https://www.myappliance.us/blog/${slug}`,
-      siteName: 'MyAppliance Repair LLC',
+      siteName: 'My Appliance Repair LLC',
       locale: 'en_US',
       title: post.title,
       description: socialDescription,
       publishedTime: post.date,
-      authors: ['MyAppliance Repair LLC Team'],
+      authors: ['My Appliance Repair LLC Team'],
       // Image itself comes from the co-located opengraph-image.tsx file convention,
       // which takes priority over anything set here — no need to duplicate it.
     },
@@ -90,12 +90,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     dateModified: post.date,
     author: {
       '@type': 'Organization',
-      name: 'MyAppliance Repair LLC Team',
+      name: 'My Appliance Repair LLC Team',
       url: 'https://www.myappliance.us',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'MyAppliance Repair LLC',
+      name: 'My Appliance Repair LLC',
       url: 'https://www.myappliance.us',
       logo: {
         '@type': 'ImageObject',

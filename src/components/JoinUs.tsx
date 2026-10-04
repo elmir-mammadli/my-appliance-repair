@@ -97,7 +97,7 @@ export default function JoinUs() {
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Join Our Team</h2>
           <p className="text-blue-200 text-lg leading-relaxed">
-            MyAppliance Repair LLC is a locally owned company built on real craftsmanship and real
+            My Appliance Repair LLC is a locally owned company built on real craftsmanship and real
             relationships. We&apos;re looking for skilled technicians who take pride in their work
             and want to grow with us.
           </p>

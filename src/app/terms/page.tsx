@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
-    'Terms of Service for MyAppliance Repair LLC — the rules and conditions governing our appliance repair services in Connecticut.',
+    'Terms of Service for My Appliance Repair LLC — the rules and conditions governing our appliance repair services in Connecticut.',
   alternates: { canonical: 'https://www.myappliance.us/terms' },
   robots: { index: true, follow: true },
 };

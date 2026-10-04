@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
  <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
 
  <tr><td style="background:#112654;padding:28px 32px;border-radius:4px 4px 0 0;">
- <p style="margin:0;color:#ffb81c;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">MyAppliance Repair LLC</p>
+ <p style="margin:0;color:#ffb81c;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">My Appliance Repair LLC</p>
  <h1 style="margin:6px 0 0;color:#fff;font-size:22px;font-weight:700;">New Job Application</h1>
  </td></tr>
 
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
  </td></tr>
 
  <tr><td style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 32px;border-radius:0 0 4px 4px;">
- <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">MyAppliance Repair LLC · myappliance.us · (959) 261-6736</p>
+ <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">My Appliance Repair LLC · myappliance.us · (959) 261-6736</p>
  <p style="margin:6px 0 0;color:#cbd5e1;font-size:11px;text-align:center;">Sent to ${notificationEmail} · Do not reply to this email</p>
  </td></tr>
 
@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
-      from: 'MyAppliance Repair LLC <notifications@myappliance.us>',
+      from: 'My Appliance Repair LLC <notifications@myappliance.us>',
       to: notificationEmail,
       subject: `New Application — ${name} · ${experience} · ${availability}`,
       html,

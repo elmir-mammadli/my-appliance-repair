@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'Privacy Policy for MyAppliance Repair LLC — how we collect, use, and protect your personal information.',
+    'Privacy Policy for My Appliance Repair LLC — how we collect, use, and protect your personal information.',
   alternates: { canonical: 'https://www.myappliance.us/privacy' },
   robots: { index: true, follow: true },
 };
@@ -334,7 +334,7 @@ export default function PrivacyPage() {
             data practices, please contact us:
           </p>
           <div className="bg-blue-50 p-6 mt-4 mb-10">
-            <p className="font-semibold text-blue-900 mb-1">MyAppliance Repair, LLC</p>
+            <p className="font-semibold text-blue-900 mb-1">My Appliance Repair, LLC</p>
             <p className="text-slate-600 text-sm">Serving Connecticut</p>
             <p className="text-slate-600 text-sm mt-2">
               Phone:{' '}

@@ -23,16 +23,16 @@ export async function generateMetadata({
   const socialDescription = `Fast, reliable appliance repair in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers & ovens. Insured techs, 90-day warranty.`;
 
   return {
-    // Bare of the brand — the root layout's `%s | MyAppliance Repair` template appends it.
+    // Bare of the brand — the root layout's `%s | My Appliance Repair` template appends it.
     title: `Appliance Repair ${city.name}, CT | Same-Day Service`,
     description: `${socialDescription} Call (959) 261-6736.`,
     alternates: { canonical: `https://www.myappliance.us/${city.slug}` },
     openGraph: {
       type: 'website',
       url: `https://www.myappliance.us/${city.slug}`,
-      siteName: 'MyAppliance Repair LLC',
+      siteName: 'My Appliance Repair LLC',
       locale: 'en_US',
-      title: `Appliance Repair ${city.name}, CT | Same-Day Service | MyAppliance Repair LLC`,
+      title: `Appliance Repair ${city.name}, CT | Same-Day Service | My Appliance Repair LLC`,
       description: socialDescription,
       images: [
         {
@@ -151,7 +151,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
     '@context': 'https://schema.org',
     '@type': 'HomeAndConstructionBusiness',
     '@id': 'https://www.myappliance.us/#business',
-    name: 'MyAppliance Repair LLC',
+    name: 'My Appliance Repair LLC',
     url: 'https://www.myappliance.us',
     telephone: '+19592616736',
     email: 'service@myappliance.us',
