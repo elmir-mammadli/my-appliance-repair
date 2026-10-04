@@ -46,6 +46,6 @@ export const SERVICE_AREA_SCHEMA = SERVICE_AREAS.map((name) => ({
 }));
 
 export const REVIEW_RATINGS = {
-  google: { rating: 5, count: 95 },
-  thumbtack: { rating: 5, count: 145 },
+  google: { rating: 5, count: 100 },
+  thumbtack: { rating: 5, count: 160 },
 } as const;
