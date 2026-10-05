@@ -186,10 +186,10 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
               <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-[#ffb81c]">
                 MyAppliance Repair · New Jersey
               </p>
-              <h1 className="max-w-xl text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl">
+              <h1 className="max-w-2xl text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl">
                 Appliance repair
                 <br />
-                in {area}
+                in {area}<span className="hidden sm:inline">,&nbsp;NJ</span>
                 <span className="text-[#ffb81c]">.</span>
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-blue-100">
