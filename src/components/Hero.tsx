@@ -24,9 +24,7 @@ export default function Hero() {
     <section className="border-b border-slate-100 bg-white pt-20" aria-label="Hero section">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
         <div className="max-w-2xl">
-          <p className="mb-4 flex flex-col items-start gap-1 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 sm:mb-6 sm:inline-flex sm:flex-row sm:items-center sm:gap-2">
-            <span>Appliance Repair Near You</span>
-            <span className="hidden h-1.5 w-1.5 bg-[#F97316] sm:inline-block" aria-hidden="true" />
+          <p className="mb-2 flex flex-col items-start gap-1 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 sm:mb-2 sm:inline-flex sm:flex-row sm:items-center sm:gap-2">
             <span>New Haven, Hamden, West Haven & across CT</span>
           </p>
 
