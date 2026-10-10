@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { BUSINESS } from '@/lib/business';
 
 const brandOptions = [
   'Samsung',
@@ -140,7 +141,7 @@ export default function HiringModal() {
       if (!res.ok) throw new Error('server error');
       setSubmitted(true);
     } catch {
-      alert('Something went wrong. Please call us directly at (959) 261-6736.');
+      alert(`Something went wrong. Please call us directly at ${BUSINESS.phone.display}.`);
     } finally {
       setSubmitting(false);
     }

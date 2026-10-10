@@ -15,7 +15,7 @@ import ContactForm from '@/components/ContactForm';
 import JoinUs from '@/components/JoinUs';
 import HiringModal from '@/components/HiringModal';
 import Footer from '@/components/Footer';
-import { APPLIANCE_REPAIR_COST_ANSWER, SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
+import { APPLIANCE_REPAIR_COST_ANSWER, BUSINESS, SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
 
 export const metadata: Metadata = {
   title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
         url: '/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'My Appliance Repair LLC - Connecticut Appliance Repair Services',
+        alt: `${BUSINESS.name} - Connecticut Appliance Repair Services`,
       },
     ],
   },

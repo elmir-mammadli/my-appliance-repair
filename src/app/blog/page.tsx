@@ -5,22 +5,22 @@ import Footer from '@/components/Footer';
 import BookingModal from '@/components/BookingModal';
 import BlogCategoryCard from '@/components/BlogCategoryCard';
 import { posts } from '@/lib/posts';
-import { SERVICE_AREAS } from '@/lib/business';
+import { BUSINESS, SERVICE_AREAS } from '@/lib/business';
 
 export const metadata: Metadata = {
-  // Bare title — the root layout's `%s | My Appliance Repair` template adds the brand.
+  // Bare title — the root layout's title template adds the business name.
   title: 'Appliance Repair Tips for CT Homeowners',
   description:
-    "Expert appliance repair tips, maintenance guides, and cost-saving advice for Connecticut homeowners. Stay informed with My Appliance Repair LLC's blog.",
+    `Expert appliance repair tips, maintenance guides, and cost-saving advice for Connecticut homeowners. Stay informed with ${BUSINESS.name}'s blog.`,
   keywords:
     'appliance repair tips Connecticut, washer dryer maintenance, refrigerator problems, dishwasher repair, appliance maintenance',
-  alternates: { canonical: 'https://www.myappliance.us/blog' },
+  alternates: { canonical: `${BUSINESS.url}/blog` },
   // Without these the page inherits the root layout's OG block wholesale, which
   // advertises the homepage title and og:url on every share of /blog.
   openGraph: {
     type: 'website',
-    url: 'https://www.myappliance.us/blog',
-    siteName: 'My Appliance Repair LLC',
+    url: `${BUSINESS.url}/blog`,
+    siteName: BUSINESS.name,
     locale: 'en_US',
     title: 'Appliance Repair Tips & Guides for CT Homeowners',
     description:
@@ -198,7 +198,7 @@ export default function BlogPage() {
             insured technicians, and a 90-day warranty.
           </p>
           <a
-            href="tel:+19592616736"
+            href={BUSINESS.phone.href}
             className="inline-flex items-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold px-8 py-4 rounded-xl transition-all duration-200 text-base"
           >
             <svg
@@ -215,7 +215,7 @@ export default function BlogPage() {
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               />
             </svg>
-            Call (959) 261-6736
+            Call {BUSINESS.phone.display}
           </a>
         </div>
       </section>

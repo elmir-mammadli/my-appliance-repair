@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import { Resend } from 'resend';
 import { createBookingConfirmationEmail } from '@/lib/booking-confirmation-email';
+import { BUSINESS } from '@/lib/business';
 
 async function appendToSheet(data: Record<string, string>) {
   const auth = new google.auth.GoogleAuth({
@@ -71,7 +72,7 @@ async function sendNotification(data: Record<string, string>) {
  <tr><td style="background:#112654;padding:28px 32px;border-radius:4px 4px 0 0;">
  <table width="100%" cellpadding="0" cellspacing="0"><tr>
  <td>
- <p style="margin:0;color:#ffb81c;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">My Appliance Repair LLC</p>
+ <p style="margin:0;color:#ffb81c;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">${BUSINESS.name}</p>
  <h1 style="margin:6px 0 0;color:#ffffff;font-size:22px;font-weight:700;">New Repair Request</h1>
  </td>
  <td align="right">
@@ -150,7 +151,7 @@ async function sendNotification(data: Record<string, string>) {
  </td></tr>
 
  <tr><td style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 32px;border-radius:0 0 4px 4px;">
- <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">My Appliance Repair LLC · myappliance.us · (959) 261-6736</p>
+ <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">${BUSINESS.name} · ${new URL(BUSINESS.url).host} · ${BUSINESS.phone.display}</p>
  <p style="margin:6px 0 0;color:#cbd5e1;font-size:11px;text-align:center;">This notification was sent to ${notificationEmail} · Do not reply to this email</p>
  </td></tr>
 
@@ -162,7 +163,7 @@ async function sendNotification(data: Record<string, string>) {
 
   const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
-    from: 'My Appliance Repair LLC <notifications@myappliance.us>',
+    from: `${BUSINESS.name} <notifications@myappliance.us>`,
     to: notificationEmail,
     subject: `🔧 New Lead: ${data.appliance} · ${data.urgency.toUpperCase()} · ${data.name}`,
     html,
@@ -176,7 +177,7 @@ async function sendConfirmation(data: Record<string, string>) {
 
   const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
-    from: 'My Appliance Repair LLC <notifications@myappliance.us>',
+    from: `${BUSINESS.name} <notifications@myappliance.us>`,
     to: data.email,
     subject,
     html,

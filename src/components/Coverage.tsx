@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { cities } from '@/lib/cities';
-import { SERVICE_AREAS } from '@/lib/business';
+import { BUSINESS, SERVICE_AREAS } from '@/lib/business';
 
 const ServiceAreaMap = dynamic(() => import('./ServiceAreaMapInner'), {
   ssr: false,
@@ -162,7 +162,7 @@ export default function Coverage() {
                 appointments.
               </p>
               <a
-                href="tel:+19592616736"
+                href={BUSINESS.phone.href}
                 className="inline-flex items-center gap-2 mt-3 bg-[#ffb81c] hover:bg-[#ffca4d] text-gray-900 font-bold px-5 py-2.5 transition-all duration-200 cursor-pointer text-sm"
               >
                 <svg
@@ -179,7 +179,7 @@ export default function Coverage() {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                Call (959) 261-6736
+                Call {BUSINESS.phone.display}
               </a>
             </div>
           </div>

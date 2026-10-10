@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { isCtZip } from '@/lib/zip';
-import { SERVICE_CALL_FEE } from '@/lib/business';
+import { BUSINESS, SERVICE_CALL_FEE } from '@/lib/business';
 import DatePicker from '@/components/DatePicker';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
 
@@ -197,7 +197,7 @@ export default function BookingForm({
       if (!res.ok) throw new Error('Request failed');
       setSubmitted(true);
     } catch {
-      alert('Something went wrong. Please call us directly at (959) 261-6736.');
+      alert(`Something went wrong. Please call us directly at ${BUSINESS.phone.display}.`);
     } finally {
       setSubmitting(false);
     }
@@ -355,10 +355,10 @@ export default function BookingForm({
             </ol>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="tel:+19592616736"
+                href={BUSINESS.phone.href}
                 className="inline-flex items-center justify-center gap-2 bg-blue-950 hover:bg-blue-900 text-white font-bold px-6 py-3 transition-colors duration-200"
               >
-                Call (959) 261-6736
+                Call {BUSINESS.phone.display}
               </a>
               <button
                 onClick={() => {
@@ -543,7 +543,7 @@ export default function BookingForm({
                   Contact Us Directly
                 </p>
                 <a
-                  href="tel:+19592616736"
+                  href={BUSINESS.phone.href}
                   className="flex items-center gap-3 p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors duration-200 cursor-pointer"
                 >
                   <div className="w-10 h-10 bg-blue-700 flex items-center justify-center text-white flex-shrink-0">
@@ -563,7 +563,7 @@ export default function BookingForm({
                     </svg>
                   </div>
                   <div>
-                    <div className="font-bold text-blue-950 text-sm">(959) 261-6736</div>
+                    <div className="business-phone font-bold text-blue-950 text-sm">{BUSINESS.phone.display}</div>
                     <div className="text-xs text-slate-500">Mon–Sun 8am–6pm</div>
                   </div>
                 </a>
@@ -617,7 +617,7 @@ export default function BookingForm({
                 <div className="aspect-[1122/1230] overflow-hidden">
                   <Image
                     src="/images/form-img.png"
-                    alt="Smiling technician in a My Appliance Repair uniform"
+                    alt={`Smiling technician in a ${BUSINESS.shortName} uniform`}
                     width={1122}
                     height={1402}
                     sizes="280px"

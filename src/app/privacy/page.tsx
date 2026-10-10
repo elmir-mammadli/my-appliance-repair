@@ -2,12 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import BusinessNap from '@/components/BusinessNap';
+import { BUSINESS } from '@/lib/business';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'Privacy Policy for My Appliance Repair LLC — how we collect, use, and protect your personal information.',
-  alternates: { canonical: 'https://www.myappliance.us/privacy' },
+    `Privacy Policy for ${BUSINESS.name} — how we collect, use, and protect your personal information.`,
+  alternates: { canonical: `${BUSINESS.url}/privacy` },
   robots: { index: true, follow: true },
 };
 
@@ -42,10 +44,10 @@ export default function PrivacyPage() {
       <section className="bg-white py-16 lg:py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-slate-600 leading-relaxed mb-10">
-            My Appliance Repair (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) operates
+            {BUSINESS.name} (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) operates
             the website{' '}
-            <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">
-              myappliance.us
+            <a href={BUSINESS.url} className="text-blue-700 hover:underline">
+              {new URL(BUSINESS.url).host}
             </a>
             {' '}
             and provides home appliance repair services in select Connecticut communities. This Privacy Policy
@@ -202,8 +204,8 @@ export default function PrivacyPage() {
           </ul>
           <p className="text-slate-600 leading-relaxed mb-6">
             To exercise any of these rights, please contact us at{' '}
-            <a href="mailto:service@myappliance.us" className="text-blue-700 underline hover:underline">
-              service@myappliance.us
+            <a href={`mailto:${BUSINESS.email}`} className="text-blue-700 underline hover:underline">
+              {BUSINESS.email}
             </a>
             . We will respond to your request within a reasonable timeframe.
           </p>
@@ -246,8 +248,8 @@ export default function PrivacyPage() {
           </ul>
           <p className="text-slate-600 leading-relaxed mb-6">
             To submit a CTDPA rights request, email us at{' '}
-            <a href="mailto:service@myappliance.us" className="text-blue-700 underline hover:underline">
-              service@myappliance.us
+            <a href={`mailto:${BUSINESS.email}`} className="text-blue-700 underline hover:underline">
+              {BUSINESS.email}
             </a>
             {' '}
             with the subject line &ldquo;CTDPA Rights Request.&rdquo; We will respond within 45 days
@@ -289,8 +291,8 @@ export default function PrivacyPage() {
             knowingly collect personal information from children under 13. If you believe that we
             have inadvertently collected information from a child under 13, please contact us
             immediately at{' '}
-            <a href="mailto:service@myappliance.us" className="text-blue-700 underline hover:underline">
-              service@myappliance.us
+            <a href={`mailto:${BUSINESS.email}`} className="text-blue-700 underline hover:underline">
+              {BUSINESS.email}
             </a>
             {' '}
             and we will take steps to delete that information as promptly as possible.
@@ -334,26 +336,16 @@ export default function PrivacyPage() {
             data practices, please contact us:
           </p>
           <div className="bg-blue-50 p-6 mt-4 mb-10">
-            <p className="font-semibold text-blue-900 mb-1">My Appliance Repair, LLC</p>
-            <p className="text-slate-600 text-sm">Serving Connecticut</p>
-            <p className="text-slate-600 text-sm mt-2">
-              Phone:{' '}
-              <a href="tel:959-261-6736" className="text-blue-700 hover:underline">
-                959-261-6736
-              </a>
-            </p>
-            <p className="text-slate-600 text-sm">
-              Email:{' '}
-              <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">
-                service@myappliance.us
-              </a>
-            </p>
-            <p className="text-slate-600 text-sm">
-              Website:{' '}
-              <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">
-                www.myappliance.us
-              </a>
-            </p>
+            <BusinessNap
+              className="flex flex-col gap-1 text-sm text-slate-600"
+              itemClassName="not-italic"
+            />
+            <a href={`mailto:${BUSINESS.email}`} className="mt-2 text-sm text-blue-700 hover:underline">
+              {BUSINESS.email}
+            </a>
+            <a href={BUSINESS.url} className="text-sm text-blue-700 hover:underline">
+              {new URL(BUSINESS.url).host}
+            </a>
           </div>
 
           {/* Cross-link */}

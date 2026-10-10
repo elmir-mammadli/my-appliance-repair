@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import BookingButton from '@/components/BookingButton';
+import { BUSINESS } from '@/lib/business';
 
 const popularRepairs = [
   { href: '/services/refrigerator-repair', label: 'Refrigerator Repair' },
@@ -152,7 +153,7 @@ export default function Hero() {
               Schedule a Repair
             </BookingButton>
             <a
-              href="tel:+19592616736"
+              href={BUSINESS.phone.href}
               className="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-blue-950 px-8 py-4 text-base font-bold text-blue-950 transition-colors duration-200 hover:bg-blue-950 hover:text-white"
             >
               <svg
@@ -169,7 +170,7 @@ export default function Hero() {
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              (959) 261-6736
+              {BUSINESS.phone.display}
             </a>
           </div>
 

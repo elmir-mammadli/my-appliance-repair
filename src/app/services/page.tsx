@@ -7,6 +7,7 @@ import BookingButton from '@/components/BookingButton';
 import ServiceCard from '@/components/ServiceCard';
 import RecentJobs from '@/components/RecentJobs';
 import { services } from '@/lib/services';
+import { BUSINESS } from '@/lib/business';
 
 function jsonLd(data: object): string {
   return JSON.stringify(data)
@@ -16,16 +17,16 @@ function jsonLd(data: object): string {
 }
 
 export const metadata: Metadata = {
-  // Kept short — the root template appends ' | My Appliance Repair' (22 chars) and
+  // Kept short — the root template appends the business name and
   // anything past ~65 total gets truncated in the SERP.
   title: 'Appliance Repair Services in Connecticut',
   description:
     'Appliances we repair in Connecticut. Washers, dryers, fridges, dishwashers, ovens, and the rest. Same-day service when slots are open, OEM parts on the truck, 90 days on parts and labor.',
-  alternates: { canonical: 'https://www.myappliance.us/services' },
+  alternates: { canonical: `${BUSINESS.url}/services` },
   openGraph: {
     type: 'website',
-    url: 'https://www.myappliance.us/services',
-    title: 'Appliance Repair Services in Connecticut | My Appliance Repair',
+    url: `${BUSINESS.url}/services`,
+    title: `Appliance Repair Services in Connecticut | ${BUSINESS.shortName}`,
     description:
       'Appliances we repair in Connecticut. Washers, dryers, fridges, dishwashers, ovens, and the rest. Same-day when slots are open, OEM parts on the truck, 90 days on parts and labor.',
     images: [
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
         url: '/og-image.svg',
         width: 1200,
         height: 630,
-        alt: 'My Appliance Repair Services',
+        alt: `${BUSINESS.shortName} Services`,
       },
     ],
   },
@@ -159,7 +160,7 @@ export default function ServicesIndexPage() {
                 Schedule a Repair
               </BookingButton>
               <a
-                href="tel:+19592616736"
+                href={BUSINESS.phone.href}
                 className="inline-flex items-center justify-center gap-2 border-2 border-blue-950 hover:bg-blue-950 hover:text-white text-blue-950 font-bold px-8 py-4 text-base transition-colors duration-200 cursor-pointer"
               >
                 <svg
@@ -176,7 +177,7 @@ export default function ServicesIndexPage() {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                (959) 261-6736
+                {BUSINESS.phone.display}
               </a>
             </div>
 
@@ -335,7 +336,7 @@ export default function ServicesIndexPage() {
               Schedule a Repair
             </BookingButton>
             <a
-              href="tel:+19592616736"
+              href={BUSINESS.phone.href}
               className="inline-flex items-center justify-center gap-2 border-2 border-blue-600 hover:border-blue-400 text-white font-bold px-8 py-4 transition-colors duration-200"
             >
               <svg
@@ -352,7 +353,7 @@ export default function ServicesIndexPage() {
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              (959) 261-6736
+              {BUSINESS.phone.display}
             </a>
           </div>
         </div>

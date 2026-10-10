@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { REPAIR_PRICING_DESCRIPTION, SERVICE_AREA_SCHEMA } from '@/lib/business';
+import { BUSINESS, REPAIR_PRICING_DESCRIPTION, SERVICE_AREA_SCHEMA } from '@/lib/business';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -32,7 +32,7 @@ export async function generateMetadata({
   if (!service) return {};
 
   const title = `${service.title} in Connecticut | Same-Day Service`;
-  const description = `${service.title} in CT. Same-day service when slots are open, OEM parts on the truck, 90-day warranty. We work on ${service.brands.slice(0, 4).join(',')} and the rest. Book online or call (959) 261-6736.`;
+  const description = `${service.title} in CT. Same-day service when slots are open, OEM parts on the truck, 90-day warranty. We work on ${service.brands.slice(0, 4).join(',')} and the rest. Book online or call ${BUSINESS.phone.display}.`;
 
   return {
     title,
@@ -42,7 +42,7 @@ export async function generateMetadata({
     openGraph: {
       type: 'website',
       url: `https://www.myappliance.us/services/${slug}`,
-      title: `${title} | My Appliance Repair`,
+      title: `${title} | ${BUSINESS.shortName}`,
       description,
       images: [
         {
@@ -72,10 +72,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     description: service.intro,
     provider: {
       '@type': 'LocalBusiness',
-      name: 'My Appliance Repair',
-      telephone: '+1-959-261-6736',
-      url: 'https://www.myappliance.us',
-      image: 'https://www.myappliance.us/og-image.svg',
+      name: BUSINESS.name,
+      telephone: BUSINESS.phone.e164,
+      url: BUSINESS.url,
+      address: BUSINESS.schemaAddress,
+      image: `${BUSINESS.url}/og-image.svg`,
       areaServed: SERVICE_AREA_SCHEMA,
     },
     areaServed: SERVICE_AREA_SCHEMA,
@@ -245,7 +246,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   Schedule {service.shortName} Repair
                 </BookingButton>
                 <a
-                  href="tel:+19592616736"
+                  href={BUSINESS.phone.href}
                   className="inline-flex items-center justify-center gap-2 border-2 border-blue-950 hover:bg-blue-950 hover:text-white text-blue-950 font-bold px-8 py-4 text-base transition-colors duration-200 cursor-pointer"
                 >
                   <svg
@@ -262,7 +263,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                     />
                   </svg>
-                  (959) 261-6736
+                  {BUSINESS.phone.display}
                 </a>
               </div>
 
@@ -648,7 +649,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               charge.
             </p>
             <a
-              href="tel:+19592616736"
+              href={BUSINESS.phone.href}
               className="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-bold px-8 py-3.5 transition-all duration-200 cursor-pointer shadow-md"
             >
               <svg
@@ -665,7 +666,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              Call (959) 261-6736
+              Call {BUSINESS.phone.display}
             </a>
           </div>
         </div>
@@ -707,7 +708,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               Book {service.shortName} Repair
             </BookingButton>
             <a
-              href="tel:+19592616736"
+              href={BUSINESS.phone.href}
               className="inline-flex items-center justify-center gap-2 border-2 border-blue-600 hover:border-blue-400 text-white font-bold px-8 py-4 transition-colors duration-200"
             >
               <svg
@@ -724,7 +725,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              (959) 261-6736
+              {BUSINESS.phone.display}
             </a>
           </div>
         </div>

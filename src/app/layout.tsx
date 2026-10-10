@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
+import { BUSINESS, SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
 import { Lexend, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
 import StructuredData from '@/components/StructuredData';
@@ -20,10 +20,10 @@ const sourceSans3 = Source_Sans_3({
 const serviceDescription = `Appliance repair in ${SERVICE_AREAS.length} Connecticut communities. $${SERVICE_CALL_FEE} service call; repair quote provided on-site. Insured technicians, 90-day warranty.`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.myappliance.us'),
+  metadataBase: new URL(BUSINESS.url),
   title: {
-    default: 'Same-Day Appliance Repair in CT | 90-Day Warranty | My Appliance Repair',
-    template: '%s | My Appliance Repair',
+    default: `Same-Day Appliance Repair in CT | 90-Day Warranty | ${BUSINESS.shortName}`,
+    template: `%s | ${BUSINESS.shortName}`,
   },
   description:
     serviceDescription,
@@ -38,11 +38,11 @@ export const metadata: Metadata = {
     'appliance repair New Haven',
     'appliance repair Hamden',
     'dishwasher repair Connecticut',
-    'My Appliance Repair LLC',
+    BUSINESS.name,
   ],
-  authors: [{ name: 'My Appliance Repair LLC', url: 'https://www.myappliance.us' }],
-  creator: 'My Appliance Repair LLC',
-  publisher: 'My Appliance Repair LLC',
+  authors: [{ name: BUSINESS.name, url: BUSINESS.url }],
+  creator: BUSINESS.name,
+  publisher: BUSINESS.name,
   robots: {
     index: true,
     follow: true,
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://www.myappliance.us',
-    siteName: 'My Appliance Repair LLC',
-    title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | My Appliance Repair',
+    url: BUSINESS.url,
+    siteName: BUSINESS.name,
+    title: `Same-Day Appliance Repair in CT | 90-Day Warranty | ${BUSINESS.shortName}`,
     description:
       serviceDescription,
     images: [
@@ -66,13 +66,13 @@ export const metadata: Metadata = {
         url: '/images/appliance-repair-connecticut-og.jpg',
         width: 1200,
         height: 630,
-        alt: 'My Appliance Repair LLC - Connecticut Appliance Repair Services',
+        alt: `${BUSINESS.name} - Connecticut Appliance Repair Services`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Same-Day Appliance Repair in CT | 90-Day Warranty | My Appliance Repair',
+    title: `Same-Day Appliance Repair in CT | 90-Day Warranty | ${BUSINESS.shortName}`,
     description:
       serviceDescription,
     images: ['/images/appliance-repair-connecticut-og.jpg'],
@@ -100,8 +100,10 @@ export default function RootLayout({
       lang="en"
       className={`h-full antialiased scroll-smooth ${lexend.variable} ${sourceSans3.variable}`}
     >
-      <body className="min-h-full flex flex-col bg-blue-50">
+      <head>
         <StructuredData />
+      </head>
+      <body className="min-h-full flex flex-col bg-blue-50">
         {children}
         <CookieConsent />
       </body>

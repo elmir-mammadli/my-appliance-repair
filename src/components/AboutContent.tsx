@@ -7,7 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BookingModal from '@/components/BookingModal';
 import { openBookingModal } from '@/lib/booking';
-import { SERVICE_AREAS } from '@/lib/business';
+import { BUSINESS, SERVICE_AREAS } from '@/lib/business';
 import { cities } from '@/lib/cities';
 
 function useFadeIn(threshold = 0.1) {
@@ -261,7 +261,7 @@ export default function AboutContent() {
             Our Story
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
-            About My Appliance Repair LLC
+            About {BUSINESS.name}
           </h1>
           <p className="text-blue-300 text-lg sm:text-xl max-w-2xl leading-relaxed">
             Connecticut&apos;s trusted appliance repair team &mdash; insured, local, and here when
@@ -390,7 +390,7 @@ export default function AboutContent() {
             Serving {SERVICE_AREAS.length} Connecticut communities
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-            My Appliance Repair LLC serves the towns and cities listed below, including New Haven,
+            {BUSINESS.name} serves the towns and cities listed below, including New Haven,
             Hamden, Bristol, Waterbury, Trumbull, Stratford, and Madison. Contact us to check
             appointment availability for your address.
           </p>
@@ -492,7 +492,7 @@ export default function AboutContent() {
               Book a Service
             </button>
             <a
-              href="mailto:service@myappliance.us"
+              href={`mailto:${BUSINESS.email}`}
               className="w-full sm:w-auto flex items-center justify-center gap-2 border border-blue-600 text-blue-200 hover:bg-blue-800 hover:text-white font-semibold px-8 py-4 transition-colors duration-200 cursor-pointer text-base"
             >
               <svg
@@ -509,16 +509,16 @@ export default function AboutContent() {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              service@myappliance.us
+              {BUSINESS.email}
             </a>
           </div>
           <p className="text-blue-500 text-sm mt-8">
             Have a question?{' '}
             <a
-              href="mailto:service@myappliance.us"
+              href={`mailto:${BUSINESS.email}`}
               className="text-blue-300 hover:text-white transition-colors duration-200 underline underline-offset-2"
             >
-              Contact us at service@myappliance.us
+              Contact us at {BUSINESS.email}
             </a>
           </p>
         </div>

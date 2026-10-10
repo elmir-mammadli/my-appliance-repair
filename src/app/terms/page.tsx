@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
-import { SERVICE_CALL_FEE } from '@/lib/business';
+import { BUSINESS, SERVICE_CALL_FEE } from '@/lib/business';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import BusinessNap from '@/components/BusinessNap';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
-    'Terms of Service for My Appliance Repair LLC — the rules and conditions governing our appliance repair services in Connecticut.',
-  alternates: { canonical: 'https://www.myappliance.us/terms' },
+    `Terms of Service for ${BUSINESS.name} — the rules and conditions governing our appliance repair services in Connecticut.`,
+  alternates: { canonical: `${BUSINESS.url}/terms` },
   robots: { index: true, follow: true },
 };
 
@@ -44,11 +45,11 @@ export default function TermsPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-slate-600 leading-relaxed mb-10">
             Please read these Terms of Service carefully before using the website{''}
-            <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">
-              myappliance.us
+            <a href={BUSINESS.url} className="text-blue-700 hover:underline">
+              {new URL(BUSINESS.url).host}
             </a>
             {''}
-            or scheduling appliance repair services with My Appliance Repair (&ldquo;we,&rdquo;
+            or scheduling appliance repair services with {BUSINESS.name} (&ldquo;we,&rdquo;
             &ldquo;our,&rdquo; or &ldquo;us&rdquo;). By accessing our website or booking our
             services, you agree to be bound by these Terms.
           </p>
@@ -71,7 +72,7 @@ export default function TermsPage() {
             2. Description of Services
           </h2>
           <p className="text-slate-600 leading-relaxed mb-4">
-            My Appliance Repair provides residential and light-commercial home appliance repair
+            {BUSINESS.name} provides residential and light-commercial home appliance repair
             services in our listed Connecticut service communities. Our services include, but are not limited
             to, repair of:
           </p>
@@ -256,7 +257,7 @@ export default function TermsPage() {
           <h2 className="text-2xl font-bold text-blue-900 mb-4 mt-10">9. Intellectual Property</h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             All content on the myappliance.us website — including text, graphics, logos, images, and
-            software — is the property of My Appliance Repair or its content suppliers and is
+            software — is the property of {BUSINESS.name} or its content suppliers and is
             protected by applicable copyright, trademark, and other intellectual property laws. You
             may not reproduce, distribute, modify, or create derivative works from any content on
             this website without our express written permission. You are granted a limited,
@@ -287,8 +288,8 @@ export default function TermsPage() {
           <h2 className="text-2xl font-bold text-blue-900 mb-4 mt-10">12. Dispute Resolution</h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             Before filing any formal legal action, we encourage you to contact us directly at{''}
-            <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">
-              service@myappliance.us
+            <a href={`mailto:${BUSINESS.email}`} className="text-blue-700 hover:underline">
+              {BUSINESS.email}
             </a>
             {''}
             to attempt to resolve the dispute informally. Most concerns can be resolved quickly and
@@ -323,20 +324,16 @@ export default function TermsPage() {
             If you have questions about these Terms of Service, please contact us:
           </p>
           <div className="bg-blue-50 p-6 mt-4 mb-10">
-            <p className="font-semibold text-blue-900 mb-1">My Appliance Repair</p>
-            <p className="text-slate-600 text-sm">Serving Connecticut</p>
-            <p className="text-slate-600 text-sm mt-2">
-              Email:{''}
-              <a href="mailto:service@myappliance.us" className="text-blue-700 hover:underline">
-                service@myappliance.us
-              </a>
-            </p>
-            <p className="text-slate-600 text-sm">
-              Website:{''}
-              <a href="https://www.myappliance.us" className="text-blue-700 hover:underline">
-                myappliance.us
-              </a>
-            </p>
+            <BusinessNap
+              className="flex flex-col gap-1 text-sm text-slate-600"
+              itemClassName="not-italic"
+            />
+            <a href={`mailto:${BUSINESS.email}`} className="mt-2 text-sm text-blue-700 hover:underline">
+              {BUSINESS.email}
+            </a>
+            <a href={BUSINESS.url} className="text-sm text-blue-700 hover:underline">
+              {new URL(BUSINESS.url).host}
+            </a>
           </div>
 
           {/* Cross-link */}

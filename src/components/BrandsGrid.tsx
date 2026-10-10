@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { BUSINESS } from '@/lib/business';
 
 const featuredBrands = [
   { name: 'Sub-Zero', logo: '/images/brands/sub-zero.svg' },
@@ -43,7 +44,7 @@ interface BrandsGridProps {
 
 export default function BrandsGrid({
   regionName = 'Connecticut',
-  telephone = '+19592616736',
+  telephone = BUSINESS.phone.e164,
 }: BrandsGridProps = {}) {
   return (
     <section className="border-y border-blue-100 bg-slate-50 py-16" aria-labelledby="brands-heading">

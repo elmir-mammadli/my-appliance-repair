@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { BUSINESS } from '@/lib/business';
 
 export const metadata: Metadata = {
   title: 'Leave a Review',
   description:
-    'Share your experience with My Appliance Repair LLC. Leave a review on Google, Yelp, or Thumbtack, or follow us on Instagram.',
-  alternates: { canonical: 'https://www.myappliance.us/socials' },
+    `Share your experience with ${BUSINESS.name}. Leave a review on Google, Yelp, or Thumbtack, or follow us on Instagram.`,
+  alternates: { canonical: `${BUSINESS.url}/socials` },
   robots: { index: false, follow: false },
 };
 
@@ -182,7 +183,7 @@ export default function SocialsPage() {
           <div className=" bg-white/80 px-6 py-4 shadow-[0_8px_32px_-12px_rgba(30,58,138,0.18)] ring-1 ring-blue-100 backdrop-blur-sm">
             <Image
               src="/logo.svg"
-              alt="My Appliance Repair LLC"
+              alt={BUSINESS.name}
               width={200}
               height={66}
               className="h-12 w-auto sm:h-14"
@@ -340,10 +341,10 @@ export default function SocialsPage() {
 
         {/* Tap-to-call */}
         <a
-          href="tel:+19592616736"
+          href={BUSINESS.phone.href}
           className="socials-fade-in mt-8 flex items-center justify-center gap-2.5 border border-blue-200 bg-white/70 px-6 py-4 text-base font-semibold text-blue-900 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-blue-300 hover:bg-white hover:shadow-md active:scale-[0.98] font-[family-name:var(--font-lexend)]"
           style={{ animationDelay: `${120 + (reviewLinks.length + 1) * 80}ms` }}
-          aria-label="Call My Appliance Repair at (959) 261-6736"
+          aria-label={`Call ${BUSINESS.name} at ${BUSINESS.phone.display}`}
         >
           <svg
             className="h-5 w-5"
@@ -359,7 +360,7 @@ export default function SocialsPage() {
               d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
             />
           </svg>
-          <span>Or call us: (959) 261-6736</span>
+          <span>Or call us: {BUSINESS.phone.display}</span>
         </a>
 
         {/* Footer */}
@@ -386,7 +387,7 @@ export default function SocialsPage() {
             myappliance.us
           </Link>
           <p className="mt-3 text-xs text-slate-500 font-[family-name:var(--font-source-sans-3)]">
-            &copy; 2025 My Appliance Repair LLC &middot; Connecticut
+            &copy; 2025 {BUSINESS.name} &middot; Connecticut
           </p>
         </footer>
       </div>

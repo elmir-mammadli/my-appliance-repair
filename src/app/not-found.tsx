@@ -3,9 +3,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import BookingModal from '@/components/BookingModal';
 import NotFoundActions from '@/components/NotFoundActions';
+import { BUSINESS } from '@/lib/business';
 
 export const metadata: Metadata = {
-  title: 'Page Not Found | My Appliance Repair LLC',
+  title: `Page Not Found | ${BUSINESS.name}`,
   robots: { index: false },
 };
 
@@ -18,7 +19,7 @@ export default function NotFound() {
           <Link href="/" className="flex items-center group cursor-pointer">
             <Image
               src="/logo.svg"
-              alt="My Appliance Repair LLC"
+              alt={BUSINESS.name}
               width={160}
               height={53}
               className="h-11 w-auto transition-transform duration-200 group-hover:scale-105"
@@ -27,7 +28,7 @@ export default function NotFound() {
           </Link>
 
           <a
-            href="tel:+19592616736"
+            href={BUSINESS.phone.href}
             className="hidden sm:flex items-center gap-2 text-blue-900 hover:text-blue-600 font-semibold text-sm transition-colors duration-200"
             aria-label="Call us now"
           >
@@ -45,7 +46,7 @@ export default function NotFound() {
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               />
             </svg>
-            (959) 261-6736
+            {BUSINESS.phone.display}
           </a>
         </div>
       </header>
@@ -165,10 +166,10 @@ export default function NotFound() {
           <p className="mt-8 text-sm text-slate-500">
             Need help?{' '}
             <a
-              href="tel:+19592616736"
+              href={BUSINESS.phone.href}
               className="text-blue-700 hover:text-blue-900 font-medium underline underline-offset-2 transition-colors duration-200"
             >
-              Call (959) 261-6736.
+              Call {BUSINESS.phone.display}.
             </a>
             {' '}We&apos;re available 7 days a week.
           </p>

@@ -1,8 +1,10 @@
 import { SERVICE_CALL_FEE } from './business';
 
-const SITE_URL = 'https://www.myappliance.us';
-const PHONE = '(959) 261-6736';
-const PHONE_URL = 'tel:+19592616736';
+import { BUSINESS } from '@/lib/business';
+
+const SITE_URL = BUSINESS.url;
+const PHONE = BUSINESS.phone.display;
+const PHONE_URL = BUSINESS.phone.href;
 
 const escapeHtml = (value: string) =>
   value.replace(
@@ -94,7 +96,7 @@ export function createBookingConfirmationEmail(data: Record<string, string>) {
   <meta name="x-apple-disable-message-reformatting">
   <meta name="color-scheme" content="light">
   <meta name="supported-color-schemes" content="light">
-  <title>Your repair request · My Appliance Repair</title>
+  <title>Your repair request · ${BUSINESS.shortName}</title>
   <!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
   <style>
     body { margin:0; padding:0; width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
@@ -120,14 +122,14 @@ export function createBookingConfirmationEmail(data: Record<string, string>) {
         <tr><td height="5" bgcolor="#ffb81c" style="height:5px;line-height:5px;font-size:1px;">&nbsp;</td></tr>
         <tr><td class="section-pad" bgcolor="#ffffff" style="padding:26px 40px;background-color:#ffffff;">
           <table role="presentation" width="100%" cellspacing="0" cellpadding="0"><tr>
-            <td><a href="${SITE_URL}" style="text-decoration:none;"><img src="${SITE_URL}/images/email/myappliance-logo.png" width="198" height="65" alt="My Appliance Repair LLC" style="display:block;width:198px;max-width:100%;height:auto;border:0;color:#142852;font-size:18px;font-weight:700;"></a></td>
+            <td><a href="${SITE_URL}" style="text-decoration:none;"><img src="${SITE_URL}/images/email/myappliance-logo.png" width="198" height="65" alt="${BUSINESS.name}" style="display:block;width:198px;max-width:100%;height:auto;border:0;color:#142852;font-size:18px;font-weight:700;"></a></td>
             <td class="header-note" align="right" style="color:#59677d;font-size:11px;line-height:18px;letter-spacing:1.2px;">LOCAL EXPERTISE.<br>THOUGHTFUL SERVICE.</td>
           </tr></table>
         </td></tr>
         <tr><td class="section-pad" bgcolor="#142852" style="padding:34px 40px 36px;background-color:#142852;">
           <p style="margin:0 0 14px;color:#ffbf36;font-size:11px;font-weight:700;line-height:16px;letter-spacing:2px;">REPAIR REQUEST RECEIVED</p>
           <h1 class="hero-title" style="margin:0 0 18px;color:#ffffff;font-size:36px;font-weight:700;line-height:42px;letter-spacing:-1px;">Let’s get your home<br>back to normal.</h1>
-          <p style="margin:0;color:#e0e7f2;font-size:15px;line-height:25px;">Hi ${escapeHtml(name)}, thanks for choosing My Appliance Repair.<br>We’ll call you within <strong style="color:#ffffff;">30 minutes</strong> to confirm your appointment and service address.</p>
+          <p style="margin:0;color:#e0e7f2;font-size:15px;line-height:25px;">Hi ${escapeHtml(name)}, thanks for choosing ${BUSINESS.shortName}.<br>We’ll call you within <strong style="color:#ffffff;">30 minutes</strong> to confirm your appointment and service address.</p>
         </td></tr>
         <tr><td class="section-pad" style="padding:32px 40px 8px;">
           <h2 style="margin:0 0 6px;color:#142852;font-size:21px;line-height:28px;letter-spacing:-0.3px;">Your visit, at a glance</h2>
@@ -174,7 +176,7 @@ export function createBookingConfirmationEmail(data: Record<string, string>) {
           <p style="margin:4px 0 0;color:#59677d;font-size:12px;line-height:20px;">Local appliance care for our Connecticut communities.</p>
         </td></tr>
         <tr><td class="section-pad" align="center" bgcolor="#f8fafc" style="padding:24px 40px;background-color:#f8fafc;">
-          <p style="margin:0 0 7px;color:#142852;font-size:12px;font-weight:700;line-height:20px;">My Appliance Repair LLC</p>
+          <p style="margin:0 0 7px;color:#142852;font-size:12px;font-weight:700;line-height:20px;">${BUSINESS.name}</p>
           <p style="margin:0 0 12px;font-size:12px;line-height:20px;"><a href="${SITE_URL}" style="color:#59677d;text-decoration:underline;">myappliance.us</a> &nbsp;&middot;&nbsp; <a href="${PHONE_URL}" style="color:#59677d;text-decoration:underline;">${PHONE}</a></p>
           <p style="margin:0;color:#68758a;font-size:11px;line-height:18px;overflow-wrap:anywhere;word-break:break-word;">Sent to ${escapeHtml(data.email || '')} because you requested a technician visit.<br>This email acknowledges your request; your appointment is confirmed by phone.</p>
         </td></tr>
@@ -185,10 +187,10 @@ export function createBookingConfirmationEmail(data: Record<string, string>) {
 </body>
 </html>`;
 
-  const text = `MY APPLIANCE REPAIR LLC
+  const text = `${BUSINESS.name.toUpperCase()}
 Repair request received
 
-Hi ${name}, thanks for choosing My Appliance Repair.
+Hi ${name}, thanks for choosing ${BUSINESS.shortName}.
 We’ll call you within 30 minutes to confirm your appointment and service address.
 
 YOUR REQUEST
@@ -210,12 +212,12 @@ Mention it when we call. We repair refrigerators, washers, dryers, dishwashers, 
 Explore our services: ${SITE_URL}/services
 
 Fully insured · 90-day parts & labor warranty
-My Appliance Repair LLC · ${SITE_URL} · ${PHONE}
+${BUSINESS.name} · ${SITE_URL} · ${PHONE}
 Sent to ${data.email || ''} because you requested a technician visit.
 This email acknowledges your request; your appointment is confirmed by phone.`;
 
   return {
-    subject: `Request received: ${appliance.replace(/[\r\n]/g, ' ')} repair · My Appliance Repair`,
+    subject: `Request received: ${appliance.replace(/[\r\n]/g, ' ')} repair · ${BUSINESS.shortName}`,
     html,
     text,
   };

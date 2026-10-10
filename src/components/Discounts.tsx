@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { openBookingModal } from '@/lib/booking';
+import { BUSINESS } from '@/lib/business';
 
 const discounts = [
   {
@@ -205,7 +206,7 @@ export default function Discounts() {
             We Honor Those Who Serve Our Community
           </h2>
           <p className="text-blue-200 text-lg max-w-2xl mx-auto leading-relaxed">
-            My Appliance Repair LLC is proud to offer special pricing for the people who keep our
+            {BUSINESS.name} is proud to offer special pricing for the people who keep our
             communities safe, educated, and protected. Discounts apply to labor on all repair
             services.
           </p>

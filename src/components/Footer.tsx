@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { cities } from '@/lib/cities';
-import { SERVICE_AREAS } from '@/lib/business';
+import { BUSINESS, SERVICE_AREAS } from '@/lib/business';
 
 const quickLinks = [
   { label: 'Home', href: '/' },
@@ -78,7 +78,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Image
               src="/logo.svg"
-              alt="My Appliance Repair LLC"
+              alt={BUSINESS.name}
               width={180}
               height={60}
               className="h-11 w-auto mb-5"
@@ -89,7 +89,13 @@ export default function Footer() {
               warranty on every repair.
             </p>
 
-            <ul className="space-y-3 text-sm">
+            <address
+              className="space-y-3 text-sm not-italic"
+              itemScope
+              itemType="https://schema.org/LocalBusiness"
+              aria-label={`${BUSINESS.name} contact information`}
+            >
+              <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <svg
                   className="w-4 h-4 text-[#F97316] flex-shrink-0"
@@ -104,11 +110,21 @@ export default function Footer() {
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
                   <circle cx="12" cy="9" r="2.5" />
                 </svg>
-                <span className="font-semibold text-white">Connecticut, USA</span>
+                <span
+                  className="business-address font-semibold text-white"
+                  itemProp="address"
+                  itemScope
+                  itemType="https://schema.org/PostalAddress"
+                >
+                  <span itemProp="streetAddress">{BUSINESS.address.streetAddress}</span>,{' '}
+                  <span itemProp="addressLocality">{BUSINESS.address.addressLocality}</span>,{' '}
+                  <span itemProp="addressRegion">{BUSINESS.address.addressRegion}</span>{' '}
+                  <span itemProp="postalCode">{BUSINESS.address.postalCode}</span>
+                </span>
               </li>
               <li>
                 <a
-                  href="tel:+19592616736"
+                  href={BUSINESS.phone.href}
                   className="flex items-center gap-3 hover:text-white transition-colors duration-200"
                 >
                   <svg
@@ -123,12 +139,14 @@ export default function Footer() {
                   >
                     <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  <span className="font-semibold text-white">(959) 261-6736</span>
+                  <span className="business-phone font-semibold text-white" itemProp="telephone">
+                    {BUSINESS.phone.display}
+                  </span>
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:service@myappliance.us"
+                  href={`mailto:${BUSINESS.email}`}
                   className="flex items-center gap-3 hover:text-white transition-colors duration-200"
                 >
                   <svg
@@ -143,10 +161,11 @@ export default function Footer() {
                   >
                     <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <span>service@myappliance.us</span>
+                  <span>{BUSINESS.email}</span>
                 </a>
               </li>
-            </ul>
+              </ul>
+            </address>
           </div>
 
           {/* Col 2 — Quick Links */}
@@ -312,7 +331,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-14 border-t border-white/10 pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-200/40">
-          <p>&copy; {currentYear} My Appliance Repair LLC. All rights reserved.</p>
+          <p>&copy; {currentYear} {BUSINESS.name}. All rights reserved.</p>
           <div className="flex gap-5">
             <Link href="/privacy" className="hover:text-white transition-colors duration-200">
               Privacy Policy

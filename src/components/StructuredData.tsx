@@ -1,4 +1,4 @@
-import { SERVICE_AREA_SCHEMA } from '@/lib/business';
+import { BUSINESS, SERVICE_AREA_SCHEMA } from '@/lib/business';
 
 function jsonLd(data: object): string {
   return JSON.stringify(data)
@@ -10,14 +10,15 @@ function jsonLd(data: object): string {
 const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://www.myappliance.us/#business',
-  name: 'My Appliance Repair',
-  legalName: 'MyAppliance Repair LLC',
-  url: 'https://www.myappliance.us',
-  telephone: '+19592616736',
-  email: 'service@myappliance.us',
-  image: 'https://www.myappliance.us/images/appliance-repair-connecticut-og.jpg',
-  logo: 'https://www.myappliance.us/logo.svg',
+  '@id': `${BUSINESS.url}/#business`,
+  name: BUSINESS.name,
+  legalName: BUSINESS.name,
+  url: BUSINESS.url,
+  telephone: BUSINESS.phone.e164,
+  email: BUSINESS.email,
+  address: BUSINESS.schemaAddress,
+  image: `${BUSINESS.url}/images/appliance-repair-connecticut-og.jpg`,
+  logo: `${BUSINESS.url}/logo.svg`,
   description:
     'Insured appliance repair service in Connecticut. Same-day service for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Fully insured, 90-day parts and labor warranty.',
   slogan: 'Same-day appliance repair in Connecticut',
@@ -39,7 +40,7 @@ const localBusiness = {
         itemOffered: {
           '@type': 'Service',
           name: 'Refrigerator Repair',
-          url: 'https://www.myappliance.us/services/refrigerator-repair',
+          url: `${BUSINESS.url}/services/refrigerator-repair`,
         },
       },
       {
@@ -47,7 +48,7 @@ const localBusiness = {
         itemOffered: {
           '@type': 'Service',
           name: 'Washing Machine Repair',
-          url: 'https://www.myappliance.us/services/washer-repair',
+          url: `${BUSINESS.url}/services/washer-repair`,
         },
       },
       {
@@ -55,7 +56,7 @@ const localBusiness = {
         itemOffered: {
           '@type': 'Service',
           name: 'Clothes Dryer Repair',
-          url: 'https://www.myappliance.us/services/dryer-repair',
+          url: `${BUSINESS.url}/services/dryer-repair`,
         },
       },
       {
@@ -63,7 +64,7 @@ const localBusiness = {
         itemOffered: {
           '@type': 'Service',
           name: 'Dishwasher Repair',
-          url: 'https://www.myappliance.us/services/dishwasher-repair',
+          url: `${BUSINESS.url}/services/dishwasher-repair`,
         },
       },
       {
@@ -71,7 +72,7 @@ const localBusiness = {
         itemOffered: {
           '@type': 'Service',
           name: 'Oven & Range Repair',
-          url: 'https://www.myappliance.us/services/oven-range-repair',
+          url: `${BUSINESS.url}/services/oven-range-repair`,
         },
       },
       {
@@ -79,7 +80,7 @@ const localBusiness = {
         itemOffered: {
           '@type': 'Service',
           name: 'Additional Appliance Repair',
-          url: 'https://www.myappliance.us/services',
+          url: `${BUSINESS.url}/services`,
         },
       },
     ],
@@ -104,9 +105,9 @@ const localBusiness = {
 const website = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': 'https://www.myappliance.us/#website',
-  url: 'https://www.myappliance.us',
-  name: 'My Appliance Repair LLC',
+  '@id': `${BUSINESS.url}/#website`,
+  url: BUSINESS.url,
+  name: BUSINESS.name,
   inLanguage: 'en-US',
 };
 
@@ -117,10 +118,10 @@ const services = [
     name: 'Refrigerator Repair Connecticut',
     description:
       'Professional refrigerator repair in Connecticut. We fix all makes and models including Samsung, LG, Whirlpool, GE, and more. Same-day service available.',
-    provider: { '@id': 'https://www.myappliance.us/#business' },
+    provider: { '@id': `${BUSINESS.url}/#business` },
     areaServed: SERVICE_AREA_SCHEMA,
     serviceType: 'Appliance Repair',
-    url: 'https://www.myappliance.us/services/refrigerator-repair',
+    url: `${BUSINESS.url}/services/refrigerator-repair`,
   },
   {
     '@context': 'https://schema.org',
@@ -128,10 +129,10 @@ const services = [
     name: 'Washing Machine Repair Connecticut',
     description:
       'Expert washing machine repair in our Connecticut service communities. We diagnose and fix spin failures, leaks, drain issues, loud noises, and other common washer problems.',
-    provider: { '@id': 'https://www.myappliance.us/#business' },
+    provider: { '@id': `${BUSINESS.url}/#business` },
     areaServed: SERVICE_AREA_SCHEMA,
     serviceType: 'Appliance Repair',
-    url: 'https://www.myappliance.us/services/washer-repair',
+    url: `${BUSINESS.url}/services/washer-repair`,
   },
   {
     '@context': 'https://schema.org',
@@ -139,10 +140,10 @@ const services = [
     name: 'Clothes Dryer Repair Connecticut',
     description:
       'Clothes dryer repair in our Connecticut service communities for no-heat, long-dry, squeaking, thumping, belt, and vent-related dryer problems.',
-    provider: { '@id': 'https://www.myappliance.us/#business' },
+    provider: { '@id': `${BUSINESS.url}/#business` },
     areaServed: SERVICE_AREA_SCHEMA,
     serviceType: 'Appliance Repair',
-    url: 'https://www.myappliance.us/services/dryer-repair',
+    url: `${BUSINESS.url}/services/dryer-repair`,
   },
   {
     '@context': 'https://schema.org',
@@ -150,10 +151,10 @@ const services = [
     name: 'Dishwasher Repair Connecticut',
     description:
       'Reliable dishwasher repair in Connecticut. We fix cleaning issues, drainage problems, door latch failures, and all common dishwasher faults.',
-    provider: { '@id': 'https://www.myappliance.us/#business' },
+    provider: { '@id': `${BUSINESS.url}/#business` },
     areaServed: SERVICE_AREA_SCHEMA,
     serviceType: 'Appliance Repair',
-    url: 'https://www.myappliance.us/services/dishwasher-repair',
+    url: `${BUSINESS.url}/services/dishwasher-repair`,
   },
   {
     '@context': 'https://schema.org',
@@ -161,10 +162,10 @@ const services = [
     name: 'Oven & Range Repair Connecticut',
     description:
       'Gas and electric oven repair in Connecticut. We fix ignition failures, uneven heating, control board issues, and all oven and range problems.',
-    provider: { '@id': 'https://www.myappliance.us/#business' },
+    provider: { '@id': `${BUSINESS.url}/#business` },
     areaServed: SERVICE_AREA_SCHEMA,
     serviceType: 'Appliance Repair',
-    url: 'https://www.myappliance.us/services/oven-range-repair',
+    url: `${BUSINESS.url}/services/oven-range-repair`,
   },
 ];
 

@@ -2,9 +2,10 @@ import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { Post } from '@/lib/posts';
+import { BUSINESS } from '@/lib/business';
 
 export const OG_IMAGE_SIZE = { width: 1200, height: 630 };
-export const OG_IMAGE_ALT = 'My Appliance Repair LLC — Connecticut appliance repair blog';
+export const OG_IMAGE_ALT = `${BUSINESS.name} — Connecticut appliance repair blog`;
 
 const NAVY = '#172554';
 const SLATE = '#64748b';

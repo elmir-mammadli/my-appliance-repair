@@ -9,6 +9,7 @@ import BookingButton from '@/components/BookingButton';
 import { posts, getPostBySlug, getRelatedPosts, getServiceSlugForPost } from '@/lib/posts';
 import { getServiceBySlug } from '@/lib/services';
 import ViewCounter from '@/components/ViewCounter';
+import { BUSINESS } from '@/lib/business';
 // import BlogAudioPlayer from '@/components/BlogAudioPlayer';
 
 function jsonLd(data: object): string {
@@ -37,7 +38,7 @@ export async function generateMetadata({
     post.excerpt.length > 125 ? post.excerpt.slice(0, 122).replace(/\s+\S*$/, '') + '...' : post.excerpt;
 
   return {
-    // Bare title — the root layout's `%s | My Appliance Repair` template adds the
+    // Bare title — the root layout's title template adds the
     // brand suffix, so this shouldn't repeat it or the <title> doubles up.
     title: post.title,
     description,
@@ -46,12 +47,12 @@ export async function generateMetadata({
     openGraph: {
       type: 'article',
       url: `https://www.myappliance.us/blog/${slug}`,
-      siteName: 'My Appliance Repair LLC',
+      siteName: BUSINESS.name,
       locale: 'en_US',
       title: post.title,
       description: socialDescription,
       publishedTime: post.date,
-      authors: ['My Appliance Repair LLC Team'],
+      authors: [`${BUSINESS.name} Team`],
       // Image itself comes from the co-located opengraph-image.tsx file convention,
       // which takes priority over anything set here — no need to duplicate it.
     },
@@ -90,13 +91,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     dateModified: post.date,
     author: {
       '@type': 'Organization',
-      name: 'My Appliance Repair LLC Team',
-      url: 'https://www.myappliance.us',
+      name: `${BUSINESS.name} Team`,
+      url: BUSINESS.url,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'My Appliance Repair LLC',
-      url: 'https://www.myappliance.us',
+      name: BUSINESS.name,
+      url: BUSINESS.url,
       logo: {
         '@type': 'ImageObject',
         url: 'https://www.myappliance.us/images/og-image.png',
@@ -297,7 +298,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   Book a Service Call
                 </BookingButton>
                 <a
-                  href="tel:+19592616736"
+                  href={BUSINESS.phone.href}
                   className="mt-3 w-full flex items-center justify-center gap-2 border border-blue-700 hover:border-blue-400 text-blue-200 hover:text-white font-medium py-3 transition-all duration-200 text-sm"
                 >
                   <svg
@@ -314,7 +315,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                     />
                   </svg>
-                  (959) 261-6736
+                  {BUSINESS.phone.display}
                 </a>
               </div>
 
@@ -432,7 +433,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               Book a Service Call
             </BookingButton>
             <a
-              href="tel:+19592616736"
+              href={BUSINESS.phone.href}
               className="inline-flex items-center justify-center gap-2 border-2 border-blue-600 hover:border-blue-400 text-white font-bold px-8 py-4 transition-all duration-200"
             >
               <svg
@@ -449,7 +450,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              (959) 261-6736
+              {BUSINESS.phone.display}
             </a>
           </div>
         </div>
