@@ -196,7 +196,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-blue-100">
                 {town
                   ? 'Your home has enough moving parts. Let us take care of the ones that stop working.'
-                  : 'Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens, and freezers in Hackensack and across Bergen County. Based in Hudson County, every visit includes a written estimate before work begins and a 90-day labor warranty.'}
+                  : 'Insured appliance repair in Hackensack and across Bergen County. Based in Hudson County, with written estimates and a 90-day labor warranty.'}
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <BookingButton

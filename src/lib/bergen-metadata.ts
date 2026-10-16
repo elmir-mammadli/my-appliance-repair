@@ -9,7 +9,7 @@ export function bergenMetadata(town?: BergenTown): Metadata {
     : 'Appliance Repair in New Jersey | Bergen County & Hackensack';
   const description = town
     ? `Refrigerator, washer, dryer, dishwasher and oven repair in ${area}, NJ. $99 service call, written repair quote, 90-day warranty. Call (201) 403-0001.`
-    : 'Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens, and freezers in Hackensack and across Bergen County. Based in Hudson County, with a written estimate before work begins and a 90-day labor warranty.';
+    : 'Insured appliance repair in Hackensack and across Bergen County. Based in Hudson County, with written estimates and a 90-day labor warranty.';
   const url = `https://www.myappliance.us${NJ_PATH}${town ? `/${town.slug}` : ''}`;
   const images = [
     {
