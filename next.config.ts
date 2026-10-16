@@ -17,6 +17,7 @@ const RETIRED_POSTS: Record<string, string> = {
 };
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ['192.168.12.173'],
   compress: true,
   poweredByHeader: false,
   async redirects() {

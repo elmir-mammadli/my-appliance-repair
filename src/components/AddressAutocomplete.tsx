@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useId } from 'react';
+import type { BranchId } from '@/lib/branches';
 
 interface Prediction {
   place_id: string;
@@ -8,6 +9,7 @@ interface Prediction {
 }
 
 interface Props {
+  branchId?: BranchId;
   id?: string;
   value: string;
   onChange: (value: string) => void;
@@ -16,6 +18,7 @@ interface Props {
 }
 
 export default function AddressAutocomplete({
+  branchId = 'ct',
   id,
   value,
   onChange,
@@ -61,7 +64,11 @@ export default function AddressAutocomplete({
     const controller = new AbortController();
     requestRef.current = controller;
     sessionRef.current ||= crypto.randomUUID();
-    const params = new URLSearchParams({ input: query, sessionToken: sessionRef.current });
+    const params = new URLSearchParams({
+      input: query,
+      sessionToken: sessionRef.current,
+      branch: branchId,
+    });
     try {
       const res = await fetch(`/api/places?${params}`, { signal: controller.signal });
       if (!res.ok) throw new Error('Lookup unavailable');
@@ -117,7 +124,11 @@ export default function AddressAutocomplete({
     setMessage('Completing your address…');
     inputRef.current?.focus();
     try {
-      const params = new URLSearchParams({ placeId: prediction.place_id, sessionToken });
+      const params = new URLSearchParams({
+        placeId: prediction.place_id,
+        sessionToken,
+        branch: branchId,
+      });
       const res = await fetch(`/api/places?${params}`, { signal: controller.signal });
       if (!res.ok) throw new Error('Address details unavailable');
       const data: { address: string; zip: string } = await res.json();
@@ -188,7 +199,7 @@ export default function AddressAutocomplete({
           onChange={handleInput}
           onKeyDown={handleKeyDown}
           onFocus={() => predictions.length > 0 && setOpen(true)}
-          placeholder="123 Main St, New Haven"
+          placeholder={branchId === 'nj' ? '123 Main St, Hackensack, NJ' : '123 Main St, New Haven'}
           className={`w-full pl-4 pr-10 py-3 border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 ${error ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
         />
         {loading && (

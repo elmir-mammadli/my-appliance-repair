@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { BUSINESS, SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
 import { Lexend, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
-import StructuredData from '@/components/StructuredData';
 import CookieConsent from '@/components/CookieConsent';
 
 const lexend = Lexend({
@@ -100,9 +99,6 @@ export default function RootLayout({
       lang="en"
       className={`h-full antialiased scroll-smooth ${lexend.variable} ${sourceSans3.variable}`}
     >
-      <head>
-        <StructuredData />
-      </head>
       <body className="min-h-full flex flex-col bg-blue-50">
         {children}
         <CookieConsent />

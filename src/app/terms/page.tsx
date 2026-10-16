@@ -8,7 +8,7 @@ import BusinessNap from '@/components/BusinessNap';
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
-    `Terms of Service for ${BUSINESS.name} — the rules and conditions governing our appliance repair services in Connecticut.`,
+    `Terms of Service for ${BUSINESS.name} — the rules and conditions governing our appliance repair services in Connecticut and Bergen County, NJ.`,
   alternates: { canonical: `${BUSINESS.url}/terms` },
   robots: { index: true, follow: true },
 };
@@ -73,7 +73,7 @@ export default function TermsPage() {
           </h2>
           <p className="text-slate-600 leading-relaxed mb-4">
             {BUSINESS.name} provides residential and light-commercial home appliance repair
-            services in our listed Connecticut service communities. Our services include, but are not limited
+            services in our listed Connecticut communities and Bergen County, New Jersey. Our services include, but are not limited
             to, repair of:
           </p>
           <ul className="list-disc list-outside pl-5 space-y-2 text-slate-600 mb-6">
@@ -85,7 +85,7 @@ export default function TermsPage() {
           </ul>
           <p className="text-slate-600 leading-relaxed mb-6">
             All services are performed by trained, insured technicians. We service most major
-            appliance brands. Service availability may vary by location within Connecticut. We
+            appliance brands. Service availability may vary by location within our service areas. We
             reserve the right to decline service at our discretion.
           </p>
 

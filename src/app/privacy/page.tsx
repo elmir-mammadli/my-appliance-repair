@@ -50,7 +50,8 @@ export default function PrivacyPage() {
               {new URL(BUSINESS.url).host}
             </a>
             {' '}
-            and provides home appliance repair services in select Connecticut communities. This Privacy Policy
+            and provides home appliance repair services in select Connecticut communities and Bergen
+            County, New Jersey. This Privacy Policy
             explains what personal information we collect, how we use it, and your rights regarding
             that information.
           </p>
