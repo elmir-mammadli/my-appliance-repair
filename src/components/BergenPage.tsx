@@ -328,9 +328,13 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
                   branchId="nj"
                   municipality={town?.name}
                   appliance={repair.appliance}
-                  className="mt-4 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-blue-700 hover:text-blue-950"
+                  className="group mt-5 inline-flex min-h-11 cursor-pointer items-center justify-center gap-3 bg-[#112654] px-5 py-3 text-sm font-bold text-[#ffb81c] transition-colors duration-200 hover:bg-[#1a3974] hover:text-[#ffd071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffb81c]"
                 >
-                  Request service <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  Request service
+                  <ArrowUpRight
+                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    aria-hidden="true"
+                  />
                 </BookingButton>
               </article>
             ))}
