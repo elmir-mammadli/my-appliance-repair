@@ -164,7 +164,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#101d40] via-[#101d40]/90 to-[#101d40]/20" />
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-            <nav
+            {/* <nav
               aria-label="Breadcrumb"
               className="mb-10 flex flex-wrap gap-2 text-xs text-blue-100/75"
             >
@@ -181,19 +181,22 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
                   <span aria-current="page">{town.name}</span>
                 </>
               )}
-            </nav>
+            </nav> */}
             <div className="nj-entrance max-w-2xl">
               <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-[#ffb81c]">
-                MyAppliance Repair · New Jersey
+                My Appliance Repair · New Jersey
               </p>
               <h1 className="max-w-2xl text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl">
                 Appliance repair
                 <br />
-                in {area}<span className="hidden sm:inline">,&nbsp;NJ</span>
+                in {town ? area : 'New Jersey'}
+                {town && <span className="hidden sm:inline">,&nbsp;NJ</span>}
                 <span className="text-[#ffb81c]">.</span>
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-blue-100">
-                Your home has enough moving parts. Let us take care of the ones that stop working.
+                {town
+                  ? 'Your home has enough moving parts. Let us take care of the ones that stop working.'
+                  : 'Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens, and freezers in Hackensack and across Bergen County. Based in Hudson County, every visit includes a written estimate before work begins and a 90-day labor warranty.'}
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <BookingButton
@@ -245,7 +248,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
           </div>
         </section>
 
-        <section className="border-b border-slate-200 bg-[#f5f7fb] px-6 py-10">
+        <section className="border-b border-slate-200 bg-[#f5f7fb] px-10 py-10">
           <div className="mx-auto flex max-w-7xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-baseline gap-4">
               <span className="text-5xl font-bold tracking-tight text-blue-950">$99</span>
