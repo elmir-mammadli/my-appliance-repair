@@ -40,6 +40,16 @@ const MUNICIPALITY_COORDINATES: Record<(typeof SERVICE_AREAS)[number], LatLngTup
   Oxford: [41.4440326, -73.1482350],
   Guilford: [41.3390910, -72.7061392],
   Seymour: [41.3854655, -73.0836408],
+  Bridgeport: [41.1873933, -73.1957567],
+  Monroe: [41.3392376, -73.2228287],
+  Middletown: [41.5486107, -72.6567838],
+  Berlin: [41.6054509, -72.7784968],
+  'New Britain': [41.6765545, -72.7861613],
+  Hartford: [41.7659331, -72.6815789],
+  'West Hartford': [41.7665678, -72.7549436],
+  Farmington: [41.7297737, -72.8420312],
+  Plainville: [41.6739923, -72.8544338],
+  Newington: [41.6869933, -72.7308386],
 };
 
 export default function ServiceAreaMapInner() {
@@ -71,10 +81,12 @@ export default function ServiceAreaMapInner() {
         },
       );
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      // CARTO now watermarks unauthenticated tiles. Standard OSM tiles require
+      // no API key and load directly in the browser with normal caching/referrers.
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        className: 'service-area-tiles',
         maxZoom: 19,
       }).addTo(map);
 
@@ -117,6 +129,9 @@ export default function ServiceAreaMapInner() {
   return (
     <>
       <style>{`
+ .service-area-tiles {
+ filter: grayscale(1) invert(1) brightness(0.9);
+ }
  @keyframes pulse-dot {
  0%, 100% { transform: scale(1); opacity: 1; }
  50% { transform: scale(1.3); opacity: 0.7; }

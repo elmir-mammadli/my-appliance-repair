@@ -7,7 +7,7 @@ import BookingButton from '@/components/BookingButton';
 import ServiceCard from '@/components/ServiceCard';
 import RecentJobs from '@/components/RecentJobs';
 import { services } from '@/lib/services';
-import { BUSINESS } from '@/lib/business';
+import { BUSINESS, SERVICE_CALL_FEE } from '@/lib/business';
 
 function jsonLd(data: object): string {
   return JSON.stringify(data)
@@ -17,11 +17,10 @@ function jsonLd(data: object): string {
 }
 
 export const metadata: Metadata = {
-  // Kept short — the root template appends the business name and
-  // anything past ~65 total gets truncated in the SERP.
+  // The root template appends the business name.
   title: 'Appliance Repair Services in Connecticut',
   description:
-    'Appliances we repair in Connecticut. Washers, dryers, fridges, dishwashers, ovens, and the rest. Same-day service when slots are open, OEM parts on the truck, 90 days on parts and labor.',
+    `Washer, dryer, refrigerator, dishwasher and oven repair in CT. $${SERVICE_CALL_FEE} diagnostic, waived with repair. Written quotes and a 90-day warranty.`,
   alternates: { canonical: `${BUSINESS.url}/services` },
   openGraph: {
     type: 'website',
@@ -31,12 +30,18 @@ export const metadata: Metadata = {
       'Appliances we repair in Connecticut. Washers, dryers, fridges, dishwashers, ovens, and the rest. Same-day when slots are open, OEM parts on the truck, 90 days on parts and labor.',
     images: [
       {
-        url: '/og-image.svg',
+          url: '/images/appliance-repair-connecticut-og.jpg',
         width: 1200,
         height: 630,
         alt: `${BUSINESS.shortName} Services`,
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Appliance Repair Services in Connecticut | ${BUSINESS.shortName}`,
+    description: `Explore appliance repairs in our Connecticut service area. $${SERVICE_CALL_FEE} diagnostic, on-site repair quotes, and a 90-day warranty.`,
+    images: ['/images/appliance-repair-connecticut-og.jpg'],
   },
 };
 
@@ -74,12 +79,12 @@ const processSteps = [
   {
     step: '2',
     title: 'Tech shows up',
-    desc: 'Same or next day. Parts already on the van for most jobs.',
+    desc: 'We confirm coverage and availability, then diagnose the appliance on-site.',
   },
   {
     step: '3',
     title: 'Written estimate',
-    desc: 'You see the cost before we open anything up. Diagnostic fee waived if you go ahead.',
+    desc: `The $${SERVICE_CALL_FEE} diagnostic is waived with repair. Approve the written quote before repair work starts.`,
   },
   {
     step: '4',

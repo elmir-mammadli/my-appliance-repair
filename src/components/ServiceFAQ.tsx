@@ -37,12 +37,14 @@ function FAQItem({ q, a }: FAQ) {
       <div
         id={id}
         role="region"
-        className={`overflow-hidden transition-all duration-300 ${open ? 'max-h-96' : 'max-h-0'}`}
+        className={`grid transition-[grid-template-rows] duration-300 ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
         aria-hidden={!open}
       >
-        <p className="px-6 pb-5 pt-1 text-slate-600 text-sm sm:text-base leading-relaxed bg-blue-50 border-t border-blue-100">
-          {a}
-        </p>
+        <div className="overflow-hidden">
+          <p className="px-6 pb-5 pt-1 text-slate-600 text-sm sm:text-base leading-relaxed bg-blue-50 border-t border-blue-100">
+            {a}
+          </p>
+        </div>
       </div>
     </div>
   );

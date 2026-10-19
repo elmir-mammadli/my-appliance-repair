@@ -3,7 +3,7 @@
 import { BUSINESS } from '@/lib/business';
 
 import { useState } from 'react';
-import { APPLIANCE_REPAIR_COST_ANSWER } from '@/lib/business';
+import { APPLIANCE_REPAIR_COST_ANSWER, GAS_ODOR_GUIDANCE, SAME_DAY_SERVICE_ANSWER } from '@/lib/business';
 
 const faqs = [
   {
@@ -15,7 +15,7 @@ const faqs = [
       },
       {
         q: 'Do you offer same-day appliance repair?',
-        a: 'Yes. Call before noon and we can usually dispatch a technician to your Connecticut home the same day. We offer morning (8am–12pm), afternoon (12pm–4pm), and evening (4pm–7pm) slots. Emergency service is available 24/7.',
+        a: SAME_DAY_SERVICE_ANSWER,
       },
       {
         q: 'How long does a typical repair take?',
@@ -82,7 +82,7 @@ const faqs = [
       },
       {
         q: "My gas oven won't ignite — is this dangerous?",
-        a: "A gas oven that clicks but won't light, or shows a gas smell without igniting, needs prompt professional attention. The most common causes are a failed igniter, a faulty spark module, or dirty/misaligned burner caps. If you smell a strong gas odor, leave the home and call your gas provider first, then contact us.",
+        a: GAS_ODOR_GUIDANCE,
       },
       {
         q: 'My oven heats unevenly — some areas burn while others are undercooked?',

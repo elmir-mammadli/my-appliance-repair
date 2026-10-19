@@ -3,6 +3,7 @@ import { BUSINESS, SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
 import { Lexend, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
 import CookieConsent from '@/components/CookieConsent';
+import ConversionTracking from '@/components/ConversionTracking';
 
 const lexend = Lexend({
   subsets: ['latin'],
@@ -102,6 +103,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-blue-50">
         {children}
         <CookieConsent />
+        <ConversionTracking />
       </body>
     </html>
   );

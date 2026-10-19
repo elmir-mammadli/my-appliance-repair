@@ -20,6 +20,19 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Service area map
+
+The homepage uses Leaflet with OpenStreetMap's standard raster tiles. It does not
+require a map API key. Tiles load directly in the visitor's browser when the map
+comes into view, with normal browser caching and visible OpenStreetMap attribution.
+The tile layer is styled dark without changing the town markers or map controls.
+Follow the [OpenStreetMap tile usage policy](https://operations.osmfoundation.org/policies/tiles/)
+when changing caching, referrer headers, or map loading behavior.
+
+The Google Places key below is only for booking address suggestions; it is unrelated
+to this map. CARTO tiles were replaced because unauthenticated requests display an
+API-key watermark.
+
 ## Address autocomplete
 
 The booking page and booking modal share an accessible address autocomplete field.

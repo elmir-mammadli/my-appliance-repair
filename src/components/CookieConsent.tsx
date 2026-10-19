@@ -3,53 +3,37 @@
 import { useState, useEffect } from 'react';
 import Script from 'next/script';
 import Link from 'next/link';
-
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
-
-const GA_ID = 'G-JKQBNGF2P9';
+import {
+  GA_ID,
+  getStoredAnalyticsConsent,
+  initializeAnalytics,
+  setAnalyticsConsent,
+} from '@/lib/analytics';
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem('ga_consent');
-    if (stored === 'granted') {
-      window.gtag?.('consent', 'update', { analytics_storage: 'granted' });
-    } else if (stored !== 'denied') {
+    const stored = getStoredAnalyticsConsent();
+    initializeAnalytics(stored ?? 'denied');
+    if (!stored) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(true);
     }
   }, []);
 
   const choose = (value: 'granted' | 'denied') => {
-    localStorage.setItem('ga_consent', value);
+    setAnalyticsConsent(value);
     setVisible(false);
-    window.gtag?.('consent', 'update', { analytics_storage: value });
   };
 
   return (
     <>
-      {/* GA always loads; consent defaults to denied (cookieless pings only) */}
+      {/* GA loads with the saved consent choice; new visitors default to denied. */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         strategy="afterInteractive"
       />
-      <Script id="ga4-init" strategy="afterInteractive">{`
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('consent','default', {
- analytics_storage:'denied',
- ad_storage:'denied',
- ad_user_data:'denied',
- ad_personalization:'denied'
- });
- gtag('js', new Date());
- gtag('config','${GA_ID}');
-`}</Script>
 
       {visible && (
         <div

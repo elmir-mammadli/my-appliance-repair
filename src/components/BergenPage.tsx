@@ -248,8 +248,8 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
           </div>
         </section>
 
-        <section className="border-b border-slate-200 bg-[#f5f7fb] px-10 py-10">
-          <div className="mx-auto flex max-w-7xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <section className="border-b border-slate-200 bg-[#f5f7fb] px-6 py-10">
+          <div className="mx-auto flex max-w-[1200px] flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-baseline gap-4">
               <span className="text-5xl font-bold tracking-tight text-blue-950">$99</span>
               <div>

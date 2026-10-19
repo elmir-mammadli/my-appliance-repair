@@ -45,8 +45,11 @@ export async function GET() {
     })
     .join('\n');
 
-  const lastBuildDate =
-    sorted.length > 0 ? toRfc822(sorted[0].date) : new Date().toUTCString();
+  const latestContentDate = posts
+    .map((post) => post.updatedAt ?? post.date)
+    .sort()
+    .at(-1);
+  const lastBuildDate = latestContentDate ? toRfc822(latestContentDate) : new Date().toUTCString();
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">

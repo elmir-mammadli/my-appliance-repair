@@ -1,4 +1,4 @@
-import { SERVICE_CALL_FEE } from './business';
+import { BUSINESS, BUSINESS_HOURS, SERVICE_CALL_FEE } from './business';
 import { BERGEN_MUNICIPALITIES, BERGEN_ZIPS } from './bergen';
 import { isCtZip } from './zip';
 
@@ -11,11 +11,11 @@ export const BRANCHES = {
     id: 'ct',
     name: 'Connecticut',
     state: 'CT',
-    phone: '(959) 261-6736',
-    telephone: '+19592616736',
+    phone: BUSINESS.phone.display,
+    telephone: BUSINESS.phone.e164,
     home: '/',
     fee: SERVICE_CALL_FEE,
-    hours: 'Mon–Sun 8am–6pm',
+    hours: BUSINESS_HOURS.display,
   },
   nj: {
     id: 'nj',
@@ -25,7 +25,7 @@ export const BRANCHES = {
     telephone: '+12014030001',
     home: NJ_PATH,
     fee: SERVICE_CALL_FEE,
-    hours: 'Mon–Sun 8am–6pm',
+    hours: BUSINESS_HOURS.display,
   },
 } as const;
 

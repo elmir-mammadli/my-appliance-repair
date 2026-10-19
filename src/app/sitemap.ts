@@ -1,19 +1,20 @@
 import type { MetadataRoute } from 'next';
-import { getAllSlugs } from '@/lib/posts';
+import { posts } from '@/lib/posts';
+import { BUSINESS } from '@/lib/business';
 import { getAllCitySlugs } from '@/lib/cities';
 import { getAllServiceSlugs } from '@/lib/services';
 import { BERGEN_TOWNS } from '@/lib/bergen';
 import { NJ_PATH, NJ_BOOKING_ENABLED } from '@/lib/branches';
 
-const BASE_URL = 'https://www.myappliance.us';
+const BASE_URL = BUSINESS.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const blogSlugs = getAllSlugs();
   const citySlugs = getAllCitySlugs();
   const serviceSlugs = getAllServiceSlugs();
 
-  const blogEntries: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
-    url: `${BASE_URL}/blog/${slug}`,
+  const blogEntries: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    ...(post.updatedAt ? { lastModified: post.updatedAt } : {}),
     changeFrequency: 'monthly',
     priority: 0.8,
   }));
@@ -30,8 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // Omit lastModified until we track actual content updates. A build timestamp
-  // would incorrectly mark unchanged pages as fresh on every deployment.
+  // Only edited articles with a recorded update date receive lastModified.
+  // Deployment timestamps would falsely refresh unchanged pages.
   return [
     {
       url: BASE_URL,

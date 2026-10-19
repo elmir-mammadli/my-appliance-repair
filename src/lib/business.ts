@@ -30,6 +30,23 @@ export const BUSINESS = {
 
 export const SERVICE_CALL_FEE = 99;
 
+// Keep published hours aligned with the branch records and LocalBusiness markup.
+export const BUSINESS_HOURS = {
+  display: 'Mon–Sun 8am–6pm',
+  schema: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '08:00',
+    closes: '18:00',
+  },
+} as const;
+
+export const SAME_DAY_SERVICE_ANSWER =
+  'Same-day appointments may be available depending on your location, technician schedules, and parts. Call early to check availability. Your requested date and time are confirmed by our team; submitting a request does not reserve an appointment. Call to discuss urgent or after-hours requests and any additional charges.';
+
+export const GAS_ODOR_GUIDANCE =
+  'If you smell gas, leave the building immediately. Do not use switches, appliances, flames, or a phone inside. From a safe location outside, call 911 or your gas utility. Arrange appliance repair only after the emergency has been addressed.';
+
 export const REPAIR_PRICING_DESCRIPTION =
   'Repair prices vary by appliance, diagnosis, parts, and labor. Your technician determines the repair price on-site and provides a written quote before work begins.';
 
@@ -66,6 +83,16 @@ export const SERVICE_AREAS = [
   "Oxford",
   "Guilford",
   "Seymour",
+  'Bridgeport',
+  'Monroe',
+  'Middletown',
+  'Berlin',
+  'New Britain',
+  'Hartford',
+  'West Hartford',
+  'Farmington',
+  'Plainville',
+  'Newington',
 ] as const;
 
 export const SERVICE_AREA_SCHEMA = SERVICE_AREAS.map((name) => ({

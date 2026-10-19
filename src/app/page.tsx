@@ -15,7 +15,7 @@ import ContactForm from '@/components/ContactForm';
 import JoinUs from '@/components/JoinUs';
 import HiringModal from '@/components/HiringModal';
 import Footer from '@/components/Footer';
-import { APPLIANCE_REPAIR_COST_ANSWER, BUSINESS, SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
+import { APPLIANCE_REPAIR_COST_ANSWER, BUSINESS, SERVICE_AREAS, SERVICE_CALL_FEE, SAME_DAY_SERVICE_ANSWER } from '@/lib/business';
 
 export const metadata: Metadata = {
   title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
@@ -73,7 +73,7 @@ const faqSchema = {
       name: 'Do you offer same-day appliance repair?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Call before noon and we can usually dispatch a technician to your Connecticut home the same day. We offer morning (8am–12pm), afternoon (12pm–4pm), and evening (4pm–7pm) slots. Emergency service is available with an extra surcharge for after-hours calls. We service emergency calls in New Haven, Hamden, West Haven, and nearby towns in Connecticut.',
+        text: SAME_DAY_SERVICE_ANSWER,
       },
     },
     {

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BUSINESS, REPAIR_PRICING_DESCRIPTION, SERVICE_AREA_SCHEMA } from '@/lib/business';
+import { BUSINESS, REPAIR_PRICING_DESCRIPTION, SERVICE_AREA_SCHEMA, SERVICE_CALL_FEE } from '@/lib/business';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -31,17 +31,20 @@ export async function generateMetadata({
   const service = getServiceBySlug(slug);
   if (!service) return {};
 
-  const title = `${service.title} in Connecticut | Same-Day Service`;
-  const description = `${service.title} in CT. Same-day service when slots are open, OEM parts on the truck, 90-day warranty. We work on ${service.brands.slice(0, 4).join(',')} and the rest. Book online or call ${BUSINESS.phone.display}.`;
+  const title = service.slug === 'more-appliances'
+    ? 'Freezer, Microwave & Cooktop Repair in CT'
+    : `${service.title} in Connecticut`;
+  const description = `${service.slug === 'more-appliances' ? 'Freezer, ice maker, microwave and cooktop repair' : service.title} in CT. $${SERVICE_CALL_FEE} diagnostic, waived with repair. Written quote before work; 90-day parts and labor warranty.`;
+  const url = `${BUSINESS.url}/services/${slug}`;
 
   return {
     title,
     description,
-    keywords: `${service.title.toLowerCase()} Connecticut, ${service.shortName.toLowerCase()} repair near me, ${service.brands.join(',')}, same-day appliance repair CT`,
-    alternates: { canonical: `https://www.myappliance.us/services/${slug}` },
+    alternates: { canonical: url },
     openGraph: {
       type: 'website',
-      url: `https://www.myappliance.us/services/${slug}`,
+      url,
+      siteName: BUSINESS.name,
       title: `${title} | ${BUSINESS.shortName}`,
       description,
       images: [
@@ -52,6 +55,12 @@ export async function generateMetadata({
           alt: service.heroImageAlt,
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} | ${BUSINESS.shortName}`,
+      description,
+      images: [{ url: service.heroImage, alt: service.heroImageAlt }],
     },
   };
 }
@@ -67,16 +76,19 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${BUSINESS.url}/services/${service.slug}#service`,
+    url: `${BUSINESS.url}/services/${service.slug}`,
     serviceType: service.title,
     name: `${service.title} in Connecticut`,
     description: service.intro,
     provider: {
       '@type': 'LocalBusiness',
+      '@id': `${BUSINESS.url}/#business`,
       name: BUSINESS.name,
       telephone: BUSINESS.phone.e164,
       url: BUSINESS.url,
       address: BUSINESS.schemaAddress,
-      image: `${BUSINESS.url}/og-image.svg`,
+      image: `${BUSINESS.url}/images/appliance-repair-connecticut-og.jpg`,
       areaServed: SERVICE_AREA_SCHEMA,
     },
     areaServed: SERVICE_AREA_SCHEMA,
@@ -126,12 +138,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     {
       step: '2',
       title: 'Tech shows up',
-      desc: 'Same or next day. Parts already on the van for most jobs.',
+      desc: 'We confirm coverage and availability, then diagnose the appliance on-site.',
     },
     {
       step: '3',
       title: 'Written estimate',
-      desc: 'You see the cost before we open anything up. Diagnostic fee waived if you go ahead.',
+      desc: `The $${SERVICE_CALL_FEE} diagnostic is waived with repair. Approve the written quote before repair work starts.`,
     },
     {
       step: '4',
@@ -180,7 +192,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </li>
               <li>
                 <Link
-                  href="/#services"
+                  href="/services"
                   className="hover:text-blue-700 transition-colors duration-200"
                 >
                   Services
@@ -385,8 +397,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               Sound like your {service.shortName.toLowerCase()}?
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              These are the calls we get most weeks. If your {service.shortName.toLowerCase()} is
-              doing any of them, we can almost always fix it on the first visit.
+              These symptoms help describe the problem. Your technician checks the cause before
+              recommending a repair; the symptom alone does not identify the failed part.
             </p>
           </div>
 
@@ -425,17 +437,17 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               On the truck
             </span>
             <h2 id="parts-heading" className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">
-              {service.shortName} parts we keep stocked
+              {service.shortName} components we diagnose and repair
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Parts we keep in regular rotation, so most {service.shortName.toLowerCase()} jobs
-              finish in one visit.
+              The right part depends on your exact model. Some components may need to be ordered;
+              we confirm the repair plan and availability after diagnosis.
             </p>
           </div>
 
           <div className="bg-white border border-blue-100 shadow-sm p-8">
             <p className="text-xs text-slate-400 mb-4 font-medium uppercase tracking-wider">
-              Commonly stocked:
+              Components include:
             </p>
             <div className="flex flex-wrap gap-2">
               {service.parts.map((part) => (
@@ -635,7 +647,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </h2>
             <p className="text-slate-500 max-w-xl mx-auto">
               The {service.shortName.toLowerCase()} questions CT homeowners ask us most. If yours is
-              not here, call us. We can usually diagnose it over the phone.
+              not here, call us to discuss the symptoms and whether a service visit is needed.
             </p>
           </div>
 
@@ -645,8 +657,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="mt-12 text-center bg-blue-50 border border-blue-100 p-8">
             <p className="text-blue-900 font-bold text-lg mb-2">Still stuck?</p>
             <p className="text-slate-500 mb-5">
-              A tech can usually diagnose your {service.shortName.toLowerCase()} over the phone. No
-              charge.
+              Call to discuss your {service.shortName.toLowerCase()} symptoms. A repair diagnosis
+              and written quote are provided on-site; the ${SERVICE_CALL_FEE} service call is waived
+              when you proceed with the repair.
             </p>
             <a
               href={BUSINESS.phone.href}
@@ -682,7 +695,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             Get your {service.shortName.toLowerCase()} fixed
           </h2>
           <p className="text-blue-200 text-lg max-w-2xl mx-auto leading-relaxed mb-10">
-            Same-day CT service when slots are open. Written estimate before we open anything. OEM
+            Same-day CT service when slots are open. Written estimate before repair work begins. OEM
             parts on the truck. 90 days on parts and labor.
           </p>
 

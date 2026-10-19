@@ -121,7 +121,7 @@ export default function Coverage() {
                 </svg>
                 Towns &amp; Cities We Serve
               </h3>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-3 gap-2">
                 {SERVICE_AREAS.map((name) => {
                   const city = cities.find((entry) => entry.name === name);
 

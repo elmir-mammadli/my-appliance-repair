@@ -6,6 +6,7 @@ import { BRANCHES, branchForZip, coverageError, type BranchId } from '@/lib/bran
 import MunicipalitySelect from '@/components/MunicipalitySelect';
 import DatePicker from '@/components/DatePicker';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
+import { useRepairTracking } from '@/lib/use-repair-tracking';
 
 const appliances = [
   'Washer',
@@ -95,6 +96,7 @@ export default function BookingForm({
   const [submitted, setSubmitted] = useState(false);
   const branchId = branchForZip(form.zip) ?? initialBranch;
   const branch = BRANCHES[branchId];
+  const tracking = useRepairTracking('booking', onClose ? 'modal' : 'page', branchId, form.appliance);
   const suggestions = issueSuggestions[form.appliance] ?? [];
 
   const handleChange = (field: keyof FormState, value: string) => {
@@ -144,6 +146,7 @@ export default function BookingForm({
     setTimeout(() => {
       setChecking(false);
       setStep(2);
+      tracking.completeContactStep();
       onStepChange?.(2);
     }, 1000);
   };
@@ -161,7 +164,9 @@ export default function BookingForm({
       });
       if (!res.ok) throw new Error('Request failed');
       setSubmitted(true);
+      tracking.success();
     } catch {
+      tracking.error();
       alert(`Something went wrong. Please call us directly at ${branch.phone}.`);
     } finally {
       setSubmitting(false);
@@ -169,6 +174,7 @@ export default function BookingForm({
   };
 
   const resetForm = () => {
+    tracking.reset();
     setSubmitted(false);
     setForm({ ...initialState, appliance: initialAppliance ?? '', municipality: initialMunicipality });
     setStep(1);
@@ -338,7 +344,7 @@ export default function BookingForm({
           </div>
         ) : step === 1 ? (
           /* ── Step 1 — Phone + ZIP ── */
-          <form onSubmit={handleStep1Next} noValidate aria-label="Step 1: Contact check">
+          <form onSubmit={handleStep1Next} onChangeCapture={tracking.start} noValidate aria-label="Step 1: Contact check">
             <div className="space-y-5">
               <p className="text-sm text-slate-500 text-center pb-1">
                 Service team: {branch.name}. We’ll confirm your address and availability.
@@ -632,7 +638,7 @@ export default function BookingForm({
             </div>
 
             {/* Step 2 form */}
-            <form onSubmit={handleSubmit} noValidate aria-label="Step 2: Repair details">
+            <form onSubmit={handleSubmit} onChangeCapture={tracking.start} noValidate aria-label="Step 2: Repair details">
               <div className="space-y-4">
                 {/* Name */}
                 <div>

@@ -52,6 +52,7 @@ export async function generateMetadata({
       title: post.title,
       description: socialDescription,
       publishedTime: post.date,
+      modifiedTime: post.updatedAt ?? post.date,
       authors: [`${BUSINESS.name} Team`],
       // Image itself comes from the co-located opengraph-image.tsx file convention,
       // which takes priority over anything set here — no need to duplicate it.
@@ -69,6 +70,7 @@ function formatDate(iso: string): string {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
+    timeZone: 'UTC',
   });
 }
 
@@ -80,6 +82,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const related = getRelatedPosts(post.slug, 2);
   const parentServiceSlug = getServiceSlugForPost(post);
   const parentService = parentServiceSlug ? getServiceBySlug(parentServiceSlug) : undefined;
+  // Older article bodies repeat their headline; the page header already supplies it.
+  const articleContent = post.content.replace(/^\s*<h1(?:\s[^>]*)?>[\s\S]*?<\/h1>\s*/i, '');
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -88,7 +92,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     description: post.excerpt.length > 160 ? post.excerpt.slice(0, 157) + '...' : post.excerpt,
     image: post.image,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updatedAt ?? post.date,
     author: {
       '@type': 'Organization',
       name: `${BUSINESS.name} Team`,
@@ -210,8 +214,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                   />
                 </svg>
-                {formatDate(post.date)}
+                Published <time dateTime={post.date}>{formatDate(post.date)}</time>
               </span>
+              {post.updatedAt && (
+                <span>Updated <time dateTime={post.updatedAt}>{formatDate(post.updatedAt)}</time></span>
+              )}
               <span className="flex items-center gap-1.5">
                 <svg
                   className="w-4 h-4"
@@ -259,7 +266,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             {/* Main content */}
             {/* Temporary turn off the blog audio player */}
             <div className="lg:col-span-2">
-              <div className="prose" dangerouslySetInnerHTML={{ __html: post.content }} />
+              <div className="prose" dangerouslySetInnerHTML={{ __html: articleContent }} />
             </div>
 
             {/* Sidebar */}

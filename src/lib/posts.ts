@@ -6,6 +6,7 @@ export interface Post {
   excerpt: string;
   category: string;
   date: string; // ISO date"2026-03-18"
+  updatedAt?: string; // Actual substantive edit date, never a deployment timestamp.
   readTime: string; //"6 min read"
   author: string;
   featuredColor: string; // Tailwind gradient classes

@@ -5,6 +5,7 @@ import { BRANCHES, branchForZip, coverageError } from '@/lib/branches';
 import MunicipalitySelect from '@/components/MunicipalitySelect';
 import { SERVICE_CALL_FEE } from '@/lib/business';
 import DatePicker from '@/components/DatePicker';
+import { useRepairTracking } from '@/lib/use-repair-tracking';
 
 const appliances = [
   'Washer',
@@ -55,6 +56,7 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const tracking = useRepairTracking('contact', 'inline', branchId, form.appliance);
 
   const validate = (): boolean => {
     const newErrors: Partial<FormState> = {};
@@ -89,7 +91,9 @@ export default function ContactForm() {
       });
       if (!res.ok) throw new Error('Request failed');
       setSubmitted(true);
+      tracking.success();
     } catch {
+      tracking.error();
       alert(`Something went wrong. Please call us directly at ${branch.phone}.`);
     } finally {
       setSubmitting(false);
@@ -141,6 +145,7 @@ export default function ContactForm() {
           <button
             onClick={() => {
               setSubmitted(false);
+              tracking.reset();
               setForm(initialState);
             }}
             className="text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 cursor-pointer"
@@ -254,7 +259,7 @@ export default function ContactForm() {
           {/* Form */}
           <div className="bg-blue-50 p-8 border border-blue-100 shadow-sm">
             <h3 className="text-xl font-bold text-blue-900 mb-6">Request a Repair Appointment</h3>
-            <form onSubmit={handleSubmit} noValidate aria-label="Repair booking form">
+            <form onSubmit={handleSubmit} onChangeCapture={tracking.start} noValidate aria-label="Repair booking form">
               <div className="space-y-5">
                 {/* Name */}
                 <div>

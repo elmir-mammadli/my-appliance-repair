@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { APPLIANCE_REPAIR_COST_ANSWER } from '@/lib/business';
+import { APPLIANCE_REPAIR_COST_ANSWER, GAS_ODOR_GUIDANCE, SAME_DAY_SERVICE_ANSWER } from '@/lib/business';
 
 // Must match an option in BookingModal.tsx`appliances` array.
 export type ApplianceValue =
@@ -93,7 +93,11 @@ const pricingFaqs = [
   },
   {
     q: 'Do you offer same-day service?',
-    a: 'Often yes. If you call before noon, we can usually get a tech to you the same afternoon. We run morning, afternoon, and evening slots Monday through Saturday, and emergency calls 24/7.',
+    a: SAME_DAY_SERVICE_ANSWER,
+  },
+  {
+    q: 'Should I repair or replace my appliance?',
+    a: 'Compare the written repair quote with the full installed cost of a replacement, including delivery, installation, and removal. Age, overall condition, repeat failures, parts availability, and any manufacturer warranty also matter. A small component failure and a major sealed-system or tub repair can lead to very different decisions. We explain the diagnosis and quote before you authorize work.',
   },
 ];
 
@@ -107,7 +111,7 @@ export const services: Service[] = [
     description:
       "If your washer left clothes soaking wet again or it's banging like it wants to leave the room, that's almost always a part we keep on the truck.",
     intro:
-      "Most washer calls fall into a couple of buckets. Front-loaders that won't drain or leak from the door gasket. Top-loaders that walk, won't fill, or quit mid-cycle. Connecticut basements are rough on washers because the floors are rarely level, so a lot of front-loaders end up rocking on shot shock absorbers within a few years. The truck carries shocks, boot seals, drain pumps, and motor couplers, so most of these jobs wrap in one visit.",
+      "We diagnose front-load and top-load washers that will not spin, drain, fill, or finish a cycle. Leaks, door-lock faults, and vibration can have several causes, so we check the installation and the affected systems before recommending a part. Share the brand, model number, and any error code when booking washer repair in our Connecticut service area. Repair timing depends on the diagnosis and model-specific parts availability.",
     heroImage: '/images/services/washer-repair.jpg',
     heroImageAlt: 'Front-load washing machine, same-day washer repair in Connecticut',
     applianceValue: 'Washer',
@@ -145,7 +149,7 @@ export const services: Service[] = [
       ...pricingFaqs,
       {
         q: "My washer won't spin. What's the usual culprit?",
-        a: "On Whirlpool, Maytag, and Kenmore direct-drives, the usual cause is a worn motor coupler. On most front-loaders it's the drive belt or a stuck door lock circuit. On LG and Samsung direct-drives, it's almost always the rotor position sensor or a hall sensor. We test the lock circuit and the motor before swapping anything.",
+        a: 'An unbalanced load, a drainage problem, a lid or door lock, or a drive-system fault can prevent spinning. The drive design varies by model; not every washer has a belt or motor coupler. We check drainage, locking, and the drive system before recommending a repair.',
       },
       {
         q: 'Why is my washer leaking water?',
@@ -153,7 +157,11 @@ export const services: Service[] = [
       },
       {
         q: 'My washer keeps walking out from the wall in the basement. Can you fix that?',
-        a: 'Yes. This is a top-five call for us in Connecticut. Most CT basements have uneven concrete floors, and front-loader shock absorbers wear faster than they should because the drum is constantly fighting that tilt. New shocks bring the noise and movement back to normal. While we are there, we will level the feet so the new shocks last longer.',
+        a: 'We can check the cause. An uneven floor, loose leveling feet, shipping bolts left in a recently installed machine, an unbalanced load, or worn suspension components can all cause movement. Stop using a washer that moves violently. The diagnosis determines whether it needs an installation adjustment or a repair.',
+      },
+      {
+        q: 'What can I check before booking washing machine repair?',
+        a: 'Check the selected cycle, control lock, and whether the load is unbalanced. Note any error code and whether water remains in the drum. Follow your model manual for user-accessible filter cleaning. If the washer is leaking or moving violently, stop the cycle and arrange service instead of repeatedly restarting it.',
       },
     ],
   },
@@ -166,7 +174,7 @@ export const services: Service[] = [
     description:
       "If your dryer is running but the clothes are still damp after an hour, or it's making a thumping noise that was not there last week, that is usually a one-trip fix.",
     intro:
-      'Dryer calls in Connecticut tend to split two ways. Long basement vent runs clog with lint, which trips the high-limit thermostat and blows the thermal fuse. Drum hardware (belts, glides, idler pulleys, bearings) wears with age and starts squeaking or thumping. We clear the vent and swap the worn parts in one visit when we can. Every gas dryer call gets a leak check at the supply line before we leave.',
+      'We service gas and electric dryers with no heat, long drying times, starting problems, and unusual drum noises. Restricted exhaust airflow and a failed heating component can produce different symptoms, so a diagnosis should cover both the dryer and its installation. Tell us whether your dryer is gas, electric, or ventless, along with the model number and any check-vent warning.',
     heroImage: '/images/services/dryer-repair.jpg',
     heroImageAlt: 'Clothes dryer, same-day dryer repair in Connecticut',
     applianceValue: 'Dryer',
@@ -182,7 +190,7 @@ export const services: Service[] = [
       'Burning smell from the drum',
       "Door won't close all the way",
       'Error code or check-vent light on the display',
-      'Gas smell from the dryer (call us right away)',
+      'Gas odor: leave the building and call your gas utility from outside',
       "Clothes smell like they didn't dry",
     ],
     parts: [
@@ -204,7 +212,11 @@ export const services: Service[] = [
       ...pricingFaqs,
       {
         q: 'My dryer runs but produces no heat. Is the heating element bad?',
-        a: 'Maybe, but probably not first. The thermal fuse blows nine times out of ten because the vent is clogged. If we replace the fuse without clearing the vent, it blows again within a week and the heat trapped inside the cabinet becomes a real fire risk. On gas dryers, the igniter or gas valve coils are usually the cause. Our first step on any no-heat call is the vent, then the thermal protection.',
+        a: 'A failed element is one possibility on an electric dryer, along with a power-supply fault, thermostat, thermal protection device, or control fault. Gas dryers use an ignition system rather than an electric heating element. A thermal fuse may stop heating or stop the dryer entirely depending on the model. We test the relevant circuit and check airflow instead of choosing a part from the symptom alone.',
+      },
+      {
+        q: 'What can I check before booking dryer repair?',
+        a: 'Check the cycle settings and clean the lint screen. Look for a visible crushed exhaust duct without moving or disconnecting the dryer, and check the outdoor vent only if it is safely accessible. Never run a vented dryer with its exhaust disconnected or bypass a thermal fuse. Stop using it if it overheats or smells burnt. ' + GAS_ODOR_GUIDANCE,
       },
       {
         q: "My dryer is squeaking or thumping. What's that?",
@@ -225,7 +237,7 @@ export const services: Service[] = [
     description:
       'A fridge that is running warm can cost you a couple hundred dollars in groceries by tomorrow morning, so we treat it as a same-day call whenever we can.',
     intro:
-      'Refrigerator calls jump to the top of our schedule because food spoils fast. The truck carries compressors, start relays, evaporator fans, ice maker assemblies, and water inlet valves so we can usually finish on the first visit. Samsung and LG French-doors and Bosch counter-depths are the most common units we see. We have also done plenty of Sub-Zero work in Fairfield County kitchens, so if yours is a Sub-Zero running warm, we already know the three things it is likely to be before we walk in.',
+      'A refrigerator that is running warm needs prompt attention. We diagnose cooling problems, ice maker faults, water leaks, and unusual noises on French-door, side-by-side, and top- or bottom-freezer models. Fan, defrost, air-damper, control, and sealed-system faults require different repairs. Tell us the model number and whether the refrigerator, freezer, or both compartments are affected so we can plan the visit.',
     heroImage: '/images/services/refrigerator-repair.jpg',
     heroImageAlt: 'French-door refrigerator, same-day fridge repair in Connecticut',
     applianceValue: 'Refrigerator',
@@ -274,8 +286,12 @@ export const services: Service[] = [
         a: 'Clicking usually means the start relay or the compressor is having trouble starting, and it needs attention now. Buzzing is often the evaporator or condenser fan motor going bad. Neither should be left for weeks because both can escalate fast. We get the relay tested and the fan motor swapped or ordered before we leave.',
       },
       {
-        q: "We're on well water in Litchfield County. The ice maker keeps failing. Is that related?",
-        a: 'Almost certainly. Well water in northwest CT runs hard, and the mineral content scales up the water inlet valve, the ice maker assembly, and the fill tube. Every couple of years we see homeowners on wells go through ice makers when the actual problem is the valve clogging with scale. A whole-house softener or a fridge filter rated for high TDS slows it down. We can confirm with a quick valve flow test.',
+        q: 'Can well water affect my ice maker?',
+        a: 'Water quality and supply pressure can affect ice production, but a repeated failure does not establish the cause. We check the water supply, the model-specific filter requirements, inlet valve, and ice maker before recommending repairs. Most refrigerator filters do not soften water; water-treatment decisions should be based on a water test.',
+      },
+      {
+        q: 'What should I do while waiting for refrigerator repair?',
+        a: 'Keep the doors closed as much as possible, record the compartment temperatures if you have an appliance thermometer, and note any error code. Check that the controls were not changed and that food is not blocking internal vents. Move perishable food to reliable cold storage when cooling is inadequate; food safety depends on its temperature and time, not on whether it smells normal.',
       },
     ],
   },
@@ -334,7 +350,11 @@ export const services: Service[] = [
       },
       {
         q: 'Are dishwashers OK on a septic system?',
-        a: 'Yes. Modern dishwashers actually use less water than handwashing the same load, which is easier on a septic. The real concern used to be high-phosphate detergent, but Connecticut requires phosphate-free dishwasher detergent now, so that is handled. We do recommend a vinegar rinse cycle once a month if you are on septic, just to keep the lines clear.',
+        a: 'A dishwasher can be used with a properly designed and maintained septic system. Follow the appliance and septic-system instructions for detergent and water use, and ask your septic provider about drainage or capacity concerns. Use only cleaners approved for your dishwasher model; a vinegar cycle is not a general treatment for septic or drain problems.',
+      },
+      {
+        q: 'What can I check before booking dishwasher repair?',
+        a: 'Check the control lock, delayed-start setting, and door latch. Follow the model manual to clean a user-removable filter and make sure dishes do not block the spray arms. If it is leaking onto the floor, stop the cycle and arrange service. Do not remove the base panel, bypass a leak sensor, or reach into the pump.',
       },
     ],
   },
@@ -347,7 +367,7 @@ export const services: Service[] = [
     description:
       "Oven not getting hot, burners that click but won't light, or a self-clean cycle that won't run? Most oven jobs are a one-visit fix.",
     intro:
-      'Oven and range work is mostly gas igniters, bake elements, and control boards. Old GE wall ovens in West Hartford and Glastonbury colonials are still everywhere, and we keep their igniters on the truck. On modern slide-ins, the bake/broil relay board fails before the elements do. Every gas oven call gets a leak check at the supply valve and a flame test on each burner before we leave.',
+      'We diagnose gas and electric ranges, wall ovens, and cooktops with ignition, heating, temperature-control, and door problems. An oven that will not bake can have a different fault from a surface burner that will not light. Share the model number, fuel type, error code, and whether bake, broil, or the cooktop is affected. We explain the diagnosis and provide an on-site quote before repair work begins.',
     heroImage: '/images/services/oven-range-repair.jpg',
     heroImageAlt: 'Freestanding range with oven and cooktop, same-day oven repair in Connecticut',
     applianceValue: 'Oven / Range',
@@ -360,7 +380,7 @@ export const services: Service[] = [
       'Hot and cold spots when cooking',
       "Self-clean cycle won't start or won't end",
       "Door won't close all the way",
-      'Gas smell when the oven is running (urgent, call us)',
+      'Gas odor: leave the building and call your gas utility from outside',
       "Broiler isn't working",
       'Constant clicking even when no burner is on',
       "Control panel won't respond",
@@ -385,7 +405,7 @@ export const services: Service[] = [
       ...pricingFaqs,
       {
         q: "My gas oven won't ignite. Is it dangerous?",
-        a: 'If you smell gas at any time, shut off the gas at the appliance valve, leave the house, and call your gas utility before calling us. Do not try to light the oven. If there is no gas smell, the usual causes are a worn igniter, a failed spark module, or a clogged burner port. We test the igniter resistance and the gas pressure on every call.',
+        a: GAS_ODOR_GUIDANCE + ' Without a gas odor, an ignition failure still needs a model-specific diagnosis; avoid repeatedly trying to light it.',
       },
       {
         q: 'My oven heats unevenly. Why?',
@@ -393,7 +413,11 @@ export const services: Service[] = [
       },
       {
         q: 'My older GE wall oven has stopped baking but the broiler still works. What is likely?',
-        a: 'On GE wall ovens older than about 10 years, this is almost always the bake/broil relay board. The board has separate relays for each element and the bake side fails first because it cycles more often. We carry the board for the common GE platforms and can swap it in about 30 minutes. If your oven is from the 80s or early 90s, we will tell you honestly whether parts are still available or whether replacement makes more sense.',
+        a: 'The bake element, its wiring, a control relay, or another part of the bake circuit may be involved. Working broil does not prove that the control board has failed. We check the model-specific circuit before recommending parts and discuss availability and replacement cost on older appliances.',
+      },
+      {
+        q: 'What can I check before booking oven or stove repair?',
+        a: 'Check the control lock, timer settings, and any displayed error code. With the cooktop off and fully cool, follow the manual to confirm each removable burner cap is dry and seated on its correct burner. Caps of different sizes are not interchangeable. Leave gas orifice adjustments, wiring, and internal testing to a qualified technician.',
       },
     ],
   },
@@ -406,7 +430,7 @@ export const services: Service[] = [
     description:
       "Freezer not freezing? Ice maker quit? Cooktop won't ignite? If it plugs in or runs on gas, there is a good chance we fix it.",
     intro:
-      'Specialty appliance work is a smaller portion of what we do, but a real one. Standalone freezers in CT basements and garages are common, and we see plenty in the lake regions near Candlewood and Bantam. Ice makers, both built-in and standalone, share a lot of parts with refrigerators so we usually have what we need. Cooktops (induction, gas, electric) and microwaves (countertop, over-the-range, built-in) round out the regular calls. If you are not sure whether we cover what you have, call us. The answer is yes more often than not.',
+      'We also handle standalone freezers, ice makers, cooktops, and microwaves in our Connecticut service communities. These appliances use different systems, and serviceability depends on the brand, model, installation, and available parts. Call with the model number to confirm we can service your appliance before requesting a visit. For a lower-cost countertop microwave, compare the diagnostic and repair costs with replacement.',
     heroImage: '/images/services/more-appliances.jpg',
     heroImageAlt:
       'Specialty kitchen appliances, freezer, ice maker, cooktop, and microwave repair in Connecticut',
@@ -445,7 +469,11 @@ export const services: Service[] = [
       ...pricingFaqs,
       {
         q: 'My garage freezer stops working when it gets really cold out. What is that?',
-        a: "Most consumer freezers are not rated to run below about 38 degrees ambient. When a CT garage drops below freezing in January, the freezer's thermostat thinks it is already cold enough and the compressor stops. The freezer warms up, food thaws, and you find out in February. The fix is either a garage-ready kit add-on for some models or moving the freezer somewhere that stays above 40 degrees. We can confirm whether your unit accepts a garage kit.",
+        a: 'Check the operating temperature range in your exact model manual. Some standalone garage-ready freezers are designed for colder conditions than ordinary refrigerators, so there is no single minimum temperature for every unit. A freezer that warms up may have an installation or component problem. Do not add a heater or garage kit unless the manufacturer approves it for that model.',
+      },
+      {
+        q: 'What should I check before requesting microwave or cooktop service?',
+        a: 'Record the model number and check the control lock and the user troubleshooting section of the manual. Stop using a microwave that sparks or has a damaged door. Do not remove its cover; internal components can retain a dangerous charge even when unplugged. For cooktops, tell us whether the appliance is gas, radiant electric, or induction.',
       },
     ],
   },

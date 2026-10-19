@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { BUSINESS } from '@/lib/business';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    sitemap: 'https://www.myappliance.us/sitemap.xml',
+    sitemap: `${BUSINESS.url}/sitemap.xml`,
   };
 }

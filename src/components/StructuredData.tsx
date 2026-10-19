@@ -1,4 +1,4 @@
-import { BUSINESS, SERVICE_AREA_SCHEMA } from '@/lib/business';
+import { BUSINESS, BUSINESS_HOURS, SERVICE_AREA_SCHEMA } from '@/lib/business';
 
 function jsonLd(data: object): string {
   return JSON.stringify(data)
@@ -39,6 +39,7 @@ const localBusiness = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
+          '@id': `${BUSINESS.url}/services/refrigerator-repair#service`,
           name: 'Refrigerator Repair',
           url: `${BUSINESS.url}/services/refrigerator-repair`,
         },
@@ -47,6 +48,7 @@ const localBusiness = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
+          '@id': `${BUSINESS.url}/services/washer-repair#service`,
           name: 'Washing Machine Repair',
           url: `${BUSINESS.url}/services/washer-repair`,
         },
@@ -55,6 +57,7 @@ const localBusiness = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
+          '@id': `${BUSINESS.url}/services/dryer-repair#service`,
           name: 'Clothes Dryer Repair',
           url: `${BUSINESS.url}/services/dryer-repair`,
         },
@@ -63,6 +66,7 @@ const localBusiness = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
+          '@id': `${BUSINESS.url}/services/dishwasher-repair#service`,
           name: 'Dishwasher Repair',
           url: `${BUSINESS.url}/services/dishwasher-repair`,
         },
@@ -71,6 +75,7 @@ const localBusiness = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
+          '@id': `${BUSINESS.url}/services/oven-range-repair#service`,
           name: 'Oven & Range Repair',
           url: `${BUSINESS.url}/services/oven-range-repair`,
         },
@@ -79,20 +84,14 @@ const localBusiness = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
+          '@id': `${BUSINESS.url}/services/more-appliances#service`,
           name: 'Additional Appliance Repair',
-          url: `${BUSINESS.url}/services`,
+          url: `${BUSINESS.url}/services/more-appliances`,
         },
       },
     ],
   },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      opens: '08:00',
-      closes: '18:00',
-    },
-  ],
+  openingHoursSpecification: [BUSINESS_HOURS.schema],
   priceRange: '$$',
   sameAs: [
     'https://www.instagram.com/myappliancerepair',
@@ -111,64 +110,6 @@ const website = {
   inLanguage: 'en-US',
 };
 
-const services = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Refrigerator Repair Connecticut',
-    description:
-      'Professional refrigerator repair in Connecticut. We fix all makes and models including Samsung, LG, Whirlpool, GE, and more. Same-day service available.',
-    provider: { '@id': `${BUSINESS.url}/#business` },
-    areaServed: SERVICE_AREA_SCHEMA,
-    serviceType: 'Appliance Repair',
-    url: `${BUSINESS.url}/services/refrigerator-repair`,
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Washing Machine Repair Connecticut',
-    description:
-      'Expert washing machine repair in our Connecticut service communities. We diagnose and fix spin failures, leaks, drain issues, loud noises, and other common washer problems.',
-    provider: { '@id': `${BUSINESS.url}/#business` },
-    areaServed: SERVICE_AREA_SCHEMA,
-    serviceType: 'Appliance Repair',
-    url: `${BUSINESS.url}/services/washer-repair`,
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Clothes Dryer Repair Connecticut',
-    description:
-      'Clothes dryer repair in our Connecticut service communities for no-heat, long-dry, squeaking, thumping, belt, and vent-related dryer problems.',
-    provider: { '@id': `${BUSINESS.url}/#business` },
-    areaServed: SERVICE_AREA_SCHEMA,
-    serviceType: 'Appliance Repair',
-    url: `${BUSINESS.url}/services/dryer-repair`,
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Dishwasher Repair Connecticut',
-    description:
-      'Reliable dishwasher repair in Connecticut. We fix cleaning issues, drainage problems, door latch failures, and all common dishwasher faults.',
-    provider: { '@id': `${BUSINESS.url}/#business` },
-    areaServed: SERVICE_AREA_SCHEMA,
-    serviceType: 'Appliance Repair',
-    url: `${BUSINESS.url}/services/dishwasher-repair`,
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Oven & Range Repair Connecticut',
-    description:
-      'Gas and electric oven repair in Connecticut. We fix ignition failures, uneven heating, control board issues, and all oven and range problems.',
-    provider: { '@id': `${BUSINESS.url}/#business` },
-    areaServed: SERVICE_AREA_SCHEMA,
-    serviceType: 'Appliance Repair',
-    url: `${BUSINESS.url}/services/oven-range-repair`,
-  },
-];
-
 export default function StructuredData() {
   return (
     <>
@@ -177,13 +118,6 @@ export default function StructuredData() {
         dangerouslySetInnerHTML={{ __html: jsonLd(localBusiness) }}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(website) }} />
-      {services.map((service, i) => (
-        <script
-          key={i}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLd(service) }}
-        />
-      ))}
     </>
   );
 }
