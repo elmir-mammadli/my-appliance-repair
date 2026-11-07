@@ -37,19 +37,16 @@ export default function Coverage() {
   return (
     <section
       id="coverage"
-      className="py-20 lg:py-28 bg-gradient-to-br from-blue-900 to-blue-800"
+      className="py-20 lg:py-28 bg-blue-900"
       aria-labelledby="coverage-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="inline-block text-blue-300 font-semibold text-sm tracking-widest uppercase mb-3">
-            Service Area
-          </span>
           <h2
             id="coverage-heading"
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
-            Serving {SERVICE_AREAS.length} Connecticut Communities
+            Serving {SERVICE_AREAS.length} Connecticut communities
           </h2>
           <p className="text-lg text-blue-200 max-w-2xl mx-auto">
             Appliance repair in New Haven, Hamden, Bristol, Waterbury, and the towns listed below.

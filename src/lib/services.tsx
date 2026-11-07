@@ -337,7 +337,7 @@ export const services: Service[] = [
       'Diverter motor (Whirlpool / KitchenAid)',
       'Chopper blade',
     ],
-    brands: ['Bosch', 'Whirlpool', 'GE', 'Samsung', 'Miele', 'KitchenAid', 'Frigidaire', 'Maytag'],
+    brands: ['Bosch', 'Whirlpool', 'GE', 'Samsung', 'KitchenAid', 'Frigidaire', 'Maytag'],
     faqs: [
       ...pricingFaqs,
       {

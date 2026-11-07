@@ -33,7 +33,7 @@ const reasons = [
         />
       </svg>
     ),
-    title: 'Fully Insured',
+    title: 'Fully insured',
     description:
       'Every technician we send is covered by comprehensive liability insurance. Your home and appliances are always protected.',
   },
@@ -54,7 +54,7 @@ const reasons = [
         />
       </svg>
     ),
-    title: 'Same-Day Service',
+    title: 'Same-day service',
     description:
       "Call before noon and we'll often be there the same day. Evening and weekend appointments available.",
   },
@@ -75,7 +75,7 @@ const reasons = [
         />
       </svg>
     ),
-    title: '90-Day Warranty',
+    title: '90-day warranty',
     description:
       'Every repair comes with a 90-day parts and labor warranty. We stand behind our work, guaranteed.',
   },
@@ -96,7 +96,7 @@ const reasons = [
         />
       </svg>
     ),
-    title: 'Upfront Pricing',
+    title: 'Upfront pricing',
     description:
       'No hidden fees. You get a full written estimate before any work begins. Free diagnostic with repair.',
   },
@@ -117,7 +117,7 @@ const reasons = [
         />
       </svg>
     ),
-    title: 'OEM Parts, Commonly Stocked',
+    title: 'OEM parts, commonly stocked',
     description:
       'Our vans carry OEM parts for the most common failures, so most repairs finish in a single visit.',
   },
@@ -164,15 +164,11 @@ export default function WhyUs() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left Text */}
           <div>
-            <span className="inline-block text-blue-600 font-semibold text-sm tracking-widest uppercase mb-3">
-              Why Choose Us
-            </span>
             <h2 id="why-us-heading" className="text-3xl sm:text-4xl font-bold text-blue-900 mb-6">
-              Connecticut&apos;s Most Trusted Appliance Repair Service
+              What you get on every repair
             </h2>
             <p className="text-lg text-slate-600 mb-10 leading-relaxed">
-              Connecticut homeowners count on us for quality, transparency, and fast service. That
-              commitment has made us the #1 rated appliance repair company in the state.
+              You get the price in writing before work begins, original manufacturer parts, and a 90-day warranty on every repair.
             </p>
             <div className="space-y-7">
               {reasons.map((reason, index) => (
@@ -184,7 +180,7 @@ export default function WhyUs() {
           {/* Right: Credential Cards */}
           <div className="space-y-5">
             {/* Rating Card */}
-            <div className="bg-gradient-to-br from-blue-700 to-blue-900 p-8 text-white shadow-xl">
+            <div className="bg-blue-800 p-8 text-white">
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex gap-1" aria-label="5 out of 5 stars">
                   {[1, 2, 3, 4, 5].map((i) => (
@@ -215,7 +211,7 @@ export default function WhyUs() {
                   icon: ThumbtackMark,
                 },
                 {
-                  title: 'Fully Insured',
+                  title: 'Fully insured',
                   subtitle: 'General Liability',
                   icon: <HugeiconsIcon icon={Shield01Icon} size={24} className="text-blue-700" />,
                 },
@@ -240,7 +236,7 @@ export default function WhyUs() {
 
             {/* Process Steps */}
             <div className="bg-blue-50 p-6 border border-blue-100">
-              <h3 className="font-bold text-blue-900 mb-4 text-lg">How It Works</h3>
+              <h3 className="font-bold text-blue-900 mb-4 text-lg">How it works</h3>
               <div className="space-y-4">
                 {[
                   {

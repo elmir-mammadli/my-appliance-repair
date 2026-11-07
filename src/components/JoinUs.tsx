@@ -21,7 +21,7 @@ const perks = [
         />
       </svg>
     ),
-    title: 'Competitive Pay',
+    title: 'Competitive pay',
     description: 'Earn top-of-market wages with performance bonuses. We reward great work.',
   },
   {
@@ -41,8 +41,8 @@ const perks = [
         />
       </svg>
     ),
-    title: 'Flexible Schedule',
-    description: 'Full-time or part-time — we work around your life, not the other way around.',
+    title: 'Flexible schedule',
+    description: 'Full-time or part-time, we work around your life, not the other way around.',
   },
   {
     icon: (
@@ -61,7 +61,7 @@ const perks = [
         />
       </svg>
     ),
-    title: 'Steady Work Year-Round',
+    title: 'Steady work year-round',
     description: 'Appliances break in every season. Enjoy consistent work with no dry spells.',
   },
   {
@@ -81,9 +81,9 @@ const perks = [
         />
       </svg>
     ),
-    title: 'Locally Owned & Respected',
+    title: 'Locally owned',
     description:
-      "Join a tight-knit team that's trusted by thousands of CT homeowners. Your name matters here.",
+      "Join a tight-knit team that's serving homeowners across Connecticut. Your name matters here.",
   },
 ];
 
@@ -93,10 +93,7 @@ export default function JoinUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#ffb81c] mb-3">
-            We&apos;re Hiring
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Join Our Team</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Join our team</h2>
           <p className="text-blue-200 text-lg leading-relaxed">
             {BUSINESS.name} is a locally owned company built on real craftsmanship and real
             relationships. We&apos;re looking for skilled technicians who take pride in their work

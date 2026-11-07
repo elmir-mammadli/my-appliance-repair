@@ -120,7 +120,7 @@ export default function ContactForm() {
               />
             </svg>
           </div>
-          <h2 className="text-3xl font-bold text-blue-900 mb-4">Booking Request Received!</h2>
+          <h2 className="text-3xl font-bold text-blue-900 mb-4">Booking request received</h2>
           <p className="text-lg text-slate-600 mb-6">
             Thank you, <strong>{form.name}</strong>! We&apos;ve received your repair request for
             your <strong>{form.appliance}</strong>.
@@ -163,11 +163,8 @@ export default function ContactForm() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left Info */}
           <div>
-            <span className="inline-block text-blue-600 font-semibold text-sm tracking-widest uppercase mb-3">
-              Book a Repair
-            </span>
             <h2 id="contact-heading" className="text-3xl sm:text-4xl font-bold text-blue-900 mb-6">
-              Schedule Your Repair Today
+              Schedule your repair
             </h2>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
               Fill out the form and we&apos;ll contact you to confirm your appointment and service
@@ -228,11 +225,11 @@ export default function ContactForm() {
             </div>
 
             {/* Guarantee Banner */}
-            <div className="bg-gradient-to-r from-blue-700 to-blue-800 p-6 text-white">
-              <h3 className="font-bold text-lg mb-3">Our Service Guarantee</h3>
+            <div className="bg-blue-800 p-6 text-white">
+              <h3 className="font-bold text-lg mb-3">Our service guarantee</h3>
               <ul className="space-y-2">
                 {[
-                  `$${SERVICE_CALL_FEE} service call — waived with repair`,
+                  `$${SERVICE_CALL_FEE} service call, waived with repair`,
                   'Written estimate before work begins',
                   '90-day parts & labor warranty',
                 ].map((item) => (
@@ -258,7 +255,7 @@ export default function ContactForm() {
 
           {/* Form */}
           <div className="bg-blue-50 p-8 border border-blue-100 shadow-sm">
-            <h3 className="text-xl font-bold text-blue-900 mb-6">Request a Repair Appointment</h3>
+            <h3 className="text-xl font-bold text-blue-900 mb-6">Request a repair appointment</h3>
             <form onSubmit={handleSubmit} onChangeCapture={tracking.start} noValidate aria-label="Repair booking form">
               <div className="space-y-5">
                 {/* Name */}
@@ -377,7 +374,7 @@ export default function ContactForm() {
                               clipRule="evenodd"
                             />
                           </svg>
-                          {branchId === 'ct' ? 'Connecticut ZIP' : branch.name} — we’ll confirm coverage for your address.
+                          {branchId === 'ct' ? 'Connecticut ZIP' : branch.name}, we’ll confirm coverage for your address.
                         </p>
                       ) : (
                         <p

@@ -205,11 +205,8 @@ export default function Testimonials() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-10">
         <div className="flex flex-col gap-6 border border-blue-100 bg-white p-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-blue-500">
-              Google Reviews
-            </p>
             <h2 id="testimonials-heading" className="text-3xl font-bold text-blue-900 sm:text-4xl">
-              Trusted by Connecticut homeowners
+              Google reviews from Connecticut homeowners
             </h2>
             <p className="mt-3 max-w-2xl text-slate-600">
               Fast response, honest diagnosis, and clear communication show up again and again in

@@ -9,9 +9,6 @@ export default function Services() {
     <section id="services" className="py-20 lg:py-28 bg-blue-50" aria-labelledby="services-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="inline-block text-blue-600 font-semibold text-sm tracking-widest uppercase mb-3">
-            What we fix
-          </span>
           <h2
             id="services-heading"
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-4"
@@ -56,7 +53,7 @@ export default function Services() {
             href="/services"
             className="inline-flex items-center gap-2 border-2 border-blue-900 hover:bg-blue-900 hover:text-white text-blue-900 font-bold px-8 py-3.5 transition-all duration-200 cursor-pointer"
           >
-            View All Services
+            View all services
             <svg
               className="w-4 h-4"
               fill="none"

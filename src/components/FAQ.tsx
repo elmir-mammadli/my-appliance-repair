@@ -31,7 +31,7 @@ const faqs = [
     category: 'Washer & Dryer',
     questions: [
       {
-        q: "My washing machine won't spin — what's wrong?",
+        q: "My washing machine won't spin, what's wrong?",
         a: "A washer that won't spin is usually caused by a worn drive belt, a faulty lid switch or door latch, a broken motor coupling, or an overloaded drum. Less commonly it's the control board or motor. Our technician will diagnose the exact cause before recommending any repair.",
       },
       {
@@ -39,11 +39,11 @@ const faqs = [
         a: 'Leaks typically come from a torn door gasket/boot seal (very common on front-loaders), a cracked water inlet valve, a damaged drain hose, or a worn tub bearing seal. The location of the leak (door, bottom, back) helps narrow it down quickly.',
       },
       {
-        q: 'My dryer runs but produces no heat — is it the heating element?',
+        q: 'My dryer runs but produces no heat: is it the heating element?',
         a: 'Possibly, but not always. On electric dryers, no-heat issues are most commonly a blown thermal fuse, a failed heating element, or a bad thermistor/thermostat. On gas dryers, the igniter or gas valve coils are the usual culprits. We test all components before replacing anything.',
       },
       {
-        q: "My dryer makes a loud squeaking or thumping noise — what's causing it?",
+        q: "My dryer makes a loud squeaking or thumping noise: what's causing it?",
         a: 'Squeaking is almost always the drum glides, drum bearing, or idler pulley wearing out. Thumping usually means a broken or stretched drum drive belt. Both are straightforward repairs that are typically completed in one visit.',
       },
     ],
@@ -52,19 +52,19 @@ const faqs = [
     category: 'Refrigerator & Freezer',
     questions: [
       {
-        q: 'My refrigerator is not cooling but the freezer works fine — why?',
+        q: 'My refrigerator is not cooling but the freezer works fine: why?',
         a: "This is a very common symptom of a failed evaporator fan motor or a defrost system problem (defrost heater, defrost thermostat, or defrost timer). The freezer keeps cooling because the compressor still works, but cold air isn't circulating to the refrigerator section. We see this frequently across Samsung, LG, and Whirlpool models.",
       },
       {
-        q: 'My ice maker stopped working — is this a major repair?',
+        q: 'My ice maker stopped working: is this a major repair?',
         a: 'Usually not. The most common causes are a failed ice maker assembly, a blocked or frozen water supply line, a faulty water inlet valve, or a stuck ice level arm. In most cases we can replace the failed component and restore ice production within a single visit.',
       },
       {
-        q: 'My refrigerator is making a loud buzzing or clicking noise — should I be worried?',
-        a: 'A clicking noise often indicates a failing start relay or compressor having trouble starting — this needs prompt attention to avoid compressor failure. Buzzing is often the evaporator or condenser fan motor going bad. Neither should be ignored as they can escalate quickly.',
+        q: 'My refrigerator is making a loud buzzing or clicking noise: should I be worried?',
+        a: 'A clicking noise often indicates a failing start relay or compressor having trouble starting: this needs prompt attention to avoid compressor failure. Buzzing is often the evaporator or condenser fan motor going bad. Neither should be ignored as they can escalate quickly.',
       },
       {
-        q: "There's water pooling under my vegetable drawers — what causes that?",
+        q: "There's water pooling under my vegetable drawers, what causes that?",
         a: 'Water under the crisper drawers is almost always a clogged defrost drain. As ice melts during the defrost cycle, it flows through a drain tube that can become blocked with food debris or ice. We clear the drain and verify the defrost system is working properly.',
       },
     ],
@@ -73,19 +73,19 @@ const faqs = [
     category: 'Dishwasher & Oven',
     questions: [
       {
-        q: "My dishwasher isn't cleaning dishes properly — what's wrong?",
-        a: "Poor cleaning performance is typically caused by clogged spray arms, a worn wash pump motor, a failed detergent dispenser, low water temperature, or a dirty filter assembly. We check all components — sometimes it's simply a clogged filter that homeowners can clean themselves, and we'll show you how.",
+        q: "My dishwasher isn't cleaning dishes properly, what's wrong?",
+        a: "Poor cleaning performance is typically caused by clogged spray arms, a worn wash pump motor, a failed detergent dispenser, low water temperature, or a dirty filter assembly. We check all components: sometimes it's simply a clogged filter that homeowners can clean themselves, and we'll show you how.",
       },
       {
-        q: 'My dishwasher has standing water at the bottom after a cycle — is the pump broken?',
-        a: "Not necessarily — it's often the drain pump, but it could also be a clogged drain hose, a stuck check valve, or a garbage disposal connection issue. We diagnose the full drain system before replacing components.",
+        q: 'My dishwasher has standing water at the bottom after a cycle: is the pump broken?',
+        a: "Not necessarily: it's often the drain pump, but it could also be a clogged drain hose, a stuck check valve, or a garbage disposal connection issue. We diagnose the full drain system before replacing components.",
       },
       {
-        q: "My gas oven won't ignite — is this dangerous?",
+        q: "My gas oven won't ignite, is this dangerous?",
         a: GAS_ODOR_GUIDANCE,
       },
       {
-        q: 'My oven heats unevenly — some areas burn while others are undercooked?',
+        q: 'My oven heats unevenly: some areas burn while others are undercooked?',
         a: 'Uneven oven heating is usually caused by a failing bake element (electric) or a temperature sensor giving inaccurate readings. It can also be a control board issue. We test oven temperature across multiple zones to pinpoint the cause.',
       },
     ],
@@ -144,11 +144,8 @@ export default function FAQ() {
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="inline-block text-blue-600 font-semibold text-sm tracking-widest uppercase mb-3">
-            Got Questions?
-          </span>
           <h2 id="faq-heading" className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">
-            Frequently Asked Questions
+            Frequently asked questions
           </h2>
           <p className="text-slate-500 max-w-xl mx-auto">
             Specific answers to the questions CT homeowners ask most. If yours isn&apos;t here, call
@@ -196,7 +193,7 @@ export default function FAQ() {
         <div className="mt-12 text-center bg-blue-50 border border-blue-100 p-8">
           <p className="text-blue-900 font-bold text-lg mb-2">Still have a question?</p>
           <p className="text-slate-500 mb-5">
-            Our technicians can often diagnose your appliance problem over the phone — free of
+            Our technicians can often diagnose your appliance problem over the phone, free of
             charge.
           </p>
           <a

@@ -203,7 +203,7 @@ export default function Navbar() {
             onClick={() => setIsMobileOpen(false)}
             className="flex items-center justify-center gap-2 border border-blue-200 text-blue-900 font-semibold px-5 py-3 transition-colors duration-200 cursor-pointer hover:bg-blue-50"
           >
-            Join Our Team
+            Join our team
           </Link>
         </nav>
       </div>

@@ -63,7 +63,7 @@ const discounts = [
     group: 'Seniors (65+)',
     badge: '$30 OFF',
     description:
-      'Connecticut residents aged 65 and older. Fixed income or not — every senior deserves a break.',
+      'Connecticut residents aged 65 and older. Fixed income or not, every senior gets a break.',
     eligibility: 'Present any government-issued ID confirming date of birth.',
     icon: (
       <svg
@@ -138,7 +138,7 @@ function DiscountCard({ item, index }: { item: (typeof discounts)[0]; index: num
           {item.icon}
         </div>
         <span
-          className={`${item.accentColor} text-sm font-extrabold px-3 py-1.5 tracking-wide flex-shrink-0`}
+          className={`${item.accentColor} text-sm font-extrabold px-3 py-1.5 flex-shrink-0`}
         >
           {item.badge}
         </span>
@@ -199,11 +199,8 @@ export default function Discounts() {
             headingVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
-          <span className="inline-block text-yellow-400 font-semibold text-sm tracking-widest uppercase mb-3">
-            Community Discounts
-          </span>
           <h2 id="discounts-heading" className="text-3xl sm:text-4xl font-bold text-white mb-5">
-            We Honor Those Who Serve Our Community
+            Discounts for those who serve our community
           </h2>
           <p className="text-blue-200 text-lg max-w-2xl mx-auto leading-relaxed">
             {BUSINESS.name} is proud to offer special pricing for the people who keep our

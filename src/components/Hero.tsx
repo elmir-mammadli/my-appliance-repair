@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import BookingButton from '@/components/BookingButton';
-import { BUSINESS } from '@/lib/business';
+import { BUSINESS, REVIEW_RATINGS } from '@/lib/business';
 
 const popularRepairs = [
   { href: '/services/refrigerator-repair', label: 'Refrigerator Repair' },
@@ -38,17 +38,12 @@ export default function Hero() {
         />
 
         <div className="nj-entrance relative px-6 pb-12 pt-18">
-          <p className="mb-5 flex flex-col items-start gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#ffb81c]">
-            <span>Appliance Repair Near You</span>
-            <span>New Haven, Hamden &amp; across CT</span>
-          </p>
-          <h1 className="max-w-sm text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">
-            Same-Day Appliance Repair in&nbsp;
-            <span className="text-[#ffb81c]">Connecticut</span>
+          <h1 className="max-w-sm text-4xl font-bold leading-[1.1] sm:text-5xl">
+            Same-day appliance repair in Connecticut
           </h1>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-blue-100">
             Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens,
-            and freezers across Connecticut, with a written estimate before work begins and a
+            and freezers in New Haven, Hamden, West Haven and across Connecticut, with a written estimate before work begins and a
             90-day labor warranty.
           </p>
 
@@ -92,7 +87,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="mt-5 flex flex-wrap text-sm text-blue-100/85">
+          <div className="mt-5 flex flex-col sm:flex-row flex-wrap text-sm text-blue-100/85">
             {[
               '5.0 ★ across Google & Thumbtack',
               'Same-day when available',
@@ -120,17 +115,14 @@ export default function Hero() {
 
       <div className="mx-auto hidden max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
         <div className="max-w-2xl">
-          <p className="mb-2 flex flex-col items-start gap-1 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-700 sm:mb-2 sm:inline-flex sm:flex-row sm:items-center sm:gap-2">
-            <span>New Haven, Hamden, West Haven & across CT</span>
-          </p>
 
-          <h1 className="mb-5 text-4xl font-bold leading-[1.05] tracking-tight text-blue-950 sm:mb-6 sm:text-5xl sm:leading-[1.02] lg:text-6xl">
-            Same-Day Appliance Repair in <span className="text-[#ffb81c]">Connecticut</span>
+          <h1 className="mb-5 text-4xl font-bold leading-[1.05] text-blue-950 sm:mb-6 sm:text-5xl sm:leading-[1.02] lg:text-6xl">
+            Same-day appliance repair in Connecticut
           </h1>
 
           <p className="mb-6 max-w-xl text-base leading-relaxed text-slate-600 sm:mb-8 sm:text-lg">
             Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens,
-            and freezers across Connecticut, with a written estimate before work begins and a
+            and freezers in New Haven, Hamden, West Haven and across Connecticut, with a written estimate before work begins and a
             90-day labor warranty.
           </p>
 
@@ -200,8 +192,8 @@ export default function Hero() {
 
           <div className="space-y-5">
             <div>
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
-                Popular Repairs
+              <p className="mb-2 text-xs font-bold text-slate-400">
+                Popular repairs
               </p>
               <div className="flex flex-wrap gap-2.5">
                 {popularRepairs.map((repair) => (
@@ -217,8 +209,8 @@ export default function Hero() {
             </div>
 
             <div>
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
-                Nearby Cities
+              <p className="mb-2 text-xs font-bold text-slate-400">
+                Nearby cities
               </p>
               <div className="flex flex-wrap gap-2.5">
                 {popularCities.map((city) => (
@@ -236,7 +228,7 @@ export default function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative overflow-hidden border border-blue-100 bg-slate-100 shadow-2xl shadow-slate-200">
+          <div className="relative overflow-hidden border border-blue-100 bg-slate-100">
             <div className="relative aspect-[4/5]">
               <Image
                 src="/images/hero/dishwasher.jpg"
@@ -255,7 +247,7 @@ export default function Hero() {
                 href={THUMBTACK_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute right-3 top-3 z-10 flex items-center gap-2.5 border border-slate-100 bg-white/95 px-3 py-2.5 shadow-lg backdrop-blur transition-transform duration-200 hover:-translate-y-0.5 sm:right-4 sm:top-4 sm:px-3.5"
+                className="absolute right-3 top-3 z-10 flex items-center gap-2.5 border border-slate-100 bg-white px-3 py-2.5 transition-transform duration-200 hover:-translate-y-0.5 sm:right-4 sm:top-4 sm:px-3.5"
               >
                 <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-black">
                   <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
@@ -266,8 +258,8 @@ export default function Hero() {
                   </svg>
                 </span>
                 <div className="leading-tight">
-                  <p className="text-xs font-bold uppercase tracking-wide text-blue-950">
-                    Exceptional
+                  <p className="text-xs font-bold text-blue-950">
+                    Rated 5 on Thumbtack
                   </p>
                   <div className="mt-0.5 flex items-center gap-1">
                     <div className="flex gap-px" aria-hidden="true">
@@ -282,25 +274,25 @@ export default function Hero() {
                         </svg>
                       ))}
                     </div>
-                    <span className="text-[11px] font-medium text-slate-500">145+ on Thumbtack</span>
+                    <span className="text-[11px] font-medium text-slate-500">{REVIEW_RATINGS.thumbtack.count}+ reviews</span>
                   </div>
                 </div>
               </a>
 
               <div className="absolute inset-x-0 bottom-0 p-7">
-                <p className="mb-1.5 text-xs font-bold uppercase tracking-[0.24em] text-[#ffb81c]">
-                  Refrigerator, washer, dryer, dishwasher & oven repair
+                <p className="mb-1.5 text-xs font-bold text-[#ffb81c]">
+                  Refrigerator, washer, dryer, dishwasher and oven repair
                 </p>
                 <p className="text-2xl font-bold leading-tight text-white">
-                  Local technicians. Written estimate. Repair backed by warranty.
+                  Written estimate before work starts, 90-day warranty after
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="absolute hidden md:block -left-4 top-6 border border-white/70 bg-white/95 p-4 shadow-lg backdrop-blur sm:-left-6">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
-              Most searched
+          <div className="absolute hidden md:block -left-4 top-6 border border-white/70 bg-white p-4 sm:-left-6">
+            <p className="text-xs font-bold text-slate-400">
+              Most requested
             </p>
             <ul className="mt-2 space-y-2 text-sm font-semibold text-blue-950">
               <li>Refrigerator repair</li>
@@ -310,8 +302,8 @@ export default function Hero() {
           </div>
 
           <div className="hidden md:block absolute -bottom-5 right-4 bg-blue-950 px-5 py-4 text-white sm:right-6">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300">
-              Service promise
+            <p className="text-xs font-bold text-blue-300">
+              Same-day visits
             </p>
             <p className="mt-1 text-lg font-bold">
               Call before noon for best same-day availability.

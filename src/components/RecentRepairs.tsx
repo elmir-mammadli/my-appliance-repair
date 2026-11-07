@@ -8,7 +8,7 @@ const repairs = [
   {
     brand: 'Gas Dryer',
     model: 'Heating Element Replacement',
-    issue: 'Dryer not heating — suspected failed heating element',
+    issue: 'Dryer not heating: suspected failed heating element',
     parts: ['Heating element'],
     outcome: 'Heating element replaced. Dryer back to full temperature within one cycle.',
     location: 'Naugatuck, CT',
@@ -18,8 +18,8 @@ const repairs = [
   },
   {
     brand: 'GE',
-    model: 'JGBS30DEK1WW — Gas Range',
-    issue: 'Burner not igniting — clicking but no flame',
+    model: 'JGBS30DEK1WW, Gas Range',
+    issue: 'Burner not igniting: clicking but no flame',
     parts: ['Igniter assembly'],
     outcome: 'Igniter replaced. Burner lights reliably on the first click.',
     location: 'Naugatuck, CT',
@@ -29,8 +29,8 @@ const repairs = [
   },
   {
     brand: 'LG',
-    model: 'DLG3401W — Gas Dryer',
-    issue: 'Lint trap housing cracked — customer-sourced replacement part was the wrong fit',
+    model: 'DLG3401W, Gas Dryer',
+    issue: 'Lint trap housing cracked: customer-sourced replacement part was the wrong fit',
     parts: ['OEM lint trap housing', 'Lint screen guide'],
     outcome: 'Correct OEM part sourced and installed. Trap seats properly, no more lint bypass.',
     location: 'North Haven, CT',
@@ -41,7 +41,7 @@ const repairs = [
   {
     brand: 'GE',
     model: 'Top-Freezer Refrigerator',
-    issue: 'Frost building up in freezer — fridge section not holding temperature',
+    issue: 'Frost building up in freezer: fridge section not holding temperature',
     parts: ['Defrost heater', 'Defrost thermostat'],
     outcome: 'Defrost system repaired. Frost cleared and both compartments back to proper temp.',
     location: 'New Britain, CT',
@@ -63,7 +63,7 @@ const repairs = [
   {
     brand: 'Thor',
     model: 'Electric Range',
-    issue: 'Botched prior repair by another company — loose wiring, arcing, burners stuck on or unresponsive',
+    issue: 'Botched prior repair by another company: loose wiring, arcing, burners stuck on or unresponsive',
     parts: ['Infinite switches', 'Terminal block wiring'],
     outcome: 'Rewired and replaced damaged switches. Every burner independently tested safe before leaving.',
     location: 'Hamden, CT',
@@ -74,7 +74,7 @@ const repairs = [
   {
     brand: 'Samsung',
     model: 'Top-Load Washer',
-    issue: 'Washer not running — suspected drive belt failure',
+    issue: 'Washer not running: suspected drive belt failure',
     parts: ['Drive belt'],
     outcome: 'Belt replaced. Washer spins and drains normally through a full cycle.',
     location: 'Seymour, CT',
@@ -127,7 +127,7 @@ function RepairCard({ repair, index }: { repair: (typeof repairs)[0]; index: num
       style={{ transitionDelay: `${index * 70}ms` }}
     >
       {/* Card Header */}
-      <div className="bg-gradient-to-r from-blue-700 to-blue-800 px-5 py-4">
+      <div className="bg-blue-800 px-5 py-4">
         <div className="flex items-start justify-between gap-3">
           <div>
             <span
@@ -149,16 +149,14 @@ function RepairCard({ repair, index }: { repair: (typeof repairs)[0]; index: num
       <div className="px-5 py-4 space-y-3">
         {/* Problem */}
         <div>
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
-            Problem Reported
-          </p>
+          <p className="text-xs font-bold text-slate-400 mb-1">Problem reported</p>
           <p className="text-slate-700 text-sm font-medium">{repair.issue}</p>
         </div>
 
         {/* Parts */}
         <div>
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-            Parts Replaced
+          <p className="text-xs font-bold text-slate-400 mb-1.5">
+            Parts replaced
           </p>
           <div className="flex flex-wrap gap-1.5">
             {repair.parts.map((part) => (
@@ -201,14 +199,11 @@ export default function RecentRepairs() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="inline-block text-blue-600 font-semibold text-sm tracking-widest uppercase mb-3">
-            Proof of Work
-          </span>
           <h2
             id="repairs-heading"
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-4"
           >
-            Recently Completed Repairs
+            Recently completed repairs
           </h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
             Real repairs, real appliances, real Connecticut homeowners. Every job documented with
@@ -223,7 +218,7 @@ export default function RecentRepairs() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="bg-gradient-to-r from-blue-700 to-blue-900 p-8 text-center text-white">
+        <div className="bg-blue-800 p-8 text-center text-white">
           <div className="flex items-center justify-center gap-2 mb-2">
             <div className="flex gap-0.5" aria-label="5 out of 5 stars">
               {[1, 2, 3, 4, 5].map((i) => (
@@ -250,7 +245,7 @@ export default function RecentRepairs() {
               onClick={() => openBookingModal()}
               className="inline-flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#ffca4d] text-gray-900 font-bold px-8 py-3.5 transition-all duration-200 cursor-pointer shadow-lg"
             >
-              Book a Repair Today
+              Book a repair
             </button>
             <a
               href={BUSINESS.phone.href}

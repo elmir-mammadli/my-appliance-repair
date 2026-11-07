@@ -13,7 +13,6 @@ const brandOptions = [
   'Frigidaire',
   'KitchenAid',
   'Electrolux',
-  'Miele',
 ];
 
 interface FormState {
@@ -174,7 +173,7 @@ export default function HiringModal() {
         {/* Header */}
         <div className="sticky top-0 z-10 flex items-center justify-between px-8 py-5 bg-white border-b border-slate-100">
           <div>
-            <h2 className="text-xl font-bold text-blue-950">Apply to Join Our Team</h2>
+            <h2 className="text-xl font-bold text-blue-950">Apply to join our team</h2>
             <p className="text-sm text-slate-500 mt-0.5">
               We&apos;ll be in touch within 2 business days
             </p>
@@ -217,7 +216,7 @@ export default function HiringModal() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-950 mb-3">Application Received!</h3>
+              <h3 className="text-2xl font-bold text-blue-950 mb-3">Application received</h3>
               <p className="text-slate-500 mb-6 max-w-md mx-auto">
                 Thanks, <strong className="text-blue-950">{form.name}</strong>! We&apos;ve received
                 your application and will review it shortly. We&apos;ll be in touch within{' '}

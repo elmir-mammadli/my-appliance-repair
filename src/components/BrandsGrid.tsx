@@ -5,12 +5,11 @@ const featuredBrands = [
   { name: 'Sub-Zero', logo: '/images/brands/sub-zero.svg' },
   { name: 'Wolf', logo: '/images/brands/wolf.svg' },
   { name: 'Thermador', logo: '/images/brands/thermador.jpg' },
-  { name: 'Miele', logo: '/images/brands/miele.svg' },
+  { name: 'GE Appliances', logo: '/images/brands/ge-appliances.svg' },
   { name: 'Fisher & Paykel', logo: '/images/brands/fisher-paykel.png' },
   { name: 'Whirlpool', logo: '/images/brands/whirlpool.svg' },
   { name: 'Samsung', logo: '/images/brands/samsung.svg' },
   { name: 'LG', logo: '/images/brands/lg.svg' },
-  { name: 'GE Appliances', logo: '/images/brands/ge-appliances.svg' },
   { name: 'Bosch', logo: '/images/brands/bosch.svg' },
   { name: 'KitchenAid', logo: '/images/brands/kitchenaid.svg' },
   { name: 'Maytag', logo: '/images/brands/maytag.svg' },
@@ -50,11 +49,8 @@ export default function BrandsGrid({
     <section className="border-y border-blue-100 bg-slate-50 py-16" aria-labelledby="brands-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
-          <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-widest text-blue-600">
-            All Brands Welcome
-          </span>
           <h2 id="brands-heading" className="mb-3 text-2xl font-bold text-blue-900 sm:text-3xl">
-            We Repair Every Major Brand
+            We repair every major brand
           </h2>
           <p className="mx-auto max-w-xl text-slate-600">
             From everyday laundry rooms to premium kitchen packages, our technicians work on the
