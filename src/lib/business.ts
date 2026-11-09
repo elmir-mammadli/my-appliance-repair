@@ -83,7 +83,6 @@ export const SERVICE_AREAS = [
   "Oxford",
   "Guilford",
   "Seymour",
-  'Bridgeport',
   'Monroe',
   'Middletown',
   'Berlin',
@@ -93,10 +92,11 @@ export const SERVICE_AREAS = [
   'Farmington',
   'Plainville',
   'Newington',
+  'Hartford County',
 ] as const;
 
 export const SERVICE_AREA_SCHEMA = SERVICE_AREAS.map((name) => ({
-  '@type': 'City',
+  '@type': name.endsWith('County') ? 'AdministrativeArea' : 'City',
   name,
   containedInPlace: { '@type': 'State', name: 'Connecticut' },
 }));

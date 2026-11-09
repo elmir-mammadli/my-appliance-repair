@@ -113,11 +113,11 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="mx-auto hidden max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-20">
+      <div className="mx-auto hidden max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:pb-20 lg:pt-28">
         <div className="max-w-2xl">
 
-          <h1 className="mb-5 text-4xl font-bold leading-[1.05] text-blue-950 sm:mb-6 sm:text-5xl sm:leading-[1.02] lg:text-6xl">
-            Same-day appliance repair in Connecticut
+          <h1 className="mb-5 text-4xl font-bold leading-[1.05] text-blue-950 sm:mb-6 sm:text-5xl sm:leading-[1.02] lg:text-[3.25rem]">
+            Same-day appliance<br className="hidden lg:block" /> repair in Connecticut
           </h1>
 
           <p className="mb-6 max-w-xl text-base leading-relaxed text-slate-600 sm:mb-8 sm:text-lg">
@@ -279,7 +279,7 @@ export default function Hero() {
                 </div>
               </a>
 
-              <div className="absolute inset-x-0 bottom-0 p-7">
+              <div className="absolute inset-x-0 bottom-0 p-7 md:pb-20">
                 <p className="mb-1.5 text-xs font-bold text-[#ffb81c]">
                   Refrigerator, washer, dryer, dishwasher and oven repair
                 </p>
