@@ -335,11 +335,8 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-14 border-t border-white/10 pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-200/40">
-<<<<<<< HEAD
-          <p>&copy; {currentYear} {BUSINESS.name}. All rights reserved.</p>
-=======
           <p>
-            &copy; {currentYear} My Appliance Repair LLC. All rights reserved. Made by{' '}
+            &copy; {currentYear} {BUSINESS.name}. All rights reserved. Made by{' '}
             <a
               href="https://meridianwebsystems.com"
               target="_blank"
@@ -350,7 +347,6 @@ export default function Footer() {
             </a>
             .
           </p>
->>>>>>> 3f6bab3 (add edits to footer)
           <div className="flex gap-5">
             <Link href="/privacy" className="hover:text-white transition-colors duration-200">
               Privacy Policy
