@@ -1,5 +1,6 @@
 export const runtime = 'nodejs';
 
+import { formatPhone } from '@/lib/phone';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { BUSINESS } from '@/lib/business';
@@ -46,7 +47,7 @@ export async function POST(req: NextRequest) {
 
  <tr><td style="background:#ffb81c;padding:14px 32px;">
  <p style="margin:0;color:#112654;font-size:13px;font-weight:600;">Applicant phone</p>
- <p style="margin:2px 0 0;color:#112654;font-size:24px;font-weight:800;">${phone}</p>
+ <p style="margin:2px 0 0;color:#112654;font-size:24px;font-weight:800;">${formatPhone(phone)}</p>
  </td></tr>
 
  <tr><td style="background:#fff;padding:28px 32px;">

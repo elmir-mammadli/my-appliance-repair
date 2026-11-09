@@ -1,5 +1,6 @@
 export const runtime = 'nodejs';
 
+import { formatPhone } from '@/lib/phone';
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import { Resend } from 'resend';
@@ -84,7 +85,7 @@ async function sendNotification(data: Record<string, string>) {
  <table width="100%" cellpadding="0" cellspacing="0"><tr>
  <td>
  <p style="margin:0;color:#112654;font-size:13px;font-weight:600;">Customer phone number</p>
- <p style="margin:2px 0 0;color:#112654;font-size:24px;font-weight:800;letter-spacing:0.5px;">${data.phone}</p>
+ <p style="margin:2px 0 0;color:#112654;font-size:24px;font-weight:800;letter-spacing:0.5px;">${formatPhone(data.phone)}</p>
  </td>
  <td align="right">
  <a href="tel:${data.phone}" style="display:inline-block;background:#112654;color:#ffffff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:4px;text-decoration:none;">Call Now</a>
@@ -221,7 +222,7 @@ async function sendConfirmation(data: Record<string, string>, recipient: string)
  <tr><td style="padding:10px 0;border-bottom:1px solid #f1f5f9;">
  <table cellpadding="0" cellspacing="0"><tr>
  <td style="width:28px;vertical-align:top;padding-top:1px;"><span style="display:inline-block;width:20px;height:20px;background:#dbeafe;color:#1d4ed8;border-radius:50%;font-size:11px;font-weight:800;text-align:center;line-height:20px;">1</span></td>
- <td style="padding-left:8px;"><p style="margin:0;color:#334155;font-size:13px;">We&apos;ll call <strong>${data.phone}</strong> within 30 minutes to confirm your appointment.</p></td>
+ <td style="padding-left:8px;"><p style="margin:0;color:#334155;font-size:13px;">We&apos;ll call <strong>${formatPhone(data.phone)}</strong> within 30 minutes to confirm your appointment.</p></td>
  </tr></table>
  </td></tr>
  <tr><td style="padding:10px 0;border-bottom:1px solid #f1f5f9;">

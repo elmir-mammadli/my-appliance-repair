@@ -1,5 +1,6 @@
 'use client';
 
+import { formatPhoneInput } from '@/lib/phone';
 import { useState, useEffect, useCallback } from 'react';
 import { BUSINESS } from '@/lib/business';
 
@@ -286,7 +287,7 @@ export default function HiringModal() {
                       type="tel"
                       autoComplete="tel"
                       value={form.phone}
-                      onChange={(e) => handleChange('phone', e.target.value)}
+                      onChange={(e) => handleChange('phone', formatPhoneInput(e.target.value, form.phone))}
                       placeholder="(203) 555-0100"
                       className={`w-full px-4 py-3 border bg-white text-blue-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 ${errors.phone ? 'border-red-400' : 'border-slate-200 hover:border-blue-300'}`}
                       aria-required="true"

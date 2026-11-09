@@ -1,5 +1,6 @@
 import { SERVICE_CALL_FEE } from './business';
 
+import { formatPhone } from './phone';
 import { BUSINESS } from '@/lib/business';
 
 const SITE_URL = BUSINESS.url;
@@ -54,7 +55,7 @@ export function createBookingConfirmationEmail(data: Record<string, string>) {
     data.address?.trim() ||
     (data.zip ? `ZIP ${data.zip} — address to be confirmed` : 'To be confirmed by phone');
   const issue = data.issue?.trim() || 'We’ll discuss the details when we call.';
-  const phone = data.phone?.trim() || 'the number you provided';
+  const phone = data.phone?.trim() ? formatPhone(data.phone.trim()) : 'the number you provided';
   const preheader =
     'We’ll call within 30 minutes to confirm your service address and appointment. Your request details are inside.';
 

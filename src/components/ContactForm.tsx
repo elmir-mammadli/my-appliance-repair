@@ -1,5 +1,6 @@
 'use client';
 
+import { formatPhoneInput } from '@/lib/phone';
 import { useState } from 'react';
 import { BRANCHES, branchForZip, coverageError } from '@/lib/branches';
 import MunicipalitySelect from '@/components/MunicipalitySelect';
@@ -308,7 +309,7 @@ export default function ContactForm() {
                       type="tel"
                       autoComplete="tel"
                       value={form.phone}
-                      onChange={(e) => handleChange('phone', e.target.value)}
+                      onChange={(e) => handleChange('phone', formatPhoneInput(e.target.value, form.phone))}
                       placeholder="(203) 555-0100"
                       className={`w-full px-4 py-3 border bg-white text-blue-900 placeholder-slate-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                         errors.phone
