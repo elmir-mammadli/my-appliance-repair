@@ -179,7 +179,7 @@ test('inline contact form produces one received lead and no customer data', asyn
   });
   await page.getByRole('button', { name: label, exact: true }).click();
   await form.locator('button[type="submit"]').click();
-  await expect(page.getByText('Booking Request Received!')).toBeVisible();
+  await expect(page.getByText('Booking request received')).toBeVisible();
   expect(await events(page, 'form_start')).toHaveLength(1);
   const leads = await events(page, 'generate_lead');
   expect(leads).toHaveLength(1);
@@ -300,7 +300,13 @@ test('revised articles preserve URLs and publish dates while exposing actual edi
     expect(article.datePublished).not.toBe(article.dateModified);
   }
   const sitemap = await (await request.get('/sitemap.xml')).text();
-  expect(sitemap.match(/<lastmod>2026-10-18<\/lastmod>/g)).toHaveLength(2);
+  for (const slug of [
+    'dryer-heating-element-thermal-fuse-misdiagnosis',
+    'stove-burners-wont-light-cheap-fix',
+  ]) {
+    const entry = sitemap.match(new RegExp(`<url>\\s*<loc>[^<]*/blog/${slug}</loc>[\\s\\S]*?</url>`))?.[0];
+    expect(entry).toContain('<lastmod>2026-10-18</lastmod>');
+  }
   await page.goto('/blog/stacking-washer-dryer-warranty-problems');
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
 });

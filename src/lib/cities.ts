@@ -787,6 +787,186 @@ export const cities: City[] = [
     ],
     neighborhoods: ['Yalesville', 'Community Lake', 'Wallingford Center', 'North Farms'],
   },
+  {
+    slug: 'hartford',
+    name: 'Hartford',
+    county: 'Hartford County',
+    region: 'Greater Hartford',
+    intro:
+      "Hartford is a renter's city, and that shapes the calls. Three out of four households rent, so a lot of what we see is a landlord or property manager with a tenant who has no fridge, in a Perfect Six on Asylum Hill, a triple-decker in Frog Hollow or Parkville, or a converted office tower downtown. We drive up I-91 from the New Haven side, which puts Hartford about forty minutes from our base on a normal morning.",
+    faqs: [
+      {
+        q: 'Can a landlord book the repair for a tenant in Hartford?',
+        a: "Yes, and it's the most common way a Hartford call reaches us. The owner or manager books and pays, the tenant gives us access, and we text both sides the arrival window. The written quote goes to whoever is paying before any work starts.",
+      },
+      {
+        q: 'My apartment is in one of the brick six-family buildings on Asylum Hill. Any access issues?',
+        a: "Rarely. Those buildings have real stairwells and the appliances are standard-size, so a dolly handles anything we'd ever need to move. Most fridge, range and dishwasher repairs happen in place anyway. Let us know if the building needs a key or a buzzer code.",
+      },
+      {
+        q: 'Do you repair the compact appliances in the converted downtown high-rises?',
+        a: "We do. The office-to-apartment conversions around Main Street and Pratt Street tend to have 24-inch dishwashers, stacked ventless laundry pairs and slim refrigerators. Parts for those take an extra day sometimes, and we'll say so on the first visit rather than guess.",
+      },
+      {
+        q: 'Is parking a problem for a service van in Frog Hollow or the South End?',
+        a: "It can be tight on street-cleaning days, but we work around it the same as in New Haven. If your block has permit parking, a visitor pass or a spot in the driveway saves a few minutes. It has never stopped a repair.",
+      },
+    ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Hartford is a planned run up I-91 rather than a detour, so a morning call usually gets an afternoon window. Calls that come in after lunch are often next morning.",
+      },
+      {
+        title: 'Fully Insured',
+        body: "Property managers ask for proof of insurance before we set foot in a multi-family building. We carry it and can send the certificate before the visit.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Same 90-day parts and labor warranty whether the appliance belongs to a homeowner in the West End or a landlord with twelve units in Barry Square.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "Rental units run on mid-range Whirlpool, GE and Frigidaire, so the parts that fail most on those come in the van. Specialty parts are ordered and installed on a scheduled second visit.",
+      },
+    ],
+    neighborhoods: ['Asylum Hill', 'West End', 'Frog Hollow', 'Parkville', 'South End', 'Blue Hills', 'Downtown'],
+  },
+  {
+    slug: 'west-hartford',
+    name: 'West Hartford',
+    county: 'Hartford County',
+    region: 'Greater Hartford',
+    intro:
+      "West Hartford kitchens skew high-end. The brick colonials and Tudors between the Center and Prospect Avenue were built in the 1920s and 30s and have been renovated two or three times since, which means Sub-Zero, Wolf, Bosch and Miele in houses with original plaster walls. Elmwood and the streets off New Britain Avenue are postwar capes with more ordinary appliances. We get to both from I-84, with Bishops Corner and Blue Back Square the usual landmarks for a tech who is new to town.",
+    faqs: [
+      {
+        q: 'Do you work on built-in Sub-Zero and Wolf appliances in West Hartford?',
+        a: "Yes. Built-in refrigerators and pro ranges are a big share of our West Hartford calls. The sealed system on a Sub-Zero is a specialist job and we'll tell you up front whether it's something we fix or something the manufacturer should handle under their own program.",
+      },
+      {
+        q: 'Our dishwasher is paneled to match the cabinets. Can you still get at it?',
+        a: "Panel-ready dishwashers and fridges come apart from the front, so the cabinetry usually stays put. Tell us the brand when you book so the tech brings the right trim clips. Replacement panels are not something we supply.",
+      },
+      {
+        q: 'Can you come to a condo near Blue Back Square?',
+        a: "We can. The newer buildings around the Center have service-entrance rules and sometimes a loading dock reservation. Share the building's instructions when you book and we'll follow them.",
+      },
+      {
+        q: 'Is the older wiring in the 1920s houses a problem for appliance repairs?',
+        a: "Not for the repair itself. Where it matters is a dryer or range that trips a breaker. Our tech will tell you whether the fault is in the appliance or the circuit, and if it's the circuit we'll point you to an electrician rather than sell you a part you don't need.",
+      },
+    ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "West Hartford sits right off I-84, so it fits into a Hartford-area run without much added drive time. Morning calls usually get a same-day window.",
+      },
+      {
+        title: 'Fully Insured',
+        body: "Insured techs who are used to working in finished kitchens with hardwood floors and custom cabinetry. Shoe covers and drop cloths come in on every call.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "The 90-day parts and labor warranty covers premium brands too. If a repaired Bosch or Miele unit fails the same way within 90 days, the return visit is on us.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "We stock the common failure parts for Bosch and KitchenAid dishwashers and for GE and Whirlpool laundry. Sub-Zero, Wolf and Miele parts are ordered by model and serial so the first return trip is the last one.",
+      },
+    ],
+    neighborhoods: ['West Hartford Center', 'Blue Back Square', 'Bishops Corner', 'Elmwood', 'Park Road', 'Prospect Hill'],
+  },
+  {
+    slug: 'new-britain',
+    name: 'New Britain',
+    county: 'Hartford County',
+    region: 'Greater Hartford',
+    intro:
+      "New Britain built the tools that built everything else, and the housing shows its factory roots. Belvedere and the streets around Walnut Hill Park are two- and three-family homes from the Stanley Works era, Little Poland along Broad Street is dense and walkable, and the blocks near Central Connecticut State University turn over every August. Appliances in those houses are often older, hard-wearing and worth fixing. We reach New Britain by Route 9 from I-91.",
+    faqs: [
+      {
+        q: 'Do you repair the older appliances in the two-family homes near Walnut Hill Park?',
+        a: "That's most of what we see in New Britain. A twenty-year-old Kenmore or Whirlpool in a two-family house is usually a belt, a pump or a heating element away from running for years more. Parts for those are still easy to get.",
+      },
+      {
+        q: 'I own a rental near CCSU. Can you fit a repair between tenants?',
+        a: "Yes. Tell us the turnover date and we'll schedule around it. Vacant-unit visits are easier for us than occupied ones, and if the appliance should be replaced instead of repaired we'll tell you that at the diagnostic so you can decide before the next lease starts.",
+      },
+      {
+        q: 'My dryer is in the basement of a 1920s house. Is that a problem?',
+        a: "Not a problem. New Britain basements are usually dry with a bulkhead or interior stairs, and dryers that live down there mostly fail from long, lint-packed vent runs. We check the vent on every dryer call because a clogged one is the most common reason for no heat.",
+      },
+      {
+        q: 'Do you handle Polish and European brands common in Little Poland?',
+        a: "Bosch, Beko and Blomberg yes. Brands with no U.S. parts distribution we'll look at, but we're honest when a part can't be sourced, and we won't charge for a repair we can't finish.",
+      },
+    ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "New Britain is a straight shot up Route 9, so it shares a route with our Berlin and Newington calls. Morning bookings typically get a same-day afternoon window.",
+      },
+      {
+        title: 'Fully Insured',
+        body: "Fully insured techs who are comfortable in older multi-family houses, narrow basement stairs included. We leave the work area the way we found it.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "A 90-day parts and labor warranty on every repair, which matters more on an older appliance where you want to know the fix will hold.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "The vans carry the parts that fail most on the mid-range Whirlpool, GE, Kenmore and Frigidaire units common in New Britain rentals, so most calls close in one visit.",
+      },
+    ],
+    neighborhoods: ['Belvedere', 'Little Poland', 'Walnut Hill', 'East Side', 'South End', 'Downtown'],
+  },
+  {
+    slug: 'newington',
+    name: 'Newington',
+    county: 'Hartford County',
+    region: 'Greater Hartford',
+    intro:
+      "Newington is mostly single-family houses from the 1950s through the 70s, ranches and capes around Newington Center and split-levels up toward Cedar Mountain, with the Berlin Turnpike running down the east side. Those houses have had one or two kitchen updates, so the appliances are a mix of ten-year-old mid-range units and the occasional original. It's a quick exit off Route 9 or I-84 for us, and the Turnpike's big-box stores mean a replacement is nearby when a repair isn't worth it.",
+    faqs: [
+      {
+        q: 'My appliance is ten years old. Is it worth repairing or should I buy new on the Turnpike?',
+        a: "We'll give you a straight answer at the diagnostic. A ten-year-old refrigerator with a failed start relay or a dryer with a bad element is a cheap fix. A sealed-system failure on the same fridge usually isn't. The written quote lets you compare against a new unit before you commit.",
+      },
+      {
+        q: 'Do you service the laundry rooms in Newington split-levels?',
+        a: "Yes, and the half-flight of stairs doesn't slow us down. The common issue in those houses is a dryer vent that runs a long way to the outside wall. We check it on every no-heat call.",
+      },
+      {
+        q: 'Can you come to a condo in Newington?',
+        a: "We can. The condo complexes off Cedar Street and the Turnpike mostly have standard appliances, and we only need the unit number and any gate or lockbox details when you book.",
+      },
+      {
+        q: 'How soon can you get to Newington?',
+        a: "Same day for most morning calls. Newington sits between our Hartford and New Britain stops, so it's one of the easier Hartford County towns to slot in.",
+      },
+    ],
+    whyUs: [
+      {
+        title: 'Same-Day Service',
+        body: "Newington is minutes off Route 9 and I-84 and sits between our Hartford and New Britain stops, so most morning calls get a same-day window.",
+      },
+      {
+        title: 'Fully Insured',
+        body: "Insured, background-checked techs who treat a finished basement laundry room or a renovated kitchen with the same care.",
+      },
+      {
+        title: '90-Day Warranty',
+        body: "Every Newington repair carries a 90-day parts and labor warranty. If the same fault comes back inside that window, the return visit costs nothing.",
+      },
+      {
+        title: 'OEM Parts on Board',
+        body: "The vans stock the common failure parts for Whirlpool, GE, Samsung and LG, which covers most of what's in a Newington kitchen or laundry room, so the majority of calls finish in one visit.",
+      },
+    ],
+    neighborhoods: ['Newington Center', 'Cedar Mountain', 'Maple Hill', 'Berlin Turnpike corridor', 'Mill Pond'],
+  },
 ];
 
 export function getCityBySlug(slug: string): City | undefined {

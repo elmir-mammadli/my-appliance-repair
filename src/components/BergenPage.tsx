@@ -54,7 +54,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
   const area = town?.name ?? 'Bergen County';
   const path = town ? `${NJ_PATH}/${town.slug}` : NJ_PATH;
   const faqs = [
-    ...(town ? [{ q: town.question, a: town.answer }] : []),
+    ...(town ? town.faqs : []),
     {
       q: `How much does an appliance repair visit in ${area} cost?`,
       a: APPLIANCE_REPAIR_COST_ANSWER,
@@ -167,7 +167,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-blue-100">
                 {town
-                  ? 'Your home has enough moving parts. Let us take care of the ones that stop working.'
+                  ? town.tagline
                   : 'Insured appliance repair in Hackensack and across Bergen County. Based in Hudson County, with written estimates and a 90-day parts and labor warranty.'}
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -245,9 +245,23 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
                 {town.name} · {town.zip}
               </p>
               <h2 className="text-3xl font-bold text-blue-950">
-                A repair visit that starts with the details.
+                What repairs look like in {town.name}.
               </h2>
               <p className="mt-5 leading-relaxed text-slate-600">{town.intro}</p>
+              <p className="mt-4 leading-relaxed text-slate-600">{town.homes}</p>
+              <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-blue-600">
+                Areas we hear from
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2" aria-label={`${town.name} areas`}>
+                {town.neighborhoods.map((place) => (
+                  <li
+                    key={place}
+                    className="border border-slate-200 bg-[#f5f7fb] px-3 py-1.5 text-sm text-blue-950"
+                  >
+                    {place}
+                  </li>
+                ))}
+              </ul>
             </div>
             <div className="border-l-2 border-[#ffb81c] pl-6">
               <h3 className="text-lg font-semibold text-blue-950">Before your {town.name} visit</h3>
@@ -402,16 +416,19 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
                   </Link>
                 ))}
               </div>
-              <details className="mt-6 border-b border-slate-200 pb-5">
-                <summary className="min-h-11 cursor-pointer py-3 text-sm font-semibold text-blue-700">
-                  See all 70 municipalities
-                </summary>
-                <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-slate-600 sm:grid-cols-3">
-                  {BERGEN_MUNICIPALITIES.map((name) => (
-                    <li key={name}>{name}</li>
-                  ))}
-                </ul>
-              </details>
+              {/* The 70-name list lives on the hub only, so town pages do not all repeat it. */}
+              {!town && (
+                <details className="mt-6 border-b border-slate-200 pb-5">
+                  <summary className="min-h-11 cursor-pointer py-3 text-sm font-semibold text-blue-700">
+                    See all 70 municipalities
+                  </summary>
+                  <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-slate-600 sm:grid-cols-3">
+                    {BERGEN_MUNICIPALITIES.map((name) => (
+                      <li key={name}>{name}</li>
+                    ))}
+                  </ul>
+                </details>
+              )}
             </div>
           </div>
         </section>

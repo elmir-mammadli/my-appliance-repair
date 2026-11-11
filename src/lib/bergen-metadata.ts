@@ -6,8 +6,9 @@ export function bergenMetadata(town?: BergenTown): Metadata {
   const area = town?.name ?? 'Bergen County';
   // The root template appends the brand; keep the whole title under 60 characters.
   const title = town ? `Appliance Repair in ${area}, NJ` : 'Appliance Repair in Bergen County, NJ';
+  // Each town names its own areas and its own tagline so no two descriptions share a template.
   const description = town
-    ? `Refrigerator, washer, dryer, dishwasher and oven repair in ${area}, NJ. $99 service call, written repair quote, 90-day warranty. Call (201) 403-0001.`
+    ? `Appliance repair in ${area}, NJ. ${town.tagline}`
     : 'Insured appliance repair in Hackensack and across Bergen County. Based in Hudson County, with written estimates and a 90-day parts and labor warranty.';
   const url = `https://www.myappliance.us${NJ_PATH}${town ? `/${town.slug}` : ''}`;
   const images = [
@@ -20,7 +21,12 @@ export function bergenMetadata(town?: BergenTown): Metadata {
     title,
     description,
     keywords: town
-      ? [`appliance repair ${area} NJ`, 'Bergen County appliance repair']
+      ? [
+          `appliance repair ${area} NJ`,
+          `${area} refrigerator repair`,
+          `${area} washer dryer repair`,
+          'Bergen County appliance repair',
+        ]
       : [
           'appliance repair New Jersey',
           'Bergen County appliance repair',

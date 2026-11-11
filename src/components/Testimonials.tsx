@@ -1,139 +1,11 @@
-import { BUSINESS, REVIEW_RATINGS } from '@/lib/business';
+import { PROFILES, REVIEW_RATINGS } from '@/lib/business';
+import { REVIEWS, REVIEWS_SOURCE, type Review } from '@/lib/reviews';
 
-const GOOGLE_REVIEWS_URL = 'https://share.google/aktwu5fUEtjV6Eo40';
+const GOOGLE_REVIEWS_URL = PROFILES.google;
 
-interface Review {
-  name: string;
-  initials: string;
-  text: string;
-  appliance: string;
-}
-
-const reviews: Review[] = [
-  {
-    name: 'Niyazi Yilmaz',
-    initials: 'NY',
-    text: `I called ${BUSINESS.shortName} at 10 AM and they had Nijat at my door by 1:30 that same afternoon. He walked me through everything and even installed my disposal press button — all without me asking.`,
-    appliance: 'Dishwasher repair',
-  },
-  {
-    name: 'Christopher Nelson',
-    initials: 'CN',
-    text: 'They contacted me minutes after I submitted a request, came out at my earliest time, and fixed my freezer. The technician showed me the problem, explained the fix, and communicated the cost before doing anything.',
-    appliance: 'Freezer repair',
-  },
-  {
-    name: 'Sarah Mizrahi',
-    initials: 'SM',
-    text: 'Our microwave stopped heating and was making unusual noises. The technician arrived on time, quickly diagnosed the issue, and fixed it the same day. Very professional, honest pricing, and great communication.',
-    appliance: 'Microwave repair',
-  },
-  {
-    name: 'Patricia Lane',
-    initials: 'PL',
-    text: 'My washing machine was leaking and I was worried it would be a huge expense. The tech came out quickly, found the issue, and had the part on hand. Fair price and he cleaned up everything before leaving.',
-    appliance: 'Washer repair',
-  },
-  {
-    name: 'David Kim',
-    initials: 'DK',
-    text: 'Called on a Saturday morning about my refrigerator not cooling. Someone was at my house by noon. Diagnosed a failing compressor start relay, replaced it on the spot, and saved me from losing a fridge full of food.',
-    appliance: 'Refrigerator repair',
-  },
-  {
-    name: 'Maria Torres',
-    initials: 'MT',
-    text: `Dryer stopped heating mid-cycle. ${BUSINESS.shortName} sent a tech the next morning who found a burned heating element. He had the part in his van and fixed it in under an hour. Excellent service from start to finish.`,
-    appliance: 'Dryer repair',
-  },
-  {
-    name: 'James Reynolds',
-    initials: 'JR',
-    text: 'Oven would not heat past 200 degrees. Technician diagnosed a faulty igniter and replaced it same day. Now it works perfectly. Price was very reasonable and he was in and out in about 45 minutes.',
-    appliance: 'Oven repair',
-  },
-  {
-    name: 'Angela Martinez',
-    initials: 'AM',
-    text: 'My LG washer was throwing an LE error code and not spinning. Nijat came out, replaced the motor hall sensor, and tested it through two full cycles before leaving. Really thorough and professional.',
-    appliance: 'Washer repair',
-  },
-  {
-    name: 'Robert Flynn',
-    initials: 'RF',
-    text: 'Refrigerator ice maker stopped working completely. Tech arrived same day, identified a frozen fill tube, cleared it, and replaced the water inlet valve. Ice maker has been working perfectly since.',
-    appliance: 'Refrigerator repair',
-  },
-  {
-    name: 'Susan Harris',
-    initials: 'SH',
-    text: 'Dishwasher was leaving dishes dirty and not draining properly. The repair was quick and affordable. What I appreciated most was the technician explaining exactly what was wrong before touching anything.',
-    appliance: 'Dishwasher repair',
-  },
-  {
-    name: 'Kevin Brooks',
-    initials: 'KB',
-    text: 'Samsung dryer was making a terrible squeaking noise. They diagnosed worn drum support rollers and a bad belt, replaced everything same visit. Runs quieter than it did when it was new.',
-    appliance: 'Dryer repair',
-  },
-  {
-    name: 'Linda Chen',
-    initials: 'LC',
-    text: 'I called about my GE refrigerator running warm and they came the same afternoon. Turns out the condenser fan motor had failed. Fixed in one visit, no upselling, fair price. Highly recommend.',
-    appliance: 'Refrigerator repair',
-  },
-  {
-    name: 'Thomas Wilson',
-    initials: 'TW',
-    text: 'Gas range burners were not igniting consistently. The tech cleaned the igniters, replaced two faulty ones, and adjusted the gas valves. Everything works like new. Fast, clean, and professional.',
-    appliance: 'Oven / Range repair',
-  },
-  {
-    name: 'Michelle Parker',
-    initials: 'MP',
-    text: 'Whirlpool washer was vibrating so badly it was walking across the floor. Technician rebalanced the drum, replaced the shock absorbers, and showed me how to load it properly. Problem completely solved.',
-    appliance: 'Washer repair',
-  },
-  {
-    name: 'Steven Adams',
-    initials: 'SA',
-    text: 'My Bosch dishwasher was not cleaning the top rack at all. The repair tech found a clogged spray arm and a broken wash pump. Had parts on the truck, fixed it on the spot. Great experience.',
-    appliance: 'Dishwasher repair',
-  },
-  {
-    name: 'Nancy Garcia',
-    initials: 'NG',
-    text: 'Called late on a Friday about my freezer not freezing. They had someone here Saturday morning. Defrost heater had burned out. Fixed within two hours and the price was exactly what they quoted over the phone.',
-    appliance: 'Freezer repair',
-  },
-  {
-    name: 'Brian O\'Brien',
-    initials: 'BO',
-    text: 'Electric dryer was taking three cycles to dry a load. Technician found a nearly blocked exhaust duct and a weak heating element. Replaced the element and cleaned the duct. Back to one cycle now.',
-    appliance: 'Dryer repair',
-  },
-  {
-    name: 'Karen Sullivan',
-    initials: 'KS',
-    text: 'My oven was heating unevenly — burnt on one side, raw on the other. Tech replaced the bake element and recalibrated the thermostat. Baked a test batch of cookies after he left and they came out perfect.',
-    appliance: 'Oven repair',
-  },
-  {
-    name: 'Daniel Murphy',
-    initials: 'DM',
-    text: 'Refrigerator compressor was running constantly and the fridge was warm. They diagnosed a refrigerant leak, repaired it, and recharged the system. Saved me from buying a new fridge. Worth every penny.',
-    appliance: 'Refrigerator repair',
-  },
-  {
-    name: 'Rachel Evans',
-    initials: 'RE',
-    text: 'Front-load washer had a terrible mildew smell that would not go away. Tech found a torn door gasket that was trapping moisture, replaced it, and showed me a maintenance routine. Problem solved for good.',
-    appliance: 'Washer repair',
-  },
-];
-
-const row1 = reviews.slice(0, 10);
-const row2 = reviews.slice(10, 20);
+const half = Math.ceil(REVIEWS.length / 2);
+const row1 = REVIEWS.slice(0, half);
+const row2 = REVIEWS.slice(half);
 
 function StarRow() {
   return (
@@ -164,7 +36,9 @@ function ReviewCard({ review }: { review: Review }) {
             </div>
             <div className="min-w-0">
               <p className="font-semibold text-blue-900 text-sm truncate">{review.name}</p>
-              <p className="text-xs text-slate-500">{review.appliance}</p>
+              <p className="text-xs text-slate-500">
+                {review.appliance} · {review.when} · {REVIEWS_SOURCE}
+              </p>
             </div>
           </div>
           {/* Google G mark — appears on hover */}
@@ -180,7 +54,7 @@ function ReviewCard({ review }: { review: Review }) {
           </svg>
         </div>
         <StarRow />
-        <p className="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-4">{review.text}</p>
+        <blockquote className="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-4">{review.text}</blockquote>
       </article>
     </a>
   );
@@ -237,10 +111,32 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Marquee rows */}
-      <div className="relative *:overflow-hidden *:whitespace-nowrap px-2 md:px-10 flex items-center justify-center">
-        <iframe src="https://client.housecallpro.com/reviews/widget/df1659f3-6394-40e5-8a29-57e343c26b67" className="w-full max-w-none h-250" height="1000" width="1000"></iframe>
-        </div>
+      {/* Marquee rows: each row is rendered twice so the loop is seamless; the copy is hidden from AT. */}
+      <div className="space-y-4">
+        {[
+          { items: row1, animation: 'marquee-left 110s linear infinite' },
+          { items: row2, animation: 'marquee-right 120s linear infinite' },
+        ].map(({ items, animation }, rowIndex) => (
+          <div key={rowIndex} className="overflow-hidden px-2 md:px-10">
+            <div className="marquee-track flex w-max gap-4" style={{ animation }}>
+              <ul className="flex gap-4">
+                {items.map((review) => (
+                  <li key={`${review.name}-${review.when}`}>
+                    <ReviewCard review={review} />
+                  </li>
+                ))}
+              </ul>
+              <ul className="flex gap-4" aria-hidden="true">
+                {items.map((review) => (
+                  <li key={`${review.name}-${review.when}-copy`}>
+                    <ReviewCard review={review} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {/* CTA */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8 text-center">

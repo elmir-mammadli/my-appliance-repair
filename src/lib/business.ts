@@ -122,7 +122,7 @@ export const SERVICE_AREA_COUNT = SERVICE_AREA_TOWNS.length;
 // Update both the number and the date together; never estimate upward.
 export const REVIEW_RATINGS = {
   asOf: '2026-11-11',
-  google: { rating: 5, count: 100 },
+  google: { rating: 5, count: 109 },
   thumbtack: { rating: 5, count: 182 },
 } as const;
 
