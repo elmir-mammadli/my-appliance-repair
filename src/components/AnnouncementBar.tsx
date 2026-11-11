@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useSyncExternalStore } from 'react';
 import Link from 'next/link';
-import { BUSINESS, EMERGENCY_SERVICE } from '@/lib/business';
+import { BUSINESS } from '@/lib/business';
 import { isEmergencyWindow, subscribeToEmergencyClock } from '@/lib/emergency';
 
 // The discount dismissal is remembered across visits; the emergency notice only
@@ -91,9 +91,9 @@ export default function AnnouncementBar() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#ffb81c]" />
             </span>
             <span className="font-bold text-[#ffb81c]">EMERGENCY LINE OPEN</span>
-            <span className="sm:hidden">until midnight · ${EMERGENCY_SERVICE.fee}</span>
+            <span className="sm:hidden">until midnight</span>
             <span className="hidden sm:inline">
-              Calls until {EMERGENCY_SERVICE.until} midnight · ${EMERGENCY_SERVICE.fee} service call
+              Taking calls until midnight
             </span>
             <span className="inline-flex items-center gap-x-3">
               <a
