@@ -6,6 +6,7 @@ import Services from '@/components/Services';
 import RecentRepairs from '@/components/RecentRepairs';
 import WhyUs from '@/components/WhyUs';
 import Discounts from '@/components/Discounts';
+import EmergencyService from '@/components/EmergencyService';
 import RecentJobs from '@/components/RecentJobs';
 import Coverage from '@/components/Coverage';
 import Testimonials from '@/components/Testimonials';
@@ -212,6 +213,7 @@ export default function Home() {
       <RecentRepairs />
       <WhyUs />
       <Discounts />
+      <EmergencyService />
       <FAQ />
       <BookingModal />
       <ContactForm />

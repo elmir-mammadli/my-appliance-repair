@@ -204,8 +204,8 @@ export default function Discounts() {
           </h2>
           <p className="text-blue-200 text-lg max-w-2xl mx-auto leading-relaxed">
             {BUSINESS.name} is proud to offer special pricing for the people who keep our
-            communities safe, educated, and protected. Discounts apply to labor on all repair
-            services.
+            communities safe, educated, and protected. Discounts apply when you
+            move forward with the repair.
           </p>
         </div>
 
@@ -266,8 +266,10 @@ export default function Discounts() {
 
         {/* Fine print */}
         <p className="text-center text-blue-400 text-xs mt-6 leading-relaxed">
-          Discounts apply to labor charges only and cannot be combined with other offers or
-          promotions. One discount per service call. Verification required at time of service.
+          Discounts apply only when you proceed with the repair and are taken off the labor
+          charge. They do not apply to a diagnostic-only visit. Discounts cannot be combined with
+          other offers or promotions. One discount per service call. Verification required at
+          time of service.
         </p>
       </div>
     </section>

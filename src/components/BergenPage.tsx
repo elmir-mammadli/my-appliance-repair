@@ -104,7 +104,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
           name: 'Bergen County',
           containedInPlace: { '@type': 'State', name: 'New Jersey' },
         },
-        openingHours: 'Mo-Su 08:00-18:00',
+        openingHours: 'Mo-Su 08:00-19:00',
         priceRange: '$$',
         sameAs: [
           'https://www.instagram.com/myappliancerepair',
