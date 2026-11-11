@@ -5,7 +5,8 @@ import BookingButton from './BookingButton';
 import BrandsGrid from './BrandsGrid';
 import { BRANCHES, NJ_PATH } from '@/lib/branches';
 import { BERGEN_MUNICIPALITIES, BERGEN_TOWNS, type BergenTown } from '@/lib/bergen';
-import { APPLIANCE_REPAIR_COST_ANSWER } from '@/lib/business';
+import { APPLIANCE_REPAIR_COST_ANSWER, BUSINESS } from '@/lib/business';
+import { NJ_BUSINESS_ID, businessRef, jsonLd, njBusiness } from '@/components/StructuredData';
 
 const repairs = [
   {
@@ -75,46 +76,17 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
       a: 'We accept service requests from all 70 Bergen County municipalities. Enter your ZIP code and municipality when booking. Our team confirms your service address and appointment availability before scheduling.',
     },
   ];
+  // The NJ branch is its own LocalBusiness node, linked to the canonical Connecticut
+  // business by @id rather than redefining it with a different name or type.
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': 'https://www.myappliance.us/#organization',
-        name: 'MyAppliance Repair LLC',
-        url: 'https://www.myappliance.us',
-        logo: 'https://www.myappliance.us/logo.svg',
-      },
-      {
-        '@type': 'WebSite',
-        '@id': 'https://www.myappliance.us/#website',
-        name: 'MyAppliance Repair LLC',
-        url: 'https://www.myappliance.us',
-      },
-      {
-        '@type': 'LocalBusiness',
-        '@id': `https://www.myappliance.us${NJ_PATH}#business`,
-        name: 'MyAppliance Repair LLC',
-        url: `https://www.myappliance.us${NJ_PATH}`,
-        telephone: branch.telephone,
-        image: 'https://www.myappliance.us/images/hero/dishwasher.jpg',
-        parentOrganization: { '@id': 'https://www.myappliance.us/#organization' },
-        areaServed: {
-          '@type': 'AdministrativeArea',
-          name: 'Bergen County',
-          containedInPlace: { '@type': 'State', name: 'New Jersey' },
-        },
-        openingHours: 'Mo-Su 08:00-19:00',
-        priceRange: '$$',
-        sameAs: [
-          'https://www.instagram.com/myappliancerepair',
-          'https://www.facebook.com/myappliancerepairllc',
-        ],
-      },
+      { ...businessRef, logo: `${BUSINESS.url}/logo.svg` },
+      njBusiness,
       {
         '@type': 'Service',
         name: `Appliance repair in ${area}, NJ`,
-        provider: { '@id': `https://www.myappliance.us${NJ_PATH}#business` },
+        provider: { '@id': NJ_BUSINESS_ID },
         areaServed: {
           '@type': town ? 'City' : 'AdministrativeArea',
           name: area,
@@ -150,7 +122,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(schema) }}
       />
       <main className="bg-white">
         <section className="relative isolate overflow-hidden bg-blue-950 pb-16 pt-32 text-white sm:pb-20 lg:pb-24 lg:pt-40">
@@ -196,7 +168,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-blue-100">
                 {town
                   ? 'Your home has enough moving parts. Let us take care of the ones that stop working.'
-                  : 'Insured appliance repair in Hackensack and across Bergen County. Based in Hudson County, with written estimates and a 90-day labor warranty.'}
+                  : 'Insured appliance repair in Hackensack and across Bergen County. Based in Hudson County, with written estimates and a 90-day parts and labor warranty.'}
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <BookingButton

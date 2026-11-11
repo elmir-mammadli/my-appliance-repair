@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   description:
     `Privacy Policy for ${BUSINESS.name} — how we collect, use, and protect your personal information.`,
   alternates: { canonical: `${BUSINESS.url}/privacy` },
-  robots: { index: true, follow: true },
+  // Legal boilerplate: keep it crawlable for links, out of the index.
+  robots: { index: false, follow: true },
 };
 
 export default function PrivacyPage() {

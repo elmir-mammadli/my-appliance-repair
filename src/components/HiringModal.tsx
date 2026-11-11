@@ -34,9 +34,10 @@ const initialState: FormState = {
   why: '',
 };
 
-export default function HiringModal() {
-  const [open, setOpen] = useState(false);
-  const [visible, setVisible] = useState(false);
+export default function HiringModal({ openOnMount = false }: { openOnMount?: boolean }) {
+  // LazyHiringModal mounts this only after the first open request, so it starts open.
+  const [open, setOpen] = useState(openOnMount);
+  const [visible, setVisible] = useState(openOnMount);
   const [form, setForm] = useState<FormState>(initialState);
   const [brands, setBrands] = useState<string[]>([]);
   const [errors, setErrors] = useState<Partial<FormState>>({});

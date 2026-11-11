@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BookingForm from '@/components/BookingForm';
-import { BUSINESS, SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
+import { BUSINESS, SERVICE_AREA_COUNT, SERVICE_CALL_FEE } from '@/lib/business';
 
 export const metadata: Metadata = {
-  title: 'Book Appliance Repair in CT | Same-Day Service',
+  title: 'Book Appliance Repair in CT',
   description:
-    `Book appliance repair in ${SERVICE_AREAS.length} Connecticut communities. $${SERVICE_CALL_FEE} service call, on-site repair quote, insured technicians, and a 90-day warranty.`,
+    `Book appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities. $${SERVICE_CALL_FEE} service call, on-site repair quote, insured technicians, and a 90-day warranty.`,
   alternates: { canonical: `${BUSINESS.url}/booking` },
   openGraph: {
     type: 'website',

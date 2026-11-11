@@ -5,9 +5,9 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import BookingModal from '@/components/BookingModal';
+import BookingModal from '@/components/LazyBookingModal';
 import { openBookingModal } from '@/lib/booking';
-import { BUSINESS, SERVICE_AREAS } from '@/lib/business';
+import { BUSINESS, SERVICE_AREAS, SERVICE_AREA_COUNT } from '@/lib/business';
 import { cities } from '@/lib/cities';
 
 function useFadeIn(threshold = 0.1) {
@@ -135,7 +135,7 @@ const STATS = [
   { value: '100+', label: 'Repairs This Month' },
   { value: '5.0★', label: 'Average Rating' },
   { value: '20', label: 'Brands Serviced' },
-  { value: String(SERVICE_AREAS.length), label: 'Towns & Cities Served' },
+  { value: String(SERVICE_AREA_COUNT), label: 'Towns & Cities Served' },
 ];
 
 const CREDENTIALS: Credential[] = [
@@ -387,7 +387,7 @@ export default function AboutContent() {
             We Come to You
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-900 mb-6">
-            Serving {SERVICE_AREAS.length} Connecticut communities
+            Serving {SERVICE_AREA_COUNT} Connecticut communities
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
             {BUSINESS.name} serves the towns and cities listed below, including New Haven,

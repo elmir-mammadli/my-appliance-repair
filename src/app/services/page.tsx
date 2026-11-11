@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import BookingModal from '@/components/BookingModal';
+import BookingModal from '@/components/LazyBookingModal';
 import BookingButton from '@/components/BookingButton';
 import ServiceCard from '@/components/ServiceCard';
 import RecentJobs from '@/components/RecentJobs';

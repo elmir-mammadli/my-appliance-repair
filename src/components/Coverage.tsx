@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { cities } from '@/lib/cities';
-import { BUSINESS, SERVICE_AREAS } from '@/lib/business';
+import { BUSINESS, SERVICE_AREAS, SERVICE_AREA_COUNT } from '@/lib/business';
 
 const ServiceAreaMap = dynamic(() => import('./ServiceAreaMapInner'), {
   ssr: false,
@@ -46,7 +46,7 @@ export default function Coverage() {
             id="coverage-heading"
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
-            Serving {SERVICE_AREAS.length} Connecticut communities
+            Serving {SERVICE_AREA_COUNT} Connecticut communities
           </h2>
           <p className="text-lg text-blue-200 max-w-2xl mx-auto">
             Appliance repair in New Haven, Hamden, Bristol, Waterbury, and the towns listed below.
@@ -92,7 +92,7 @@ export default function Coverage() {
             </div>
             <div className="mt-6 border-t border-blue-500/30 pt-5">
               <p className="text-lg font-bold text-white">
-                {SERVICE_AREAS.length} towns and cities served
+                {SERVICE_AREA_COUNT} towns and cities served
               </p>
               <p className="mt-1 text-sm text-blue-200">
                 Markers show the communities we serve, not business locations.

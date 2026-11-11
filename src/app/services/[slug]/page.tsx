@@ -5,9 +5,10 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import BookingModal from '@/components/BookingModal';
+import BookingModal from '@/components/LazyBookingModal';
 import BookingButton from '@/components/BookingButton';
 import ServiceFAQ from '@/components/ServiceFAQ';
+import { businessRef } from '@/components/StructuredData';
 import { services, getServiceBySlug, getRelatedServices } from '@/lib/services';
 import { getPostsForService } from '@/lib/posts';
 
@@ -81,16 +82,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     serviceType: service.title,
     name: `${service.title} in Connecticut`,
     description: service.intro,
-    provider: {
-      '@type': 'LocalBusiness',
-      '@id': `${BUSINESS.url}/#business`,
-      name: BUSINESS.name,
-      telephone: BUSINESS.phone.e164,
-      url: BUSINESS.url,
-      address: BUSINESS.schemaAddress,
-      image: `${BUSINESS.url}/images/appliance-repair-connecticut-og.jpg`,
-      areaServed: SERVICE_AREA_SCHEMA,
-    },
+    // Reference only; the footer's StructuredData defines the business once per page.
+    provider: businessRef,
     areaServed: SERVICE_AREA_SCHEMA,
     offers: {
       '@type': 'Offer',

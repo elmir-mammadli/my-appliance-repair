@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Shield01Icon, LeafyGreenIcon } from '@hugeicons/core-free-icons';
+import { BUSINESS_HOURS, SERVICE_CALL_FEE } from '@/lib/business';
 
 const ThumbtackMark = (
   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-black">
@@ -56,7 +57,7 @@ const reasons = [
     ),
     title: 'Same-day service',
     description:
-      "Call before noon and we'll often be there the same day. Evening and weekend appointments available.",
+      `Call before noon and we'll often be there the same day. Open 7 days, ${BUSINESS_HOURS.display.replace('Mon–Sun ', '')}, with an evening emergency line until midnight.`,
   },
   {
     icon: (
@@ -98,7 +99,7 @@ const reasons = [
     ),
     title: 'Upfront pricing',
     description:
-      'No hidden fees. You get a full written estimate before any work begins. Free diagnostic with repair.',
+      `No hidden fees. You get a full written estimate before any work begins, and the $${SERVICE_CALL_FEE} diagnostic is waived when you go ahead with the repair.`,
   },
   {
     icon: (
@@ -252,12 +253,12 @@ export default function WhyUs() {
                   {
                     step: '3',
                     title: 'Diagnosis & Quote',
-                    desc: 'Free written estimate before we start',
+                    desc: 'Written estimate before we start',
                   },
                   {
                     step: '4',
                     title: 'Repair & Warranty',
-                    desc: '90-day guarantee on all repairs',
+                    desc: '90-day parts and labor warranty on all repairs',
                   },
                 ].map((item) => (
                   <div key={item.step} className="flex items-start gap-4">

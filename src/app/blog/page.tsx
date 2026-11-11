@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import BookingModal from '@/components/BookingModal';
+import BookingModal from '@/components/LazyBookingModal';
 import BlogCategoryCard from '@/components/BlogCategoryCard';
 import { posts } from '@/lib/posts';
-import { BUSINESS, SERVICE_AREAS } from '@/lib/business';
+import { BUSINESS, SERVICE_AREA_COUNT } from '@/lib/business';
 
 export const metadata: Metadata = {
   // Bare title — the root layout's title template adds the business name.
@@ -194,7 +194,7 @@ export default function BlogPage() {
             Need Appliance Repair in Connecticut?
           </h2>
           <p className="text-blue-200 text-lg mb-8 max-w-xl mx-auto">
-            Serving {SERVICE_AREAS.length} Connecticut communities. Same-day appointments when available,
+            Serving {SERVICE_AREA_COUNT} Connecticut communities. Same-day appointments when available,
             insured technicians, and a 90-day warranty.
           </p>
           <a

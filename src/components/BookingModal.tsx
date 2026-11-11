@@ -6,14 +6,26 @@ import { useState, useEffect, useCallback } from 'react';
 import type { OpenBookingDetail } from '@/lib/booking';
 import BookingForm from '@/components/BookingForm';
 
-export default function BookingModal() {
+export default function BookingModal({
+  openOnMount,
+}: {
+  /** Set by LazyBookingModal to replay the open request that triggered loading. */
+  openOnMount?: OpenBookingDetail | null;
+}) {
   const pathname = usePathname();
-  const [initialBranch, setInitialBranch] = useState<BranchId>('ct');
-  const [initialMunicipality, setInitialMunicipality] = useState('');
-  const [open, setOpen] = useState(false);
-  const [visible, setVisible] = useState(false);
+  // When LazyBookingModal mounts this after the first open request, the modal starts
+  // open with that request's details instead of waiting for a second event.
+  const startOpen = openOnMount !== undefined;
+  const [initialBranch, setInitialBranch] = useState<BranchId>(
+    () => openOnMount?.branchId ?? (pathname.startsWith(NJ_PATH) ? 'nj' : 'ct'),
+  );
+  const [initialMunicipality, setInitialMunicipality] = useState(openOnMount?.municipality ?? '');
+  const [open, setOpen] = useState(startOpen);
+  const [visible, setVisible] = useState(startOpen);
   const [step, setStep] = useState<1 | 2>(1);
-  const [initialAppliance, setInitialAppliance] = useState<string | undefined>();
+  const [initialAppliance, setInitialAppliance] = useState<string | undefined>(
+    openOnMount?.appliance,
+  );
 
   const openModal = useCallback(
     (detail?: OpenBookingDetail) => {

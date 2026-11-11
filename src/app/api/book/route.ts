@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import { Resend } from 'resend';
 import { BRANCHES, type BranchId } from '@/lib/branches';
+import { SERVICE_CALL_FEE } from '@/lib/business';
 import { validateBookingRequest, escapeEmailData } from '@/lib/booking-request';
 
 async function appendToSheet(data: Record<string, string>) {
@@ -234,7 +235,7 @@ async function sendConfirmation(data: Record<string, string>, recipient: string)
  <tr><td style="padding:10px 0;">
  <table cellpadding="0" cellspacing="0"><tr>
  <td style="width:28px;vertical-align:top;padding-top:1px;"><span style="display:inline-block;width:20px;height:20px;background:#dbeafe;color:#1d4ed8;border-radius:50%;font-size:11px;font-weight:800;text-align:center;line-height:20px;">3</span></td>
- <td style="padding-left:8px;"><p style="margin:0;color:#334155;font-size:13px;">Free diagnostic included with any paid repair. Written estimate before work begins.</p></td>
+ <td style="padding-left:8px;"><p style="margin:0;color:#334155;font-size:13px;">The $${SERVICE_CALL_FEE} service call covers the diagnostic and is waived when you proceed with the repair. Written estimate before work begins.</p></td>
  </tr></table>
  </td></tr>
  </table>

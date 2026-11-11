@@ -3,7 +3,7 @@
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef } from 'react';
 import type { LatLngTuple, Map } from 'leaflet';
-import { SERVICE_AREAS } from '@/lib/business';
+import { SERVICE_AREAS, SERVICE_AREA_COUNT } from '@/lib/business';
 
 // Representative points for service towns; these are not business addresses.
 // Points added to the original 17-town map use Census
@@ -151,7 +151,7 @@ export default function ServiceAreaMapInner() {
       <div
         ref={containerRef}
         style={{ width: '100%', height: '100%', minHeight: '400px' }}
-        aria-label={`Interactive map of our ${SERVICE_AREAS.length} Connecticut service communities`}
+        aria-label={`Interactive map of our ${SERVICE_AREA_COUNT} Connecticut service communities`}
       />
     </>
   );

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import BookingButton from '@/components/BookingButton';
-import { BUSINESS, REVIEW_RATINGS } from '@/lib/business';
+import { BUSINESS, PROFILES, REVIEW_RATINGS } from '@/lib/business';
 
 const popularRepairs = [
   { href: '/services/refrigerator-repair', label: 'Refrigerator Repair' },
@@ -17,8 +17,7 @@ const popularCities = [
   { href: '/north-haven', label: 'North Haven' },
 ];
 
-const THUMBTACK_URL =
-  'https://www.thumbtack.com/ct/hamden/appliance-repair/my-appliance-repair-llc/service/580267695654707208';
+const THUMBTACK_URL = PROFILES.thumbtack;
 
 export default function Hero() {
   return (
@@ -29,7 +28,9 @@ export default function Hero() {
           alt="MyAppliance technician working on a dishwasher"
           fill
           priority
-          sizes="100vw"
+          // Identical to the desktop image's sizes on purpose: React dedupes preloads by
+          // srcset+sizes, so one <link rel=preload> covers both breakpoints.
+          sizes="(max-width: 1024px) 100vw, 45vw"
           className="object-cover object-[65%_center] opacity-40"
         />
         <div
@@ -44,7 +45,7 @@ export default function Hero() {
           <p className="mt-6 max-w-md text-lg leading-relaxed text-blue-100">
             Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens,
             and freezers in New Haven, Hamden, West Haven and across Connecticut, with a written estimate before work begins and a
-            90-day labor warranty.
+            90-day parts and labor warranty.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -116,14 +117,20 @@ export default function Hero() {
       <div className="mx-auto hidden max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:pb-20 lg:pt-28">
         <div className="max-w-2xl">
 
-          <h1 className="mb-5 text-4xl font-bold leading-[1.05] text-blue-950 sm:mb-6 sm:text-5xl sm:leading-[1.02] lg:text-[3.25rem]">
+          {/* The mobile block above owns the page's single <h1>; this desktop copy is
+              exposed as a level-1 heading to assistive tech without a second h1 element. */}
+          <p
+            role="heading"
+            aria-level={1}
+            className="mb-5 text-4xl font-bold leading-[1.05] text-blue-950 sm:mb-6 sm:text-5xl sm:leading-[1.02] lg:text-[3.25rem]"
+          >
             Same-day appliance<br className="hidden lg:block" /> repair in Connecticut
-          </h1>
+          </p>
 
           <p className="mb-6 max-w-xl text-base leading-relaxed text-slate-600 sm:mb-8 sm:text-lg">
             Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens,
             and freezers in New Haven, Hamden, West Haven and across Connecticut, with a written estimate before work begins and a
-            90-day labor warranty.
+            90-day parts and labor warranty.
           </p>
 
           <div className="mb-6 flex flex-col gap-4 sm:flex-row">

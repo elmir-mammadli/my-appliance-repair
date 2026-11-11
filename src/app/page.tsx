@@ -11,17 +11,18 @@ import RecentJobs from '@/components/RecentJobs';
 import Coverage from '@/components/Coverage';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
-import BookingModal from '@/components/BookingModal';
+import BookingModal from '@/components/LazyBookingModal';
 import ContactForm from '@/components/ContactForm';
 import JoinUs from '@/components/JoinUs';
-import HiringModal from '@/components/HiringModal';
+import HiringModal from '@/components/LazyHiringModal';
 import Footer from '@/components/Footer';
-import { APPLIANCE_REPAIR_COST_ANSWER, BUSINESS, SERVICE_AREAS, SERVICE_CALL_FEE, SAME_DAY_SERVICE_ANSWER } from '@/lib/business';
+import { APPLIANCE_REPAIR_COST_ANSWER, BUSINESS, SERVICE_AREA_COUNT, SERVICE_CALL_FEE, SAME_DAY_SERVICE_ANSWER } from '@/lib/business';
 
 export const metadata: Metadata = {
-  title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
+  // Absolute: the template would push this past 60 characters.
+  title: { absolute: `Appliance Repair in Connecticut | ${BUSINESS.shortName}` },
   description:
-    `Appliance repair in ${SERVICE_AREAS.length} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. $${SERVICE_CALL_FEE} service call, on-site repair quotes, and a 90-day warranty.`,
+    `Appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. $${SERVICE_CALL_FEE} service call, on-site repair quotes, and a 90-day warranty.`,
   keywords: [
     'appliance repair Connecticut',
     'appliance repair near me',
@@ -36,9 +37,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://www.myappliance.us',
-    title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
+    title: `Appliance Repair in Connecticut | ${BUSINESS.shortName}`,
     description:
-      `Appliance repair in ${SERVICE_AREAS.length} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. On-site repair quotes and a 90-day warranty.`,
+      `Appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. On-site repair quotes and a 90-day warranty.`,
     images: [
       {
         url: '/images/og-image.png',
@@ -50,9 +51,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Appliance Repair Connecticut | Refrigerator, Washer & Dryer Repair',
+    title: `Appliance Repair in Connecticut | ${BUSINESS.shortName}`,
     description:
-      `Appliance repair in ${SERVICE_AREAS.length} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. On-site repair quotes and a 90-day warranty.`,
+      `Appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. On-site repair quotes and a 90-day warranty.`,
     images: ['/images/og-image.png'],
   },
 };

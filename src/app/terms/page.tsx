@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   description:
     `Terms of Service for ${BUSINESS.name} — the rules and conditions governing our appliance repair services in Connecticut and Bergen County, NJ.`,
   alternates: { canonical: `${BUSINESS.url}/terms` },
-  robots: { index: true, follow: true },
+  // Legal boilerplate: keep it crawlable for links, out of the index.
+  robots: { index: false, follow: true },
 };
 
 export default function TermsPage() {

@@ -3,7 +3,7 @@ import { NJ_PATH } from '@/lib/branches';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cities } from '@/lib/cities';
-import { BUSINESS, SERVICE_AREAS } from '@/lib/business';
+import { BUSINESS, PROFILES, SERVICE_AREAS } from '@/lib/business';
 
 const quickLinks = [
   { label: 'Home', href: '/' },
@@ -20,7 +20,7 @@ const serviceLinks = [
   { label: 'Dryer Repair', href: '/services/dryer-repair' },
   { label: 'Dishwasher Repair', href: '/services/dishwasher-repair' },
   { label: 'Oven & Range Repair', href: '/services/oven-range-repair' },
-  { label: 'Same-Day Emergency', href: '/services' },
+  { label: 'Evening Emergency Line', href: '/#emergency' },
 ];
 
 function ArrowLink({
@@ -240,7 +240,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-5">
               {/* Google */}
               <a
-                href="https://share.google/aktwu5fUEtjV6Eo40"
+                href={PROFILES.google}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Leave us a Google review"
@@ -268,7 +268,7 @@ export default function Footer() {
 
               {/* Yelp */}
               <a
-                href="https://www.yelp.com/writeareview/biz/4qpGmPtt9HvAqeKYkFw4Bw?review_origin=writeareview-landing&rating=5&uuid=96653301-8e8b-40e9-b4d9-76129f1229e4"
+                href={PROFILES.yelpWriteReview}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Review us on Yelp"
@@ -279,7 +279,7 @@ export default function Footer() {
 
               {/* Instagram */}
               <a
-                href="https://www.instagram.com/myappliancerepair"
+                href={PROFILES.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on Instagram"

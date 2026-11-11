@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import BookingModal from '@/components/BookingModal';
+import BookingModal from '@/components/LazyBookingModal';
 import BookingButton from '@/components/BookingButton';
 import { posts, getPostBySlug, getRelatedPosts, getServiceSlugForPost } from '@/lib/posts';
 import { getServiceBySlug } from '@/lib/services';
@@ -38,9 +38,9 @@ export async function generateMetadata({
     post.excerpt.length > 125 ? post.excerpt.slice(0, 122).replace(/\s+\S*$/, '') + '...' : post.excerpt;
 
   return {
-    // Bare title — the root layout's title template adds the
-    // brand suffix, so this shouldn't repeat it or the <title> doubles up.
-    title: post.title,
+    // Bare title — the root layout's title template adds the brand suffix. Long
+    // headlines drop the suffix instead so the <title> stays near 60 characters.
+    title: post.title.length + BUSINESS.shortName.length + 3 > 60 ? { absolute: post.title } : post.title,
     description,
     keywords: `${post.category.toLowerCase()}, appliance repair Connecticut, ${post.title.toLowerCase()}`,
     alternates: { canonical: `https://www.myappliance.us/blog/${slug}` },
@@ -53,7 +53,7 @@ export async function generateMetadata({
       description: socialDescription,
       publishedTime: post.date,
       modifiedTime: post.updatedAt ?? post.date,
-      authors: [`${BUSINESS.name} Team`],
+      authors: [post.author],
       // Image itself comes from the co-located opengraph-image.tsx file convention,
       // which takes priority over anything set here — no need to duplicate it.
     },
@@ -93,11 +93,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     image: post.image,
     datePublished: post.date,
     dateModified: post.updatedAt ?? post.date,
-    author: {
-      '@type': 'Organization',
-      name: `${BUSINESS.name} Team`,
-      url: BUSINESS.url,
-    },
+    // Must match the visible byline. Named technicians are people who work for the
+    // business; the team byline is the business itself.
+    author: /team/i.test(post.author)
+      ? { '@type': 'Organization', name: BUSINESS.name, url: BUSINESS.url }
+      : {
+          '@type': 'Person',
+          name: post.author,
+          jobTitle: 'Appliance Repair Technician',
+          worksFor: { '@type': 'Organization', name: BUSINESS.name, url: BUSINESS.url },
+        },
     publisher: {
       '@type': 'Organization',
       name: BUSINESS.name,
@@ -432,8 +437,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             Appliance giving you trouble?
           </h2>
           <p className="text-blue-200 mb-7 max-w-lg mx-auto">
-            Connecticut&apos;s most trusted repair team is ready to help — same day, backed by a
-            90-day warranty.
+            Our 5.0-rated Connecticut repair team is ready to help — same day when available,
+            backed by a 90-day parts and labor warranty.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <BookingButton className="inline-flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold px-8 py-4 transition-all duration-200 cursor-pointer">

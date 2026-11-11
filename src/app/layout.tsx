@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BUSINESS, SERVICE_AREAS, SERVICE_CALL_FEE } from '@/lib/business';
+import { BUSINESS, SERVICE_AREA_COUNT, SERVICE_CALL_FEE } from '@/lib/business';
 import { Lexend, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
 import CookieConsent from '@/components/CookieConsent';
@@ -17,12 +17,15 @@ const sourceSans3 = Source_Sans_3({
   display: 'swap',
 });
 
-const serviceDescription = `Appliance repair in ${SERVICE_AREAS.length} Connecticut communities. $${SERVICE_CALL_FEE} service call; repair quote provided on-site. Insured technicians, 90-day warranty.`;
+const serviceDescription = `Appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities. $${SERVICE_CALL_FEE} service call; repair quote provided on-site. Insured technicians, 90-day parts and labor warranty.`;
+
+// Keep the default under 60 characters once the template appends the brand.
+const defaultTitle = `Same-Day Appliance Repair in CT | ${BUSINESS.shortName}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BUSINESS.url),
   title: {
-    default: `Same-Day Appliance Repair in CT | 90-Day Warranty | ${BUSINESS.shortName}`,
+    default: defaultTitle,
     template: `%s | ${BUSINESS.shortName}`,
   },
   description:
@@ -58,7 +61,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: BUSINESS.url,
     siteName: BUSINESS.name,
-    title: `Same-Day Appliance Repair in CT | 90-Day Warranty | ${BUSINESS.shortName}`,
+    title: defaultTitle,
     description:
       serviceDescription,
     images: [
@@ -72,7 +75,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Same-Day Appliance Repair in CT | 90-Day Warranty | ${BUSINESS.shortName}`,
+    title: defaultTitle,
     description:
       serviceDescription,
     images: ['/images/appliance-repair-connecticut-og.jpg'],

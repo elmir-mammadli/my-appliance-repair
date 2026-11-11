@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import BookingModal from '@/components/BookingModal';
+import BookingModal from '@/components/LazyBookingModal';
 import NotFoundActions from '@/components/NotFoundActions';
 import { BUSINESS } from '@/lib/business';
 

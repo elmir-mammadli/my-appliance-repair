@@ -4,12 +4,11 @@ import type { BergenTown } from './bergen';
 
 export function bergenMetadata(town?: BergenTown): Metadata {
   const area = town?.name ?? 'Bergen County';
-  const title = town
-    ? `Appliance Repair ${area}, NJ | $99 Service Call`
-    : 'Appliance Repair in New Jersey | Bergen County & Hackensack';
+  // The root template appends the brand; keep the whole title under 60 characters.
+  const title = town ? `Appliance Repair in ${area}, NJ` : 'Appliance Repair in Bergen County, NJ';
   const description = town
     ? `Refrigerator, washer, dryer, dishwasher and oven repair in ${area}, NJ. $99 service call, written repair quote, 90-day warranty. Call (201) 403-0001.`
-    : 'Insured appliance repair in Hackensack and across Bergen County. Based in Hudson County, with written estimates and a 90-day labor warranty.';
+    : 'Insured appliance repair in Hackensack and across Bergen County. Based in Hudson County, with written estimates and a 90-day parts and labor warranty.';
   const url = `https://www.myappliance.us${NJ_PATH}${town ? `/${town.slug}` : ''}`;
   const images = [
     {

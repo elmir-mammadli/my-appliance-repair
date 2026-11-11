@@ -1,47 +1,25 @@
 import type { Metadata } from 'next';
-import { BUSINESS, SERVICE_AREA_SCHEMA } from '@/lib/business';
+import { BUSINESS, REVIEW_RATINGS } from '@/lib/business';
+import { BUSINESS_ID, BUSINESS_TYPE, jsonLd } from '@/components/StructuredData';
 import AboutContent from '@/components/AboutContent';
 
+const description = `Learn about ${BUSINESS.name}, an insured Connecticut appliance repair service rated ${REVIEW_RATINGS.google.rating.toFixed(1)} on Google and Thumbtack. 90-day parts and labor warranty, 2,500+ repairs completed across CT.`;
+
 export const metadata: Metadata = {
-  title: 'About Us | Insured CT Appliance Repair Experts',
-  description:
-    `Learn about ${BUSINESS.name} — Connecticut's trusted local appliance repair service. Insured technicians, 90-day warranty, 2,500+ repairs completed across CT.`,
+  title: 'About Our CT Appliance Repair Team',
+  description,
   alternates: { canonical: `${BUSINESS.url}/about` },
 };
 
-function jsonLd(data: object): string {
-  return JSON.stringify(data)
-    .replace(/</g, '\\u003c')
-    .replace(/>/g, '\\u003e')
-    .replace(/&/g, '\\u0026');
-}
-
+// The business itself is defined once in StructuredData (rendered by the footer);
+// this page only points at it.
 const aboutPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
   name: `About ${BUSINESS.name}`,
-  description:
-    "Connecticut's trusted local appliance repair service. Insured technicians, 90-day warranty, 2,500+ repairs completed across CT.",
-  url: 'https://www.myappliance.us/about',
-  mainEntity: {
-    '@type': 'LocalBusiness',
-    '@id': 'https://www.myappliance.us/#business',
-    name: BUSINESS.name,
-    description:
-      "Connecticut's most trusted appliance repair service. Insured technicians, 90-day warranty, same-day appointments available.",
-    url: BUSINESS.url,
-    telephone: BUSINESS.phone.e164,
-    email: BUSINESS.email,
-    address: BUSINESS.schemaAddress,
-    areaServed: SERVICE_AREA_SCHEMA,
-    hasCredential: [
-      {
-        '@type': 'EducationalOccupationalCredential',
-        name: 'EPA 608 Certified',
-        credentialCategory: 'certification',
-      },
-    ],
-  },
+  description,
+  url: `${BUSINESS.url}/about`,
+  mainEntity: { '@type': BUSINESS_TYPE, '@id': BUSINESS_ID },
 };
 
 export default function AboutPage() {

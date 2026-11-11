@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar';
 import BergenFooter from '@/components/BergenFooter';
-import BookingModal from '@/components/BookingModal';
+import BookingModal from '@/components/LazyBookingModal';
 export default function BergenLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="[&_a]:cursor-pointer [&_button]:cursor-pointer [&_summary]:cursor-pointer">

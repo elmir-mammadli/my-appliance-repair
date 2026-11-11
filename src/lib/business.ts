@@ -113,7 +113,44 @@ export const SERVICE_AREA_SCHEMA = SERVICE_AREAS.map((name) => ({
   containedInPlace: { '@type': 'State', name: 'Connecticut' },
 }));
 
+// Towns and cities only. County-level entries are regions, not communities, so they
+// must not inflate the "N Connecticut communities" copy.
+export const SERVICE_AREA_TOWNS = SERVICE_AREAS.filter((name) => !name.endsWith('County'));
+export const SERVICE_AREA_COUNT = SERVICE_AREA_TOWNS.length;
+
+// Counts are rounded down to what the public profiles showed on the date noted.
+// Update both the number and the date together; never estimate upward.
 export const REVIEW_RATINGS = {
+  asOf: '2026-11-11',
   google: { rating: 5, count: 100 },
-  thumbtack: { rating: 5, count: 160 },
+  thumbtack: { rating: 5, count: 182 },
 } as const;
+
+export const WARRANTY_STATEMENT = '90-day parts and labor warranty';
+
+// Public profiles. Every sameAs list and outbound profile link derives from here so a
+// changed or dead URL is fixed in one place.
+export const PROFILES = {
+  google: 'https://share.google/aktwu5fUEtjV6Eo40',
+  yelp: 'https://www.yelp.com/biz/my-appliance-repair-hamden-2',
+  yelpWriteReview:
+    'https://www.yelp.com/writeareview/biz/4qpGmPtt9HvAqeKYkFw4Bw?review_origin=writeareview-landing&rating=5&uuid=96653301-8e8b-40e9-b4d9-76129f1229e4',
+  thumbtack:
+    'https://www.thumbtack.com/ct/hamden/appliance-repair/my-appliance-repair-llc/service/580267695654707208',
+  thumbtackWriteReview:
+    'https://www.thumbtack.com/reviews/services/580267695654707208/write-customer-review',
+  instagram: 'https://www.instagram.com/myappliancerepair',
+  facebook: 'https://www.facebook.com/myappliancerepairllc',
+} as const;
+
+export const SAME_AS = [
+  PROFILES.google,
+  PROFILES.yelp,
+  PROFILES.thumbtack,
+  PROFILES.instagram,
+  PROFILES.facebook,
+] as const;
+
+export const CREDENTIALS = [
+  { name: 'EPA Section 608 Certified', category: 'certification' },
+] as const;
