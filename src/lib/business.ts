@@ -32,13 +32,25 @@ export const SERVICE_CALL_FEE = 99;
 
 // Keep published hours aligned with the branch records and LocalBusiness markup.
 export const BUSINESS_HOURS = {
-  display: 'Mon–Sun 8am–6pm',
+  display: 'Mon–Sun 8am–7pm',
   schema: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     opens: '08:00',
-    closes: '18:00',
+    closes: '19:00',
   },
+} as const;
+
+// Evening emergency line. The top announcement bar switches to it from 8 PM to midnight Eastern.
+// Kept separate from BUSINESS_HOURS so the Google Business Profile hours and
+// LocalBusiness markup stay unchanged.
+export const EMERGENCY_SERVICE = {
+  timeZone: 'America/New_York',
+  startHour: 20, // 8 PM
+  endHour: 24, // midnight
+  from: '8 PM',
+  until: '12:00 AM',
+  fee: 149,
 } as const;
 
 export const SAME_DAY_SERVICE_ANSWER =
