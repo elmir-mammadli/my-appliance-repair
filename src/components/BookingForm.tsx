@@ -8,18 +8,9 @@ import MunicipalitySelect from '@/components/MunicipalitySelect';
 import DatePicker from '@/components/DatePicker';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
 import { useRepairTracking } from '@/lib/use-repair-tracking';
+import { APPLIANCES } from '@/lib/appliances';
 
-const appliances = [
-  'Washer',
-  'Dryer',
-  'Refrigerator',
-  'Dishwasher',
-  'Oven / Range',
-  'Cooktop',
-  'Microwave',
-  'Freezer',
-  'Other',
-];
+const appliances = APPLIANCES;
 
 const timeSlots = ['Morning (8am–12pm)', 'Afternoon (12pm–4pm)', 'Evening (4pm–7pm)'];
 
@@ -71,6 +62,7 @@ const initialState: FormState = {
 interface BookingFormProps {
   initialBranch?: BranchId;
   initialMunicipality?: string;
+  initialZip?: string;
   onClose?: () => void;
   initialAppliance?: string;
   onStepChange?: (step: 1 | 2) => void;
@@ -84,12 +76,14 @@ export default function BookingForm({
   stickyHeader = false,
   initialBranch = 'ct',
   initialMunicipality = '',
+  initialZip = '',
 }: BookingFormProps) {
   const [step, setStep] = useState<1 | 2>(1);
   const [form, setForm] = useState<FormState>({
     ...initialState,
     appliance: initialAppliance ?? '',
     municipality: initialMunicipality,
+    zip: initialZip,
   });
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [checking, setChecking] = useState(false);
@@ -177,7 +171,7 @@ export default function BookingForm({
   const resetForm = () => {
     tracking.reset();
     setSubmitted(false);
-    setForm({ ...initialState, appliance: initialAppliance ?? '', municipality: initialMunicipality });
+    setForm({ ...initialState, appliance: initialAppliance ?? '', municipality: initialMunicipality, zip: initialZip });
     setStep(1);
     onStepChange?.(1);
   };

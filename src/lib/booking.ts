@@ -4,6 +4,8 @@ export interface OpenBookingDetail {
   branchId?: BranchId;
   municipality?: string;
   appliance?: string;
+  /** 5-digit ZIP from the hero quick-start strip; pre-fills step 1. */
+  zip?: string;
 }
 
 export const openBookingModal = (detail?: OpenBookingDetail) => {
