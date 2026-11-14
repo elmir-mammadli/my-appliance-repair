@@ -20,6 +20,7 @@ export default function BookingModal({
     () => openOnMount?.branchId ?? (pathname.startsWith(NJ_PATH) ? 'nj' : 'ct'),
   );
   const [initialMunicipality, setInitialMunicipality] = useState(openOnMount?.municipality ?? '');
+  const [initialZip, setInitialZip] = useState(openOnMount?.zip ?? '');
   const [open, setOpen] = useState(startOpen);
   const [visible, setVisible] = useState(startOpen);
   const [step, setStep] = useState<1 | 2>(1);
@@ -31,6 +32,7 @@ export default function BookingModal({
     (detail?: OpenBookingDetail) => {
       setInitialAppliance(detail?.appliance);
       setInitialMunicipality(detail?.municipality ?? '');
+      setInitialZip(detail?.zip ?? '');
       setInitialBranch(detail?.branchId ?? (pathname.startsWith(NJ_PATH) ? 'nj' : 'ct'));
       setStep(1);
       setOpen(true);
@@ -98,6 +100,7 @@ export default function BookingModal({
           initialAppliance={initialAppliance}
           initialBranch={initialBranch}
           initialMunicipality={initialMunicipality}
+          initialZip={initialZip}
           onStepChange={setStep}
           stickyHeader
         />

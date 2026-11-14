@@ -1,38 +1,63 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import BookingButton from '@/components/BookingButton';
-import { BUSINESS, PROFILES, REVIEW_RATINGS } from '@/lib/business';
+import HeroQuickStart from '@/components/HeroQuickStart';
+import { BUSINESS, BUSINESS_HOURS, REVIEW_RATINGS, SERVICE_CALL_FEE } from '@/lib/business';
 
-const popularRepairs = [
-  { href: '/services/refrigerator-repair', label: 'Refrigerator Repair' },
-  { href: '/services/washer-repair', label: 'Washing Machine Repair' },
-  { href: '/services/dryer-repair', label: 'Clothes Dryer Repair' },
-  { href: '/services/dishwasher-repair', label: 'Dishwasher Repair' },
-];
+const DESCRIPTION =
+  'Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens, and freezers in New Haven, Hamden, West Haven and across Connecticut, with a written estimate before work begins and a 90-day parts and labor warranty.';
 
-const popularCities = [
-  { href: '/new-haven', label: 'New Haven' },
-  { href: '/hamden', label: 'Hamden' },
-  { href: '/west-haven', label: 'West Haven' },
-  { href: '/north-haven', label: 'North Haven' },
-];
+// Identical on both <Image>s on purpose: React dedupes preloads by srcset+sizes, so one
+// <link rel=preload> covers the mobile backdrop and the desktop photo.
+const HERO_IMAGE_SIZES = '(max-width: 1024px) 100vw, 54vw';
 
-const THUMBTACK_URL = PROFILES.thumbtack;
+const totalReviews = REVIEW_RATINGS.google.count + REVIEW_RATINGS.thumbtack.count;
+// Round down to the nearest ten so the copy stays true as reviews come in.
+const reviewFloor = Math.floor(totalReviews / 10) * 10;
+
+const calendarIcon = (
+  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+    />
+  </svg>
+);
+
+const phoneIcon = (
+  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+    />
+  </svg>
+);
+
+const checkIcon = (className: string) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+    <path
+      fillRule="evenodd"
+      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
 
 export default function Hero() {
   return (
-    <section className="border-b border-slate-100 bg-white pt-20" aria-label="Hero section">
+    <section className="bg-blue-50 pt-20" aria-label="Hero section">
+      {/* Mobile and tablet: photo backdrop under a navy wash, copy on top. */}
       <div className="relative isolate overflow-hidden bg-blue-950 text-white lg:hidden">
         <Image
           src="/images/hero/dishwasher.jpg"
           alt="MyAppliance technician working on a dishwasher"
           fill
           priority
-          // Identical to the desktop image's sizes on purpose: React dedupes preloads by
-          // srcset+sizes, so one <link rel=preload> covers both breakpoints.
-          sizes="(max-width: 1024px) 100vw, 45vw"
+          sizes={HERO_IMAGE_SIZES}
           className="object-cover object-[65%_center] opacity-40"
         />
+        {/* deslop-keep: photo scrim, keeps the white copy readable over the backdrop */}
         <div
           className="absolute inset-0 bg-gradient-to-r from-[#101d40] via-[#101d40]/90 to-[#101d40]/35"
           aria-hidden="true"
@@ -42,71 +67,30 @@ export default function Hero() {
           <h1 className="max-w-sm text-4xl font-bold leading-[1.1] sm:text-5xl">
             Same-day appliance repair in Connecticut
           </h1>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-blue-100">
-            Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens,
-            and freezers in New Haven, Hamden, West Haven and across Connecticut, with a written estimate before work begins and a
-            90-day parts and labor warranty.
-          </p>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-blue-100">{DESCRIPTION}</p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <BookingButton className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 bg-[#ffb81c] px-8 py-4 text-base font-bold text-gray-900 transition-colors duration-200 hover:bg-[#c9920d]">
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
+              {calendarIcon}
               Schedule a Repair
             </BookingButton>
             <a
-              href="tel:+19592616736"
+              href={BUSINESS.phone.href}
               className="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-white bg-transparent px-8 py-4 text-base font-bold text-white transition-colors duration-200 hover:border-[#ffb81c] hover:text-[#ffb81c]"
             >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              (959) 261-6736
+              {phoneIcon}
+              {BUSINESS.phone.display}
             </a>
           </div>
 
-          <div className="mt-5 flex flex-col sm:flex-row flex-wrap text-sm text-blue-100/85">
+          <div className="mt-5 flex flex-col flex-wrap text-sm text-blue-100/85 sm:flex-row">
             {[
               '5.0 ★ across Google & Thumbtack',
               'Same-day when available',
               'Diagnostic waived with repair',
             ].map((item) => (
               <span key={item} className="inline-flex items-center gap-2 py-1">
-                <svg
-                  className="h-4 w-4 flex-shrink-0 text-[#ffb81c]"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                {checkIcon('h-4 w-4 flex-shrink-0 text-[#ffb81c]')}
                 {item}
               </span>
             ))}
@@ -114,209 +98,77 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="mx-auto hidden max-w-7xl gap-12 px-4 py-10 sm:px-6 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:px-8 lg:pb-20 lg:pt-28">
-        <div className="max-w-2xl">
-
-          {/* The mobile block above owns the page's single <h1>; this desktop copy is
-              exposed as a level-1 heading to assistive tech without a second h1 element. */}
-          <p
-            role="heading"
-            aria-level={1}
-            className="mb-5 text-4xl font-bold leading-[1.05] text-blue-950 sm:mb-6 sm:text-5xl sm:leading-[1.02] lg:text-[3.25rem]"
-          >
-            Same-day appliance<br className="hidden lg:block" /> repair in Connecticut
-          </p>
-
-          <p className="mb-6 max-w-xl text-base leading-relaxed text-slate-600 sm:mb-8 sm:text-lg">
-            Insured technicians repair refrigerators, washers, dryers, dishwashers, ovens,
-            and freezers in New Haven, Hamden, West Haven and across Connecticut, with a written estimate before work begins and a
-            90-day parts and labor warranty.
-          </p>
-
-          <div className="mb-6 flex flex-col gap-4 sm:flex-row">
-            <BookingButton className="inline-flex cursor-pointer min-h-12 items-center justify-center gap-2 bg-[#ffb81c] px-8 py-4 text-base font-bold text-gray-900 transition-colors duration-200 hover:bg-[#c9920d]">
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              Schedule a Repair
-            </BookingButton>
-            <a
-              href={BUSINESS.phone.href}
-              className="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-blue-950 px-8 py-4 text-base font-bold text-blue-950 transition-colors duration-200 hover:bg-blue-950 hover:text-white"
-            >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              {BUSINESS.phone.display}
-            </a>
-          </div>
-
-          <div className="mb-8 flex flex-wrap text-sm text-slate-600">
-            {[
-              '5.0 ★ across Google & Thumbtack',
-              'Same-day when available',
-              'Diagnostic waived with repair',
-            ].map((item) => (
-              <span key={item} className="inline-flex items-center gap-2 bg-slate-50 px-3.5 py-2">
-                <svg
-                  className="h-4 w-4 flex-shrink-0 text-[#ffb81c]"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                {item}
-              </span>
-            ))}
-          </div>
-
-          <div className="space-y-5">
-            <div>
-              <p className="mb-2 text-xs font-bold text-slate-400">
-                Popular repairs
-              </p>
-              <div className="flex flex-wrap gap-2.5">
-                {popularRepairs.map((repair) => (
-                  <Link
-                    key={repair.href}
-                    href={repair.href}
-                    className=" border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-800 transition-colors duration-200 hover:border-blue-400 hover:bg-blue-50"
-                  >
-                    {repair.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <p className="mb-2 text-xs font-bold text-slate-400">
-                Nearby cities
-              </p>
-              <div className="flex flex-wrap gap-2.5">
-                {popularCities.map((city) => (
-                  <Link
-                    key={city.href}
-                    href={city.href}
-                    className=" border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-colors duration-200 hover:border-blue-300 hover:bg-white hover:text-blue-800"
-                  >
-                    {city.label} Appliance Repair
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
+      {/* Desktop: the photo owns the right half and fades into the navy on the left. */}
+      <div className="relative isolate hidden overflow-hidden bg-[#101d40] text-white lg:block">
+        <div className="absolute inset-y-0 right-0 w-[54%]" aria-hidden="true">
+          <Image
+            src="/images/hero/dishwasher.jpg"
+            alt=""
+            fill
+            priority
+            sizes={HERO_IMAGE_SIZES}
+            className="object-cover object-[60%_center]"
+          />
+          {/* deslop-keep: photo scrims, they keep the white copy readable where it meets the photo */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#101d40] via-[#101d40]/40 to-transparent" />
+          {/* deslop-keep: photo scrim, darkens the photo's foot so the strip's edge reads */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#101d40]/80 via-transparent to-transparent" />
         </div>
 
-        <div className="relative">
-          <div className="relative overflow-hidden border border-blue-100 bg-slate-100">
-            <div className="relative aspect-[4/5]">
-              <Image
-                src="/images/hero/dishwasher.jpg"
-                alt="Connecticut technician performing same-day dishwasher repair service"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className="object-cover"
-              />
-              <div
-                className="absolute inset-0 bg-gradient-to-t from-blue-950/90 via-blue-950/25 to-transparent"
-                aria-hidden="true"
-              />
+        <div className="nj-entrance relative mx-auto max-w-7xl px-8 pb-44 pt-24">
+          <div className="max-w-2xl">
+            {/* The mobile block above owns the page's single <h1>; this desktop copy is
+                exposed as a level-1 heading to assistive tech without a second h1 element. */}
+            <p role="heading" aria-level={1} className="mb-6 text-[3.75rem] font-bold leading-[1.02]">
+              Same-day appliance repair in Connecticut
+            </p>
 
-              <a
-                href={THUMBTACK_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute right-3 top-3 z-10 flex items-center gap-2.5 border border-slate-100 bg-white px-3 py-2.5 transition-transform duration-200 hover:-translate-y-0.5 sm:right-4 sm:top-4 sm:px-3.5"
-              >
-                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-black">
-                  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-                    <path
-                      fill="#FFF"
-                      d="M8.973 10.385a3.71 3.71 0 01-.564 1.957L8 13l-.409-.658a3.704 3.704 0 01-.564-1.957v-3.14C7.51 6.62 8.231 6.4 8.973 6.4v3.985zM4 5.69V4h8v1.69H4z"
-                    />
-                  </svg>
+            <p className="mb-7 max-w-xl text-xl leading-relaxed text-blue-100">{DESCRIPTION}</p>
+
+            <ul className="mb-9 space-y-2.5 text-[17px] text-blue-100">
+              <li className="flex items-center gap-2.5">
+                {checkIcon('h-[18px] w-[18px] flex-shrink-0 text-[#ffb81c]')}
+                <span>5.0 ★ on Google and Thumbtack, {reviewFloor}+ reviews</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                {checkIcon('h-[18px] w-[18px] flex-shrink-0 text-[#ffb81c]')}
+                <span>
+                  <strong className="font-semibold text-white">${SERVICE_CALL_FEE} diagnostic</strong>,
+                  waived when you go ahead with the repair
                 </span>
-                <div className="leading-tight">
-                  <p className="text-xs font-bold text-blue-950">
-                    Rated 5 on Thumbtack
-                  </p>
-                  <div className="mt-0.5 flex items-center gap-1">
-                    <div className="flex gap-px" aria-hidden="true">
-                      {[1, 2, 3, 4, 5].map((i) => (
-                        <svg
-                          key={i}
-                          className="h-2.5 w-2.5 text-[#ffb81c]"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <span className="text-[11px] font-medium text-slate-500">{REVIEW_RATINGS.thumbtack.count}+ reviews</span>
-                  </div>
-                </div>
-              </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                {checkIcon('h-[18px] w-[18px] flex-shrink-0 text-[#ffb81c]')}
+                <span>
+                  Based in {BUSINESS.address.addressLocality}, open {BUSINESS_HOURS.display}
+                </span>
+              </li>
+            </ul>
 
-              <div className="absolute inset-x-0 bottom-0 p-7 md:pb-20">
-                <p className="mb-1.5 text-xs font-bold text-[#ffb81c]">
-                  Refrigerator, washer, dryer, dishwasher and oven repair
-                </p>
-                <p className="text-2xl font-bold leading-tight text-white">
-                  Written estimate before work starts, 90-day warranty after
-                </p>
-              </div>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
+              <BookingButton className="inline-flex min-h-[52px] cursor-pointer items-center justify-center gap-2 bg-[#ffb81c] px-8 py-3.5 text-base font-bold text-gray-900 transition-colors duration-200 hover:bg-[#e6a619]">
+                {calendarIcon}
+                Schedule a Repair
+              </BookingButton>
+              <a
+                href={BUSINESS.phone.href}
+                className="inline-flex min-h-[52px] items-center justify-center gap-2 border-2 border-white px-7 py-3 text-base font-bold text-white transition-colors duration-200 hover:border-[#ffb81c] hover:text-[#ffb81c]"
+              >
+                {phoneIcon}
+                {BUSINESS.phone.display}
+              </a>
+              <p className="text-sm leading-tight text-blue-200">
+                <span className="block text-base font-bold text-white">Call before noon</span>
+                for best same-day availability
+              </p>
             </div>
           </div>
-
-          <div className="absolute hidden md:block -left-4 top-6 border border-white/70 bg-white p-4 sm:-left-6">
-            <p className="text-xs font-bold text-slate-400">
-              Most requested
-            </p>
-            <ul className="mt-2 space-y-2 text-sm font-semibold text-blue-950">
-              <li>Refrigerator repair</li>
-              <li>Washing machine repair</li>
-              <li>Appliance repair near me</li>
-            </ul>
-          </div>
-
-          <div className="hidden md:block absolute -bottom-5 right-4 bg-blue-950 px-5 py-4 text-white sm:right-6">
-            <p className="text-xs font-bold text-blue-300">
-              Same-day visits
-            </p>
-            <p className="mt-1 text-lg font-bold">
-              Call before noon for best same-day availability.
-            </p>
-          </div>
         </div>
+      </div>
+
+      {/* Quick-start strip: in flow under the mobile hero, overlapping the desktop hero's bottom edge. */}
+      <div className="relative mx-auto mt-6 max-w-7xl px-4 pb-12 sm:px-6 lg:-mt-24 lg:px-8 lg:pb-16">
+        <HeroQuickStart />
       </div>
     </section>
   );
