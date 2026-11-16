@@ -12,12 +12,14 @@ const BASE_URL = BUSINESS.url;
 // would falsely refresh unchanged pages, so bump these by hand when the content
 // of that page type actually changes.
 const CONTENT_UPDATED = {
-  home: '2026-11-11',
+  home: '2026-11-15',
   about: '2026-11-11',
   booking: '2026-11-11',
-  services: '2026-11-11',
-  cities: '2026-11-11',
-  nj: '2026-11-11',
+  servicesHub: '2026-11-15',
+  serviceDetails: '2026-11-11',
+  cities: '2026-11-15',
+  nj: '2026-11-15',
+  njBooking: '2026-11-15',
 } as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -45,14 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const serviceEntries: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
     url: `${BASE_URL}/services/${slug}`,
-    lastModified: CONTENT_UPDATED.services,
+    lastModified: CONTENT_UPDATED.serviceDetails,
     changeFrequency: 'weekly',
     priority: 0.9,
   }));
 
   // /privacy and /terms are noindex and intentionally absent.
-  // NJ pages are noindex while NJ_BOOKING_ENABLED is false (see bergenMetadata), so
-  // leaving them out of the sitemap in that state is consistent, not a leak.
   return [
     {
       url: BASE_URL,
@@ -80,21 +80,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/services`,
-      lastModified: CONTENT_UPDATED.services,
+      lastModified: CONTENT_UPDATED.servicesHub,
       changeFrequency: 'weekly',
       priority: 0.95,
     },
     ...cityEntries,
     ...serviceEntries,
+    { url: `${BASE_URL}${NJ_PATH}`, lastModified: CONTENT_UPDATED.nj },
+    ...BERGEN_TOWNS.map(({ slug }) => ({
+      url: `${BASE_URL}${NJ_PATH}/${slug}`,
+      lastModified: CONTENT_UPDATED.nj,
+    })),
+    // The booking route is a phone-only fallback with noindex while intake is paused.
     ...(NJ_BOOKING_ENABLED
-      ? [
-          { url: `${BASE_URL}${NJ_PATH}`, lastModified: CONTENT_UPDATED.nj },
-          { url: `${BASE_URL}${NJ_PATH}/booking`, lastModified: CONTENT_UPDATED.nj },
-          ...BERGEN_TOWNS.map(({ slug }) => ({
-            url: `${BASE_URL}${NJ_PATH}/${slug}`,
-            lastModified: CONTENT_UPDATED.nj,
-          })),
-        ]
+      ? [{ url: `${BASE_URL}${NJ_PATH}/booking`, lastModified: CONTENT_UPDATED.njBooking }]
       : []),
     ...blogEntries,
   ];

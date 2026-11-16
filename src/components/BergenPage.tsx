@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import BookingButton from './BookingButton';
 import BrandsGrid from './BrandsGrid';
-import { BRANCHES, NJ_PATH } from '@/lib/branches';
+import { BRANCHES, NJ_BOOKING_ENABLED, NJ_PATH } from '@/lib/branches';
 import { BERGEN_MUNICIPALITIES, BERGEN_TOWNS, type BergenTown } from '@/lib/bergen';
 import { APPLIANCE_REPAIR_COST_ANSWER, BUSINESS } from '@/lib/business';
 import { NJ_BUSINESS_ID, businessRef, jsonLd, njBusiness } from '@/components/StructuredData';
@@ -73,7 +73,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
     },
     {
       q: 'Do you cover my Bergen County town?',
-      a: 'We accept service requests from all 70 Bergen County municipalities. Enter your ZIP code and municipality when booking. Our team confirms your service address and appointment availability before scheduling.',
+      a: 'We accept service requests from all 70 Bergen County municipalities. Have your ZIP code and municipality ready. Our team confirms your service address and appointment availability before scheduling.',
     },
   ];
   // The NJ branch is its own LocalBusiness node, linked to the canonical Connecticut
@@ -171,27 +171,29 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
                   : 'Insured appliance repair in Hackensack and across Bergen County. Based in Hudson County, with written estimates and a 90-day parts and labor warranty.'}
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <BookingButton
-                  branchId="nj"
-                  municipality={town?.name}
-                  className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 bg-[#ffb81c] px-8 py-4 text-base font-bold text-gray-900 transition-colors duration-200 hover:bg-[#c9920d]"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    aria-hidden="true"
+                {NJ_BOOKING_ENABLED && (
+                  <BookingButton
+                    branchId="nj"
+                    municipality={town?.name}
+                    className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 bg-[#ffb81c] px-8 py-4 text-base font-bold text-gray-900 transition-colors duration-200 hover:bg-[#c9920d]"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                  Schedule a Repair
-                </BookingButton>
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    Schedule a Repair
+                  </BookingButton>
+                )}
                 <a
                   href={`tel:${branch.telephone}`}
                   className="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-white bg-transparent px-8 py-4 text-base font-bold text-white transition-colors duration-200 hover:border-[#ffb81c] hover:text-[#ffb81c]"
@@ -290,8 +292,9 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
               </h2>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-slate-500">
-              Choose your appliance to start a repair request. Add the symptoms and we’ll take it
-              from there.
+              {NJ_BOOKING_ENABLED
+                ? 'Choose your appliance to start a repair request. Add the symptoms and we’ll take it from there.'
+                : 'Call us with your appliance type and symptoms to request a repair.'}
             </p>
           </div>
           <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -310,18 +313,20 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
                   {repair.appliance === 'Other' ? repair.name : `${repair.name} repair`}
                 </h3>
                 <p className="mt-2 text-sm text-slate-500">{repair.symptoms}</p>
-                <BookingButton
-                  branchId="nj"
-                  municipality={town?.name}
-                  appliance={repair.appliance}
-                  className="group mt-5 inline-flex min-h-11 cursor-pointer items-center justify-center gap-3 bg-[#112654] px-5 py-3 text-sm font-bold text-[#ffb81c] transition-colors duration-200 hover:bg-[#1a3974] hover:text-[#ffd071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffb81c]"
-                >
-                  Request service
-                  <ArrowUpRight
-                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    aria-hidden="true"
-                  />
-                </BookingButton>
+                {NJ_BOOKING_ENABLED && (
+                  <BookingButton
+                    branchId="nj"
+                    municipality={town?.name}
+                    appliance={repair.appliance}
+                    className="group mt-5 inline-flex min-h-11 cursor-pointer items-center justify-center gap-3 bg-[#112654] px-5 py-3 text-sm font-bold text-[#ffb81c] transition-colors duration-200 hover:bg-[#1a3974] hover:text-[#ffd071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffb81c]"
+                  >
+                    Request service
+                    <ArrowUpRight
+                      className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden="true"
+                    />
+                  </BookingButton>
+                )}
               </article>
             ))}
           </div>
@@ -462,13 +467,19 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
             <h2 className="text-3xl font-bold text-blue-950">Let’s get your home running again.</h2>
             <p className="mt-3 text-slate-500">Bergen County appointments · {branch.hours}</p>
           </div>
-          <BookingButton
-            branchId="nj"
-            municipality={town?.name}
-            className={`${buttonClass} shrink-0`}
-          >
-            Book my repair <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
-          </BookingButton>
+          {NJ_BOOKING_ENABLED ? (
+            <BookingButton
+              branchId="nj"
+              municipality={town?.name}
+              className={`${buttonClass} shrink-0`}
+            >
+              Book my repair <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
+            </BookingButton>
+          ) : (
+            <a href={`tel:${branch.telephone}`} className={`${buttonClass} shrink-0`}>
+              Call {branch.phone}
+            </a>
+          )}
         </section>
       </main>
     </>

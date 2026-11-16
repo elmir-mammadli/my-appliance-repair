@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { BRANCHES, NJ_PATH } from '@/lib/branches';
+import { BRANCHES, NJ_BOOKING_ENABLED, NJ_PATH } from '@/lib/branches';
 import { openBookingModal } from '@/lib/booking';
 import AnnouncementBar from './AnnouncementBar';
 
@@ -14,6 +14,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const branchId = pathname.startsWith(NJ_PATH) ? 'nj' : 'ct';
   const branch = BRANCHES[branchId];
+  const canBookOnline = branchId === 'ct' || NJ_BOOKING_ENABLED;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -96,12 +97,14 @@ export default function Navbar() {
             </svg>
             {branch.phone}
           </a>
-          <button
-            onClick={() => openBookingModal({ branchId })}
-            className="flex items-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold px-5 py-2.5 transition-all duration-100 cursor-pointer shadow-[4px_4px_0_#172554] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#172554] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
-          >
-            Book a Repair
-          </button>
+          {canBookOnline && (
+            <button
+              onClick={() => openBookingModal({ branchId })}
+              className="flex items-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-bold px-5 py-2.5 transition-all duration-100 cursor-pointer shadow-[4px_4px_0_#172554] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#172554] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
+            >
+              Book a Repair
+            </button>
+          )}
         </div>
 
         {/* Mobile Phone Link + Hamburger */}
@@ -189,15 +192,17 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <button
-            onClick={() => {
-              setIsMobileOpen(false);
-              openBookingModal({ branchId });
-            }}
-            className="mt-2 flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-semibold px-5 py-3 transition-all duration-100 cursor-pointer w-full shadow-[4px_4px_0_#172554] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#172554] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
-          >
-            Book a Repair
-          </button>
+          {canBookOnline && (
+            <button
+              onClick={() => {
+                setIsMobileOpen(false);
+                openBookingModal({ branchId });
+              }}
+              className="mt-2 flex items-center justify-center gap-2 bg-[#ffb81c] hover:bg-[#e6a619] text-gray-900 font-semibold px-5 py-3 transition-all duration-100 cursor-pointer w-full shadow-[4px_4px_0_#172554] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#172554] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
+            >
+              Book a Repair
+            </button>
+          )}
           <Link
             href="/#join-us"
             onClick={() => setIsMobileOpen(false)}

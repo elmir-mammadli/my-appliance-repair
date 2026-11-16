@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import Link from 'next/link';
 import { openBookingModal } from '@/lib/booking';
 import { BUSINESS } from '@/lib/business';
 
@@ -59,6 +60,10 @@ const repairs = [
     date: 'Aug 2026',
     category: 'Washer',
     color: 'blue',
+    links: [
+      { href: '/services/washer-repair', label: 'Washer repair' },
+      { href: '/new-haven', label: 'Service in New Haven' },
+    ],
   },
   {
     brand: 'Thor',
@@ -92,6 +97,10 @@ const repairs = [
     date: 'Aug 2026',
     category: 'Refrigerator',
     color: 'indigo',
+    links: [
+      { href: '/services/refrigerator-repair', label: 'Refrigerator repair' },
+      { href: '/hamden', label: 'Service in Hamden' },
+    ],
   },
 ];
 
@@ -186,6 +195,17 @@ function RepairCard({ repair, index }: { repair: (typeof repairs)[0]; index: num
           </svg>
           <p className="text-green-700 text-xs font-medium leading-relaxed">{repair.outcome}</p>
         </div>
+        {repair.links && (
+          <ul className="flex flex-wrap gap-x-3 gap-y-1 text-xs">
+            {repair.links.map(({ href, label }) => (
+              <li key={href}>
+                <Link href={href} className="font-semibold text-blue-700 underline">
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

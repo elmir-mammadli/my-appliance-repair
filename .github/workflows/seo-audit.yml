@@ -13,13 +13,13 @@ jobs:
   seo-audit:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -35,20 +35,16 @@ jobs:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
         run: python .github/scripts/seo_audit.py
 
-      - name: Check for changes
-        id: changes
+      - name: Prepare proposed SEO edits
         run: |
-          git diff --quiet content/posts.json && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff -- content/posts.json > "$RUNNER_TEMP/blog-seo-edits.patch"
+          if test ! -s "$RUNNER_TEMP/blog-seo-edits.patch"; then
+            rm "$RUNNER_TEMP/blog-seo-edits.patch"
+          fi
 
-      - name: Commit and push improved posts
-        if: steps.changes.outputs.changed == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/posts.json
-          git commit -m "seo: daily article audit and optimization [$(date +'%Y-%m-%d')]"
-          git push
-
-      - name: No changes
-        if: steps.changes.outputs.changed == 'false'
-        run: echo "No posts were modified — nothing to commit."
+      - name: Upload proposed edits for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: blog-seo-edits
+          path: ${{ runner.temp }}/blog-seo-edits.patch
+          if-no-files-found: ignore

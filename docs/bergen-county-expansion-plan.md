@@ -51,7 +51,7 @@ Customer emails say **Request Received**, use the applicable branch phone, and l
 3. Check `/sitemap.xml`, then inspect the county page and a small sample of town pages in Search Console. Indexing and rankings are not guaranteed by deployment.
 4. Measure NJ calls, accepted requests, completed jobs, and town-page performance before adding more pages. Add real NJ photos, job examples, and reviews as they become available.
 
-`NEXT_PUBLIC_NJ_BOOKING_ENABLED=false` pauses NJ online intake while preserving CT booking. Because this is a public build-time variable, **rebuild/redeploy** after changing it. The paused build also excludes NJ URLs from the sitemap and marks them noindex. County pages remain accessible and callers can still contact the team.
+`NEXT_PUBLIC_NJ_BOOKING_ENABLED=false` pauses NJ online intake while preserving CT booking. Because this is a public build-time variable, **rebuild/redeploy** after changing it. The county and town pages stay in the sitemap and direct customers to the NJ phone line. The dedicated NJ booking URL shows the phone number and carries `noindex` until online intake resumes.
 
 No Google Business Profile was created. A separate NJ profile should represent a qualifying real operation; no public street address is invented by this implementation.
 

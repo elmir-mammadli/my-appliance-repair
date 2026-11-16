@@ -6,7 +6,7 @@ import {
   SERVICE_AREA_SCHEMA,
   WARRANTY_STATEMENT,
 } from '@/lib/business';
-import { BRANCHES, NJ_BOOKING_ENABLED, NJ_PATH } from '@/lib/branches';
+import { BRANCHES, NJ_PATH } from '@/lib/branches';
 import { services } from '@/lib/services';
 
 export function jsonLd(data: object): string {
@@ -95,7 +95,7 @@ const localBusiness = {
   openingHoursSpecification: [BUSINESS_HOURS.schema],
   priceRange: '$$',
   sameAs: SAME_AS,
-  ...(NJ_BOOKING_ENABLED ? { subOrganization: [njBusiness] } : {}),
+  subOrganization: [njBusiness],
 };
 
 const website = {
