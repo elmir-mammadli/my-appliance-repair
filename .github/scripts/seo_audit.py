@@ -155,6 +155,7 @@ Audit this post against current SEO best practices. Check for:
 Then rewrite/improve the content HTML and excerpt. Rules:
 - The content is HTML — output must be valid HTML
 - Keep ALL existing fields intact — only return improved content and excerpt
+- Preserve the factual meaning of the source article. Omit new service-call anecdotes and unsupported claims about jobs, pricing, credentials, or outcomes.
 - Preserve or ADD the branded anchor links: <a href="/#booking" style="color:#1e3a5f;font-weight:600;">book a service call</a> and <a href="/#contact" style="color:#1e3a5f;font-weight:600;">contact our team</a>
 - Keep {COMPANY_NAME} brand mentions (2-3 per post)
 - Do NOT add <html>, <head>, or <body> tags

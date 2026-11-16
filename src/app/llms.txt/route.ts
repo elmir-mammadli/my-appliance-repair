@@ -32,7 +32,7 @@ function render(): string {
   add();
   add(`- **Website:** ${url}`);
   add(`- **Phone (Connecticut):** ${BUSINESS.phone.display}`);
-  if (NJ_BOOKING_ENABLED) add(`- **Phone (Bergen County, NJ):** ${BRANCHES.nj.phone}`);
+  add(`- **Phone (Bergen County, NJ):** ${BRANCHES.nj.phone}`);
   add(`- **Email:** ${BUSINESS.email}`);
   add(`- **Address:** ${BUSINESS.formattedAddress}`);
   add(`- **Hours:** ${BUSINESS_HOURS.display}, Eastern Time`);
@@ -76,14 +76,13 @@ function render(): string {
   }
   add();
 
-  if (NJ_BOOKING_ENABLED) {
-    add('## Bergen County, New Jersey');
-    add();
-    add(
-      `A separate ${BRANCHES.nj.name} line (${BRANCHES.nj.phone}) takes repair requests from all 70 Bergen County municipalities. Same $${SERVICE_CALL_FEE} service call and ${WARRANTY_STATEMENT}. Details: ${url}${NJ_PATH}`,
-    );
-    add();
-  }
+  add('## Bergen County, New Jersey');
+  add();
+  add(
+    `A separate ${BRANCHES.nj.name} line (${BRANCHES.nj.phone}) takes repair requests from all 70 Bergen County municipalities. Same $${SERVICE_CALL_FEE} service call and ${WARRANTY_STATEMENT}. Details: ${url}${NJ_PATH}`,
+  );
+  if (!NJ_BOOKING_ENABLED) add('Call the New Jersey line to request a repair.');
+  add();
 
   add('## Profiles');
   add();

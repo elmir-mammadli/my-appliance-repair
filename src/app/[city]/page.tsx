@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import BookingModal from '@/components/LazyBookingModal';
 import BookingButton from '@/components/BookingButton';
 import { cities, getCityBySlug, getCitiesByRegion } from '@/lib/cities';
-import { BUSINESS, REVIEW_RATINGS } from '@/lib/business';
+import { BUSINESS, REVIEW_RATINGS, SERVICE_CALL_FEE } from '@/lib/business';
 import { BUSINESS_ID, businessRef, jsonLd } from '@/components/StructuredData';
 
 export async function generateStaticParams() {
@@ -22,14 +22,12 @@ export async function generateMetadata({
   const city = getCityBySlug(slug);
   if (!city) return {};
 
-  // Each city names its own neighborhoods so no two descriptions read as one template.
-  const places = city.neighborhoods.slice(0, 3).join(', ');
-  const socialDescription = `Appliance repair in ${city.name}, CT, from ${places} and beyond. Same-day refrigerator, washer, dryer, dishwasher and oven repair. Insured techs, 90-day parts and labor warranty.`;
+  const description = `Appliance repair in ${city.name}, CT, including ${city.neighborhoods[0]}. $${SERVICE_CALL_FEE} diagnostic waived with repair. Ask about same-day availability.`;
 
   return {
     // Bare of the brand — the root layout's title template appends it.
     title: `Appliance Repair in ${city.name}, CT`,
-    description: `${socialDescription} Call ${BUSINESS.phone.display}.`,
+    description,
     alternates: { canonical: `https://www.myappliance.us/${city.slug}` },
     openGraph: {
       type: 'website',
@@ -37,7 +35,7 @@ export async function generateMetadata({
       siteName: BUSINESS.name,
       locale: 'en_US',
       title: `Appliance Repair in ${city.name}, CT | ${BUSINESS.shortName}`,
-      description: socialDescription,
+      description,
       images: [
         {
           url: '/images/og-image.png',
@@ -51,7 +49,7 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: `Appliance Repair in ${city.name}, CT | ${BUSINESS.shortName}`,
-      description: socialDescription,
+      description,
       images: ['/images/og-image.png'],
     },
   };
@@ -154,7 +152,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
     url: `${BUSINESS.url}/${city.slug}`,
     serviceType: 'Appliance repair',
     name: `Appliance Repair in ${city.name}, CT`,
-    description: `Insured appliance repair service in ${city.name}, CT. Same-day service for refrigerators, washers, dryers, dishwashers, ovens, and more. 90-day parts and labor warranty.`,
+    description: `Insured repair for refrigerators, washers, dryers, dishwashers, and ovens in ${city.name}, CT. Same-day appointments depend on availability. Repairs include a 90-day parts and labor warranty.`,
     provider: businessRef,
     areaServed: {
       '@type': 'City',
@@ -206,7 +204,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           </nav>
 
           <p className="text-sm font-semibold text-blue-600 tracking-wide uppercase mb-4">
-            {city.county} · Same-day appliance repair
+            {city.county} · In-home appliance repair
           </p>
 
           <h1 className="text-4xl lg:text-5xl font-bold text-blue-950 leading-tight tracking-tight mb-6">
@@ -260,7 +258,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             {[
               `${REVIEW_RATINGS.google.rating.toFixed(1)} ★ on Google & Thumbtack`,
               'Fully Insured',
-              'Same-day available',
+              'Ask about same-day service',
               '90-day parts & labor warranty',
               'OEM parts',
               'Background-checked techs',
@@ -396,7 +394,8 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
               Areas Near {city.name} We Also Serve
             </h2>
             <p className="text-slate-500 text-center mb-8">
-              We cover all of {city.region} — same-day service throughout {city.county}.
+              We also serve the communities below. Contact us to confirm coverage and appointment
+              availability for your address.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               {nearbyCities.map((c) => (
@@ -437,7 +436,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             Ready to Schedule Your Repair in {city.name}?
           </h2>
           <p className="text-blue-200 mb-8 max-w-lg mx-auto">
-            Same-day appointments available. Insured technicians, 90-day parts and labor
+            Ask about same-day availability. Insured technicians, 90-day parts and labor
             warranty, OEM parts on every van.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

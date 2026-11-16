@@ -134,7 +134,7 @@ export default function ServicesIndexPage() {
 
           <div className="max-w-3xl">
             <p className="text-sm font-semibold text-blue-600 tracking-wide uppercase mb-6">
-              CT · Insured · Same-day service
+              Connecticut · Insured technicians
             </p>
             <h1 className="text-5xl lg:text-6xl font-bold text-blue-950 leading-[1.1] tracking-tight mb-6">
               Appliances we <span className="text-[#ffb81c]">repair</span> in Connecticut
@@ -142,8 +142,10 @@ export default function ServicesIndexPage() {
             <p className="text-lg text-slate-500 leading-relaxed mb-8 max-w-2xl">
               Washers that won&apos;t spin. Fridges running warm. Ovens that won&apos;t hold temp.
               Pick an appliance below to see the symptoms we hear most weeks, the parts we keep on
-              the truck, and book a repair. Same-day service when slots are open, anywhere from
-              Greenwich to Mystic.
+              the truck, and request a repair. We serve New Haven, Hamden, Waterbury, Hartford,
+              and other <Link href="/#coverage" className="font-semibold text-blue-700 underline">
+                Connecticut communities
+              </Link>. Contact us to confirm coverage at your address and check same-day availability.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">

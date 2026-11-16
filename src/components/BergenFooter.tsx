@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
-import { BRANCHES, NJ_PATH } from '@/lib/branches';
+import { BRANCHES, NJ_BOOKING_ENABLED, NJ_PATH } from '@/lib/branches';
 
 export default function BergenFooter() {
   const branch = BRANCHES.nj;
@@ -35,9 +35,11 @@ export default function BergenFooter() {
           <Link href={`${NJ_PATH}#coverage`} className="hover:text-white">
             Service areas
           </Link>
-          <Link href={`${NJ_PATH}/booking`} className="hover:text-white">
-            Request a repair
-          </Link>
+          {NJ_BOOKING_ENABLED && (
+            <Link href={`${NJ_PATH}/booking`} className="hover:text-white">
+              Request a repair
+            </Link>
+          )}
           <Link href="/" className="inline-flex items-center gap-1 hover:text-white">
             Connecticut service <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </Link>

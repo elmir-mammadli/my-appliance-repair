@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { NJ_PATH, NJ_BOOKING_ENABLED } from './branches';
+import { NJ_PATH } from './branches';
+import { BUSINESS } from './business';
 import type { BergenTown } from './bergen';
 
 export function bergenMetadata(town?: BergenTown): Metadata {
@@ -10,7 +11,7 @@ export function bergenMetadata(town?: BergenTown): Metadata {
   const description = town
     ? `Appliance repair in ${area}, NJ. ${town.tagline}`
     : 'Insured appliance repair in Hackensack and across Bergen County. Based in Hudson County, with written estimates and a 90-day parts and labor warranty.';
-  const url = `https://www.myappliance.us${NJ_PATH}${town ? `/${town.slug}` : ''}`;
+  const url = `${BUSINESS.url}${NJ_PATH}${town ? `/${town.slug}` : ''}`;
   const images = [
     {
       url: '/images/hero/dishwasher.jpg',
@@ -34,7 +35,7 @@ export function bergenMetadata(town?: BergenTown): Metadata {
           'Hudson County appliance repair',
         ],
     alternates: { canonical: url },
-    robots: { index: NJ_BOOKING_ENABLED, follow: true },
+    robots: { index: true, follow: true },
     openGraph: { title, description, url, type: 'website', locale: 'en_US', images },
     twitter: { card: 'summary_large_image', title, description, images },
   };

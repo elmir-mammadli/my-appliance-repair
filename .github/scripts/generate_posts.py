@@ -443,7 +443,7 @@ Requirements for the new topic:
 - Genuinely useful to homeowners: appliance repair, maintenance, energy savings,
   buying advice, troubleshooting, seasonal issues, or smart home appliances
 - Must not duplicate anything already covered above
-- Must be grounded in real patterns from service calls, not generic advice
+- Choose a concrete problem supported by reliable appliance information
 
 {TITLE_RULES}
 
@@ -460,7 +460,6 @@ For the RESEARCH SUMMARY, include:
 - At least one specific fact, stat, or part cost that will appear in the post
 - At least one brand or model pattern to reference (can be a common one you see)
 - 4-6 loose section ideas with concrete details, not just headings
-- One anecdote seed from a real-feeling service call
 - Any seasonal or regional context if it fits naturally
 
 Format your response EXACTLY like this:
@@ -559,13 +558,13 @@ WHAT MAKES THIS POST TECHNICALLY AUTHORITATIVE:
   and that will change how they think about this appliance.
 
 HUMANIZER CHECKLIST (all of these must appear somewhere in the post):
-- One anecdote or reference to a specific service call (city, symptom, outcome)
 - One opinion stated directly, not hedged ("I'd skip the warranty", "Don't bother")
 - At least two very short paragraphs (1 sentence each)
 - One longer paragraph (4-5 sentences) that builds to a point
 - One sentence that starts with And, But, or So
 
 Branding, kept light:
+- Omit personal service-call stories and claims about company experience unless verified details are supplied. Use hypothetical examples only if you label them as such.
 - Mention "{COMPANY_NAME}" once or twice, naturally, in first person ("we").
 - Work these two links into mid-paragraph sentences (not in a standalone CTA block):
   {chosen_links[0]}
