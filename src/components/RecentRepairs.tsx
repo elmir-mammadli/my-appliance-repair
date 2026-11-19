@@ -240,7 +240,7 @@ export default function RecentRepairs() {
         {/* Bottom CTA */}
         <div className="bg-blue-800 p-8 text-center text-white">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <div className="flex gap-0.5" aria-label="5 out of 5 stars">
+            <div className="flex gap-0.5" role="img" aria-label="5 out of 5 stars">
               {[1, 2, 3, 4, 5].map((i) => (
                 <svg
                   key={i}

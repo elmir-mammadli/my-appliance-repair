@@ -566,7 +566,7 @@ export default function BookingForm({
                 </ul>
               </div>
 
-              {branchId === 'ct' && <div className="flex gap-1" aria-label="5 out of 5 stars">
+              {branchId === 'ct' && <div className="flex gap-1" role="img" aria-label="5 out of 5 stars">
                 {[1, 2, 3, 4, 5].map((s) => (
                   <svg
                     key={s}

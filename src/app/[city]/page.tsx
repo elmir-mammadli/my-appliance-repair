@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import BookingModal from '@/components/LazyBookingModal';
 import BookingButton from '@/components/BookingButton';
 import { cities, getCityBySlug, getCitiesByRegion } from '@/lib/cities';
+import { getPostsForCity } from '@/lib/posts';
 import { BUSINESS, REVIEW_RATINGS, SERVICE_CALL_FEE } from '@/lib/business';
 import { BUSINESS_ID, businessRef, jsonLd } from '@/components/StructuredData';
 
@@ -38,7 +39,7 @@ export async function generateMetadata({
       description,
       images: [
         {
-          url: '/images/og-image.png',
+          url: '/images/og-image.jpg',
           width: 1200,
           height: 630,
           alt: `Appliance Repair ${city.name} CT`,
@@ -50,7 +51,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: `Appliance Repair in ${city.name}, CT | ${BUSINESS.shortName}`,
       description,
-      images: ['/images/og-image.png'],
+      images: ['/images/og-image.jpg'],
     },
   };
 }
@@ -142,6 +143,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
   if (!city) notFound();
 
   const nearbyCities = getCitiesByRegion(city.region).filter((c) => c.slug !== city.slug);
+  const guides = getPostsForCity(city.name, 2);
 
   // The business node itself comes from the footer's StructuredData. This page adds
   // only what is specific to it: the service offered in this city, by that business.
@@ -411,6 +413,34 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           </div>
         </section>
       )}
+
+      {/* Guides: the blog's only inbound links used to be the index page. */}
+      <section className="py-16 bg-blue-50 border-t border-blue-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-blue-950 mb-3 text-center">
+            Repair Guides for {city.name} Homeowners
+          </h2>
+          <p className="text-slate-500 text-center mb-8 max-w-2xl mx-auto">
+            Written by our technicians from calls across Connecticut. Read before you book; some
+            fixes you can check yourself.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {guides.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="bg-white p-6 border border-blue-100 shadow-sm hover:border-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors"
+              >
+                <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-2">
+                  {post.category} · {post.readTime}
+                </p>
+                <h3 className="font-bold text-blue-950 mb-2">{post.seoTitle ?? post.title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{post.excerpt}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* FAQ */}
       <section className="py-16 lg:py-20 bg-white">

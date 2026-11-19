@@ -81,7 +81,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
-      { ...businessRef, logo: `${BUSINESS.url}/logo.svg` },
+      { ...businessRef, logo: `${BUSINESS.url}/images/logo-600.png` },
       njBusiness,
       {
         '@type': 'Service',

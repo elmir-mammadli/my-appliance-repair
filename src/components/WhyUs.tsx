@@ -183,7 +183,7 @@ export default function WhyUs() {
             {/* Rating Card */}
             <div className="bg-blue-800 p-8 text-white">
               <div className="flex items-center gap-3 mb-4">
-                <div className="flex gap-1" aria-label="5 out of 5 stars">
+                <div className="flex gap-1" role="img" aria-label="5 out of 5 stars">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <svg
                       key={i}

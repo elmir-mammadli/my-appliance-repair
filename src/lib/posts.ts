@@ -3,6 +3,7 @@ import postsData from '../../content/posts.json';
 export interface Post {
   slug: string;
   title: string;
+  seoTitle?: string; // <title> under 60 characters; the headline stays as the H1.
   excerpt: string;
   category: string;
   date: string; // ISO date"2026-03-18"
@@ -81,4 +82,16 @@ export function getPostsForService(serviceSlug: string, count = 3): Post[] {
     .filter((p) => getServiceSlugForPost(p) === serviceSlug)
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, count);
+}
+
+/**
+ * Guides to surface from a city page: posts that mention the city by name, newest
+ * first, topped up with the newest posts overall so every city page links to `count`.
+ */
+export function getPostsForCity(cityName: string, count = 2): Post[] {
+  const mention = new RegExp(`\\b${cityName}\\b`);
+  const byDate = (a: Post, b: Post) => b.date.localeCompare(a.date);
+  const local = posts.filter((p) => mention.test(p.content)).sort(byDate);
+  const rest = posts.filter((p) => !local.includes(p)).sort(byDate);
+  return [...local, ...rest].slice(0, count);
 }

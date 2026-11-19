@@ -3,7 +3,7 @@ import { BUSINESS, REVIEW_RATINGS } from '@/lib/business';
 import { BUSINESS_ID, BUSINESS_TYPE, jsonLd } from '@/components/StructuredData';
 import AboutContent from '@/components/AboutContent';
 
-const description = `Learn about ${BUSINESS.name}, an insured Connecticut appliance repair service rated ${REVIEW_RATINGS.google.rating.toFixed(1)} on Google and Thumbtack. 90-day parts and labor warranty, 2,500+ repairs completed across CT.`;
+const description = `Learn about ${BUSINESS.name}, an insured Connecticut appliance repair service rated ${REVIEW_RATINGS.google.rating.toFixed(1)} on Google and Thumbtack. 90-day parts and labor warranty and 6+ years of appliance repair experience.`;
 
 export const metadata: Metadata = {
   title: 'About Our CT Appliance Repair Team',

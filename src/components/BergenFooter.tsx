@@ -12,7 +12,7 @@ export default function BergenFooter() {
           <Link href={NJ_PATH}>
             <Image
               src="/logo.svg"
-              alt="MyAppliance Repair LLC"
+              alt="My Appliance Repair LLC"
               width={180}
               height={60}
               className="h-12 w-auto brightness-0 invert"

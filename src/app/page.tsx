@@ -42,7 +42,7 @@ export const metadata: Metadata = {
       `Appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. On-site repair quotes and a 90-day warranty.`,
     images: [
       {
-        url: '/images/og-image.png',
+        url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
         alt: `${BUSINESS.name} - Connecticut Appliance Repair Services`,
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: `Appliance Repair in Connecticut | ${BUSINESS.shortName}`,
     description:
       `Appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. On-site repair quotes and a 90-day warranty.`,
-    images: ['/images/og-image.png'],
+    images: ['/images/og-image.jpg'],
   },
 };
 

@@ -40,7 +40,10 @@ export async function generateMetadata({
   return {
     // Bare title — the root layout's title template adds the brand suffix. Long
     // headlines drop the suffix instead so the <title> stays near 60 characters.
-    title: post.title.length + BUSINESS.shortName.length + 3 > 60 ? { absolute: post.title } : post.title,
+    title:
+      (post.seoTitle ?? post.title).length + BUSINESS.shortName.length + 3 > 60
+        ? { absolute: post.seoTitle ?? post.title }
+        : (post.seoTitle ?? post.title),
     description,
     keywords: `${post.category.toLowerCase()}, appliance repair Connecticut, ${post.title.toLowerCase()}`,
     alternates: { canonical: `https://www.myappliance.us/blog/${slug}` },
@@ -109,7 +112,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       url: BUSINESS.url,
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.myappliance.us/images/og-image.png',
+        url: 'https://www.myappliance.us/images/logo-600.png',
+        width: 600,
+        height: 198,
       },
     },
     mainEntityOfPage: {
