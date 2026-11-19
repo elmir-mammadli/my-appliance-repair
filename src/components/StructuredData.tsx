@@ -62,7 +62,7 @@ const localBusiness = {
   email: BUSINESS.email,
   address: BUSINESS.schemaAddress,
   image: `${BUSINESS.url}/images/appliance-repair-connecticut-og.jpg`,
-  logo: `${BUSINESS.url}/logo.svg`,
+  logo: `${BUSINESS.url}/images/logo-600.png`,
   description: `Insured appliance repair service in Connecticut. Same-day service for refrigerators, washing machines, dryers, dishwashers, ovens, and freezers. Fully insured, ${WARRANTY_STATEMENT}.`,
   slogan: 'Same-day appliance repair in Connecticut',
   knowsAbout: [

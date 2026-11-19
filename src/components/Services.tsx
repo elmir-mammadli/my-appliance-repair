@@ -23,7 +23,7 @@ export default function Services() {
 
           {/* Review pill */}
           <div className="inline-flex items-center gap-2 mt-5 bg-white border border-blue-200 px-5 py-2 shadow-sm">
-            <div className="flex gap-0.5" aria-label="5 out of 5 stars">
+            <div className="flex gap-0.5" role="img" aria-label="5 out of 5 stars">
               {[1, 2, 3, 4, 5].map((i) => (
                 <svg
                   key={i}

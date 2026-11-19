@@ -12,12 +12,12 @@ const BASE_URL = BUSINESS.url;
 // would falsely refresh unchanged pages, so bump these by hand when the content
 // of that page type actually changes.
 const CONTENT_UPDATED = {
-  home: '2026-11-15',
+  home: '2026-11-18',
   about: '2026-11-11',
   booking: '2026-11-11',
   servicesHub: '2026-11-15',
   serviceDetails: '2026-11-11',
-  cities: '2026-11-15',
+  cities: '2026-11-18',
   nj: '2026-11-15',
   njBooking: '2026-11-15',
 } as const;

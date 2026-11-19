@@ -3,19 +3,35 @@ import { REVIEWS, REVIEWS_SOURCE, type Review } from '@/lib/reviews';
 
 const GOOGLE_REVIEWS_URL = PROFILES.google;
 
-const half = Math.ceil(REVIEWS.length / 2);
-const row1 = REVIEWS.slice(0, half);
-const row2 = REVIEWS.slice(half);
+// The homepage used to render all 24 reviews twice (marquee loop copies) with five
+// inline star SVGs each: 48 cards and 240 SVG elements, a third of the page's DOM.
+// Twelve reviews, six per row, keep the loop seamless at a quarter of the weight.
+const SHOWN = 12;
+const shown = REVIEWS.slice(0, SHOWN);
+const half = Math.ceil(shown.length / 2);
+const row1 = shown.slice(0, half);
+const row2 = shown.slice(half);
 
-function StarRow() {
-  return (
-    <div className="flex gap-0.5" aria-hidden="true">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <svg key={i} className="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-      ))}
-    </div>
+// One star glyph as a CSS background, repeated: a single element per rating row
+// instead of five <svg> + five <path> nodes.
+const STAR_PATH =
+  'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z';
+const STAR_URL = `url("data:image/svg+xml,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#facc15"><path d="${STAR_PATH}"/></svg>`,
+)}")`;
+
+function StarRow({ size = 16, label }: { size?: number; label?: string }) {
+  const style = {
+    width: size * 5 + 4 * 2,
+    height: size,
+    backgroundImage: STAR_URL,
+    backgroundSize: `${size + 2}px ${size}px`,
+    backgroundRepeat: 'repeat-x',
+  } as const;
+  return label ? (
+    <div role="img" aria-label={label} style={style} />
+  ) : (
+    <div aria-hidden="true" style={style} />
   );
 }
 
@@ -29,29 +45,16 @@ function ReviewCard({ review }: { review: Review }) {
       tabIndex={-1}
     >
       <article className="h-full border border-blue-100 bg-white p-5 transition-all duration-300 group-hover:border-blue-300 group-hover:-translate-y-1 group-hover:bg-blue-50/40">
-        <div className="flex items-center justify-between gap-3 mb-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center bg-blue-700 text-sm font-bold text-white transition-colors duration-300 group-hover:bg-blue-600">
-              {review.initials}
-            </div>
-            <div className="min-w-0">
-              <p className="font-semibold text-blue-900 text-sm truncate">{review.name}</p>
-              <p className="text-xs text-slate-500">
-                {review.appliance} · {review.when} · {REVIEWS_SOURCE}
-              </p>
-            </div>
+        <div className="flex items-center gap-3 mb-3 min-w-0">
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center bg-blue-700 text-sm font-bold text-white transition-colors duration-300 group-hover:bg-blue-600">
+            {review.initials}
           </div>
-          {/* Google G mark — appears on hover */}
-          <svg
-            className="w-5 h-5 flex-shrink-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            viewBox="0 0 48 48"
-            aria-hidden="true"
-          >
-            <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
-            <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
-            <path fill="#FBBC05" d="M11.69 28.18c-.44-1.32-.69-2.73-.69-4.18s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/>
-            <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
-          </svg>
+          <div className="min-w-0">
+            <p className="font-semibold text-blue-900 text-sm truncate">{review.name}</p>
+            <p className="text-xs text-slate-500">
+              {review.appliance} · {review.when} · {REVIEWS_SOURCE}
+            </p>
+          </div>
         </div>
         <StarRow />
         <blockquote className="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-4">{review.text}</blockquote>
@@ -89,13 +92,7 @@ export default function Testimonials() {
           </div>
 
           <div className="bg-blue-950 px-6 py-5 text-white shrink-0">
-            <div className="flex gap-1" aria-label={`${REVIEW_RATINGS.google.rating} out of 5 stars on Google`}>
-              {[1, 2, 3, 4, 5].map((i) => (
-                <svg key={i} className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
+            <StarRow size={20} label={`${REVIEW_RATINGS.google.rating} out of 5 stars on Google`} />
             <p className="mt-2 text-3xl font-bold">{REVIEW_RATINGS.google.rating.toFixed(1)} / 5</p>
             <p className="text-sm text-blue-300 mt-0.5">{REVIEW_RATINGS.google.count}+ Google reviews</p>
             <a
@@ -114,8 +111,8 @@ export default function Testimonials() {
       {/* Marquee rows: each row is rendered twice so the loop is seamless; the copy is hidden from AT. */}
       <div className="space-y-4">
         {[
-          { items: row1, animation: 'marquee-left 110s linear infinite' },
-          { items: row2, animation: 'marquee-right 120s linear infinite' },
+          { items: row1, animation: 'marquee-left 70s linear infinite' },
+          { items: row2, animation: 'marquee-right 80s linear infinite' },
         ].map(({ items, animation }, rowIndex) => (
           <div key={rowIndex} className="overflow-hidden px-2 md:px-10">
             <div className="marquee-track flex w-max gap-4" style={{ animation }}>

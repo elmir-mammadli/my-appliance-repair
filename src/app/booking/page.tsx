@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     title: `Book Appliance Repair | ${BUSINESS.name}`,
     description:
       `Schedule appliance repair in our Connecticut service area. $${SERVICE_CALL_FEE} service call, on-site repair quote, and a 90-day warranty.`,
-    images: [{ url: '/images/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: `Book Appliance Repair in CT | ${BUSINESS.shortName}`,
     description: `Request a repair visit in our Connecticut service area. $${SERVICE_CALL_FEE} diagnostic, waived with repair. We call to confirm coverage and availability.`,
-    images: ['/images/og-image.png'],
+    images: ['/images/og-image.jpg'],
   },
 };
 

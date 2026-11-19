@@ -53,7 +53,8 @@ export default function Hero() {
           src="/images/hero/dishwasher.jpg"
           alt="MyAppliance technician working on a dishwasher"
           fill
-          priority
+          preload
+          fetchPriority="high"
           sizes={HERO_IMAGE_SIZES}
           className="object-cover object-[65%_center] opacity-40"
         />
@@ -105,7 +106,8 @@ export default function Hero() {
             src="/images/hero/dishwasher.jpg"
             alt=""
             fill
-            priority
+            preload
+            fetchPriority="high"
             sizes={HERO_IMAGE_SIZES}
             className="object-cover object-[60%_center]"
           />

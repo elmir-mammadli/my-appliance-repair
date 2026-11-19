@@ -1,8 +1,4 @@
-'use client';
-
 import Image from 'next/image';
-import useEmblaCarousel from 'embla-carousel-react';
-import { useCallback, useEffect, useState } from 'react';
 
 const jobs = [
   {
@@ -82,52 +78,6 @@ function JobCard({ job }: { job: (typeof jobs)[0] }) {
   );
 }
 
-function MobileCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    emblaApi.on('select', onSelect);
-    onSelect();
-  }, [emblaApi, onSelect]);
-
-  return (
-    <div>
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex gap-3">
-          {jobs.map((job) => (
-            <div key={job.id} className="flex-none w-[82vw]">
-              <JobCard job={job} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Dot indicators */}
-      <div className="flex justify-center gap-2 mt-5" role="tablist" aria-label="Gallery slides">
-        {jobs.map((job, i) => (
-          <button
-            key={job.id}
-            role="tab"
-            aria-selected={i === selectedIndex}
-            aria-label={`Go to slide ${i + 1}`}
-            onClick={() => emblaApi?.scrollTo(i)}
-            className={`h-1.5 transition-all duration-300 ${
-              i === selectedIndex ? 'w-6 bg-[#ffb81c]' : 'w-1.5 bg-slate-300 hover:bg-slate-400'
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function RecentJobs() {
   return (
     <section
@@ -150,17 +100,17 @@ export default function RecentJobs() {
           </div>
         </div>
 
-        {/* Mobile: carousel */}
-        <div className="md:hidden">
-          <MobileCarousel />
-        </div>
-
-        {/* Desktop: grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* One list: a snap-scrolling row on phones, a grid from md up. */}
+        <ul
+          className="flex gap-3 overflow-x-auto snap-x snap-mandatory -mx-4 px-4 pb-2 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible lg:grid-cols-3"
+          aria-label="Recent repair photos"
+        >
           {jobs.map((job) => (
-            <JobCard key={job.id} job={job} />
+            <li key={job.id} className="flex-none w-[82vw] snap-start md:w-auto">
+              <JobCard job={job} />
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
