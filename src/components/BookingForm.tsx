@@ -1,8 +1,9 @@
 'use client';
 
 import { formatPhoneInput } from '@/lib/phone';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
+import Turnstile, { Honeypot, TURNSTILE_SITE_KEY, type TurnstileHandle } from '@/components/Turnstile';
 import { BRANCHES, branchForZip, coverageError, type BranchId } from '@/lib/branches';
 import MunicipalitySelect from '@/components/MunicipalitySelect';
 import DatePicker from '@/components/DatePicker';
@@ -89,6 +90,10 @@ export default function BookingForm({
   const [checking, setChecking] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [captchaError, setCaptchaError] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const turnstileRef = useRef<TurnstileHandle>(null);
   const branchId = branchForZip(form.zip) ?? initialBranch;
   const branch = BRANCHES[branchId];
   const tracking = useRepairTracking('booking', onClose ? 'modal' : 'page', branchId, form.appliance);
@@ -150,18 +155,34 @@ export default function BookingForm({
     e.preventDefault();
     if (!validateStep1()) { setStep(1); onStepChange?.(1); return; }
     if (!validateStep2()) return;
+    if (TURNSTILE_SITE_KEY && !captchaToken) {
+      setCaptchaError('Please wait a moment while we verify you’re human, then try again.');
+      return;
+    }
     setSubmitting(true);
     try {
       const res = await fetch('/api/book', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, branchId, sourcePage: window.location.pathname }),
+        body: JSON.stringify({
+          ...form,
+          branchId,
+          sourcePage: window.location.pathname,
+          turnstileToken: captchaToken,
+          website: honeypot,
+        }),
       });
+      if (res.status === 403) {
+        setCaptchaError('Verification failed. Please try again.');
+        turnstileRef.current?.reset();
+        return;
+      }
       if (!res.ok) throw new Error('Request failed');
       setSubmitted(true);
       tracking.success();
     } catch {
       tracking.error();
+      turnstileRef.current?.reset();
       alert(`Something went wrong. Please call us directly at ${branch.phone}.`);
     } finally {
       setSubmitting(false);
@@ -171,6 +192,8 @@ export default function BookingForm({
   const resetForm = () => {
     tracking.reset();
     setSubmitted(false);
+    setCaptchaToken('');
+    setCaptchaError('');
     setForm({ ...initialState, appliance: initialAppliance ?? '', municipality: initialMunicipality, zip: initialZip });
     setStep(1);
     onStepChange?.(1);
@@ -179,6 +202,7 @@ export default function BookingForm({
   const goBack = () => {
     setStep(1);
     setErrors({});
+    setCaptchaToken('');
     onStepChange?.(1);
   };
 
@@ -633,7 +657,7 @@ export default function BookingForm({
             </div>
 
             {/* Step 2 form */}
-            <form onSubmit={handleSubmit} onChangeCapture={tracking.start} noValidate aria-label="Step 2: Repair details">
+            <form onSubmit={handleSubmit} onChangeCapture={tracking.start} noValidate aria-label="Step 2: Repair details" className="relative">
               <div className="space-y-4">
                 {/* Name */}
                 <div>
@@ -904,6 +928,20 @@ export default function BookingForm({
                     </select>
                   </div>
                 </div>
+
+                <Honeypot value={honeypot} onChange={setHoneypot} />
+                <Turnstile
+                  ref={turnstileRef}
+                  onToken={(t) => {
+                    setCaptchaToken(t);
+                    if (t) setCaptchaError('');
+                  }}
+                />
+                {captchaError && (
+                  <p className="text-red-500 text-xs" role="alert">
+                    {captchaError}
+                  </p>
+                )}
 
                 {/* Submit */}
                 <button

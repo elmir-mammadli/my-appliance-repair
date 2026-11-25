@@ -28,6 +28,8 @@ const SECURITY_HEADERS = [
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['192.168.12.173'],
+  // Turnstile site keys are public by design; inline it for the browser widget.
+  env: { TURNSTILE_SITE_KEY: process.env.TURNSTILE_SITE_KEY ?? '' },
   compress: true,
   poweredByHeader: false,
   async headers() {
