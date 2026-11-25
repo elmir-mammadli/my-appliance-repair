@@ -4,9 +4,20 @@ import { formatPhone } from '@/lib/phone';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { BUSINESS } from '@/lib/business';
+import { clientIp, HONEYPOT_FIELD, isHoneypotFilled, verifyTurnstile } from '@/lib/turnstile';
 
 export async function POST(req: NextRequest) {
-  const fd = await req.formData();
+  let fd: FormData;
+  try {
+    fd = await req.formData();
+  } catch {
+    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
+  }
+
+  // Bots that fill the hidden field get a fake success so they don't retry.
+  if (isHoneypotFilled(fd.get(HONEYPOT_FIELD))) return NextResponse.json({ ok: true });
+  if (!(await verifyTurnstile(fd.get('turnstileToken'), clientIp(req.headers))))
+    return NextResponse.json({ error: 'Captcha verification failed.' }, { status: 403 });
 
   const name         = fd.get('name')         as string;
   const phone        = fd.get('phone')        as string;

@@ -7,6 +7,7 @@ import { Resend } from 'resend';
 import { BRANCHES, type BranchId } from '@/lib/branches';
 import { SERVICE_CALL_FEE } from '@/lib/business';
 import { validateBookingRequest, escapeEmailData } from '@/lib/booking-request';
+import { clientIp, HONEYPOT_FIELD, isHoneypotFilled, verifyTurnstile } from '@/lib/turnstile';
 
 async function appendToSheet(data: Record<string, string>) {
   const auth = new google.auth.GoogleAuth({
@@ -274,9 +275,20 @@ export async function POST(req: NextRequest) {
   } catch {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
   }
+  const raw = (input && typeof input === 'object' ? input : {}) as Record<string, unknown>;
+  // Bots that fill the hidden field get a fake success so they don't retry.
+  if (isHoneypotFilled(raw[HONEYPOT_FIELD])) return NextResponse.json({ ok: true });
+  if (!(await verifyTurnstile(raw.turnstileToken, clientIp(req.headers))))
+    return NextResponse.json({ error: 'Captcha verification failed.' }, { status: 403 });
   const result = validateBookingRequest(input);
   if (!result.ok) return NextResponse.json({ error: result.error }, { status: 400 });
   const data = result.data;
+  // Local dev without Google credentials: log the lead instead of failing.
+  // Production still requires the sheet so real leads are never dropped.
+  if (process.env.NODE_ENV !== 'production' && !process.env.GOOGLE_SHEET_ID) {
+    console.warn('[/api/book] GOOGLE_SHEET_ID not set (dev); lead not saved:', data);
+    return NextResponse.json({ ok: true, branch: data.branchId });
+  }
   try {
     await appendToSheet(data);
   } catch (err) {

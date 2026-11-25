@@ -1,8 +1,9 @@
 'use client';
 
 import { formatPhoneInput } from '@/lib/phone';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { BUSINESS } from '@/lib/business';
+import Turnstile, { Honeypot, TURNSTILE_SITE_KEY, type TurnstileHandle } from '@/components/Turnstile';
 
 const brandOptions = [
   'Samsung',
@@ -45,6 +46,10 @@ export default function HiringModal({ openOnMount = false }: { openOnMount?: boo
   const [cvError, setCvError] = useState<string>('');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [captchaError, setCaptchaError] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const turnstileRef = useRef<TurnstileHandle>(null);
 
   const openModal = useCallback(() => {
     setOpen(true);
@@ -126,6 +131,10 @@ export default function HiringModal({ openOnMount = false }: { openOnMount?: boo
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+    if (TURNSTILE_SITE_KEY && !captchaToken) {
+      setCaptchaError('Please wait a moment while we verify you’re human, then try again.');
+      return;
+    }
     setSubmitting(true);
     try {
       const fd = new FormData();
@@ -137,11 +146,20 @@ export default function HiringModal({ openOnMount = false }: { openOnMount?: boo
       fd.append('why', form.why);
       fd.append('brands', JSON.stringify(brands));
       if (cvFile) fd.append('cv', cvFile, cvFile.name);
+      fd.append('turnstileToken', captchaToken);
+      fd.append('website', honeypot);
 
       const res = await fetch('/api/apply', { method: 'POST', body: fd });
+      if (res.status === 403) {
+        setCaptchaError('Verification failed. Please try again.');
+        turnstileRef.current?.reset();
+        return;
+      }
       if (!res.ok) throw new Error('server error');
       setSubmitted(true);
+      setCaptchaToken('');
     } catch {
+      turnstileRef.current?.reset();
       alert(`Something went wrong. Please call us directly at ${BUSINESS.phone.display}.`);
     } finally {
       setSubmitting(false);
@@ -240,7 +258,7 @@ export default function HiringModal({ openOnMount = false }: { openOnMount?: boo
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} noValidate aria-label="Job application form">
+            <form onSubmit={handleSubmit} noValidate aria-label="Job application form" className="relative">
               <div className="space-y-5">
                 {/* Name */}
                 <div>
@@ -545,6 +563,20 @@ export default function HiringModal({ openOnMount = false }: { openOnMount?: boo
                     </p>
                   )}
                 </div>
+
+                <Honeypot value={honeypot} onChange={setHoneypot} />
+                <Turnstile
+                  ref={turnstileRef}
+                  onToken={(t) => {
+                    setCaptchaToken(t);
+                    if (t) setCaptchaError('');
+                  }}
+                />
+                {captchaError && (
+                  <p className="text-red-500 text-xs" role="alert">
+                    {captchaError}
+                  </p>
+                )}
 
                 {/* Submit */}
                 <button
