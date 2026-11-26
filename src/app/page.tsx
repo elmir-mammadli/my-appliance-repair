@@ -16,20 +16,25 @@ import ContactForm from '@/components/ContactForm';
 import JoinUs from '@/components/JoinUs';
 import HiringModal from '@/components/LazyHiringModal';
 import Footer from '@/components/Footer';
-import { APPLIANCE_REPAIR_COST_ANSWER, BUSINESS, SERVICE_AREA_COUNT, SERVICE_CALL_FEE, SAME_DAY_SERVICE_ANSWER } from '@/lib/business';
+import { APPLIANCE_REPAIR_COST_ANSWER, BUSINESS, REVIEW_RATINGS, SERVICE_AREA_COUNT, SERVICE_CALL_FEE, SAME_DAY_SERVICE_ANSWER } from '@/lib/business';
+
+// Town-first: Search Console shows the homepage earning its impressions on "appliance
+// repair hamden" and "appliance repair new haven", and it is the Google Business Profile's
+// landing page. Nobody ranks for a whole state. Service pages keep the statewide wording,
+// which matches the "refrigerator repair ct" style of demand.
+const HOME_TITLE = `Appliance Repair Hamden & New Haven, CT | ${BUSINESS.shortName}`;
+const HOME_DESCRIPTION = `Appliance repair in Hamden, New Haven and ${SERVICE_AREA_COUNT - 2} more Connecticut towns. $${SERVICE_CALL_FEE} diagnostic waived with repair, 90-day warranty. ${REVIEW_RATINGS.google.rating.toFixed(1)} stars from ${REVIEW_RATINGS.google.count}+ Google reviews.`;
 
 export const metadata: Metadata = {
-  // Absolute: the template would push this past 60 characters.
-  title: { absolute: `Appliance Repair in Connecticut | ${BUSINESS.shortName}` },
-  description:
-    `Appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. $${SERVICE_CALL_FEE} service call, on-site repair quotes, and a 90-day warranty.`,
+  // Absolute: the root template would append the brand a second time.
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESCRIPTION,
   alternates: { canonical: 'https://www.myappliance.us' },
   openGraph: {
     type: 'website',
     url: 'https://www.myappliance.us',
-    title: `Appliance Repair in Connecticut | ${BUSINESS.shortName}`,
-    description:
-      `Appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. On-site repair quotes and a 90-day warranty.`,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     images: [
       {
         url: '/images/og-image.jpg',
@@ -41,9 +46,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Appliance Repair in Connecticut | ${BUSINESS.shortName}`,
-    description:
-      `Appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. On-site repair quotes and a 90-day warranty.`,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     images: ['/images/og-image.jpg'],
   },
 };
