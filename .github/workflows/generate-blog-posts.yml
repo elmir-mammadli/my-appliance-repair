@@ -1,9 +1,10 @@
 name: Generate Blog Drafts
 
+# The every-three-days schedule was removed on 2026-11-26. Batch-generated posts were the
+# ones Google declined to index (7 of 37 indexed). New posts are written from real jobs.
+# Manual runs remain possible for drafting help.
 on:
-  schedule:
-    - cron: '0 9 */3 * *'  # 9 AM UTC = ~5 AM ET every 3 days
-  workflow_dispatch:  # Allow manual trigger for testing
+  workflow_dispatch:
 
 jobs:
   generate-posts:
