@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   description:
     `Book appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities. $${SERVICE_CALL_FEE} service call, on-site repair quote, insured technicians, and a 90-day warranty.`,
   alternates: { canonical: `${BUSINESS.url}/booking` },
+  // A form with almost no copy. Search Console showed impressions and no clicks, and
+  // every indexable thin URL competes with the service and town pages for crawl.
+  robots: { index: false, follow: true },
   openGraph: {
     type: 'website',
     url: `${BUSINESS.url}/booking`,

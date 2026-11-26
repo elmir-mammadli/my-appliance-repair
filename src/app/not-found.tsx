@@ -6,7 +6,7 @@ import NotFoundActions from '@/components/NotFoundActions';
 import { BUSINESS } from '@/lib/business';
 
 export const metadata: Metadata = {
-  title: `Page Not Found | ${BUSINESS.name}`,
+  title: 'Page Not Found',
   robots: { index: false },
 };
 

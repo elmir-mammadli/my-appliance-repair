@@ -23,16 +23,6 @@ export const metadata: Metadata = {
   title: { absolute: `Appliance Repair in Connecticut | ${BUSINESS.shortName}` },
   description:
     `Appliance repair in ${SERVICE_AREA_COUNT} Connecticut communities, including New Haven, Hamden, West Haven, and Waterbury. $${SERVICE_CALL_FEE} service call, on-site repair quotes, and a 90-day warranty.`,
-  keywords: [
-    'appliance repair Connecticut',
-    'appliance repair near me',
-    'refrigerator repair Connecticut',
-    'washing machine repair Connecticut',
-    'dryer repair Connecticut',
-    'dishwasher repair Connecticut',
-    'appliance repair New Haven',
-    'appliance repair Hamden',
-  ],
   alternates: { canonical: 'https://www.myappliance.us' },
   openGraph: {
     type: 'website',

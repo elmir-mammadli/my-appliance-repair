@@ -48,6 +48,9 @@ const nextConfig: NextConfig = {
         destination: '/services/dishwasher-repair',
         permanent: true,
       },
+      // The Google Business Profile once linked /bookings (plural). Search Console still
+      // reports impressions for it, and it was returning the 404 page.
+      { source: '/bookings', destination: '/booking', permanent: true },
       // The state-level URL has no page of its own; Bergen County is the NJ hub.
       {
         source: '/new-jersey',

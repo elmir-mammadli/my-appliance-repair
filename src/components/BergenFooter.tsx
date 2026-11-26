@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { BRANCHES, NJ_BOOKING_ENABLED, NJ_PATH } from '@/lib/branches';
+import { BUSINESS } from '@/lib/business';
 
 export default function BergenFooter() {
   const branch = BRANCHES.nj;
@@ -66,7 +67,7 @@ export default function BergenFooter() {
         </nav>
       </div>
       <div className="mx-auto mt-10 flex max-w-7xl flex-wrap justify-between gap-4 border-t border-white/15 pt-6 text-xs text-blue-200/60">
-        <p>© {new Date().getFullYear()} MyAppliance Repair LLC.</p>
+        <p>© {new Date().getFullYear()} {BUSINESS.name}.</p>
         <div className="flex gap-5">
           <Link href="/privacy">Privacy</Link>
           <Link href="/terms">Terms</Link>

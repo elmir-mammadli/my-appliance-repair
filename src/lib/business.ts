@@ -121,9 +121,9 @@ export const SERVICE_AREA_COUNT = SERVICE_AREA_TOWNS.length;
 // Counts are rounded down to what the public profiles showed on the date noted.
 // Update both the number and the date together; never estimate upward.
 export const REVIEW_RATINGS = {
-  asOf: '2026-11-11',
-  google: { rating: 5, count: 109 },
-  thumbtack: { rating: 5, count: 182 },
+  asOf: '2026-11-25',
+  google: { rating: 5, count: 113 },
+  thumbtack: { rating: 5, count: 188 },
 } as const;
 
 export const WARRANTY_STATEMENT = '90-day parts and labor warranty';

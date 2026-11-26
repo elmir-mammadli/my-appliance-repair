@@ -45,7 +45,6 @@ export async function generateMetadata({
         ? { absolute: post.seoTitle ?? post.title }
         : (post.seoTitle ?? post.title),
     description,
-    keywords: `${post.category.toLowerCase()}, appliance repair Connecticut, ${post.title.toLowerCase()}`,
     alternates: { canonical: `https://www.myappliance.us/blog/${slug}` },
     openGraph: {
       type: 'article',
