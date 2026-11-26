@@ -66,7 +66,7 @@ export default function Hero() {
 
         <div className="nj-entrance relative px-6 pb-12 pt-18">
           <h1 className="max-w-sm text-4xl font-bold leading-[1.1] sm:text-5xl">
-            Same-day appliance repair in Connecticut
+            Same-day appliance repair in Hamden & New{'\u00A0'}Haven, CT
           </h1>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-blue-100">{DESCRIPTION}</p>
 
@@ -122,7 +122,7 @@ export default function Hero() {
             {/* The mobile block above owns the page's single <h1>; this desktop copy is
                 exposed as a level-1 heading to assistive tech without a second h1 element. */}
             <p role="heading" aria-level={1} className="mb-6 text-[3.75rem] font-bold leading-[1.02]">
-              Same-day appliance repair in Connecticut
+              Same-day appliance repair in Hamden & New{'\u00A0'}Haven, CT
             </p>
 
             <p className="mb-7 max-w-xl text-xl leading-relaxed text-blue-100">{DESCRIPTION}</p>
