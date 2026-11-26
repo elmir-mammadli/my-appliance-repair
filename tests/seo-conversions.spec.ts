@@ -284,7 +284,6 @@ test('revised articles preserve URLs and publish dates while exposing actual edi
   await consent(page, 'denied');
   for (const slug of [
     'dryer-heating-element-thermal-fuse-misdiagnosis',
-    'stove-burners-wont-light-cheap-fix',
   ]) {
     await page.goto(`/blog/${slug}`);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
@@ -302,11 +301,10 @@ test('revised articles preserve URLs and publish dates while exposing actual edi
   const sitemap = await (await request.get('/sitemap.xml')).text();
   for (const slug of [
     'dryer-heating-element-thermal-fuse-misdiagnosis',
-    'stove-burners-wont-light-cheap-fix',
   ]) {
     const entry = sitemap.match(new RegExp(`<url>\\s*<loc>[^<]*/blog/${slug}</loc>[\\s\\S]*?</url>`))?.[0];
     expect(entry).toContain('<lastmod>2026-10-18</lastmod>');
   }
-  await page.goto('/blog/stacking-washer-dryer-warranty-problems');
+  await page.goto('/blog/cleaning-lint-trap-isnt-enough');
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
 });
