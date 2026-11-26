@@ -15,25 +15,12 @@ export function bergenMetadata(town?: BergenTown): Metadata {
   const images = [
     {
       url: '/images/hero/dishwasher.jpg',
-      alt: 'MyAppliance Repair technician servicing a dishwasher',
+      alt: 'My Appliance Repair technician servicing a dishwasher',
     },
   ];
   return {
     title,
     description,
-    keywords: town
-      ? [
-          `appliance repair ${area} NJ`,
-          `${area} refrigerator repair`,
-          `${area} washer dryer repair`,
-          'Bergen County appliance repair',
-        ]
-      : [
-          'appliance repair New Jersey',
-          'Bergen County appliance repair',
-          'Hackensack appliance repair',
-          'Hudson County appliance repair',
-        ],
     alternates: { canonical: url },
     robots: { index: true, follow: true },
     openGraph: { title, description, url, type: 'website', locale: 'en_US', images },

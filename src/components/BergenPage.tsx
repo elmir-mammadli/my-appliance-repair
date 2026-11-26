@@ -128,7 +128,7 @@ export default function BergenPage({ town }: { town?: BergenTown }) {
         <section className="relative isolate overflow-hidden bg-blue-950 pb-16 pt-32 text-white sm:pb-20 lg:pb-24 lg:pt-40">
           <Image
             src="/images/hero/dishwasher.jpg"
-            alt="MyAppliance technician working on a dishwasher"
+            alt="My Appliance Repair technician working on a dishwasher"
             fill
             sizes="100vw"
             preload

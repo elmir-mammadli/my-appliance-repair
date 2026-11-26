@@ -51,7 +51,7 @@ export default function Hero() {
       <div className="relative isolate overflow-hidden bg-blue-950 text-white lg:hidden">
         <Image
           src="/images/hero/dishwasher.jpg"
-          alt="MyAppliance technician working on a dishwasher"
+          alt="My Appliance Repair technician working on a dishwasher"
           fill
           preload
           fetchPriority="high"

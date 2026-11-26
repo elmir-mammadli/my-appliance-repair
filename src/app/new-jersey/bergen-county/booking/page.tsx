@@ -16,7 +16,8 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: url },
-  robots: { index: NJ_BOOKING_ENABLED, follow: true },
+  // Same reasoning as /booking: a form, not a landing page.
+  robots: { index: false, follow: true },
   openGraph: {
     ...base.openGraph,
     title,

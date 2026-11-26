@@ -57,6 +57,8 @@ const localBusiness = {
   '@id': BUSINESS_ID,
   name: BUSINESS.name,
   legalName: BUSINESS.name,
+  // The name people type and the one on most third-party listings.
+  alternateName: BUSINESS.shortName,
   url: BUSINESS.url,
   telephone: BUSINESS.phone.e164,
   email: BUSINESS.email,

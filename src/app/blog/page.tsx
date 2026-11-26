@@ -12,8 +12,6 @@ export const metadata: Metadata = {
   title: 'Appliance Repair Tips for CT Homeowners',
   description:
     `Expert appliance repair tips, maintenance guides, and cost-saving advice for Connecticut homeowners. Stay informed with ${BUSINESS.name}'s blog.`,
-  keywords:
-    'appliance repair tips Connecticut, washer dryer maintenance, refrigerator problems, dishwasher repair, appliance maintenance',
   alternates: { canonical: `${BUSINESS.url}/blog` },
   // Without these the page inherits the root layout's OG block wholesale, which
   // advertises the homepage title and og:url on every share of /blog.
